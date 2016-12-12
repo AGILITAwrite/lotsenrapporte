@@ -13,7 +13,8 @@
     "excludedFiles": [
       "test.html"
     ],
-    "buildRequired": true
+    "buildRequired": false,
+    "lastBuildDateTime": "Mon, 12 Dec 2016 10:31:29 GMT"
   },
   "dataBinding": {
     "/webapp/view/App.view.xml": {
@@ -84,5 +85,10 @@
         }
       }
     ]
+  },
+  "hcpdeploy": {
+    "account": "a88ba9460",
+    "name": "lotsenrapporte",
+    "lastVersionWeTriedToDeploy": "1.0.1"
   }
 }
