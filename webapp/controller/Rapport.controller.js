@@ -21,7 +21,7 @@ sap.ui.define([
 			//this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
 			
 			//this.getRouter().getRoute("rapport").attachPatternMatched(this._onRouteMatched, this);
-			this.getRouter().getRoute("rapport").attachMatched(this._onRouteMatched, this);
+			this.getRouter().getRoute("rapportNewRoute").attachMatched(this._onRouteMatched, this);
 			//this.getRouter().getRoute("object").attachPatternMatched(this._onRouteMatched, this);
 			this.setModel(oViewModel, "rapportView");
 			this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));

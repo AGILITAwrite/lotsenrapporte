@@ -7,7 +7,8 @@
 		<semantic:cancelAction>
 			<semantic:CancelAction id="__action1" press="onCancel"/>
 		</semantic:cancelAction>
-		<semantic:content><ObjectHeader title="{Name}" introActive="true" id="__header0" number="{Schiffsnummer}" condensed="true" titleActive="true"/>
+		<semantic:content>
+			<ObjectHeader title="{Name}" introActive="true" id="__header0" number="{Schiffsnummer}" condensed="true" titleActive="true"/>
 		</semantic:content>
 	</semantic:DetailPage>
 </mvc:View>

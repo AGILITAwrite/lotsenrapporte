@@ -110,11 +110,19 @@
 					]
 				},
 				{
-					"pattern": "SchiffeSet/{objectId}",
-					"name": "rapport",
+					"pattern": "RapportNew/{objectId}",
+					"name": "rapportNewRoute",
 					"target": [
 						"master",
-						"rapport"
+						"rapportTarget"
+					]
+				},
+								{
+					"pattern": "Rapport/{objectId}",
+					"name": "rapportRoute",
+					"target": [
+						"master",
+						"rapportTarget"
 					]
 				}
 			],
@@ -130,10 +138,10 @@
 					"viewId": "detail",
 					"viewLevel": 2
 				},
-				"rapport": {
+				"rapportTarget": {
 					"viewName": "Rapport",
 					"viewId": "rapport",
-					"viewLevel": 2
+					"viewLevel": 3
 				},
 				"detailObjectNotFound": {
 					"viewName": "DetailObjectNotFound",

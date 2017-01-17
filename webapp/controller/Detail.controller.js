@@ -194,11 +194,11 @@ sap.ui.define([
 			//this.getRouter().navTo("rapport");
 			//							this.getRouter().getTargets().display("detailNoObjectsAvailable");
 
-			 this.getRouter().getTargets().display("rapport");
+			// this.getRouter().getTargets().display("rapportTarget");
 			//var bReplace = !Device.system.phone;
-			//this.getRouter().navTo("rapport", {
-			//	objectId: this.getView().getBindingContext().getProperty("Schiffsnummer")
-			//}, true);
+			this.getRouter().navTo("rapportNewRoute", {
+				objectId: this.getView().getBindingContext().getProperty("Schiffsnummer")
+			}, true);
 			//this.getRouter().navTo("rapport");
 
 		}
