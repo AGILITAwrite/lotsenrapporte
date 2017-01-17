@@ -6,7 +6,10 @@
 		</semantic:saveAction>
 		<semantic:cancelAction>
 			<semantic:CancelAction id="__action1" press="onCancel"/>
+<<<<<<< HEAD
+=======
 			
+>>>>>>> cfbf09bdbe69dbacf1ecfa119ccfe1e3dace45f7
 		</semantic:cancelAction>
 		<semantic:content><ObjectHeader title="{Name}" introActive="true" id="__header0" number="{Schiffsnummer}" condensed="true" titleActive="true"/>
 		</semantic:content>

@@ -49,21 +49,5 @@
       },
       "description": "SRH HANA Dev System Client 100 for Application"
     }
-  ],
-  "cacheControl": [
-    {
-      "directive": "private",
-      "maxAge": 0,
-      "path": "**.html"
-    },
-    {
-      "directive": "private",
-      "maxAge": 0,
-      "path": "sap-ui-cachebuster-info.json"
-    },
-    {
-      "directive": "public",
-      "maxAge": 31536000
-    }
   ]
 }
