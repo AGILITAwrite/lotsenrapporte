@@ -13,8 +13,8 @@ sap.ui.define([
 		 * @memberOf ch.portof.view.Rapport
 		 */
 		onInit: function() {
-<<<<<<< HEAD
 			
+
 				var oViewModel = new JSONModel({
 				busy: false,
 				delay: 0
@@ -182,87 +182,6 @@ sap.ui.define([
 			// Restore original busy indicator delay for the detail view
 			oViewModel.setProperty("/delay", iOriginalViewBusyDelay);
 		},
-=======
-			this.getRouter().getRoute("rapport").attachPatternMatched(this._onRouteMatched, this);
-		},
-		/**
-		 * If the master route was hit (empty hash) we have to set
-		 * the hash to to the first item in the list as soon as the
-		 * listLoading is done and the first item in the list is known
-		 * @private
-		 */
-		_onRouteMatched: function(oEvent) {
-			/*			this.getOwnerComponent().oListSelector.oWhenListLoadingIsDone.then(
-				function(mParams) {
-					if (mParams.list.getMode() === "None") {
-						return;
-					}
-					var sObjectId = mParams.firstListitem.getBindingContext().getProperty("Schiffsnummer");
-					this.getRouter().navTo("rapport", {
-						objectId: sObjectId
-					}, true);
-				}.bind(this),
-				function(mParams) {
-					if (mParams.error) {
-						return;
-					}
-					this.getRouter().getTargets().display("detailNoObjectsAvailable");
-				}.bind(this)
-			);*/
-			/*			var oArgs, oView;
-			oArgs = oEvent.getParameter("arguments");
-			oView = this.getView();
-			oView.bindElement({
-				path : "/Schiffeset(" + oArgs.objectId + ")",
-				events : {
-					change: this._onBindingChange.bind(this),
-					dataRequested: function (oEvent) {
-						oView.setBusy(true);
-					},
-					dataReceived: function (oEvent) {
-						oView.setBusy(false);
-					}
-				}
-			});*/
-			var sObjectId = oEvent.getParameter("arguments").objectId;
-			this.getModel().metadataLoaded().then(function() {
-				var sObjectPath = this.getModel().createKey("SchiffeSet", {
-					Schiffsnummer: sObjectId
-				});
-				this._bindView("/" + sObjectPath);
-			}.bind(this));
-		},
-		_onBindingChange: function(oEvent) {
-				// No data for the binding
-				if (!this.getView().getBindingContext()) {
-					this.getRouter().getTargets().display("notFound");
-				}
-			}
-			/**
-			 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
-			 * (NOT before the first rendering! onInit() is used for that one!).
-			 * @memberOf ch.portof.view.Rapport
-			 */
-			//	onBeforeRendering: function() {
-			//
-			//	},
-			/**
-			 * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
-			 * This hook is the same one that SAPUI5 controls get after being rendered.
-			 * @memberOf ch.portof.view.Rapport
-			 */
-			//	onAfterRendering: function() {
-			//
-			//	},
-			/**
-			 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
-			 * @memberOf ch.portof.view.Rapport
-			 */
-			//	onExit: function() {
-			//
-			//	}
-			,
->>>>>>> cfbf09bdbe69dbacf1ecfa119ccfe1e3dace45f7
 		/**
 		 *@memberOf ch.portof.controller.Rapport
 		 */
