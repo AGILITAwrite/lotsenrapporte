@@ -96,7 +96,7 @@
             </EntityType>
             <Association Name="ASSOC_DEBITOR_SCHIFFE" sap:content-version="1">
                 <End Type="ZLOTSENAPP2_SRV.Debitoren" Multiplicity="0..1" Role="FromRole_ASSOC_DEBITOR_SCHIFFE"/>
-                <End Type="ZLOTSENAPP2_SRV.Schiffe" Multiplicity="1" Role="ToRole_ASSOC_DEBITOR_SCHIFFE"/>
+                <End Type="ZLOTSENAPP2_SRV.Schiffe" Multiplicity="*" Role="ToRole_ASSOC_DEBITOR_SCHIFFE"/>
                 <ReferentialConstraint>
                     <Principal Role="FromRole_ASSOC_DEBITOR_SCHIFFE">
                         <PropertyRef Name="Kunnr"/>

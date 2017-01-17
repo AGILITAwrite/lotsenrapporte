@@ -13,8 +13,13 @@
     "excludedFiles": [
       "test.html"
     ],
+<<<<<<< HEAD
+    "buildRequired": true,
+    "lastBuildDateTime": "Tue, 20 Dec 2016 15:34:43 GMT"
+=======
     "buildRequired": false,
     "lastBuildDateTime": "Mon, 12 Dec 2016 10:31:29 GMT"
+>>>>>>> 49591e800ae91fb9a82eefb9a9c14560341bd0d5
   },
   "dataBinding": {
     "/webapp/view/App.view.xml": {
@@ -34,6 +39,9 @@
     },
     "/webapp/view/Detail.view.xml": {
       "entitySet": "SchiffeSet"
+    },
+    "/webapp/view/Rapport.view.xml": {
+      "entitySet": "SchiffeSet"
     }
   },
   "generation": [
@@ -41,6 +49,11 @@
       "templateId": "sap.ui.ui5-template-plugin.2masterdetail",
       "templateVersion": "1.38.3",
       "dateTimeStamp": "Mon, 12 Dec 2016 10:03:04 GMT"
+    },
+    {
+      "templateId": "ui5template.basicSAPUI5ApplicationComponent",
+      "templateVersion": "1.4.0",
+      "dateTimeStamp": "Tue, 13 Dec 2016 11:10:00 GMT"
     }
   ],
   "translation": {
@@ -90,5 +103,12 @@
     "account": "a88ba9460",
     "name": "lotsenrapporte",
     "lastVersionWeTriedToDeploy": "1.0.1"
+<<<<<<< HEAD
+  },
+  "deploy": {
+    "destination": "SRH_DEV_200",
+    "name": "ZTEST3"
+=======
+>>>>>>> 49591e800ae91fb9a82eefb9a9c14560341bd0d5
   }
 }
