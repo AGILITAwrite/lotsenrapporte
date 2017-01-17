@@ -14,7 +14,7 @@ sap.ui.define([
 		 */
 		onInit: function() {
 			
-				var oViewModel = new JSONModel({
+			var oViewModel = new JSONModel({
 				busy: false,
 				delay: 0
 			});
@@ -25,6 +25,16 @@ sap.ui.define([
 			//this.getRouter().getRoute("object").attachPatternMatched(this._onRouteMatched, this);
 			this.setModel(oViewModel, "rapportView");
 			this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
+			var oTarifModel = new JSONModel({
+				busy: false,
+				delay: 0
+			});
+			var oSchiffModel = new JSONModel({
+				busy: false,
+				delay: 0
+			});
+			
+			
 		},
 		/**
 		 * If the master route was hit (empty hash) we have to set
