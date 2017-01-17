@@ -117,7 +117,7 @@
 						"rapportTarget"
 					]
 				},
-								{
+				{
 					"pattern": "Rapport/{objectId}",
 					"name": "rapportRoute",
 					"target": [
@@ -157,7 +157,6 @@
 				}
 			}
 		}
-
 	},
 	"sap.platform.hcp": {
 		"uri": "webapp",

@@ -108,6 +108,22 @@
                         "master",
                         "object"
                     ]
+                },
+                {
+                    "pattern": "RapportNew/{objectId}",
+                    "name": "rapportNewRoute",
+                    "target": [
+                        "master",
+                        "rapportTarget"
+                    ]
+                },
+                {
+                    "pattern": "Rapport/{objectId}",
+                    "name": "rapportRoute",
+                    "target": [
+                        "master",
+                        "rapportTarget"
+                    ]
                 }
             ],
             "targets": {
@@ -121,6 +137,11 @@
                     "viewName": "Detail",
                     "viewId": "detail",
                     "viewLevel": 2
+                },
+                "rapportTarget": {
+                    "viewName": "Rapport",
+                    "viewId": "rapport",
+                    "viewLevel": 3
                 },
                 "detailObjectNotFound": {
                     "viewName": "DetailObjectNotFound",

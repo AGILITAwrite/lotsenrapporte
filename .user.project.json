@@ -31,7 +31,7 @@
         "id": 87567846,
         "runnerId": "webapprunner",
         "displayName": "App",
-        "lastRunTimeStamp": 1484673569611
+        "lastRunTimeStamp": 1484673662189
       }
     },
     {
@@ -143,6 +143,6 @@
     }
   ],
   "hybrid": {
-    "dirty": true
+    "dirty": false
   }
 }
