@@ -1,0 +1,13 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="ch.portof.controller.Rapport">
+	
+	<semantic:DetailPage xmlns:sap.m.semantic="sap.m.semantic" title="Semantic Page" id="__page2">
+		<semantic:saveAction>
+			<semantic:SaveAction id="__action0" press="onSave"/>
+		</semantic:saveAction>
+		<semantic:cancelAction>
+			<semantic:CancelAction id="__action1" press="onCancel"/>
+		</semantic:cancelAction>
+		<semantic:content><ObjectHeader title="{Name}" introActive="true" id="__header0" number="{Schiffsnummer}" condensed="true" titleActive="true"/>
+		</semantic:content>
+	</semantic:DetailPage>
+</mvc:View>

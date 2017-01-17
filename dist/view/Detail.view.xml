@@ -14,20 +14,7 @@
 				<items>
 					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://hint" tooltip="{i18n>detailIconTabBarInfo}" text="{i18n>detailStammdaten}">
 					<content>
-					    <ObjectHeader binding="{Debitoren/}" number="{Kunnr}" introActive="true" titleActive="true" id="debitorHeader1" title="{Name1} {Name2}">
-					        <attributes>
-					            <ObjectAttribute text="{Stras}" id="__attribute125" title="Strasse"/>
-								<ObjectAttribute text="{Pstlz} {Ort01}" id="__attribute126" title="Plz/Ort"/>
-								<ObjectAttribute text="{Regio}" id="__attribute127" title="Region"/>
-								<ObjectAttribute text="{Land1}" id="__attribute128" title="Land"/>
-					        </attributes>
-					    </ObjectHeader>
-<!--					    <Input binding="{/SchiffeSet('07001318')/Debitoren}" value="{Name1}" />
-
-					    <Input value="{ path: 'Debitoren/Name1',
-					    				 parameters : {expand:'Debitoren'} }" />
-						<Input binding="{ path: 'Debitoren/' }" value="{Name1}" />
-						<Input binding="{Debitoren/}" value="{Name1}" />-->
+					    <ObjectHeader number="123" numberUnit="eur" introActive="true" titleActive="true" id="debitorHeader1" intro="{Name}"/>
 					</content>
 					</IconTabFilter>
 					<IconTabFilter id="iconTabBarFilter2" icon="sap-icon://write-new-document" tooltip="{i18n>detailIconTabBarAttachments}" text="{i18n>detailRapportAnlegen}">
@@ -63,12 +50,6 @@
 		<semantic:sendEmailAction>
 			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
 		</semantic:sendEmailAction>
-
-	<semantic:positiveAction>
-
-	    <semantic:PositiveAction text="neuer Lotsenrapport" id="__action3" press="newRapport"/>
-
-	</semantic:positiveAction>
 
 	</semantic:DetailPage>
 

@@ -108,6 +108,14 @@
 						"master",
 						"object"
 					]
+				},
+				{
+					"pattern": "SchiffeSet/{objectId}",
+					"name": "rapport",
+					"target": [
+						"master",
+						"rapport"
+					]
 				}
 			],
 			"targets": {
@@ -120,6 +128,11 @@
 				"object": {
 					"viewName": "Detail",
 					"viewId": "detail",
+					"viewLevel": 2
+				},
+				"rapport": {
+					"viewName": "Rapport",
+					"viewId": "rapport",
 					"viewLevel": 2
 				},
 				"detailObjectNotFound": {
@@ -136,9 +149,19 @@
 				}
 			}
 		}
+<<<<<<< master
 	},
 	"sap.platform.hcp": {
 		"uri": "webapp",
 		"_version": "1.1.0"
+<<<<<<< HEAD
+	},
+	"sap.platform.abap": {
+		"uri": "/sap/bc/ui5_ui5/sap/ztest3/webapp",
+		"_version": "1.1.0"
+=======
+>>>>>>> 49591e800ae91fb9a82eefb9a9c14560341bd0d5
+=======
+>>>>>>> 49591e8 Deployment HCP
 	}
 }
