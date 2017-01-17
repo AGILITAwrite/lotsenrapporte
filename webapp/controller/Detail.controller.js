@@ -194,11 +194,7 @@ sap.ui.define([
 			//this.getRouter().navTo("rapport");
 			//							this.getRouter().getTargets().display("detailNoObjectsAvailable");
 
-<<<<<<< HEAD
 			 //this.getRouter().getTargets().display("rapport");
-=======
-			 this.getRouter().getTargets().display("rapport");
->>>>>>> cfbf09bdbe69dbacf1ecfa119ccfe1e3dace45f7
 			//var bReplace = !Device.system.phone;
 			this.getRouter().navTo("rapport", {
 				objectId: this.getView().getBindingContext().getProperty("Schiffsnummer")
