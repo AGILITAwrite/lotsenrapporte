@@ -154,19 +154,9 @@
 	"sap.platform.hcp": {
 		"uri": "webapp",
 		"_version": "1.1.0"
-<<<<<<< HEAD
 	},
 	"sap.platform.abap": {
 		"uri": "/sap/bc/ui5_ui5/sap/ztest3/webapp",
 		"_version": "1.1.0"
-=======
-<<<<<<< HEAD
-	},
-	"sap.platform.abap": {
-		"uri": "/sap/bc/ui5_ui5/sap/ztest3/webapp",
-		"_version": "1.1.0"
-=======
->>>>>>> 49591e800ae91fb9a82eefb9a9c14560341bd0d5
->>>>>>> cfbf09bdbe69dbacf1ecfa119ccfe1e3dace45f7
 	}
 }
