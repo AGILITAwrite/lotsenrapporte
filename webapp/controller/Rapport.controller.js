@@ -14,7 +14,6 @@ sap.ui.define([
 		 */
 		onInit: function() {
 			
-// Test rapport controller
 				var oViewModel = new JSONModel({
 				busy: false,
 				delay: 0
