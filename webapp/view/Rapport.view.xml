@@ -38,7 +38,7 @@
 			                        <items>
 			                            <ColumnListItem id="__item0">
 			                                <cells>
-			                                    <StandardListItem type="Inactive" title="Mittlere Rheinbrücke" description="Description text" id="__item7"/>
+			                                    <StandardListItem type="Inactive" title="Mittlere Rheinbrücke" description="Description text" id="__item7" adaptTitleSize="false"/>
 			                                    <CheckBox id="__box0"/>
 			                                    <Text text="bis 2'000 t" id="__text26"/>
 			                                    <Text text="86 CHF" id="__text27"/>
@@ -96,29 +96,29 @@
 			                            <ColumnListItem id="__item15">
 			                                <cells>
 			                                	<StandardListItem type="Inactive" title="Total" description="" id="__item14"/>
-			                                    <Text text="" id="__text47"/>
-			                                    <Text text="" id="__text48"/>
+			                                    <Text text="" id="__text47" visible="false"/>
+			                                    <Text text="" id="__text48" visible="false"/>
 			                                    <Text text="256 CHF" id="__text49"/>
 			                                </cells>
 			                            </ColumnListItem>
 			                    	</items>
 			                        <columns>
-			                            <Column id="__column0">
+			                            <Column id="__column0" mergeDuplicates="true">
 			                                <header>
 			                                    <Label text="Strecke" id="__label6"/>
 			                                </header>
 			                            </Column>
-			                            <Column id="__column1">
+			                            <Column id="__column1" width="40px">
 			                                <header>
-			                                    <Label text="Auswahl" id="__label7"/>
+			                                    <Label id="__label7" visible="false" text="Auswahl" width="20px"/>
 			                                </header>
 			                            </Column>
-			                            <Column id="__column2">
+			                            <Column id="__column2" minScreenWidth="800px" demandPopin="true">
 			                                <header>
 			                                    <Label text="Schiffstyp" id="__label8"/>
 			                                </header>
 			                            </Column>
-			                            <Column id="__column3">
+			                            <Column id="__column3" minScreenWidth="800px" demandPopin="true">
 			                                <header>
 			                                    <Text text="Grundtarif" id="__text46"/>
 			                                </header>
