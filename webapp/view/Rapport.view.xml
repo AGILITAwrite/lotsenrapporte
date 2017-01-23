@@ -15,8 +15,8 @@
 			            <sap.ui.layout.form:formElements>
 			                <sap.ui.layout.form:FormElement label="Datum / Zeit" id="__element2">
 			                    <sap.ui.layout.form:fields>
-			                        <DatePicker width="100%" id="__picker1" valueFormat="yyyy.MM.dd" placeholder="DD.MM.YYYY" value="17.01.2017"/>
-			                        <TimePicker placeholder="hh:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="__picker0" valueFormat="HH:mm"/>
+			                        <DatePicker width="100%" id="startDatePicker" valueFormat="yyyyMMdd" placeholder="dd.MM.yyyy" displayFormat="dd.MM.yyyy"/>
+			                        <TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker" valueFormat="HHmmss"/>
 			                    </sap.ui.layout.form:fields>
 			                <sap.ui.layout.form:layoutData>
 			                    <FlexItemData id="__data50"/>
@@ -113,15 +113,15 @@
 			                                    <Label id="__label7" visible="false" text="Auswahl" width="20px"/>
 			                                </header>
 			                            </Column>
-			                            <Column id="__column2" minScreenWidth="800px" demandPopin="true">
+			                            <Column id="__column2" minScreenWidth="800px" demandPopin="true" popinDisplay="Inline">
 			                                <header>
 			                                    <Label text="Schiffstyp" id="__label8"/>
 			                                </header>
 			                            </Column>
-			                            <Column id="__column3" minScreenWidth="800px" demandPopin="true">
-			                                <header>
-			                                    <Text text="Grundtarif" id="__text46"/>
-			                                </header>
+			                            <Column id="__column3" minScreenWidth="800px" demandPopin="true" popinDisplay="Inline">
+			                            <header>
+			                                <Label text="Grundtarif" width="100%" id="__label5"/>
+			                            </header>
 			                            </Column></columns></Table>
 			                </sap.ui.layout.form:fields>
 			                </sap.ui.layout.form:FormElement>

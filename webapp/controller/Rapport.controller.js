@@ -14,6 +14,7 @@ sap.ui.define([
 		 */
 		onInit: function() {
 			
+			
 			var oViewModel = new JSONModel({
 				busy: false,
 				delay: 0
@@ -34,7 +35,11 @@ sap.ui.define([
 				delay: 0
 			});
 			
-			
+/*			 var oCurrDate = new sap.ui.model.type.Date({pattern: "dd.MM.yyyy"});
+			 var oCurrTime = new sap.ui.model.type.Time({pattern: "HH:mm"});*/
+			 //sap.ui.getCore().byId("startDatePicker").setProperty("Value", oCurrDate);
+			 this.getView().byId("startDatePicker").setDateValue( new Date());
+			 this.getView().byId("startTimePicker").setDateValue( new Date());
 		},
 		/**
 		 * If the master route was hit (empty hash) we have to set
