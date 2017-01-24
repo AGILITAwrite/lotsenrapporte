@@ -13,14 +13,13 @@ sap.ui.define([
 		 * @memberOf ch.portof.view.Rapport
 		 */
 		onInit: function() {
-			
-			
 			var oViewModel = new JSONModel({
 				busy: false,
-				delay: 0
+				delay: 0,
+				initSignature: false
 			});
 			//this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
-			
+
 			//this.getRouter().getRoute("rapport").attachPatternMatched(this._onRouteMatched, this);
 			this.getRouter().getRoute("rapportNewRoute").attachMatched(this._onRouteMatched, this);
 			//this.getRouter().getRoute("object").attachPatternMatched(this._onRouteMatched, this);
@@ -34,12 +33,14 @@ sap.ui.define([
 				busy: false,
 				delay: 0
 			});
-			
-/*			 var oCurrDate = new sap.ui.model.type.Date({pattern: "dd.MM.yyyy"});
-			 var oCurrTime = new sap.ui.model.type.Time({pattern: "HH:mm"});*/
-			 //sap.ui.getCore().byId("startDatePicker").setProperty("Value", oCurrDate);
-			 this.getView().byId("startDatePicker").setDateValue( new Date());
-			 this.getView().byId("startTimePicker").setDateValue( new Date());
+			this.getView().byId("startDatePicker").setDateValue(new Date());
+			this.getView().byId("startTimePicker").setDateValue(new Date());
+
+			// Signatur 
+			var oSignatureModel = this._createSignatureModel();
+			// oSignatureModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
+			this.setModel(oSignatureModel, "Signature");
+
 		},
 		/**
 		 * If the master route was hit (empty hash) we have to set
@@ -86,46 +87,76 @@ sap.ui.define([
 					Schiffsnummer: sObjectId
 				});
 				this._bindView("/" + sObjectPath);
-				
+
 			}.bind(this));
-/*			var sObjectPath = this.getModel().createKey("SchiffeSet", {
-					Schiffsnummer: sObjectId
-				});
-			this._bindView("/" + sObjectPath);*/
-			
+			/*			var sObjectPath = this.getModel().createKey("SchiffeSet", {
+								Schiffsnummer: sObjectId
+							});
+						this._bindView("/" + sObjectPath);*/
+
 		},
-/*		_onBindingChange: function(oEvent) {
-				// No data for the binding
-				if (!this.getView().getBindingContext()) {
-					this.getRouter().getTargets().display("notFound");
+		/*		_onBindingChange: function(oEvent) {
+						// No data for the binding
+						if (!this.getView().getBindingContext()) {
+							this.getRouter().getTargets().display("notFound");
+						}
+					},*/
+		/**
+		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
+		 * (NOT before the first rendering! onInit() is used for that one!).
+		 * @memberOf ch.portof.view.Rapport
+		 */
+		//	onBeforeRendering: function() {
+		//
+		//	},
+		/**
+		 * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
+		 * This hook is the same one that SAPUI5 controls get after being rendered.
+		 * @memberOf ch.portof.view.Rapport
+		 */
+		onAfterRendering: function() {
+			// http://willowsystems.github.io/jSignature/#/about/
+
+			var oViewModel = this.getModel("rapportView"); 
+			var initSignature = oViewModel.getProperty("/initSignature");
+
+			if (initSignature === false) {
+				//var elementExists = document.getElementById("#signature");
+				// if (elementExists === null) {
+				var oSignaturePanel = this.getView().byId("signaturePanel");
+				var oSignatureDiv = new sap.ui.core.HTML("signature", {
+					// the static content as a long string literal
+					content: "<div style='width: 480px; height: 128px; border: 1px solid black'></div>",
+					// preferDOM : true,
+					afterRendering: function(e) {
+						// Init darf nur einmal aufgerufen
+						if (this.init === true) {
+							$("#signature").jSignature("init");
+							this.init = false;
+							// $('#signature').jSignature({
+							//     'signatureLine': false
+							// });			
+						} else {
+							$("#signature").jSignature("clear");
+						}
+					}
+				});
+				oSignatureDiv.init = true;
+
+				if (oSignaturePanel !== null) {
+					oSignatureDiv.placeAt(oSignaturePanel);
 				}
-			},*/
-			/**
-			 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
-			 * (NOT before the first rendering! onInit() is used for that one!).
-			 * @memberOf ch.portof.view.Rapport
-			 */
-			//	onBeforeRendering: function() {
-			//
-			//	},
-			/**
-			 * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
-			 * This hook is the same one that SAPUI5 controls get after being rendered.
-			 * @memberOf ch.portof.view.Rapport
-			 */
-			//	onAfterRendering: function() {
-			//
-			//	},
-			/**
-			 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
-			 * @memberOf ch.portof.view.Rapport
-			 */
-			//	onExit: function() {
-			//
-			//	}	,
-		
-			
-			
+				oViewModel.setProperty("/initSignature", true);
+			}
+		},
+		/**
+		 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
+		 * @memberOf ch.portof.view.Rapport
+		 */
+		//	onExit: function() {
+		//
+		//	}	,
+
 		/**
 		 * Binds the view to the object path. Makes sure that detail view displays
 		 * a busy indicator while data for the corresponding element binding is loaded.
@@ -150,7 +181,7 @@ sap.ui.define([
 					}
 				}
 			});
-		},	
+		},
 		_onBindingChange: function() {
 			var oView = this.getView(),
 				oElementBinding = oView.getElementBinding();
@@ -169,7 +200,7 @@ sap.ui.define([
 				sObjectName = oObject.Name,
 				oViewModel = this.getModel("detailView");
 			//this.getOwnerComponent().oListSelector.selectAListItem(sPath);
-			oViewModel.setProperty("/shareSendEmailSubject", oResourceBundle.getText("shareSendEmailObjectSubject", [sObjectId]));
+			//oViewModel.setProperty("/shareSendEmailSubject", oResourceBundle.getText("shareSendEmailObjectSubject", [sObjectId]));
 			oViewModel.setProperty("/shareSendEmailMessage", oResourceBundle.getText("shareSendEmailObjectMessage", [
 				sObjectName,
 				sObjectId,
@@ -180,15 +211,15 @@ sap.ui.define([
 			// Store original busy indicator delay for the detail view
 			var iOriginalViewBusyDelay = this.getView().getBusyIndicatorDelay(),
 				oViewModel = this.getModel("rapportView");
-				//,
-				//oLineItemTable = this.byId("lineItemsList"),
-				//iOriginalLineItemTableBusyDelay = oLineItemTable.getBusyIndicatorDelay();
+			//,
+			//oLineItemTable = this.byId("lineItemsList"),
+			//iOriginalLineItemTableBusyDelay = oLineItemTable.getBusyIndicatorDelay();
 			// Make sure busy indicator is displayed immediately when
 			// detail view is displayed for the first time
 			oViewModel.setProperty("/delay", 0);
 			//oViewModel.setProperty("/lineItemTableDelay", 0);
 			//oLineItemTable.attachEventOnce("updateFinished", function() {
-				// Restore original busy indicator delay for line item table
+			// Restore original busy indicator delay for line item table
 			//	oViewModel.setProperty("/lineItemTableDelay", iOriginalLineItemTableBusyDelay);
 			//});
 			// Binding the view will set it to not busy - so the view is always busy if it is not bound
@@ -207,7 +238,45 @@ sap.ui.define([
 		 *@memberOf ch.portof.controller.Rapport
 		 */
 		onSave: function() {
-			//This code was generated by the layout editor.
+			// This code was generated by the layout editor.
+			// var oSignatureModel = this.getModel("Signature");
+
+			// 			var oSignature = $('#signature');
+			// if (oSignature) {
+			// 	var oSignatureBase30 = oSignature.jSignature('getData', 'base30');
+			// 	if (oSignatureBase30) {
+			// 		var isSignatureProvided = oSignatureBase30[1].length > 1 ? true : false;
+			// 		if (isSignatureProvided) {
+			// 			var sigImage = oSignature.jSignature("getData", "image");
+			// 			var saveSignatureData = {
+			// 				"Aufnr": aufnr
+			// 			};
+
+			// 			saveSignatureData.SignatureMimetype = sigImage[0]; // 'image/png';
+			// 			saveSignatureData.SignatureImage = sigImage[1];
+
+			// 			// Signature data in batch List
+			// 			// batchChanges.push(model.createBatchOperation("/SignatureSet('" + aufnr + "')", "PUT", saveSignatureData));
+			// 		}
+			// 	}
+			// }
+
+		},
+		onSignatureReset: function() {
+			var oViewModel = this.getModel("detailView"); // Model Korrigieren
+			var initSignature = oViewModel.getProperty("/initSignature");
+			if (initSignature === true) {
+				$("#signature").jSignature("clear");
+			}
+		},
+		_createSignatureModel: function() {
+			return new JSONModel({
+				isFilterBarVisible: false,
+				filterBarLabel: "",
+				delay: 0,
+				title: this.getResourceBundle().getText("confirmationsTitleCount ", [0]),
+				noDataText: this.getResourceBundle().getText("confirmationsListNoDataText ")
+			});
 		}
 	});
 });

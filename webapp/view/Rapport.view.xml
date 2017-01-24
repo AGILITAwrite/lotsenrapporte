@@ -135,7 +135,8 @@
 			                </sap.ui.layout.form:FormElement>
 			                <sap.ui.layout.form:FormElement label="Unterschrift" id="__element1">
 			                    <sap.ui.layout.form:fields>
-			                        <Image width="300px" height="100px" id="__image0"/>
+			                        <!--<Image width="300px" height="100px" id="__image0"/>-->
+			                        <Panel id="signaturePanel" />
 			                    </sap.ui.layout.form:fields>
 			                <sap.ui.layout.form:layoutData>
 			                    <sap.ui.layout.form:GridElementData id="__data26" hCells="1" vCells="2"/>
