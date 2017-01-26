@@ -1,5 +1,4 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="ch.portof.controller.Rapport">
-	
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" controllerName="ch.portof.controller.Rapport">
 	<semantic:DetailPage xmlns:sap.m.semantic="sap.m.semantic" title="Semantic Page" id="__page2">
 		<semantic:saveAction>
 			<semantic:SaveAction id="__action0" press="onSave"/>
@@ -10,144 +9,199 @@
 		<semantic:content>
 			<ObjectHeader title="{Name}" introActive="true" id="__header0" number="{Schiffsnummer}" condensed="true" titleActive="true"/>
 			<sap.ui.layout.form:Form xmlns:sap.ui.layout.form="sap.ui.layout.form" editable="true" id="__form1">
-			    <sap.ui.layout.form:formContainers>
-			        <sap.ui.layout.form:FormContainer title="Kopfdaten" id="__container1">
-			            <sap.ui.layout.form:formElements>
-			                <sap.ui.layout.form:FormElement label="Datum / Zeit" id="__element2">
-			                    <sap.ui.layout.form:fields>
-			                        <DatePicker width="100%" id="startDatePicker" valueFormat="yyyyMMdd" placeholder="dd.MM.yyyy" displayFormat="dd.MM.yyyy"/>
-			                        <TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker" valueFormat="HHmmss"/>
-			                    </sap.ui.layout.form:fields>
-			                <sap.ui.layout.form:layoutData>
-			                    <FlexItemData id="__data50"/>
-			                </sap.ui.layout.form:layoutData>
-			                </sap.ui.layout.form:FormElement>
-			                <sap.ui.layout.form:FormElement label="Berg-/Talfahrt" id="__element8">
-			                <sap.ui.layout.form:fields>
-			                    <Switch id="__switch0" customTextOn="B" customTextOff="T"/>
-			                </sap.ui.layout.form:fields>
-			                </sap.ui.layout.form:FormElement>
-			                <sap.ui.layout.form:FormElement label="Lotse" id="__element9">
-			                <sap.ui.layout.form:fields>
-			                    <Text text="Mario Leuenberger" id="__text24"/>
-			                </sap.ui.layout.form:fields>
-			                </sap.ui.layout.form:FormElement>
-			                <sap.ui.layout.form:FormElement id="__element10">
-			                <sap.ui.layout.form:fields>
-			                    <Table noDataText="Drop column list items here and columns in the area above" id="__table0">
-			                        <items>
-			                            <ColumnListItem id="__item0">
-			                                <cells>
-			                                    <StandardListItem type="Inactive" title="Mittlere Rheinbrücke" description="Description text" id="__item7" adaptTitleSize="false"/>
-			                                    <CheckBox id="__box0"/>
-			                                    <Text text="bis 2'000 t" id="__text26"/>
-			                                    <Text text="86 CHF" id="__text27"/>
-			                                    
-			                                </cells>
-			                            </ColumnListItem>
-			                            <ColumnListItem id="__item1">
-			                                <cells>
-			                                	<StandardListItem type="Inactive" title="Mittlere Rheinbrücke" description="Description text" id="__item8"/>
-			                                    <CheckBox id="__box1"/>
-			                                    <Text text="&gt; 100m/2'000 t" id="__text29"/>
-			                                    <Text text="100 CHF" id="__text30"/>
-			                                </cells>
-			                            </ColumnListItem>
-			                            <ColumnListItem id="__item2">
-			                                <cells>
-			                                	<StandardListItem type="Inactive" title="Gem.RPVO Basel - Rheinfelden" description="Description text" id="__item9"/>
-			                                    <CheckBox id="__box2"/>
-			                                    <Text text="&gt; 110-125m / 2'000 t" id="__text32"/>
-			                                    <Text text="140 CHF" id="__text33"/>
-			                                </cells>
-										</ColumnListItem>
-			                            <ColumnListItem id="__item3">
-			                                <cells>
-			                                	<StandardListItem type="Inactive" title="Gem.RPVO Basel - Rheinfelden" description="Description text" id="__item10"/>
-			                                    <CheckBox id="__box3"/>
-			                                    <Text text="Schubverband" id="__text35"/>
-			                                    <Text text="240 CHF" id="__text36"/>
-			                                </cells>
-			                            </ColumnListItem>
-			                            <ColumnListItem id="__item4">
-			                                <cells>
-			                                	<StandardListItem type="Inactive" title="Basel - Augst (v.v)" description="Description text" id="__item11"/>
-			                                    <CheckBox id="__box4"/>
-			                                    <Text text="alle Schiffe" id="__text38"/>
-			                                    <Text text="256 CHF" id="__text39"/>
-			                                </cells>
-			                            </ColumnListItem>
-			                            <ColumnListItem id="__item5">
-			                                <cells>
-			                                	<StandardListItem type="Inactive" title="Birsfelden - Augst (v.v)" description="Description text" id="__item12"/>
-			                                    <CheckBox id="__box5"/>
-			                                    <Text text="alle Schiffe" id="__text41"/>
-			                                    <Text text="256 CHF" id="__text42"/>
-			                                </cells>
-			                            </ColumnListItem>
-			                            <ColumnListItem id="__item6">
-			                                <cells>
-			                                	<StandardListItem type="Inactive" title="Allgemeine Dienstleistungen" description="Description text" id="__item13"/>
-			                                    <CheckBox id="__box6"/>
-			                                    <Text text="alle Schiffe" id="__text44"/>
-			                                    <Text text="256 CHF" id="__text45"/>
-			                                </cells>
-			                            </ColumnListItem>
-			                            <ColumnListItem id="__item15">
-			                                <cells>
-			                                	<StandardListItem type="Inactive" title="Total" description="" id="__item14"/>
-			                                    <Text text="" id="__text47" visible="false"/>
-			                                    <Text text="" id="__text48" visible="false"/>
-			                                    <Text text="256 CHF" id="__text49"/>
-			                                </cells>
-			                            </ColumnListItem>
-			                    	</items>
-			                        <columns>
-			                            <Column id="__column0" mergeDuplicates="true">
-			                                <header>
-			                                    <Label text="Strecke" id="__label6"/>
-			                                </header>
-			                            </Column>
-			                            <Column id="__column1" width="40px">
-			                                <header>
-			                                    <Label id="__label7" visible="false" text="Auswahl" width="20px"/>
-			                                </header>
-			                            </Column>
-			                            <Column id="__column2" minScreenWidth="800px" demandPopin="true" popinDisplay="Inline">
-			                                <header>
-			                                    <Label text="Schiffstyp" id="__label8"/>
-			                                </header>
-			                            </Column>
-			                            <Column id="__column3" minScreenWidth="800px" demandPopin="true" popinDisplay="Inline">
-			                            <header>
-			                                <Label text="Grundtarif" width="100%" id="__label5"/>
-			                            </header>
-			                            </Column></columns></Table>
-			                </sap.ui.layout.form:fields>
-			                </sap.ui.layout.form:FormElement>
-			                <sap.ui.layout.form:FormElement label="Zuschläge" id="__element0">
-			                <sap.ui.layout.form:fields>
-			                    <Title text="Nachtzuschlag" width="100%" id="__title2"/>
-			                    <Switch id="__switch4"/>
-			                    <Title text="Feiertagszuschlag" width="100%" id="__title3"/>
-			                    <Switch id="__switch5"/>
-			                </sap.ui.layout.form:fields>
-			                </sap.ui.layout.form:FormElement>
-			                <sap.ui.layout.form:FormElement label="Unterschrift" id="__element1">
-			                    <sap.ui.layout.form:fields>
-			                        <!--<Image width="300px" height="100px" id="__image0"/>-->
-			                        <Panel id="signaturePanel" />
-			                    </sap.ui.layout.form:fields>
-			                <sap.ui.layout.form:layoutData>
-			                    <sap.ui.layout.form:GridElementData id="__data26" hCells="1" vCells="2"/>
-			                </sap.ui.layout.form:layoutData>
-			                </sap.ui.layout.form:FormElement>
-			            </sap.ui.layout.form:formElements>
-			        </sap.ui.layout.form:FormContainer>
-			    </sap.ui.layout.form:formContainers>
-			    <sap.ui.layout.form:layout>
-			        <sap.ui.layout.form:ResponsiveGridLayout id="__layout0"/>
-			    </sap.ui.layout.form:layout></sap.ui.layout.form:Form>
+				<sap.ui.layout.form:formContainers>
+					<sap.ui.layout.form:FormContainer title="Kopfdaten" id="__container1">
+						<sap.ui.layout.form:formElements>
+							<sap.ui.layout.form:FormElement label="Datum / Zeit" id="__element2">
+								<sap.ui.layout.form:fields>
+									<DatePicker width="100%" id="startDatePicker" valueFormat="yyyyMMdd" placeholder="dd.MM.yyyy" displayFormat="dd.MM.yyyy"/>
+									<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker" valueFormat="HHmmss"/>
+								</sap.ui.layout.form:fields>
+								<sap.ui.layout.form:layoutData>
+									<FlexItemData id="__data50"/>
+								</sap.ui.layout.form:layoutData>
+							</sap.ui.layout.form:FormElement>
+							<sap.ui.layout.form:FormElement label="Berg-/Talfahrt" id="__element8">
+								<sap.ui.layout.form:fields>
+									<Switch id="__switch0" customTextOn="B" customTextOff="T"/>
+								</sap.ui.layout.form:fields>
+							</sap.ui.layout.form:FormElement>
+							<sap.ui.layout.form:FormElement label="Lotse" id="__element9">
+								<sap.ui.layout.form:fields>
+									<Text text="Mario Leuenberger" id="__text24"/>
+								</sap.ui.layout.form:fields>
+							</sap.ui.layout.form:FormElement>
+							<sap.ui.layout.form:FormElement id="__element10">
+								<sap.ui.layout.form:fields>
+									<Table noDataText="Drop column list items here and columns in the area above" id="__table0">
+										<items>
+											<ColumnListItem id="__item0">
+												<cells>
+													<StandardListItem type="Inactive" title="Mittlere Rheinbrücke" description="Basel UW Birsfelden (v.v.)" id="__item7" adaptTitleSize="false"/>
+													<CheckBox id="__box0"/>
+													<Text text="bis 2'000 t" id="__text26"/>
+													<Text text="86 CHF" id="__text27"/>
+												</cells>
+											</ColumnListItem>
+											<ColumnListItem id="__item1">
+												<cells>
+													<StandardListItem type="Inactive" title="Mittlere Rheinbrücke" description="Basel UW Birsfelden (v.v.)" id="__item8"/>
+													<CheckBox id="__box1"/>
+													<Text text="&gt; 100m/2'000 t" id="__text29"/>
+													<Text text="100 CHF" id="__text30"/>
+												</cells>
+											</ColumnListItem>
+											<ColumnListItem id="__item2">
+												<cells>
+													<StandardListItem type="Inactive" title="Gem.RPVO Basel - Rheinfelden" description="(hoheitliche / nicht Mwst.pflichtig)" id="__item9"/>
+													<CheckBox id="__box2"/>
+													<Text text="&gt; 110-125m / 2'000 t" id="__text32"/>
+													<Text text="140 CHF" id="__text33"/>
+												</cells>
+											</ColumnListItem>
+											<ColumnListItem id="__item3">
+												<cells>
+													<StandardListItem type="Inactive" title="Gem.RPVO Basel - Rheinfelden" description="(hoheitliche / nicht Mwst.pflichtig)" id="__item10"/>
+													<CheckBox id="__box3"/>
+													<Text text="Schubverband" id="__text35"/>
+													<Text text="240 CHF" id="__text36"/>
+												</cells>
+											</ColumnListItem>
+											<ColumnListItem id="__item4">
+												<cells>
+													<StandardListItem type="Inactive" title="Basel - Augst (v.v)" id="__item11"/>
+													<CheckBox id="__box4"/>
+													<Text text="alle Schiffe" id="__text38"/>
+													<Text text="256 CHF" id="__text39"/>
+												</cells>
+											</ColumnListItem>
+											<ColumnListItem id="__item5">
+												<cells>
+													<StandardListItem type="Inactive" title="Birsfelden - Augst (v.v)" id="__item12"/>
+													<CheckBox id="__box5"/>
+													<Text text="alle Schiffe" id="__text41"/>
+													<Text text="256 CHF" id="__text42"/>
+												</cells>
+											</ColumnListItem>
+											<ColumnListItem id="__item6">
+												<cells>
+													<StandardListItem type="Inactive" title="Allgemeine Dienstleistungen" description="Lotsen/Stundenlohn" id="__item13"/>
+													<!--<CheckBox id="__box6"/>-->
+													<Text text="alle Schiffe" id="__text44"/>
+													<Text text="256 CHF" id="__text45"/>
+												</cells>
+											</ColumnListItem>
+											<ColumnListItem id="__item15">
+												<cells>
+													<StandardListItem type="Inactive" title="Total" id="__item14"/>
+													<Text text="" id="__text47" visible="false"/>
+													<Text text="" id="__text48" visible="false"/>
+													<Text text="256 CHF" id="__text49"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+										<columns>
+											<Column id="__column0" mergeDuplicates="true" width="200px">
+												<header>
+													<Label text="Strecke" id="__label6"/>
+												</header>
+											</Column>
+											<Column id="__column1" width="40px">
+												<header>
+													<Label id="__label7" visible="false" text="Auswahl" width="20px"/>
+												</header>
+											</Column>
+											<Column id="__column2" minScreenWidth="800px" demandPopin="true" popinDisplay="Inline">
+												<header>
+													<Label text="Schiffstyp" id="__label8"/>
+												</header>
+											</Column>
+											<Column id="__column3" minScreenWidth="800px" demandPopin="true" popinDisplay="Inline">
+												<header>
+													<Label text="Grundtarif" width="100%" id="__label5"/>
+												</header>
+											</Column>
+										</columns>
+									</Table>
+								</sap.ui.layout.form:fields>
+							</sap.ui.layout.form:FormElement>
+							<sap.ui.layout.form:FormElement label="Zuschläge" id="__element0">
+								<sap.ui.layout.form:fields>
+									<Title text="Nachtzuschlag" width="100%" id="__title2"/>
+									<Switch id="__switch4"/>
+									<Title text="Feiertagszuschlag" width="100%" id="__title3"/>
+									<Switch id="__switch5"/>
+								</sap.ui.layout.form:fields>
+							</sap.ui.layout.form:FormElement>
+							<sap.ui.layout.form:FormElement label="Unterschrift" id="__element1">
+								<sap.ui.layout.form:fields>
+									<!--<Image width="300px" height="100px" id="__image0"/>-->
+									<!--<Panel id="signaturePanel" />-->
+									<Panel id="signaturePanel">
+										<customData>
+											<sap.ui.core:CustomData id="__data67" key="sap-ui-fastnavgroup" value="true" writeToDom="true"/>
+										</customData>
+										<!--<content>-->
+										<!--	<Title text="Unterschrift" width="100%"/>-->
+										<!--</content>-->
+										<layoutData>
+											<sap.ui.layout:ResponsiveFlowLayoutData id="__data69"/>
+										</layoutData>
+									</Panel>
+									</sap.ui.layout.form:fields>
+							</sap.ui.layout.form:FormElement>
+							<sap.ui.layout.form:FormElement id="__element3">
+									<sap.ui.layout.form:fields>
+									<Panel>
+										<infoToolbar>
+											<Toolbar id="__toolbar7" width="100%">
+												<customData>
+													<sap.ui.core:CustomData id="__data71" key="sap-ui-fastnavgroup" value="true" writeToDom="true"/>
+												</customData>
+												<content>
+													<Button id="SignatureReset" press="onSignatureReset" text="Unterschrift zurücksetzen" width="200px"/>
+												</content>
+											</Toolbar>
+										</infoToolbar>
+									</Panel>
+								</sap.ui.layout.form:fields>
+								<sap.ui.layout.form:layoutData>
+									<sap.ui.layout.form:GridElementData id="__data26" hCells="2"/>
+								</sap.ui.layout.form:layoutData>
+							</sap.ui.layout.form:FormElement>
+						</sap.ui.layout.form:formElements>
+					</sap.ui.layout.form:FormContainer>
+				</sap.ui.layout.form:formContainers>
+				<sap.ui.layout.form:layout>
+					<sap.ui.layout.form:ResponsiveGridLayout id="__layout0"/>
+				</sap.ui.layout.form:layout>
+			</sap.ui.layout.form:Form>
+			<!--  <Panel id="signaturePanel">-->
+			<!--<customData>-->
+			<!--				<sap.ui.core:CustomData id="__data67" key="sap-ui-fastnavgroup" value="true" writeToDom="true"/>-->
+			<!--			</customData>-->
+			<!--			<content>-->
+			<!--				<Title text="Unterschrift" width="100%"/>-->
+			<!--			</content>-->
+			<!--			<layoutData>-->
+			<!--				<sap.ui.layout:ResponsiveFlowLayoutData id="__data69"/>-->
+			<!--			</layoutData>-->
+			<!--  </Panel>-->
+			<!--							<Panel>-->
+			<!--	<infoToolbar>-->
+			<!--		<Toolbar id="__toolbar7" width="100%">-->
+			<!--			<customData>-->
+			<!--				<sap.ui.core:CustomData id="__data71" key="sap-ui-fastnavgroup" value="true" writeToDom="true"/>-->
+			<!--			</customData>-->
+			<!--			<content>-->
+			<!--				<Button id="SignatureReset" press="onSignatureReset" text="Unterschrift zurücksetzen" width="200px"/>-->
+			<!--			</content>-->
+			<!--		</Toolbar>-->
+			<!--	</infoToolbar>-->
+			<!--</Panel>-->
 		</semantic:content>
+		<semantic:negativeAction>
+			<semantic:NegativeAction text="Reset" id="__action2"/>
+		</semantic:negativeAction>
 	</semantic:DetailPage>
 </mvc:View>

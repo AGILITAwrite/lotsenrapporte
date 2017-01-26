@@ -156,6 +156,13 @@
 					"viewId": "notFound"
 				}
 			}
+		},
+		"resources": {
+			"js": [
+				{
+					"uri": "libs/jSignature.min.js"
+				}
+			]
 		}
 	},
 	"sap.platform.hcp": {

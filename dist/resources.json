@@ -34,6 +34,21 @@
             "name": "manifest.json"
         },
         {
+            "name": "libs/jSignature.min.js"
+        },
+        {
+            "name": "libs/jSignature.CompressorSVG.js"
+        },
+        {
+            "name": "libs/jSignature.UndoButton.js"
+        },
+        {
+            "name": "libs/jSignature.js"
+        },
+        {
+            "name": "libs/jSignature.CompressorBase30.js"
+        },
+        {
             "name": "i18n/i18n.properties",
             "raw": "i18n/i18n.properties"
         },
