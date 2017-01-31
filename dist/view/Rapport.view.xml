@@ -1,4 +1,4 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" controllerName="ch.portof.controller.Rapport">
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" controllerName="ch.portof.controller.Rapport" afterRendering="onAfterRendering">
 	<semantic:DetailPage xmlns:sap.m.semantic="sap.m.semantic" title="Semantic Page" id="__page2">
 		<semantic:saveAction>
 			<semantic:SaveAction id="__action0" press="onSave"/>

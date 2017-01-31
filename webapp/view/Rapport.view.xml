@@ -1,4 +1,4 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" controllerName="ch.portof.controller.Rapport">
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" controllerName="ch.portof.controller.Rapport" afterRendering="onAfterRendering" afterInit="onAfterRendering" modelContextChange="onAfterRendering">
 	<semantic:DetailPage xmlns:sap.m.semantic="sap.m.semantic" title="Semantic Page" id="__page2">
 		<semantic:saveAction>
 			<semantic:SaveAction id="__action0" press="onSave"/>
@@ -7,6 +7,19 @@
 			<semantic:CancelAction id="__action1" press="onCancel"/>
 		</semantic:cancelAction>
 		<semantic:content>
+<!--			<Panel id="signaturePanel" width="auto" expanded="true" height="400px">
+										<customData>
+											<sap.ui.core:CustomData id="__data67" key="sap-ui-fastnavgroup" value="true" writeToDom="true"/>
+										</customData>
+										<content>
+											<Title text="Unterschrift" width="100%"/>
+										</content>
+										<layoutData>
+											<sap.ui.layout:ResponsiveFlowLayoutData id="__data69"/>
+										</layoutData>
+									</Panel>-->
+												<Panel id="signaturePanel" width="auto" expanded="true">
+									</Panel>
 			<ObjectHeader title="{Name}" introActive="true" id="__header0" number="{Schiffsnummer}" condensed="true" titleActive="true"/>
 			<sap.ui.layout.form:Form xmlns:sap.ui.layout.form="sap.ui.layout.form" editable="true" id="__form1">
 				<sap.ui.layout.form:formContainers>
@@ -137,17 +150,17 @@
 								<sap.ui.layout.form:fields>
 									<!--<Image width="300px" height="100px" id="__image0"/>-->
 									<!--<Panel id="signaturePanel" />-->
-									<Panel id="signaturePanel">
-										<customData>
-											<sap.ui.core:CustomData id="__data67" key="sap-ui-fastnavgroup" value="true" writeToDom="true"/>
-										</customData>
-										<!--<content>-->
-										<!--	<Title text="Unterschrift" width="100%"/>-->
-										<!--</content>-->
-										<layoutData>
-											<sap.ui.layout:ResponsiveFlowLayoutData id="__data69"/>
-										</layoutData>
-									</Panel>
+									<!--<Panel id="signaturePanel">-->
+									<!--	<customData>-->
+									<!--		<sap.ui.core:CustomData id="__data67" key="sap-ui-fastnavgroup" value="true" writeToDom="true"/>-->
+									<!--	</customData>-->
+									<!--	<content>-->
+									<!--		<Title text="Unterschrift" width="100%"/>-->
+									<!--	</content>-->
+									<!--	<layoutData>-->
+									<!--		<sap.ui.layout:ResponsiveFlowLayoutData id="__data69"/>-->
+									<!--	</layoutData>-->
+									<!--</Panel>-->
 									</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
 							<sap.ui.layout.form:FormElement id="__element3">
