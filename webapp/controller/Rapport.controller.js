@@ -296,8 +296,9 @@ sap.ui.define([
 */			
 			//$("#signaturePanel").toggle().toggle();
 			//	$("#signature").jSignature("reset");
-				var oSignatureDiv = this.getView().byId("signature");
-				oSignatureDiv.setVisible(true);
+				//var oSignatureDiv = this.getView().byId("signature");
+				//oSignatureDiv.setVisible(true);
+				
 		},
 		_createSignatureModel: function() {
 			return new JSONModel({
