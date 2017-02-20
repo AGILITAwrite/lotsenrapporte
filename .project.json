@@ -59,8 +59,8 @@
     "resourceModelName": "i18n"
   },
   "mockpreview": {
-    "mockUri": "/sap/opu/odata/sap/ZLOTSENAPP2_SRV",
-    "metadataFilePath": "",
+    "mockUri": "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/",
+    "metadataFilePath": "localService/metadata.xml",
     "loadJSONFiles": false,
     "loadCustomRequests": false,
     "mockRequestsFilePath": ""
