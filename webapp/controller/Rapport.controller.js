@@ -12,44 +12,65 @@ sap.ui.define([
 		 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
 		 * @memberOf ch.portof.view.Rapport
 		 */
+		formatter: formatter,
 		onInit: function() {
+
 			var oViewModel = new JSONModel({
 				busy: false,
 				delay: 0,
 				initSignature: false
 			});
 			//this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
-
 			//this.getRouter().getRoute("rapport").attachPatternMatched(this._onRouteMatched, this);
 			this.getRouter().getRoute("rapportNewRoute").attachMatched(this._onRouteMatched, this);
 			//this.getRouter().getRoute("object").attachPatternMatched(this._onRouteMatched, this);
 			this.setModel(oViewModel, "rapportView");
 			this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
+
 			var oTarifModel = new JSONModel({
 				busy: false,
 				delay: 0
 			});
+			//this.byId("__text30").setProperty("text", oTarifModel.getProperty("MrbU2000t"));
+			var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/TarifeSet('NO')";
+			oTarifModel.loadData(URL, true);
+			this.setModel(oTarifModel, "tarifeSet");
+			//, [oParameters], [bAsync], [sType], [bMerge], [bCache], [mHeaders])
 			var oSchiffModel = new JSONModel({
 				busy: false,
 				delay: 0
 			});
-			this.getView().byId("startDatePicker").setDateValue(new Date());
-			this.getView().byId("startTimePicker").setDateValue(new Date());
+
 
 			// Signatur 
 			var oSignatureModel = this._createSignatureModel();
 			// oSignatureModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
 			this.setModel(oSignatureModel, "Signature");
-			//$("#signature").jSignature("clear");
+			this._initSignature();
+
+			var objectPath = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/"; // OrderSet('" + aufnr + "')";
+			var oRapporteModel = new sap.ui.model.odata.ODataModel(objectPath, true);
+			oRapporteModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
+			var onewRapport = oRapporteModel.createEntry("/RapporteSet");
+
+			oRapporteModel.setProperty("/Nachtzuschlag", true, onewRapport);
+			oRapporteModel.setProperty("/MrbU2000t", true, onewRapport);
+			oRapporteModel.setProperty("/Datum", new Date(), onewRapport);
+			oRapporteModel.setProperty("/Zeit", new Date(), onewRapport);
+
+			//this.getView().getModel("RapporteSet").setProperty("/Datum", "22.01.2016", this.getView().getBindingContext());	
+			//onewRapport.getModel().setProperty("/Nachtzuschlag", true);
+
+			this.setModel(oRapporteModel);
 			
-/*			var initSignature = oViewModel.getProperty("/initSignature");
-			if (initSignature === true) {
-				//var elementExists = document.getElementById("#signature");
-				// if (elementExists === null) {
-				var oSignaturePanel = this.getView().byId("signaturePanel");
-				$("#signature").jSignature("clear");	
-			}*/
-			$("#signature").toggle().toggle();
+			this.getView().setBindingContext(onewRapport);
+			
+			
+			
+			//this.getView().bindElement(onewRapport.getPath());
+			//this.getView().bindElement( onewRapport );
+			//this.getView().byId("startDatePicker").setDateValue(new Date());
+			//this.getView().byId("startTimePicker").setDateValue(new Date());
 		},
 		/**
 		 * If the master route was hit (empty hash) we have to set
@@ -90,19 +111,26 @@ sap.ui.define([
 					}
 				}
 			});*/
-			var sObjectId = oEvent.getParameter("arguments").objectId;
-			this.getModel().metadataLoaded().then(function() {
-				var sObjectPath = this.getModel().createKey("SchiffeSet", {
-					Schiffsnummer: sObjectId
-				});
-				this._bindView("/" + sObjectPath);
-
-			}.bind(this));
-			/*			var sObjectPath = this.getModel().createKey("SchiffeSet", {
+			/*			var sObjectId = oEvent.getParameter("arguments").objectId;
+						this.getModel().metadataLoaded().then(function() {
+							var sObjectPath = this.getModel().createKey("SchiffeSet", {
 								Schiffsnummer: sObjectId
 							});
-						this._bindView("/" + sObjectPath);*/
+							this._bindView("/" + sObjectPath);
+						}.bind(this));*/
 
+			/*			var sObjectId = oEvent.getParameter("arguments").objectId;
+						this.getModel().metadataLoaded().then(function() {
+							var sObjectPath = this.getModel().createKey("RapporteSet", {
+								Schiffsnummer: sObjectId
+							});
+							this._bindView("/" + sObjectPath);
+						}.bind(this));*/
+
+			/*			var sObjectPath = this.getModel().createKey("SchiffeSet", {
+												Schiffsnummer: sObjectId
+											});
+										this._bindView("/" + sObjectPath);*/
 		},
 		/*		_onBindingChange: function(oEvent) {
 						// No data for the binding
@@ -123,47 +151,10 @@ sap.ui.define([
 		 * This hook is the same one that SAPUI5 controls get after being rendered.
 		 * @memberOf ch.portof.view.Rapport
 		 */
-		onAfterRendering: function() {
-			// http://willowsystems.github.io/jSignature/#/about/
+		//onAfterRendering: function() {
+		// http://willowsystems.github.io/jSignature/#/about/
 
-			var oViewModel = this.getModel("rapportView"); 
-			var initSignature = oViewModel.getProperty("/initSignature");
-
-			if (initSignature === false) {
-				//var elementExists = document.getElementById("#signature");
-				// if (elementExists === null) {
-				var oSignaturePanel = this.getView().byId("signaturePanel");
-				var oSignatureDiv = new sap.ui.core.HTML("signature", {
-					// the static content as a long string literal
-					// content: "<div style='width: 480px; height: 128px; border: 1px solid black'></d/**/iv>",
-						content: "<div style='width: 480px; height: 128px; border: 1px solid black'></d/**/iv>",
-					 //preferDOM : true,
-					afterRendering: function(e) {
-						// Init darf nur einmal aufgerufen
-						if (this.init === true) {
-							$("#signature").jSignature("init");
-							this.init = false;
-							// $('#signature').jSignature({
-							//     'signatureLine': false
-							// });			
-						} else {
-							$("#signature").jSignature("clear");
-						
-							
-						}
-					}
-				});
-				oSignatureDiv.init = true;
-
-				if (oSignaturePanel !== null) {
-					oSignatureDiv.placeAt(oSignaturePanel);
-				}
-				oViewModel.setProperty("/initSignature", true);
-				oSignatureDiv.rerender();
-				//oSignatureDiv.setVisible(true);
-
-			}
-		},
+		//},
 		/**
 		 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
 		 * @memberOf ch.portof.view.Rapport
@@ -171,7 +162,6 @@ sap.ui.define([
 		//	onExit: function() {
 		//
 		//	}	,
-
 		/**
 		 * Binds the view to the object path. Makes sure that detail view displays
 		 * a busy indicator while data for the corresponding element binding is loaded.
@@ -213,8 +203,7 @@ sap.ui.define([
 				oObject = oView.getModel().getObject(sPath),
 				sObjectId = oObject.Schiffsnummer,
 				sObjectName = oObject.Name,
-				oViewModel = this.getModel("detailView");
-			//this.getOwnerComponent().oListSelector.selectAListItem(sPath);
+				oViewModel = this.getModel("detailView"); //this.getOwnerComponent().oListSelector.selectAListItem(sPath);
 			//oViewModel.setProperty("/shareSendEmailSubject", oResourceBundle.getText("shareSendEmailObjectSubject", [sObjectId]));
 			/*oViewModel.setProperty("/shareSendEmailMessage", oResourceBundle.getText("shareSendEmailObjectMessage", [
 				sObjectName,
@@ -223,7 +212,7 @@ sap.ui.define([
 			]
 			));*/
 		},
-			_onMetadataLoaded: function() {
+		_onMetadataLoaded: function() {
 			// Store original busy indicator delay for the detail view
 			var iOriginalViewBusyDelay = this.getView().getBusyIndicatorDelay(),
 				oViewModel = this.getModel("rapportView");
@@ -242,14 +231,14 @@ sap.ui.define([
 			oViewModel.setProperty("/busy", true);
 			// Restore original busy indicator delay for the detail view
 			oViewModel.setProperty("/delay", iOriginalViewBusyDelay);
-			},
+		},
 		/**
 		 *@memberOf ch.portof.controller.Rapport
 		 */
 		onCancel: function() {
 			//This code was generated by the layout editor.
 			// history.go(-1);
-				// on Nav Back 
+			// on Nav Back 
 			var oHistory = sap.ui.core.routing.History.getInstance();
 			if (oHistory.getPreviousHash())
 				window.history.go(-1);
@@ -262,7 +251,6 @@ sap.ui.define([
 		onSave: function() {
 			// This code was generated by the layout editor.
 			// var oSignatureModel = this.getModel("Signature");
-
 			// 			var oSignature = $('#signature');
 			// if (oSignature) {
 			// 	var oSignatureBase30 = oSignature.jSignature('getData', 'base30');
@@ -273,32 +261,21 @@ sap.ui.define([
 			// 			var saveSignatureData = {
 			// 				"Aufnr": aufnr
 			// 			};
-
 			// 			saveSignatureData.SignatureMimetype = sigImage[0]; // 'image/png';
 			// 			saveSignatureData.SignatureImage = sigImage[1];
-
 			// 			// Signature data in batch List
 			// 			// batchChanges.push(model.createBatchOperation("/SignatureSet('" + aufnr + "')", "PUT", saveSignatureData));
 			// 		}
 			// 	}
 			// }
-
 		},
 		onSignatureReset: function() {
-			/*var oViewModel = this.getModel("rapportView"); // Model Korrigieren
+			var oViewModel = this.getModel("rapportView");
+			// Model Korrigieren
 			var initSignature = oViewModel.getProperty("/initSignature");
 			if (initSignature === true) {
 				$("#signature").jSignature("clear");
-			}*/
-			//$("#signature").toggle().toggle();
-/*			$("#signature").width( 600 );
-			$("#signature").height( 250 );
-*/			
-			//$("#signaturePanel").toggle().toggle();
-			//	$("#signature").jSignature("reset");
-				//var oSignatureDiv = this.getView().byId("signature");
-				//oSignatureDiv.setVisible(true);
-				
+			}
 		},
 		_createSignatureModel: function() {
 			return new JSONModel({
@@ -308,6 +285,65 @@ sap.ui.define([
 				title: this.getResourceBundle().getText("confirmationsTitleCount ", [0]),
 				noDataText: this.getResourceBundle().getText("confirmationsListNoDataText ")
 			});
+		},
+		_initSignature: function() {
+			var oViewModel = this.getModel("rapportView");
+			var initSignature = oViewModel.getProperty("/initSignature");
+			if (initSignature === false) {
+				var oSignaturePanel = this.getView().byId("signaturePanel");
+				var oSignatureDiv = new sap.ui.core.HTML("signature", {
+					// the static content as a long string literal
+					// content: "<div style='width: 480px; height: 128px; border: 1px solid black'></d/**/iv>",
+					content: "<div style='width: 480px; height: 128px; border: 1px solid black'></d/**/iv>",
+					//preferDOM : true,
+					afterRendering: function(e) {
+						// Init darf nur einmal aufgerufen
+						if (this.init === true) {
+							$("#signature").jSignature("init");
+							this.init = false;
+						} else {
+							$("#signature").jSignature("clear");
+						}
+					}
+				});
+				oSignatureDiv.init = true;
+				if (oSignaturePanel !== null) {
+					oSignatureDiv.placeAt(oSignaturePanel);
+				}
+				oViewModel.setProperty("/initSignature", true);
+			}
+		},
+		_updateTarife: function() {
+			//var oViewModel = this.getModel("rapportView");
+			//this.getView().getModel("RapporteSet").setProperty("/Datum", "22.01.2016", this.getView().getBindingContext());
+			//var oViewModel = this.getModel("RapporteSet");
+
+			//oViewModel.getProperty("")
+			//this.getView().byId("__samstagsZuschlag").getState();
+			var oRapporteModel = this.getView().getBindingContext();
+			//var oRapporteModel = this.getView().getModel();
+			var oTarifModel = this.getView().getModel("tarifeSet");
+			var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/TarifeSet";
+
+			if (oRapporteModel.getProperty("ZLotsenFeiertagszuschlag")) {
+				URL = URL + "('FR')";
+			} else if (oRapporteModel.getProperty("Nachtzuschlag")) {
+				URL = URL + "('SA')";
+			} else {
+				URL = URL + "('NO')";
+			}
+			
+			oTarifModel.loadData(URL, true);
+			
+			this.setModel(oTarifModel, "tarifeSet");
+			
+			this._calc();
+		},
+		/**
+		 *@memberOf ch.portof.controller.Rapport
+		 */
+		_calc: function() {
+			//This code was generated by the layout editor.
 		}
 	});
 });
