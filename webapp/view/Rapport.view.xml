@@ -102,7 +102,7 @@
 										<ColumnListItem id="__item6">
 											<cells>
 												<StandardListItem type="Inactive" title="Allgemeine Dienstleistungen" description="Lotsen/Stundenlohn" id="__item13"/>
-												<Input ariaLabelledBy="__xmlview0--__label7" width="100%" id="__input0" dateFormat="" change="_calc"/>
+												<Input ariaLabelledBy="__xmlview0--__label7" width="100%" id="__input0" dateFormat="" change="_calc" value="{AllgemeineDienstleistung}"/>
 												<!--<CheckBox id="__box6"/>-->
 												<Text text="alle Schiffe" id="__text44"/>
 												<Text text="{ path: 'tarifeSet>/d/AllgemeineDienstleistung', formatter: '.formatter.currencyValue' } CHF" id="__text45"/>
@@ -176,11 +176,11 @@
 							</sap.ui.layout.form:layoutData>
 						</sap.ui.layout.form:FormElement>
 					</sap.ui.layout.form:FormContainer>
-					<sap.ui.layout.form:FormContainer title="Langtext" id="__container4" expandable="true">
+					<sap.ui.layout.form:FormContainer title="Bemerkung" id="__container4" expandable="true">
 					    <sap.ui.layout.form:formElements>
 					        <sap.ui.layout.form:FormElement id="__element5">
 					            <sap.ui.layout.form:fields>
-					                <TextArea id="__area0" width="100%" rows="4"/>
+					                <TextArea id="__area0" rows="4" maxLength="255" wrapping="Off" value="{Bemerkung}"/>
 					            </sap.ui.layout.form:fields>
 					        </sap.ui.layout.form:FormElement>
 					    </sap.ui.layout.form:formElements>

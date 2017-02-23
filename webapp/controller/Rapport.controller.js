@@ -20,6 +20,7 @@ sap.ui.define([
 				delay: 0,
 				initSignature: false
 			});
+			
 			//this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
 			//this.getRouter().getRoute("rapport").attachPatternMatched(this._onRouteMatched, this);
 			this.getRouter().getRoute("rapportNewRoute").attachMatched(this._onRouteMatched, this);
@@ -27,64 +28,16 @@ sap.ui.define([
 			this.setModel(oViewModel, "rapportView");
 			this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
 
-			var oTarifModel = new JSONModel({
-				busy: false,
-				delay: 0
-			});
-			//this.byId("__text30").setProperty("text", oTarifModel.getProperty("MrbU2000t"));
-			var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/TarifeSet('NO')";
-			oTarifModel.loadData(URL, true, false);
-			this.setModel(oTarifModel, "tarifeSet");
-			//, [oParameters], [bAsync], [sType], [bMerge], [bCache], [mHeaders])
+
+			this._createTarifModel();
+			this._createSignatureModel();
+			this._createRapportModel();
+
+
 			var oSchiffModel = new JSONModel({
 				busy: false,
 				delay: 0
 			});
-
-
-			// Signatur 
-			var oSignatureModel = this._createSignatureModel();
-			// oSignatureModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
-			this.setModel(oSignatureModel, "Signature");
-			this._initSignature();
-
-			var objectPath = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/"; // OrderSet('" + aufnr + "')";
-			var oRapporteModel = new sap.ui.model.odata.ODataModel(objectPath, true);
-			oRapporteModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
-			var onewRapport = oRapporteModel.createEntry("/RapporteSet");
-
-			// oRapporteModel.setProperty("/Nachtzuschlag", true, onewRapport);
-			// oRapporteModel.setProperty("/MrbU2000t", true, onewRapport);
-			oRapporteModel.setProperty("/Datum", new Date(), onewRapport);
-			oRapporteModel.setProperty("/Zeit", new Date(), onewRapport);
-
-			//this.getView().getModel("RapporteSet").setProperty("/Datum", "22.01.2016", this.getView().getBindingContext());	
-			//onewRapport.getModel().setProperty("/Nachtzuschlag", true);
-
-			this.setModel(oRapporteModel);
-			
-			this.getView().setBindingContext(onewRapport);
-		
-/*			var olabelDatum = new sap.m.Label("__Datum123",
-								{	text: "Datum/Zeit", 
-									textAlign: "Begin",
-									textDiretion: "LTR"
-								}
-								);
-								
-			olabelDatum.setTextAlign("Begin");
-			olabelDatum.setTextDirection("RTL");
-			this.getView().byId("__element2").setLabel( olabelDatum );*/
-			//this.getView().byId("__element2").setTextAlign("Begin");                       
-			
-			
-			
-			//this.getView().bindElement(onewRapport.getPath());
-			//this.getView().bindElement( onewRapport );
-			//this.getView().byId("startDatePicker").setDateValue(new Date());
-			//this.getView().byId("startTimePicker").setDateValue(new Date());
-			
-			
 			this._calc();
 		},
 		/**
@@ -292,7 +245,7 @@ sap.ui.define([
 				$("#signature").jSignature("clear");
 			}
 		},
-		_createSignatureModel: function() {
+/*		_createSignatureModel: function() {
 			return new JSONModel({
 				isFilterBarVisible: false,
 				filterBarLabel: "",
@@ -300,7 +253,7 @@ sap.ui.define([
 				title: this.getResourceBundle().getText("confirmationsTitleCount ", [0]),
 				noDataText: this.getResourceBundle().getText("confirmationsListNoDataText ")
 			});
-		},
+		},*/
 		_initSignature: function() {
 			var oViewModel = this.getModel("rapportView");
 			var initSignature = oViewModel.getProperty("/initSignature");
@@ -387,11 +340,48 @@ sap.ui.define([
 			if(oRapporteModel.getProperty("BirAug")){
 				total = parseFloat(total) + parseFloat(oTarifModel.getProperty("/d/BirAug"));
 			}
-			if(oRapporteModel.getProperty("AllgemeineDienstleistungen")){
-				total = parseFloat(total) + ( parseFloat(oTarifModel.getProperty("/d/AllgemeineDienstleistungen")) * parseFloat(oRapporteModel.getProperty("AllgemeineDienstleistungen")) );
+			if(oRapporteModel.getProperty("AllgemeineDienstleistung")){
+				total = parseFloat(total) + ( parseFloat(oTarifModel.getProperty("/d/AllgemeineDienstleistung")) * parseFloat(oRapporteModel.getProperty("AllgemeineDienstleistung")) );
 			}
 			this.getView().byId("__Total").setProperty("text", total + " CHF" );                       
 			
+		},
+		_createSignatureModel: function(){
+						// Signatur 
+			//var oSignatureModel = this._createSignatureModel();
+			var oSignatureModel = new JSONModel({
+				isFilterBarVisible: false,
+				filterBarLabel: "",
+				delay: 0,
+				title: this.getResourceBundle().getText("confirmationsTitleCount ", [0]),
+				noDataText: this.getResourceBundle().getText("confirmationsListNoDataText ")
+			});
+			// oSignatureModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
+			this.setModel(oSignatureModel, "Signature");
+			this._initSignature();
+		},
+		_createTarifModel: function(){
+			var oTarifModel = new JSONModel({
+				busy: false,
+				delay: 0
+			});
+			var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/TarifeSet('NO')";
+			oTarifModel.loadData(URL, true, false);
+			this.setModel(oTarifModel, "tarifeSet");
+
+		},
+		_createRapportModel: function(){
+			var objectPath = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/"; // OrderSet('" + aufnr + "')";
+			var oRapporteModel = new sap.ui.model.odata.ODataModel(objectPath, true);
+			oRapporteModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
+			var onewRapport = oRapporteModel.createEntry("/RapporteSet");
+
+			oRapporteModel.setProperty("/Datum", new Date(), onewRapport);
+			oRapporteModel.setProperty("/Zeit", new Date(), onewRapport);
+
+			this.setModel(oRapporteModel);
+			
+			this.getView().setBindingContext(onewRapport);
 		}
 	});
 });

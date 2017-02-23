@@ -30,12 +30,9 @@
 						<Input binding="{Debitoren/}" value="{Name1}" />-->
 					</content>
 					</IconTabFilter>
-					<IconTabFilter id="iconTabBarFilter2" icon="sap-icon://write-new-document" tooltip="{i18n>detailIconTabBarAttachments}" text="{i18n>detailRapportAnlegen}">
-					</IconTabFilter>
-					<IconTabFilter text="{i18n>detailRapportListe}" icon="sap-icon://task" iconColor="Critical" id="__filter0"/>
-				</items>
-			</IconTabBar>
-			<Table id="lineItemsList" width="auto" items="{RapporteSet}" updateFinished="onListUpdateFinished" noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
+					<IconTabFilter text="{i18n>detailRapportListe}" icon="sap-icon://task" iconColor="Critical" id="__filter0">
+					    <content>
+					        <Table id="lineItemsList" width="auto" items="{RapporteSet}" updateFinished="onListUpdateFinished" noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
 				<headerToolbar>
 					<Toolbar id="lineItemsToolbar">
 						<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}"/>
@@ -58,6 +55,10 @@
 					</ColumnListItem>
 				</items>
 			</Table>
+					    </content>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
 		</semantic:content>
 
 		<semantic:sendEmailAction>
