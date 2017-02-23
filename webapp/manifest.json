@@ -56,8 +56,14 @@
 				"sap.m": {
 					"minVersion": "1.38.0"
 				},
+				"sap.ui.commons": {
+					"minVersion": ""
+				},
 				"sap.ui.core": {
 					"minVersion": "1.38.0"
+				},
+				"sap.ui.layout": {
+					"minVersion": ""
 				}
 			}
 		},

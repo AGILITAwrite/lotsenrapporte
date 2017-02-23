@@ -64,6 +64,18 @@ sap.ui.define([
 			this.setModel(oRapporteModel);
 			
 			this.getView().setBindingContext(onewRapport);
+		
+/*			var olabelDatum = new sap.m.Label("__Datum123",
+								{	text: "Datum/Zeit", 
+									textAlign: "Begin",
+									textDiretion: "LTR"
+								}
+								);
+								
+			olabelDatum.setTextAlign("Begin");
+			olabelDatum.setTextDirection("RTL");
+			this.getView().byId("__element2").setLabel( olabelDatum );*/
+			//this.getView().byId("__element2").setTextAlign("Begin");                       
 			
 			
 			
@@ -378,7 +390,7 @@ sap.ui.define([
 			if(oRapporteModel.getProperty("AllgemeineDienstleistungen")){
 				total = parseFloat(total) + ( parseFloat(oTarifModel.getProperty("/d/AllgemeineDienstleistungen")) * parseFloat(oRapporteModel.getProperty("AllgemeineDienstleistungen")) );
 			}
-			this.getView().byId("__Total").setProperty("text", total );                       
+			this.getView().byId("__Total").setProperty("text", total + " CHF" );                       
 			
 		}
 	});

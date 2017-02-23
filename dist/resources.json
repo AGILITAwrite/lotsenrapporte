@@ -16,6 +16,9 @@
             "name": "view/DetailObjectNotFound.view.xml"
         },
         {
+            "name": "view/CopyOfRapport.view.xml"
+        },
+        {
             "name": "view/Rapport.view.xml"
         },
         {
@@ -35,18 +38,6 @@
         },
         {
             "name": "libs/jSignature.min.js"
-        },
-        {
-            "name": "libs/jSignature.CompressorSVG.js"
-        },
-        {
-            "name": "libs/jSignature.UndoButton.js"
-        },
-        {
-            "name": "libs/jSignature.js"
-        },
-        {
-            "name": "libs/jSignature.CompressorBase30.js"
         },
         {
             "name": "i18n/i18n.properties",
@@ -120,6 +111,9 @@
         },
         {
             "name": "test/mockServer.html"
+        },
+        {
+            "name": "test/extended_runnable_file.html"
         },
         {
             "name": "test/unit/controller/App.controller.js"
