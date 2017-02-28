@@ -14,7 +14,7 @@
 						<sap.ui.layout.form:FormElement id="__element2" label="Datum/Zeit">
 							<sap.ui.layout.form:fields>
 								<DatePicker width="100%" id="startDatePicker" valueFormat="yyyyMMdd" placeholder="dd.MM.yyyy" displayFormat="dd.MM.yyyy" value="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}"/>
-								<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker" valueFormat="HHmmss" value="{ path: 'Zeit', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'HHmmss' }}"/>
+								<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker"  value="{ path: 'Zeit', type: 'sap.ui.model.type.Date', formatter: '.formatter.time'}"/>
 							</sap.ui.layout.form:fields>
 						</sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:FormElement id="__element8" label="Berg-/Talfahrt">
@@ -24,7 +24,7 @@
 						</sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:FormElement id="__element9" label="Lotse">
 							<sap.ui.layout.form:fields>
-								<Text text="Mario Leuenberger" id="__text24"/>
+								<Text text="{benutzerSet>/d/Firstname} {benutzerSet&gt;/d/Lastname}" id="__text24"/>
 							</sap.ui.layout.form:fields>
 						</sap.ui.layout.form:FormElement>
 					</sap.ui.layout.form:FormContainer>
