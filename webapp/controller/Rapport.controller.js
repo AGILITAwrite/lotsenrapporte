@@ -18,6 +18,7 @@ sap.ui.define([
 		formatter: formatter,
 		onInit: function() {
 			
+			
 			var oViewModel = new JSONModel({
 				busy: false,
 				delay: 0,
