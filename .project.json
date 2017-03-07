@@ -13,13 +13,8 @@
     "excludedFiles": [
       "test.html"
     ],
-<<<<<<< Upstream, based on 172e9dc25b33e5ea9707f39c62f439b78f08ae1e
     "buildRequired": true,
-    "lastBuildDateTime": "Tue, 07 Mar 2017 09:03:44 GMT"
-=======
-    "buildRequired": false,
     "lastBuildDateTime": "Tue, 07 Mar 2017 12:47:40 GMT"
->>>>>>> dd7dc09 Read / Save and Navigation Working
   },
   "dataBinding": {
     "/webapp/view/App.view.xml": {
@@ -103,11 +98,7 @@
   "hcpdeploy": {
     "account": "a88ba9460",
     "name": "lotsenrapporte",
-<<<<<<< Upstream, based on 172e9dc25b33e5ea9707f39c62f439b78f08ae1e
-    "lastVersionWeTriedToDeploy": "1.0.14"
-=======
     "lastVersionWeTriedToDeploy": "1.0.15"
->>>>>>> dd7dc09 Read / Save and Navigation Working
   },
   "deploy": {
     "destination": "SRH_DEV_200",

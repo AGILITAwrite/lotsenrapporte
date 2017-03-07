@@ -166,7 +166,7 @@ sap.ui.define([
 			oRapporteModel.setProperty("/EniNr", sObjectId, onewRapport);*/
 			oRapporteModel.setProperty("Datum", new Date(), onewRapport);
 		//	oRapporteModel.setProperty("Zeit", this.formatter.time(new Date()), onewRapport);
-			oRapporteModel.setProperty("Zeit", { __edmtype: "Edm.Time", ms: new Date().getTime()} , onewRapport);
+			oRapporteModel.setProperty("Zeit", {ms: new Date().getTime(), __edmtype: "Edm.Time" } , onewRapport);
 			
 			oRapporteModel.setProperty("EniNr", sObjectId, onewRapport);
 			//this.setModel(oRapporteModel);
@@ -327,11 +327,12 @@ sap.ui.define([
 				if (oSignatureBase30) {
 					var isSignatureProvided = oSignatureBase30[1].length > 1 ? true : false;
 					if (isSignatureProvided) {
-						oRapportModel.setProperty("/Signatur", oSignature.jSignature("getData", "image")[1], oContext);
+						oRapportModel.setProperty("Signatur", oSignature.jSignature("getData", "image")[1], oContext);
 					}
 				}
 			}
 			
+			oRapportModel.setProperty("Zeit",this.formatter.time( new Date(oContext.getProperty("Zeit/ms"))) , oContext);
 			oRapportModel.submitChanges();
 			if(newRapport){
 				oRapportModel.destroy();
