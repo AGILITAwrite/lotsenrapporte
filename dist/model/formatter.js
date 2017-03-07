@@ -32,8 +32,13 @@ sap.ui.define([], function() {
 				var timeinmiliseconds = value.getTime();
 
 				var oTimeFormat = sap.ui.core.format.DateFormat.getTimeInstance({
+<<<<<<< Upstream, based on 172e9dc25b33e5ea9707f39c62f439b78f08ae1e
 					//pattern: "PTHH'H'mm'M'ss'S'"
 					pattern: "\'PT\'HH\'H\'mm\'M\'ss\'S\'"
+=======
+					pattern: "PTHH'H'mm'M'ss'S'"
+					//pattern: "\'PT\'HH\'H\'mm\'M\'ss\'S\'"
+>>>>>>> dd7dc09 Read / Save and Navigation Working
 				});
 				//falls Zeitzonen Konvertierung nötig
 				//var TZOffsetMs = new Date(0).getTimezoneOffset() * 60 * 1000;

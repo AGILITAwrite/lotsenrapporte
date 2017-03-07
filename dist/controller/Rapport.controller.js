@@ -115,6 +115,12 @@ sap.ui.define([
 										this._bindView("/" + sObjectPath);*/
 		},
 		_onRouteMatchedNew: function(oEvent) {
+<<<<<<< Upstream, based on 172e9dc25b33e5ea9707f39c62f439b78f08ae1e
+=======
+			var oViewModel = this.getView().getModel("rapportView");
+				oViewModel.setProperty("newRapport", true );
+			
+>>>>>>> dd7dc09 Read / Save and Navigation Working
 			var sObjectId = oEvent.getParameter("arguments").objectId;
 //				this.getOwnerComponent().getModel().metadataLoaded().then(function() {
 				this.getModel().metadataLoaded().then(function() {
@@ -137,6 +143,7 @@ sap.ui.define([
 				//this.getView().setBindingContext(onewRapport);
 				//this._createRapportModel();
 				
+<<<<<<< Upstream, based on 172e9dc25b33e5ea9707f39c62f439b78f08ae1e
 			var objectPath = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/"; // OrderSet('" + aufnr + "')";
 			var oRapporteModel = new sap.ui.model.odata.ODataModel(objectPath,true,
 																	{ defaultBindingMode: sap.ui.model.BindingMode.TwoWay,
@@ -154,6 +161,41 @@ sap.ui.define([
 			this.getView().setBindingContext(onewRapport);
 			//var sObjectPath = onewRapport.getPath();
 			//this._bindView( sObjectPath);
+=======
+			// var objectPath = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/"; // OrderSet('" + aufnr + "')";
+			// var oRapporteModel = new sap.ui.model.odata.ODataModel(objectPath,true,
+			// 														{ defaultBindingMode: sap.ui.model.BindingMode.TwoWay,
+			// 																			bLoadMetadataAsync: true }
+			// 			);
+			
+/*						var oRapporteModel = new sap.ui.model.odata.ODataModel( 
+																	{
+																	sServiceUrl: objectPath,
+																	json: true,
+																	defaultBindingMode: sap.ui.model.BindingMode.TwoWay,
+																	loadMetadataAsync: true
+						}
+						);*/
+						
+						
+			var oRapporteModel = this.getView().getModel();
+			//oRapporteModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
+			var onewRapport = oRapporteModel.createEntry("/RapporteSet");
+
+/*			oRapporteModel.setProperty("/Datum", new Date(), onewRapport);
+			oRapporteModel.setProperty("/Zeit", formatter.time(new Date()), onewRapport);
+			oRapporteModel.setProperty("/EniNr", sObjectId, onewRapport);*/
+			oRapporteModel.setProperty("Datum", new Date(), onewRapport);
+		//	oRapporteModel.setProperty("Zeit", this.formatter.time(new Date()), onewRapport);
+			oRapporteModel.setProperty("Zeit", { __edmtype: "Edm.Time", ms: new Date().getTime()} , onewRapport);
+			
+			oRapporteModel.setProperty("EniNr", sObjectId, onewRapport);
+			//this.setModel(oRapporteModel);
+
+			//this.getView().setBindingContext(onewRapport);
+			var sObjectPath = onewRapport.getPath();
+			this._bindView( sObjectPath);
+>>>>>>> dd7dc09 Read / Save and Navigation Working
 			
 			
 			//var onewRapport = oRapporteModel.createEntry("/RapporteSet");
@@ -193,6 +235,9 @@ sap.ui.define([
 			oViewModel.setProperty("/busy", false);
 			this.getView().bindElement({
 				path: sObjectPath,
+				//defaultBindingMode: sap.ui.model.BindingMode.TwoWay,
+				//bLoadMetadataAsync: false,
+				//loadMetadataAsync: false,
 				events: {
 					change: this._onBindingChange.bind(this),
 					defaultBindingMode: sap.ui.model.BindingMode.TwoWay,
@@ -205,8 +250,13 @@ sap.ui.define([
 					}
 				}
 			});
+<<<<<<< Upstream, based on 172e9dc25b33e5ea9707f39c62f439b78f08ae1e
 var oRapporteModel = this.getView().getModel();
 			oRapporteModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
+=======
+/*var oRapporteModel = this.getView().getModel();
+			oRapporteModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);*/
+>>>>>>> dd7dc09 Read / Save and Navigation Working
 			this._updateTarife();
 
 			//var oContext = this.getView().getModel().createBindingContext(sObjectPath);
@@ -292,6 +342,7 @@ var oRapporteModel = this.getView().getModel();
 		 *@memberOf ch.portof.controller.Rapport
 		 */
 		onSave: function() {
+<<<<<<< Upstream, based on 172e9dc25b33e5ea9707f39c62f439b78f08ae1e
 			var oRapportModel = this.getModel();
 			var oContext = this.getView().getBindingContext();
 
@@ -307,6 +358,31 @@ var oRapporteModel = this.getView().getModel();
 			}
 			
 			oRapportModel.submitChanges();
+=======
+			var oViewModel = this.getView().getModel("rapportView");
+			var newRapport = oViewModel.setProperty("newRapport");
+			
+			var oRapportModel = this.getModel();
+			var oContext = this.getView().getBindingContext();
+			
+			
+			
+			var oSignature = $('#signature');
+			if (oSignature) {
+				var oSignatureBase30 = oSignature.jSignature('getData', 'base30');
+				if (oSignatureBase30) {
+					var isSignatureProvided = oSignatureBase30[1].length > 1 ? true : false;
+					if (isSignatureProvided) {
+						oRapportModel.setProperty("/Signatur", oSignature.jSignature("getData", "image")[1], oContext);
+					}
+				}
+			}
+			
+			oRapportModel.submitChanges();
+			if(newRapport){
+				oRapportModel.destroy();
+			}
+>>>>>>> dd7dc09 Read / Save and Navigation Working
 		    var schiffsnr = oContext.getProperty("EniNr");
 			this.getRouter().navTo("object", {
 				objectId: schiffsnr

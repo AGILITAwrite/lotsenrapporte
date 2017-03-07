@@ -61,7 +61,13 @@
 										<cells>
 											<ObjectIdentifier title="{Rapportid}"/>
 											<ObjectAttribute text="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}" id="__attribute0"/>
+<<<<<<< Upstream, based on 172e9dc25b33e5ea9707f39c62f439b78f08ae1e
 											<ObjectAttribute id="__attribute1" text="{ path: 'Zeit', type: 'sap.ui.model.type.Time', formatOptions: { pattern: 'HH:mm', source: { pattern : '\'PT\'HH\'H\'mm\'M\'ss\'S\''}}}"/>
+=======
+											<!--<ObjectAttribute id="__attribute1" text="{ path: 'Zeit.ms', type: 'sap.ui.model.type.Time', formatOptions: { pattern: 'HH:mm', source: { pattern : '\'PT\'HH\'H\'mm\'M\'ss\'S\''}}}"/>-->
+											<ObjectAttribute id="__attribute1" text="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time' ,formatOptions:{ source: 
+{pattern: 'timestamp'}, pattern : 'HH:mm'}}"/>
+>>>>>>> dd7dc09 Read / Save and Navigation Working
 											<ObjectAttribute text="{Ernam}" id="__attribute2"/>
 										</cells>
 									</ColumnListItem>
