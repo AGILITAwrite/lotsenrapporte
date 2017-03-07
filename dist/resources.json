@@ -71,10 +71,10 @@
             "name": "test/integration/pages/Detail.js"
         },
         {
-            "name": "test/integration/pages/Common.js"
+            "name": "test/integration/pages/App.js"
         },
         {
-            "name": "test/integration/pages/App.js"
+            "name": "test/integration/pages/Common.js"
         },
         {
             "name": "test/integration/pages/Browser.js"
@@ -141,6 +141,9 @@
         },
         {
             "name": "localService/mockserver.js"
+        },
+        {
+            "name": "localService/CopyOfmetadata.xml"
         },
         {
             "name": "controller/App.controller.js"

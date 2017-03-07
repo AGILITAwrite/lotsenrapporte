@@ -1,76 +1,82 @@
-<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" controllerName="ch.portof.controller.Detail" afterInit="" modelContextChange="" beforeRendering="" afterRendering="">
-
-	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}" busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
-
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" controllerName="ch.portof.controller.Detail">
+	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}"
+		busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
 		<semantic:content>
 			<ObjectHeader id="objectHeader" title="{Name}">
-			<attributes>
-			    <ObjectAttribute text="{Schiffsnummer}" id="__attribute3" title="{/#Schiffe/Schiffsnummer/@sap:label}"/>
-			    <ObjectAttribute text="{Nationalitaet}" id="__attribute6" title="{/#Schiffe/Nationalitaet/@sap:label}"/>
-			    <ObjectAttribute text="{Verdraengung}" id="__attribute4" title="{/#Schiffe/Verdraengung/@sap:label}"/>
-			</attributes>
+				<attributes>
+					<ObjectAttribute text="{Schiffsnummer}" id="__attribute3" title="{/#Schiffe/Schiffsnummer/@sap:label}"/>
+					<ObjectAttribute text="{Nationalitaet}" id="__attribute6" title="{/#Schiffe/Nationalitaet/@sap:label}"/>
+					<ObjectAttribute text="{Verdraengung}" id="__attribute4" title="{/#Schiffe/Verdraengung/@sap:label}"/>
+				</attributes>
 			</ObjectHeader>
 			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
 				<items>
 					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://hint" tooltip="{i18n>detailIconTabBarInfo}" text="{i18n>detailStammdaten}">
-					<content>
-					    <ObjectHeader binding="{Debitoren/}" number="{Kunnr}" introActive="true" titleActive="true" id="debitorHeader1" title="{Name1} {Name2}">
-					        <attributes>
-					            <ObjectAttribute text="{Stras}" id="__attribute125" title="Strasse"/>
-								<ObjectAttribute text="{Pstlz} {Ort01}" id="__attribute126" title="Plz/Ort"/>
-								<ObjectAttribute text="{Regio}" id="__attribute127" title="Region"/>
-								<ObjectAttribute text="{Land1}" id="__attribute128" title="Land"/>
-					        </attributes>
-					    </ObjectHeader>
-<!--					    <Input binding="{/SchiffeSet('07001318')/Debitoren}" value="{Name1}" />
+						<content>
+							<ObjectHeader binding="{Debitoren/}" number="{Kunnr}" introActive="true" titleActive="true" id="debitorHeader1" title="{Name1} {Name2}">
+								<attributes>
+									<ObjectAttribute text="{Stras}" id="__attribute125" title="Strasse"/>
+									<ObjectAttribute text="{Pstlz} {Ort01}" id="__attribute126" title="Plz/Ort"/>
+									<ObjectAttribute text="{Regio}" id="__attribute127" title="Region"/>
+									<ObjectAttribute text="{Land1}" id="__attribute128" title="Land"/>
+								</attributes>
+							</ObjectHeader>
+							<!--					    <Input binding="{/SchiffeSet('07001318')/Debitoren}" value="{Name1}" />
 
 					    <Input value="{ path: 'Debitoren/Name1',
 					    				 parameters : {expand:'Debitoren'} }" />
 						<Input binding="{ path: 'Debitoren/' }" value="{Name1}" />
 						<Input binding="{Debitoren/}" value="{Name1}" />-->
-					</content>
+						</content>
 					</IconTabFilter>
 					<IconTabFilter text="{i18n>detailRapportListe}" icon="sap-icon://task" iconColor="Critical" id="__filter0">
-					    <content>
-					        <Table id="lineItemsList" width="auto" items="{RapporteSet}" updateFinished="onListUpdateFinished" noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
-				<headerToolbar>
-					<Toolbar id="lineItemsToolbar">
-						<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}"/>
-					</Toolbar>
-				</headerToolbar>
-				<columns>
-					<Column>
-						<Text text="{i18n>detailLineItemTableIDColumn}"/>
-					</Column>
-					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Right">
-						<Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
-					</Column>
-				</columns>
-				<items>
-					<ColumnListItem>
-						<cells>
-							<ObjectIdentifier title="{Datum}" text="{Rapportid}"/>
-							<ObjectNumber/>
-						</cells>
-					</ColumnListItem>
-				</items>
-			</Table>
-					    </content>
+						<content>
+							<Table id="lineItemsList" width="auto" items="{RapporteSet}" updateFinished="onListUpdateFinished"
+								noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
+								<headerToolbar>
+									<Toolbar id="lineItemsToolbar">
+										<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}"/>
+									</Toolbar>
+								</headerToolbar>
+								<columns>
+									<Column>
+										<Text text="{i18n>detailLineItemTableIDColumn}"/>
+									</Column>
+									<Column minScreenWidth="Tablet" demandPopin="true">
+										<Text text="{i18n>detailLineItemTableUnitAttirbut1Column}"/>
+									</Column>
+									<Column id="__column2">
+										<header>
+											<Text text="{i18n>detailLineItemTableUnitAttirbut2Column}" id="__text20"/>
+										</header>
+									</Column>
+									<Column id="__column3">
+										<header>
+											<Text text="{i18n>detailLineItemTableUnitAttirbut3Column}" id="__text21"/>
+										</header>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem press="_onListItemPressed" type="Active">
+										<cells>
+											<ObjectIdentifier title="{Rapportid}"/>
+											<ObjectAttribute text="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}" id="__attribute0"/>
+											<ObjectAttribute id="__attribute1" text="{ path: 'Zeit', type: 'sap.ui.model.type.Time', formatOptions: { pattern: 'HH:mm', source: { pattern : '\'PT\'HH\'H\'mm\'M\'ss\'S\''}}}"/>
+											<ObjectAttribute text="{Ernam}" id="__attribute2"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</content>
 					</IconTabFilter>
 				</items>
 			</IconTabBar>
 		</semantic:content>
-
 		<semantic:sendEmailAction>
 			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
 		</semantic:sendEmailAction>
-
-	<semantic:positiveAction>
-
-	    <semantic:PositiveAction text="neuer Lotsenrapport" id="__action3" press="newRapport"/>
-
-	</semantic:positiveAction>
-
+		<semantic:positiveAction>
+			<semantic:PositiveAction text="neuer Lotsenrapport" id="__action3" press="newRapport"/>
+		</semantic:positiveAction>
 	</semantic:DetailPage>
-
 </mvc:View>

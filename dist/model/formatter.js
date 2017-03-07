@@ -22,8 +22,29 @@ sap.ui.define([], function() {
 				return "";
 			}
 
-		//		return parseFloat(sValue).toFixed(0);
-		return oNumberFormat.format(sValue);                                                
+			//		return parseFloat(sValue).toFixed(0);
+			return oNumberFormat.format(sValue);
+		},
+		time: function(value) {
+			//                             console.log(value);                        
+			if (value) {
+
+				var timeinmiliseconds = value.getTime();
+
+				var oTimeFormat = sap.ui.core.format.DateFormat.getTimeInstance({
+					//pattern: "PTHH'H'mm'M'ss'S'"
+					pattern: "\'PT\'HH\'H\'mm\'M\'ss\'S\'"
+				});
+				//falls Zeitzonen Konvertierung nötig
+				//var TZOffsetMs = new Date(0).getTimezoneOffset() * 60 * 1000;
+				//                             console.log(TZOffsetMs);
+				//var timeStr = oTimeFormat.format(new Date(timeinmiliseconds + TZOffsetMs));
+				//                             console.log(timeStr);
+				var timeStr = oTimeFormat.format(new Date(timeinmiliseconds));
+				return timeStr;
+			} else {
+				return value;
+			}
 		}
 	};
 

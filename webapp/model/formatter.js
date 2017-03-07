@@ -33,6 +33,7 @@ sap.ui.define([], function() {
 
 				var oTimeFormat = sap.ui.core.format.DateFormat.getTimeInstance({
 					pattern: "PTHH'H'mm'M'ss'S'"
+					//pattern: "\'PT\'HH\'H\'mm\'M\'ss\'S\'"
 				});
 				//falls Zeitzonen Konvertierung nötig
 				//var TZOffsetMs = new Date(0).getTimezoneOffset() * 60 * 1000;

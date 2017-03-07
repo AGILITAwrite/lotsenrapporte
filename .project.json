@@ -14,7 +14,7 @@
       "test.html"
     ],
     "buildRequired": true,
-    "lastBuildDateTime": "Thu, 23 Feb 2017 15:21:38 GMT"
+    "lastBuildDateTime": "Tue, 07 Mar 2017 09:03:44 GMT"
   },
   "dataBinding": {
     "/webapp/view/App.view.xml": {
@@ -36,7 +36,8 @@
       "entitySet": "SchiffeSet"
     },
     "/webapp/view/Rapport.view.xml": {
-      "entitySet": "RapporteSet"
+      "entitySet": "RapporteSet",
+      "DefaultBindingMode": "sap.ui.model.BindingMode.TwoWay"
     }
   },
   "generation": [
@@ -97,7 +98,7 @@
   "hcpdeploy": {
     "account": "a88ba9460",
     "name": "lotsenrapporte",
-    "lastVersionWeTriedToDeploy": "1.0.13"
+    "lastVersionWeTriedToDeploy": "1.0.14"
   },
   "deploy": {
     "destination": "SRH_DEV_200",

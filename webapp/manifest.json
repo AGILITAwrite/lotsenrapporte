@@ -39,10 +39,7 @@
 			"tablet": true,
 			"phone": true
 		},
-		"supportedThemes": [
-			"sap_hcb",
-			"sap_bluecrystal"
-		]
+		"supportedThemes": ["sap_hcb", "sap_bluecrystal"]
 	},
 	"sap.ui5": {
 		"rootView": {
@@ -80,7 +77,10 @@
 			},
 			"": {
 				"dataSource": "mainService",
-				"preload": true
+				"preload": true,
+				"settings": {
+					"defaultBindingMode": "TwoWay"
+				}
 			}
 		},
 		"routing": {
@@ -91,47 +91,27 @@
 				"controlId": "idAppControl",
 				"controlAggregation": "detailPages",
 				"bypassed": {
-					"target": [
-						"master",
-						"notFound"
-					]
+					"target": ["master", "notFound"]
 				},
 				"async": true
 			},
-			"routes": [
-				{
-					"pattern": "",
-					"name": "master",
-					"target": [
-						"object",
-						"master"
-					]
-				},
-				{
-					"pattern": "SchiffeSet/{objectId}",
-					"name": "object",
-					"target": [
-						"master",
-						"object"
-					]
-				},
-				{
-					"pattern": "RapportNew/{objectId}",
-					"name": "rapportNewRoute",
-					"target": [
-						"master",
-						"rapportTarget"
-					]
-				},
-				{
-					"pattern": "Rapport/{objectId}",
-					"name": "rapportRoute",
-					"target": [
-						"master",
-						"rapportTarget"
-					]
-				}
-			],
+			"routes": [{
+				"pattern": "",
+				"name": "master",
+				"target": ["object", "master"]
+			}, {
+				"pattern": "SchiffeSet/{objectId}",
+				"name": "object",
+				"target": ["master", "object"]
+			}, {
+				"pattern": "RapportNew/{objectId}",
+				"name": "rapportNewRoute",
+				"target": ["master", "rapportTarget"]
+			}, {
+				"pattern": "Rapport/{objectId}",
+				"name": "rapportRoute",
+				"target": ["master", "rapportTarget"]
+			}],
 			"targets": {
 				"master": {
 					"viewName": "Master",
@@ -164,11 +144,9 @@
 			}
 		},
 		"resources": {
-			"js": [
-				{
-					"uri": "libs/jSignature.min.js"
-				}
-			]
+			"js": [{
+				"uri": "libs/jSignature.min.js"
+			}]
 		}
 	},
 	"sap.platform.hcp": {

@@ -1,4 +1,6 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" controllerName="ch.portof.controller.Rapport" bindingContexts="RapporteSet">
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" controllerName="ch.portof.controller.Rapport">
+	<!-- bindingContexts="RapporteSet" -->
 	<semantic:DetailPage xmlns:sap.m.semantic="sap.m.semantic" title="Semantic Page" id="__page2">
 		<semantic:saveAction>
 			<semantic:SaveAction id="__action0" press="onSave"/>
@@ -10,17 +12,19 @@
 			<ObjectHeader title="{Name}" introActive="true" id="__header0" number="{Schiffsnummer}" condensed="true" titleActive="true"/>
 			<sap.ui.layout.form:Form xmlns:sap.ui.layout.form="sap.ui.layout.form" editable="true" id="__form1">
 				<sap.ui.layout.form:formContainers>
-					<sap.ui.layout.form:FormContainer title="Kopfdaten" id="__container1" expandable="true">
+					<sap.ui.layout.form:FormContainer title="Kopfdaten {Rapportid}" id="__container1" expandable="true">
 						<sap.ui.layout.form:FormElement id="__element2" label="Datum/Zeit">
 							<sap.ui.layout.form:fields>
-								<DatePicker width="100%" id="startDatePicker" valueFormat="yyyyMMdd" placeholder="dd.MM.yyyy" displayFormat="dd.MM.yyyy" value="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}"/>
-
-								<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker"   
+								<DatePicker width="100%" id="startDatePicker" valueFormat="yyyyMMdd" placeholder="dd.MM.yyyy" displayFormat="dd.MM.yyyy"
+									value="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}"/>
+								<!--								<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker"   
 									value="{ path: 'Zeit', type: 'sap.ui.model.type.Time', 
 												formatOptions: { pattern: 'HH:mm', 
 													source: { pattern : '\'PT\'HH\'H\'mm\'M\'ss\'S\''  } 
 												} 
-											}"/>
+											}"/>-->
+								<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker"
+									value="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time' , formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm'}}"/>
 							</sap.ui.layout.form:fields>
 						</sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:FormElement id="__element8" label="Berg-/Talfahrt">
@@ -34,8 +38,6 @@
 							</sap.ui.layout.form:fields>
 						</sap.ui.layout.form:FormElement>
 					</sap.ui.layout.form:FormContainer>
-					
-					
 					<sap.ui.layout.form:FormContainer title="Zuschläge" id="__container3" expandable="true">
 						<sap.ui.layout.form:FormElement id="__element0" label="Samstags">
 							<sap.ui.layout.form:fields>
@@ -49,9 +51,7 @@
 								</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
 						</sap.ui.layout.form:formElements>
-
 					</sap.ui.layout.form:FormContainer>
-					
 					<sap.ui.layout.form:FormContainer title="Tabelle" id="__container0" expandable="true">
 						<sap.ui.layout.form:FormElement id="__element10">
 							<sap.ui.layout.form:fields>
@@ -183,13 +183,13 @@
 						</sap.ui.layout.form:FormElement>
 					</sap.ui.layout.form:FormContainer>
 					<sap.ui.layout.form:FormContainer title="Bemerkung" id="__container4" expandable="true">
-					    <sap.ui.layout.form:formElements>
-					        <sap.ui.layout.form:FormElement id="__element5">
-					            <sap.ui.layout.form:fields>
-					                <TextArea id="__area0" rows="4" maxLength="255" wrapping="Off" value="{Bemerkung}"/>
-					            </sap.ui.layout.form:fields>
-					        </sap.ui.layout.form:FormElement>
-					    </sap.ui.layout.form:formElements>
+						<sap.ui.layout.form:formElements>
+							<sap.ui.layout.form:FormElement id="__element5">
+								<sap.ui.layout.form:fields>
+									<TextArea id="__area0" rows="4" maxLength="255" wrapping="Off" value="{Bemerkung}"/>
+								</sap.ui.layout.form:fields>
+							</sap.ui.layout.form:FormElement>
+						</sap.ui.layout.form:formElements>
 					</sap.ui.layout.form:FormContainer>
 				</sap.ui.layout.form:formContainers>
 				<sap.ui.layout.form:layout>
@@ -197,9 +197,7 @@
 				</sap.ui.layout.form:layout>
 			</sap.ui.layout.form:Form>
 		</semantic:content>
-		<semantic:negativeAction>
-			<semantic:NegativeAction text="Reset" id="__action2"/>
-		</semantic:negativeAction>
+		<semantic:negativeAction></semantic:negativeAction>
 		<semantic:layoutData/>
 	</semantic:DetailPage>
 </mvc:View>

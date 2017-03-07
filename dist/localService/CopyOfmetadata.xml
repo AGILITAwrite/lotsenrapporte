@@ -6,37 +6,60 @@
 				<Key>
 					<PropertyRef Name="Rapportid"/>
 				</Key>
-				<Property Name="Rapportid" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Rapport ID" sap:sortable="false"
+				<Property Name="Rapportid" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Rapport ID" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Bemerkung" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Bemerkung Rapport" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="EniNr" Type="Edm.String" MaxLength="8" sap:label="ENI" sap:creatable="false" sap:updatable="false" sap:sortable="false"
 					sap:filterable="false"/>
-				<Property Name="Bemerkung" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Bemerkung Rapport" sap:sortable="false"
-					sap:filterable="false"/>
-				<Property Name="EniNr" Type="Edm.String" MaxLength="8" sap:label="ENI" sap:sortable="false" sap:filterable="false"/>
-				<Property Name="Signatur" Type="Edm.String" Nullable="false" sap:label="Signatur" sap:sortable="false" sap:filterable="false"/>
-				<Property Name="Datum" Type="Edm.DateTime" Precision="7" sap:label="Datum" sap:sortable="false" sap:filterable="false"/>
-				<Property Name="Zeit" Type="Edm.Time" Precision="0" sap:label="Uhrzeit" sap:sortable="false" sap:filterable="false"/>
-				<Property Name="Talfahrt" Type="Edm.Boolean" sap:label="Tal oder Bergfahrt" sap:sortable="false" sap:filterable="false"/>
-				<Property Name="MrbU2000t" Type="Edm.Boolean" sap:label="MRB u. 2000T" sap:sortable="false" sap:filterable="false"/>
-				<Property Name="MrbUe2000t" Type="Edm.Boolean" sap:label="MRB ü. 2000t" sap:sortable="false" sap:filterable="false"/>
-				<Property Name="BRU125m" Type="Edm.Boolean" sap:label="Basel Rheinf. b 110m" sap:sortable="false" sap:filterable="false"/>
-				<Property Name="BRSchubverband" Type="Edm.Boolean" sap:label="Basel Rheinf. Schubv" sap:sortable="false" sap:filterable="false"/>
-				<Property Name="BaAug" Type="Edm.Boolean" sap:label="Basel Augst" sap:sortable="false" sap:filterable="false"/>
-				<Property Name="BirAug" Type="Edm.Boolean" sap:label="Birsfelden Augst" sap:sortable="false" sap:filterable="false"/>
-				<Property Name="AllgemeineDienstleistung" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="Meinh" sap:label="Allg. Dienstleistung"
+				<Property Name="Signatur" Type="Edm.String" Nullable="false" sap:label="Signatur" sap:creatable="false" sap:updatable="false"
 					sap:sortable="false" sap:filterable="false"/>
-				<Property Name="Nachtzuschlag" Type="Edm.Boolean" sap:label="Nachtzuschlag" sap:sortable="false" sap:filterable="false"/>
-				<Property Name="ZLotsenFeiertagszuschlag" Type="Edm.Boolean" sap:label="Feiertagszuschlag" sap:sortable="false" sap:filterable="false"/>
-				<Property Name="Ernam" Type="Edm.String" MaxLength="12" sap:label="Benutzername" sap:sortable="false" sap:filterable="false"/>
-				<Property Name="Erdat" Type="Edm.DateTime" Precision="7" sap:label="Datum" sap:sortable="false" sap:filterable="false"/>
-				<Property Name="Ertime" Type="Edm.Time" Precision="0" sap:label="Uhrzeit" sap:sortable="false" sap:filterable="false"/>
-				<Property Name="Aenam" Type="Edm.String" MaxLength="12" sap:label="Benutzername" sap:sortable="false" sap:filterable="false"/>
-				<Property Name="Aedat" Type="Edm.DateTime" Precision="7" sap:label="Datum" sap:sortable="false" sap:filterable="false"/>
-				<Property Name="Aetime" Type="Edm.Time" Precision="0" sap:label="Uhrzeit" sap:sortable="false" sap:filterable="false"/>
-				<Property Name="Loevm" Type="Edm.Boolean" sap:label="Löschen" sap:sortable="false" sap:filterable="false"/>
-				<Property Name="Longitude" Type="Edm.Double" sap:label="Länge" sap:sortable="false" sap:filterable="false"/>
-				<Property Name="Latitude" Type="Edm.Double" sap:label="Breite" sap:sortable="false" sap:filterable="false"/>
-				<Property Name="Altitude" Type="Edm.Decimal" Precision="4" Scale="0" sap:label="Höhe über NNull" sap:sortable="false" sap:filterable="false"/>
-				<Property Name="Meinh" Type="Edm.String" MaxLength="3" sap:label="Mengeneinheit" sap:sortable="false" sap:filterable="false"
-					sap:semantics="unit-of-measure"/>
+				<Property Name="Datum" Type="Edm.DateTime" Precision="7" sap:label="Date" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="Zeit" Type="Edm.Time" Precision="0" sap:label="Time" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="Talfahrt" Type="Edm.Boolean" sap:label="Tal oder Bergfahrt" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="MrbU2000t" Type="Edm.Boolean" sap:label="MRB u. 2000T" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="MrbUe2000t" Type="Edm.Boolean" sap:label="MRB ü. 2000t" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="BRU125m" Type="Edm.Boolean" sap:label="Basel Rheinf. b 110m" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="BRSchubverband" Type="Edm.Boolean" sap:label="Basel Rheinf. Schubv" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="BaAug" Type="Edm.Boolean" sap:label="Basel Augst" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="BirAug" Type="Edm.Boolean" sap:label="Birsfelden Augst" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="AllgemeineDienstleistung" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="Meinh" sap:label="Allg. Dienstleistung"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Nachtzuschlag" Type="Edm.Boolean" sap:label="Nachtzuschlag" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="ZLotsenFeiertagszuschlag" Type="Edm.Boolean" sap:label="Feiertagszuschlag" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Ernam" Type="Edm.String" MaxLength="12" sap:label="User Name" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Erdat" Type="Edm.DateTime" Precision="7" sap:label="Date" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="Ertime" Type="Edm.Time" Precision="0" sap:label="Time" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="Aenam" Type="Edm.String" MaxLength="12" sap:label="User Name" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Aedat" Type="Edm.DateTime" Precision="7" sap:label="Date" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="Aetime" Type="Edm.Time" Precision="0" sap:label="Time" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="Loevm" Type="Edm.Boolean" sap:label="Delete" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="Longitude" Type="Edm.Double" sap:label="Longitude" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="Latitude" Type="Edm.Double" sap:label="Latitude" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="Altitude" Type="Edm.Decimal" Precision="4" Scale="0" sap:label="Hght abv.MSLev." sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Meinh" Type="Edm.String" MaxLength="3" sap:label="Unit of Measure" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
 			</EntityType>
 			<EntityType Name="Debitoren" sap:content-version="1">
 				<Key>
