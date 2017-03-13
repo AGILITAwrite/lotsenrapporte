@@ -508,12 +508,6 @@ sap.ui.define([
 			var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/BenutzerSet('1')";
 			oBenutzerModel.loadData(URL, true, false);
 			this.setModel(oBenutzerModel, "benutzerSet");
-		},
-		__sucess: function() {
-			var test = 1;
-		},
-		__error: function() {
-			var test = 1;
 		}
 	});
 });

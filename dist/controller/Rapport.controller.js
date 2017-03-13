@@ -502,4 +502,5 @@ sap.ui.define([
 			oBenutzerModel.loadData(URL, true, false);
 			this.setModel(oBenutzerModel, "benutzerSet");
 		}
+	});
 });
