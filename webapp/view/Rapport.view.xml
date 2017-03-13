@@ -1,5 +1,4 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m"
-	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" controllerName="ch.portof.controller.Rapport">
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" controllerName="ch.portof.controller.Rapport">
 	<!-- bindingContexts="RapporteSet" -->
 	<semantic:DetailPage xmlns:sap.m.semantic="sap.m.semantic" title="Semantic Page" id="__page2">
 		<semantic:saveAction>
@@ -15,16 +14,14 @@
 					<sap.ui.layout.form:FormContainer title="Kopfdaten {Rapportid}" id="__container1" expandable="true">
 						<sap.ui.layout.form:FormElement id="__element2" label="Datum/Zeit">
 							<sap.ui.layout.form:fields>
-								<DatePicker width="100%" id="startDatePicker" valueFormat="yyyyMMdd" placeholder="dd.MM.yyyy" displayFormat="dd.MM.yyyy"
-									value="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}"/>
+								<DatePicker width="100%" id="startDatePicker" valueFormat="yyyyMMdd" placeholder="dd.MM.yyyy" displayFormat="dd.MM.yyyy" value="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}"/>
 								<!--								<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker"   
 									value="{ path: 'Zeit', type: 'sap.ui.model.type.Time', 
 												formatOptions: { pattern: 'HH:mm', 
 													source: { pattern : '\'PT\'HH\'H\'mm\'M\'ss\'S\''  } 
 												} 
 											}"/>-->
-								<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker"
-									value="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time' , formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm'}}"/>
+								<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker" value="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time' , formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm'}}"/>
 							</sap.ui.layout.form:fields>
 						</sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:FormElement id="__element8" label="Berg-/Talfahrt">
@@ -134,12 +131,12 @@
 												<Label id="__label7" visible="false" text="Auswahl" width="20px"/>
 											</header>
 										</Column>
-										<Column id="__column2" minScreenWidth="800px" demandPopin="true" popinDisplay="Inline">
+										<Column id="__column2" minScreenWidth="800px" vAlign="Middle" demandPopin="true">
 											<header>
 												<Label text="Schiffstyp" id="__label8"/>
 											</header>
 										</Column>
-										<Column id="__column3" minScreenWidth="800px" demandPopin="true" popinDisplay="Inline" hAlign="End">
+										<Column id="__column3" minScreenWidth="800px" demandPopin="true">
 											<header>
 												<Label text="Grundtarif" width="100%" id="__label5"/>
 											</header>
@@ -193,11 +190,11 @@
 					</sap.ui.layout.form:FormContainer>
 				</sap.ui.layout.form:formContainers>
 				<sap.ui.layout.form:layout>
-					<sap.ui.layout.form:ResponsiveGridLayout id="__layout0" labelSpanM="3"/>
+					<sap.ui.layout.form:ResponsiveGridLayout id="__layout0" columnsL="1"/>
 				</sap.ui.layout.form:layout>
 			</sap.ui.layout.form:Form>
 		</semantic:content>
-		<semantic:negativeAction></semantic:negativeAction>
+		<semantic:negativeAction/>
 		<semantic:layoutData/>
 	</semantic:DetailPage>
 </mvc:View>

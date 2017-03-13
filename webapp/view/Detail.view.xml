@@ -6,7 +6,6 @@
 				<attributes>
 					<ObjectAttribute text="{Schiffsnummer}" id="__attribute3" title="{/#Schiffe/Schiffsnummer/@sap:label}"/>
 					<ObjectAttribute text="{Nationalitaet}" id="__attribute6" title="{/#Schiffe/Nationalitaet/@sap:label}"/>
-					<ObjectAttribute text="{Verdraengung}" id="__attribute4" title="{/#Schiffe/Verdraengung/@sap:label}"/>
 				</attributes>
 			</ObjectHeader>
 			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">

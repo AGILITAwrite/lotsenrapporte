@@ -37,7 +37,7 @@ sap.ui.define([
 			this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
 	
 			this._createTarifModel();
-			this._createSignatureModel();
+			//this._createSignatureModel();
 			//this._createRapportModel();
 			this._createBenutzerModel();
 
@@ -226,8 +226,11 @@ sap.ui.define([
 					}
 				}
 			});
-/*var oRapporteModel = this.getView().getModel();
-			oRapporteModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);*/
+			//var oRapporteModel = this.getView().getModel();
+			var oContext = this.getView().getBindingContext();
+			var oSignature = oContext.getProperty("Signatur");
+			
+			this._createSignatureModel(oSignature);
 			this._updateTarife();
 
 			//var oContext = this.getView().getModel().createBindingContext(sObjectPath);
@@ -331,6 +334,7 @@ sap.ui.define([
 					}
 				}
 			}
+			 
 			
 			oRapportModel.setProperty("Zeit",this.formatter.time( new Date(oContext.getProperty("Zeit/ms"))) , oContext);
 			oRapportModel.submitChanges();
@@ -370,7 +374,7 @@ sap.ui.define([
 				$("#signature").jSignature("clear");
 			}
 		},
-		_initSignature: function() {
+		_initSignature: function(oSignature) {
 			var oViewModel = this.getModel("rapportView");
 			var initSignature = oViewModel.getProperty("/initSignature");
 			if (initSignature === false) {
@@ -384,6 +388,10 @@ sap.ui.define([
 						// Init darf nur einmal aufgerufen
 						if (this.init === true) {
 							$("#signature").jSignature("init");
+							if(oSignature) {
+								var signatureArray = ["image/jsignature;base30", oSignature];
+								$("#signature").jSignature("setData", "data:" + signatureArray.join(",") );
+							}
 							this.init = false;
 						} else {
 							$("#signature").jSignature("clear");
@@ -455,7 +463,7 @@ sap.ui.define([
 			this.getView().byId("__Total").setProperty("text", total + " CHF");
 
 		},
-		_createSignatureModel: function() {
+		_createSignatureModel: function(oSignature) {
 			// Signatur 
 			//var oSignatureModel = this._createSignatureModel();
 			var oSignatureModel = new JSONModel({
@@ -467,7 +475,7 @@ sap.ui.define([
 			});
 			// oSignatureModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
 			this.setModel(oSignatureModel, "Signature");
-			this._initSignature();
+			this._initSignature(oSignature);
 		},
 		_createTarifModel: function() {
 			var oTarifModel = new JSONModel({
