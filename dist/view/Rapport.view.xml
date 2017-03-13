@@ -1,9 +1,5 @@
-<<<<<<< Upstream, based on 172e9dc25b33e5ea9707f39c62f439b78f08ae1e
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" controllerName="ch.portof.controller.Rapport">
-=======
 <mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m"
 	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" controllerName="ch.portof.controller.Rapport">
->>>>>>> dd7dc09 Read / Save and Navigation Working
 	<!-- bindingContexts="RapporteSet" -->
 	<semantic:DetailPage xmlns:sap.m.semantic="sap.m.semantic" title="Semantic Page" id="__page2">
 		<semantic:saveAction>
@@ -19,16 +15,6 @@
 					<sap.ui.layout.form:FormContainer title="Kopfdaten {Rapportid}" id="__container1" expandable="true">
 						<sap.ui.layout.form:FormElement id="__element2" label="Datum/Zeit">
 							<sap.ui.layout.form:fields>
-<<<<<<< Upstream, based on 172e9dc25b33e5ea9707f39c62f439b78f08ae1e
-								<DatePicker width="100%" id="startDatePicker" valueFormat="yyyyMMdd" placeholder="dd.MM.yyyy" displayFormat="dd.MM.yyyy" value="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}"/>
-
-								<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker"   
-									value="{ path: 'Zeit', type: 'sap.ui.model.type.Time', 
-												formatOptions: { pattern: 'HH:mm', 
-													source: { pattern : '\'PT\'HH\'H\'mm\'M\'ss\'S\''  } 
-												} 
-											}"/>
-=======
 								<DatePicker width="100%" id="startDatePicker" valueFormat="yyyyMMdd" placeholder="dd.MM.yyyy" displayFormat="dd.MM.yyyy"
 									value="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}"/>
 								<!--								<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker"   
@@ -39,7 +25,6 @@
 											}"/>-->
 								<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker"
 									value="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time' , formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm'}}"/>
->>>>>>> dd7dc09 Read / Save and Navigation Working
 							</sap.ui.layout.form:fields>
 						</sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:FormElement id="__element8" label="Berg-/Talfahrt">
@@ -123,7 +108,7 @@
 										<ColumnListItem id="__item6">
 											<cells>
 												<StandardListItem type="Inactive" title="Allgemeine Dienstleistungen" description="Lotsen/Stundenlohn" id="__item13"/>
-												<Input ariaLabelledBy="__xmlview0--__label7" width="100%" id="__input0" dateFormat="" change="_calc" value="{AllgemeineDienstleistung}"/>
+												<Input ariaLabelledBy="__xmlview0--__label7" width="100%" id="__input0" change="_calc" value="{AllgemeineDienstleistung}"/>
 												<!--<CheckBox id="__box6"/>-->
 												<Text text="alle Schiffe" id="__text44"/>
 												<Text text="{ path: 'tarifeSet>/d/AllgemeineDienstleistung', formatter: '.formatter.currencyValue' } CHF" id="__text45"/>
@@ -212,12 +197,7 @@
 				</sap.ui.layout.form:layout>
 			</sap.ui.layout.form:Form>
 		</semantic:content>
-<<<<<<< Upstream, based on 172e9dc25b33e5ea9707f39c62f439b78f08ae1e
-		<semantic:negativeAction>
-		</semantic:negativeAction>
-=======
 		<semantic:negativeAction></semantic:negativeAction>
->>>>>>> dd7dc09 Read / Save and Navigation Working
 		<semantic:layoutData/>
 	</semantic:DetailPage>
 </mvc:View>
