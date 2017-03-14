@@ -8,7 +8,7 @@
 			<semantic:CancelAction id="__action1" press="onCancel"/>
 		</semantic:cancelAction>
 		<semantic:content>
-			<ObjectHeader title="{Name}" introActive="true" id="__header0" number="{Schiffsnummer}" condensed="true" titleActive="true"/>
+			<ObjectHeader title="{Schiff>/d/Name}" introActive="true" id="__header0" number="{Schiff>/d/Schiffsnummer}" condensed="true" titleActive="true"/>
 			<sap.ui.layout.form:Form xmlns:sap.ui.layout.form="sap.ui.layout.form" editable="true" id="__form1">
 				<sap.ui.layout.form:formContainers>
 					<sap.ui.layout.form:FormContainer title="Kopfdaten {Rapportid}" id="__container1" expandable="true">
@@ -31,7 +31,8 @@
 						</sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:FormElement id="__element9" label="Lotse">
 							<sap.ui.layout.form:fields>
-								<Text text="{benutzerSet>/d/Firstname} {benutzerSet&gt;/d/Lastname}" id="__text24"/>
+								<!--<Text text="{benutzerSet>/d/Firstname} {benutzerSet>/d/Lastname}" id="__text24"/>-->
+								<Text text="{Lotsenname}" id="__text24"/>
 							</sap.ui.layout.form:fields>
 						</sap.ui.layout.form:FormElement>
 					</sap.ui.layout.form:FormContainer>
@@ -183,7 +184,7 @@
 						<sap.ui.layout.form:formElements>
 							<sap.ui.layout.form:FormElement id="__element5">
 								<sap.ui.layout.form:fields>
-									<TextArea id="__area0" rows="4" maxLength="255" wrapping="Off" value="{Bemerkung}"/>
+									<TextArea id="__area0" maxLength="255" wrapping="Off" value="{Bemerkung}"/>
 								</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
 						</sap.ui.layout.form:formElements>

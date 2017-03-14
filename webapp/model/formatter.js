@@ -36,11 +36,11 @@ sap.ui.define([], function() {
 					//pattern: "\'PT\'HH\'H\'mm\'M\'ss\'S\'"
 				});
 				//falls Zeitzonen Konvertierung nötig
-				//var TZOffsetMs = new Date(0).getTimezoneOffset() * 60 * 1000;
+				var TZOffsetMs = new Date(0).getTimezoneOffset() * 60 * 1000;
 				//                             console.log(TZOffsetMs);
-				//var timeStr = oTimeFormat.format(new Date(timeinmiliseconds + TZOffsetMs));
+				var timeStr = oTimeFormat.format(new Date(timeinmiliseconds + TZOffsetMs));
 				//                             console.log(timeStr);
-				var timeStr = oTimeFormat.format(new Date(timeinmiliseconds));
+				//var timeStr = oTimeFormat.format(new Date(timeinmiliseconds));
 				return timeStr;
 			} else {
 				return value;
