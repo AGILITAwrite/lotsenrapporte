@@ -15,7 +15,6 @@ sap.ui.define([
 		 */
 		formatter: formatter,
 		onInit: function() {
-
 			var oViewModel = new JSONModel({
 				busy: false,
 				delay: 0,
@@ -23,7 +22,6 @@ sap.ui.define([
 				newRapport: false
 			});
 			this.setModel(oViewModel, "rapportView");
-			
 
 			//this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
 			//this.getRouter().getRoute("rapport").attachPatternMatched(this._onRouteMatched, this);
@@ -56,12 +54,9 @@ sap.ui.define([
 		 * @private
 		 */
 		_onRouteMatchedNew: function(oEvent) {
-			var oViewModel = this.getView().getModel("rapportView");
-			oViewModel.setProperty("newRapport", true);
+			this._resetModel();
+			this.getView().getModel("rapportView").setProperty("/newRapport", true);
 			var sObjectId = oEvent.getParameter("arguments").objectId;
-			
-
-			
 
 			this.getModel().metadataLoaded().then(function() {
 				var oRapporteModel = this.getView().getModel();
@@ -73,14 +68,15 @@ sap.ui.define([
 				}, onewRapport);
 
 				oRapporteModel.setProperty("EniNr", sObjectId, onewRapport);
-				
+
 				var sObjectPath = onewRapport.getPath();
 				this._bindView(sObjectPath);
 			}.bind(this));
 		},
 		_onRouteMatchedOld: function(oEvent) {
-			var oViewModel = this.getView().getModel("rapportView");
-			oViewModel.setProperty("newRapport", false);
+			this._resetModel();
+			this.getView().getModel("rapportView").setProperty("/newRapport", false);
+
 			var sObjectId = oEvent.getParameter("arguments").objectId;
 			this.getModel().metadataLoaded().then(function() {
 				var sObjectPath = this.getModel().createKey("RapporteSet", {
@@ -142,11 +138,16 @@ sap.ui.define([
 
 			var oContext = this.getView().getBindingContext();
 			var oSignature = oContext.getProperty("Signatur");
-			
+
 			this._createSignatureModel(oSignature);
 			this._createTarifModel();
 			this._createBenutzerModel();
 			this._createSchiffsModel();
+
+			/*if(this.getView().getModel().hasPendingChanges() && !this.getView().getModel("rapportView").getProperty("/newRapport")){
+				this.getView().getModel().resetChanges();
+			}*/
+
 			this._updateTarife();
 
 			//oViewModel.setProperty("/shareSendEmailSubject", oResourceBundle.getText("shareSendEmailObjectSubject", [sObjectId]));
@@ -217,9 +218,6 @@ sap.ui.define([
 		 *@memberOf ch.portof.controller.Rapport
 		 */
 		onSave: function() {
-			// var oViewModel = this.getView().getModel("rapportView");
-			// var newRapport = oViewModel.setProperty("newRapport");
-
 			var oRapportModel = this.getModel();
 			var oContext = this.getView().getBindingContext();
 
@@ -238,24 +236,39 @@ sap.ui.define([
 			oRapportModel.setProperty("Zeit", this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))), oContext);
 			//oRapportModel.setProperty("Zeit", new Date(oContext.getProperty("Zeit/ms")), oContext);
 			//ErrorHandler.showError( "testfehler" );
-			oRapportModel.submitChanges();
-			//	{
-  //success: function(oData){
-  //sap.m.MessageToast.show("Rapport_showServiceError wurde erfolgreich gespeichert");
-  //},
-//  error: ErrorHandler.showError
-				
-//			});
-			// if (newRapport) {
-			// 	oRapportModel.destroy();
-			// }
+
+//			oRapportModel.attachEventOnce("batchRequestCompleted", jQuery.proxy(this._submitSuccess, this));
+//			oRapportModel.attachEventOnce("batchRequestFailed", jQuery.proxy(this._submitError, this));
 			
-			
-			this._destory();
+			oRapportModel.submitChanges( 
+				/*{success: jQuery.proxy(this._submitSuccess, this),
+				error: jQuery.proxy(this._submitError, this)
+			} */
+			);
+//			oRapportModel.att;
+			this._submitSuccess();
+			//var oContext = this.getBindingContext();
 			var schiffsnr = oContext.getProperty("EniNr");
+/*			this.getView().getModel("rapportView").setProperty("/newRapport", false);
+
+			var schiffsnr = oContext.getProperty("EniNr");
+			this._destory();
+
 			this.getRouter().navTo("object", {
 				objectId: schiffsnr
 			}, true);
+*/
+			//	{
+			//success: function(oData){
+			//sap.m.MessageToast.show("Rapport_showServiceError wurde erfolgreich gespeichert");
+			//},
+			//  error: ErrorHandler.showError
+
+			//			});
+			// if (newRapport) {
+			// 	oRapportModel.destroy();
+			// }
+
 		},
 		onSignatureReset: function() {
 			var oViewModel = this.getModel("rapportView");
@@ -279,10 +292,10 @@ sap.ui.define([
 						// Init darf nur einmal aufgerufen
 						if (this.init === true) {
 							$("#signature").jSignature("init");
-/*							if (oSignature) {
-								var signatureArray = ["image/jsignature;base30", oSignature];
-								$("#signature").jSignature("setData", "data:" + signatureArray.join(","));
-							}*/
+							/*							if (oSignature) {
+															var signatureArray = ["image/jsignature;base30", oSignature];
+															$("#signature").jSignature("setData", "data:" + signatureArray.join(","));
+														}*/
 							this.init = false;
 						} else {
 							$("#signature").jSignature("clear");
@@ -291,9 +304,9 @@ sap.ui.define([
 						//var oContext = this.getBindingContext();
 						var oSignature = this.getBindingContext().getProperty("Signatur");
 						if (oSignature) {
-								var signatureArray = ["image/jsignature;base30", oSignature];
-								$("#signature").jSignature("setData", "data:" + signatureArray.join(","));
-							}
+							var signatureArray = ["image/jsignature;base30", oSignature];
+							$("#signature").jSignature("setData", "data:" + signatureArray.join(","));
+						}
 					}
 				});
 				oSignatureDiv.init = true;
@@ -301,15 +314,7 @@ sap.ui.define([
 					oSignatureDiv.placeAt(oSignaturePanel);
 				}
 				oViewModel.setProperty("/initSignature", true);
-			} 
-/*			else {
-				//initSignature = oViewModel.getProperty("/initSignature");
-				$("#signature").jSignature("clear");
-				if(oSignature) {
-					var signatureArray = ["image/jsignature;base30", oSignature];
-					$("#signature").jSignature("setData", "data:" + signatureArray.join(",") );
-				}
-			}*/
+			}
 		},
 		_updateTarife: function() {
 			var oRapporteModel = this.getView().getBindingContext();
@@ -335,37 +340,62 @@ sap.ui.define([
 		 */
 		_calc: function() {
 			//This code was generated by the layout editor.
-			var oRapporteModel = this.getView().getBindingContext();
-			//var oRapporteModel = this.getView().getModel();
+			var oRapporteContext = this.getView().getBindingContext();
+			var oRapporteModel = this.getView().getModel();
 			// if(!iTarifeModel){
 			var oTarifModel = this.getView().getModel("tarifeSet");
 			// }else{
 			// 	var oTarifModel = iTarifeModel;
 			// }
+			if (parseInt(oRapporteContext.getProperty("AllgemeineDienstleistung"), 10) !== 0 &&
+				oRapporteContext.getProperty("AllgemeineDienstleistung") !== "" &&
+				oRapporteContext.getProperty("AllgemeineDienstleistung") != null) {
+				oRapporteModel.setProperty("MrbU2000t", false, oRapporteContext);
+				oRapporteModel.setProperty("MrbUe2000t", false, oRapporteContext);
+				oRapporteModel.setProperty("BRU125m", false, oRapporteContext);
+				oRapporteModel.setProperty("BRSchubverband", false, oRapporteContext);
+				oRapporteModel.setProperty("BaAug", false, oRapporteContext);
+				oRapporteModel.setProperty("BirAug", false, oRapporteContext);
+			}
+
+			if (oRapporteContext.getProperty("MrbU2000t") === true ||
+				oRapporteContext.getProperty("MrbUe2000t") === true ||
+				oRapporteContext.getProperty("BRU125m") === true ||
+				oRapporteContext.getProperty("BRSchubverband") === true ||
+				oRapporteContext.getProperty("BaAug") === true ||
+				oRapporteContext.getProperty("BirAug") === true) {
+				oRapporteModel.setProperty("AllgemeineDienstleistung", "0", oRapporteContext);
+			}
 
 			var total = 0;
-			if (oRapporteModel.getProperty("MrbU2000t")) {
+			if (oRapporteContext.getProperty("MrbU2000t")) {
 				total = parseFloat(oTarifModel.getProperty("/d/MrbU2000t"));
 			}
-			if (oRapporteModel.getProperty("MrbUe2000t")) {
+			if (oRapporteContext.getProperty("MrbUe2000t")) {
 				total = parseFloat(total) + parseFloat(oTarifModel.getProperty("/d/MrbUe2000t"));
 			}
-			if (oRapporteModel.getProperty("BRU125m")) {
+			if (oRapporteContext.getProperty("BRU125m")) {
 				total = total + parseFloat(oTarifModel.getProperty("/d/BRU125m"));
 			}
-			if (oRapporteModel.getProperty("BRSchubverband")) {
+			if (oRapporteContext.getProperty("BRSchubverband")) {
 				total = parseFloat(total) + parseFloat(oTarifModel.getProperty("/d/BRSchubverband"));
 			}
-			if (oRapporteModel.getProperty("BaAug")) {
+			if (oRapporteContext.getProperty("BaAug")) {
 				total = parseFloat(total) + parseFloat(oTarifModel.getProperty("/d/BaAug"));
 			}
-			if (oRapporteModel.getProperty("BirAug")) {
+			if (oRapporteContext.getProperty("BirAug")) {
 				total = parseFloat(total) + parseFloat(oTarifModel.getProperty("/d/BirAug"));
 			}
-			if (oRapporteModel.getProperty("AllgemeineDienstleistung")) {
+			// if (oRapporteContext.getProperty("AllgemeineDienstleistung")) {
+			if (
+				parseInt(oRapporteContext.getProperty("AllgemeineDienstleistung"), 10) !== 0 &&
+				oRapporteContext.getProperty("AllgemeineDienstleistung") !== "" &&
+				oRapporteContext.getProperty("AllgemeineDienstleistung") != null
+			) {
 				total = parseFloat(total) + (parseFloat(oTarifModel.getProperty("/d/AllgemeineDienstleistung")) * parseFloat(oRapporteModel.getProperty(
 					"AllgemeineDienstleistung")));
 			}
+
 			this.getView().byId("__Total").setProperty("text", total + " CHF");
 
 		},
@@ -415,28 +445,52 @@ sap.ui.define([
 			oBenutzerModel.loadData(URL, true, false);
 			this.setModel(oBenutzerModel, "benutzerSet");
 		},
-		_destory: function() {
+		_destory: function(bSave) {
 			var oContext = this.getView().getBindingContext();
-			var schiffsnr = oContext.getProperty("EniNr");
+			//var schiffsnr = oContext.getProperty("EniNr");
 
 			var oRapportModel = this.getView().getModel();
-			if (this.getView().getModel("rapportView").getProperty("newRapport")) {
+			if ( bSave === false && this.getView().getModel("rapportView").getProperty("/newRapport")) {
 				oRapportModel.deleteCreatedEntry(oContext);
-			} 
-			//else {
-			    //oRapportModel.resetChanges();
-			//}
-			//oRapportModel.destroy();
+			}
+
+			//oRapportModel.batchRequestCompleted().then(this._onMetadataLoaded.bind(   
+			oRapportModel.resetChanges( 
+/*			{   
+				success: this._resetSuccess,
+				error: this._resetError
+			} */
+			);
+				
+/*				{fnSuccess: function(oData){
+					sap.m.MessageToast.show("resetChange erfolgreich");
+				} ,
+				fnError: function(oData){ sap.m.MessageToast.show("resetChange Fehler");
+				}
+				});*/
+			//oRapportModel.updateBindings();
+			//oRapportModel.refresh();
+			//));
+
+			
+			this.getView().setModel(oRapportModel);
+			
 			this.getView().getModel("tarifeSet").destroy();
 			this.getView().getModel("benutzerSet").destroy();
 			this.getView().getModel("Schiff").destroy();
+			
+			this.getView().unbindElement("");
+
+
+
+
 		},
-		_createSchiffsModel:function() {
+		_createSchiffsModel: function() {
 			//var oSchiff = this.getModel("Schiff");
-						 var oSchiff = new JSONModel({
-			 	busy: false,
+			var oSchiff = new JSONModel({
+				busy: false,
 				delay: 0
-			 });
+			});
 			//var oSchiff = new sap.ui.model.odata.v2.ODataModel("/sap/opu/odata/sap/ZLOTSENAPP2_SRV/");
 			//this.setModel(oSchiff, "Schiff");
 			var sSchiffsNummer = this.getView().getBindingContext().getProperty("EniNr");
@@ -445,6 +499,60 @@ sap.ui.define([
 			oSchiff.loadData(URL, true, false);
 
 			this.setModel(oSchiff, "Schiff");
-		}
+		},
+		_resetModel: function(oData) {
+			if (this.getView().getModel().hasPendingChanges()) {
+				this.getView().getModel().resetChanges();
+			}
+		},
+		_submitSuccess: function(oData) {
+//			sap.m.MessageToast.show("Rapport wurde erfolgreich gespeichert");
+						//var oContext = this.getBindingContext();
+			this.getView().getModel("rapportView").setProperty("/newRapport", false);
+
+			var schiffsnr = this.getView().getBindingContext().getProperty("EniNr");
+			this._destory( true );
+
+			this.getRouter().navTo("object", {
+				objectId: schiffsnr
+			}, true);
+
+			//var oRapportModel = this.getModel();
+			//var oContext = this.getView().getBindingContext();
+			//this.getView().getModel("rapportView").setProperty("newRapport", false );
+			/*var oContext = this.getBindingContext();
+			this.getModel("rapportView").setProperty("newRapport", false );
+			
+			var schiffsnr = oContext.getProperty("EniNr");			
+			this._destory();
+
+			this.getRouter().navTo("object", {
+				objectId: schiffsnr
+			}, true);*/
+		},
+		_submitError: function(oData) {
+			sap.m.MessageToast.show("FEHLER!!!!!!!!!!!!!!!!!");
+						//var oContext = this.getBindingContext();
+		/*	this.getView().getModel("rapportView").setProperty("/newRapport", false);
+
+			var schiffsnr = this.getView().getBindingContext().getProperty("EniNr");
+			this._destory( true );
+
+			this.getRouter().navTo("object", {
+				objectId: schiffsnr
+			}, true);*/
+
+		
+		},
+		_resetSuccess: function() {
+					sap.m.MessageToast.show("OK!!!!!!!!!!!!!!!!!");
+			
+		},
+		_resetError: function() {
+			sap.m.MessageToast.show("FEHLER!!!!!!!!!!!!!!!!!");
+			}
+		
+		
+		
 	});
 });
