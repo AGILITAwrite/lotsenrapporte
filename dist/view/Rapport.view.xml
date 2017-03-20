@@ -1,5 +1,4 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m"
-	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" controllerName="ch.portof.controller.Rapport">
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" controllerName="ch.portof.controller.Rapport">
 	<!-- bindingContexts="RapporteSet" -->
 	<semantic:DetailPage xmlns:sap.m.semantic="sap.m.semantic" title="Semantic Page" id="__page2">
 		<semantic:saveAction>
@@ -9,22 +8,20 @@
 			<semantic:CancelAction id="__action1" press="onCancel"/>
 		</semantic:cancelAction>
 		<semantic:content>
-			<ObjectHeader title="{Name}" introActive="true" id="__header0" number="{Schiffsnummer}" condensed="true" titleActive="true"/>
+			<ObjectHeader title="{Schiff>/d/Name}" introActive="true" id="__header0" number="{Schiff>/d/Schiffsnummer}" condensed="true" titleActive="true"/>
 			<sap.ui.layout.form:Form xmlns:sap.ui.layout.form="sap.ui.layout.form" editable="true" id="__form1">
 				<sap.ui.layout.form:formContainers>
 					<sap.ui.layout.form:FormContainer title="Kopfdaten {Rapportid}" id="__container1" expandable="true">
 						<sap.ui.layout.form:FormElement id="__element2" label="Datum/Zeit">
 							<sap.ui.layout.form:fields>
-								<DatePicker width="100%" id="startDatePicker" valueFormat="yyyyMMdd" placeholder="dd.MM.yyyy" displayFormat="dd.MM.yyyy"
-									value="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}"/>
+								<DatePicker width="100%" id="startDatePicker" valueFormat="yyyyMMdd" placeholder="dd.MM.yyyy" displayFormat="dd.MM.yyyy" value="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}"/>
 								<!--								<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker"   
 									value="{ path: 'Zeit', type: 'sap.ui.model.type.Time', 
 												formatOptions: { pattern: 'HH:mm', 
 													source: { pattern : '\'PT\'HH\'H\'mm\'M\'ss\'S\''  } 
 												} 
 											}"/>-->
-								<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker"
-									value="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time' , formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm'}}"/>
+								<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker" value="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time' , formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm'}}"/>
 							</sap.ui.layout.form:fields>
 						</sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:FormElement id="__element8" label="Berg-/Talfahrt">
@@ -34,7 +31,8 @@
 						</sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:FormElement id="__element9" label="Lotse">
 							<sap.ui.layout.form:fields>
-								<Text text="{benutzerSet>/d/Firstname} {benutzerSet&gt;/d/Lastname}" id="__text24"/>
+								<!--<Text text="{benutzerSet>/d/Firstname} {benutzerSet>/d/Lastname}" id="__text24"/>-->
+								<Text text="{Lotsenname}" id="__text24"/>
 							</sap.ui.layout.form:fields>
 						</sap.ui.layout.form:FormElement>
 					</sap.ui.layout.form:FormContainer>
@@ -60,7 +58,8 @@
 										<ColumnListItem id="__item0">
 											<cells>
 												<StandardListItem type="Inactive" title="Mittlere Rheinbrücke" description="Basel UW Birsfelden (v.v.)" id="__item7" adaptTitleSize="false"/>
-												<CheckBox id="__box0" selected="{MrbU2000t}" select="_calc"/>
+												<!--<CheckBox id="__box0" selected="{MrbU2000t}" select="_calc"/>-->
+												<RadioButton selected="{MrbU2000t}"  id="__button0" groupName="radio1" select="_calc"/>
 												<Text text="bis 2'000 t" id="__text26"/>
 												<Text text="{ path: 'tarifeSet>/d/MrbU2000t', formatter: '.formatter.currencyValue' } CHF" id="__text27"/>
 											</cells>
@@ -68,7 +67,8 @@
 										<ColumnListItem id="__item1">
 											<cells>
 												<StandardListItem type="Inactive" title="Mittlere Rheinbrücke" description="Basel UW Birsfelden (v.v.)" id="__item8"/>
-												<CheckBox id="__box1" selected="{MrbUe2000t}" select="_calc"/>
+												<!--<CheckBox id="__box1" selected="{MrbUe2000t}" select="_calc"/>-->
+												<RadioButton selected="{MrbUe2000t}"  id="__button1" groupName="radio1" select="_calc"/>
 												<Text text="&gt; 100m/2'000 t" id="__text29"/>
 												<Text text="{ path: 'tarifeSet>/d/MrbUe2000t', formatter: '.formatter.currencyValue' } CHF" id="__text30"/>
 											</cells>
@@ -76,7 +76,8 @@
 										<ColumnListItem id="__item2">
 											<cells>
 												<StandardListItem type="Inactive" title="Gem.RPVO Basel - Rheinfelden" description="(hoheitliche / nicht Mwst.pflichtig)" id="__item9"/>
-												<CheckBox id="__box2" selected="{BRU125m}" select="_calc"/>
+												<!--<CheckBox id="__box2" selected="{BRU125m}" select="_calc"/>-->
+												<RadioButton selected="{BRU125m}"  id="__button2" groupName="radio1" select="_calc"/>
 												<Text text="&gt; 110-125m / 2'000 t" id="__text32"/>
 												<Text text="{ path: 'tarifeSet>/d/BRU125m', formatter: '.formatter.currencyValue' } CHF" id="__text33"/>
 											</cells>
@@ -84,7 +85,8 @@
 										<ColumnListItem id="__item3">
 											<cells>
 												<StandardListItem type="Inactive" title="Gem.RPVO Basel - Rheinfelden" description="(hoheitliche / nicht Mwst.pflichtig)" id="__item10"/>
-												<CheckBox id="__box3" selected="{BRSchubverband}" select="_calc"/>
+												<!--<CheckBox id="__box3" selected="{BRSchubverband}" select="_calc"/>-->
+												<RadioButton selected="{BRSchubverband}"  id="__button3" groupName="radio1" select="_calc"/>
 												<Text text="Schubverband" id="__text35"/>
 												<Text text="{ path: 'tarifeSet>/d/BRSchubverband', formatter: '.formatter.currencyValue' } CHF" id="__text36"/>
 											</cells>
@@ -92,7 +94,8 @@
 										<ColumnListItem id="__item4">
 											<cells>
 												<StandardListItem type="Inactive" title="Basel - Augst (v.v)" id="__item11"/>
-												<CheckBox id="__box4" selected="{BaAug}" select="_calc"/>
+												<!--<CheckBox id="__box4" selected="{BaAug}" select="_calc"/>-->
+												<RadioButton selected="{BaAug}"  id="__button4" groupName="radio1" select="_calc"/>
 												<Text text="alle Schiffe" id="__text38"/>
 												<Text text="{ path: 'tarifeSet>/d/BaAug', formatter: '.formatter.currencyValue' } CHF" id="__text39"/>
 											</cells>
@@ -100,7 +103,8 @@
 										<ColumnListItem id="__item5">
 											<cells>
 												<StandardListItem type="Inactive" title="Birsfelden - Augst (v.v)" id="__item12"/>
-												<CheckBox id="__box5" selected="{BirAug}" select="_calc"/>
+												<!--<CheckBox id="__box5" selected="{BirAug}" select="_calc"/>-->
+												<RadioButton selected="{BirAug}"  id="__button5" groupName="radio1" select="_calc"/>
 												<Text text="alle Schiffe" id="__text41"/>
 												<Text text="{ path: 'tarifeSet>/d/BirAug', formatter: '.formatter.currencyValue' } CHF" id="__text42"/>
 											</cells>
@@ -134,12 +138,12 @@
 												<Label id="__label7" visible="false" text="Auswahl" width="20px"/>
 											</header>
 										</Column>
-										<Column id="__column2" minScreenWidth="800px" demandPopin="true" popinDisplay="Inline">
+										<Column id="__column2" minScreenWidth="800px" vAlign="Middle" demandPopin="true">
 											<header>
 												<Label text="Schiffstyp" id="__label8"/>
 											</header>
 										</Column>
-										<Column id="__column3" minScreenWidth="800px" demandPopin="true" popinDisplay="Inline" hAlign="End">
+										<Column id="__column3" minScreenWidth="800px" demandPopin="true">
 											<header>
 												<Label text="Grundtarif" width="100%" id="__label5"/>
 											</header>
@@ -186,18 +190,18 @@
 						<sap.ui.layout.form:formElements>
 							<sap.ui.layout.form:FormElement id="__element5">
 								<sap.ui.layout.form:fields>
-									<TextArea id="__area0" rows="4" maxLength="255" wrapping="Off" value="{Bemerkung}"/>
+									<TextArea id="__area0" maxLength="255" wrapping="Off" value="{Bemerkung}"/>
 								</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
 						</sap.ui.layout.form:formElements>
 					</sap.ui.layout.form:FormContainer>
 				</sap.ui.layout.form:formContainers>
 				<sap.ui.layout.form:layout>
-					<sap.ui.layout.form:ResponsiveGridLayout id="__layout0" labelSpanM="3"/>
+					<sap.ui.layout.form:ResponsiveGridLayout id="__layout0" columnsL="1"/>
 				</sap.ui.layout.form:layout>
 			</sap.ui.layout.form:Form>
 		</semantic:content>
-		<semantic:negativeAction></semantic:negativeAction>
+		<semantic:negativeAction/>
 		<semantic:layoutData/>
 	</semantic:DetailPage>
 </mvc:View>

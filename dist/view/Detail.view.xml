@@ -6,7 +6,6 @@
 				<attributes>
 					<ObjectAttribute text="{Schiffsnummer}" id="__attribute3" title="{/#Schiffe/Schiffsnummer/@sap:label}"/>
 					<ObjectAttribute text="{Nationalitaet}" id="__attribute6" title="{/#Schiffe/Nationalitaet/@sap:label}"/>
-					<ObjectAttribute text="{Verdraengung}" id="__attribute4" title="{/#Schiffe/Verdraengung/@sap:label}"/>
 				</attributes>
 			</ObjectHeader>
 			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
@@ -63,7 +62,7 @@
 											<ObjectAttribute text="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}" id="__attribute0"/>
 											<!--<ObjectAttribute id="__attribute1" text="{ path: 'Zeit.ms', type: 'sap.ui.model.type.Time', formatOptions: { pattern: 'HH:mm', source: { pattern : '\'PT\'HH\'H\'mm\'M\'ss\'S\''}}}"/>-->
 											<ObjectAttribute id="__attribute1" text="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time' ,formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm'}}"/>
-											<ObjectAttribute text="{Ernam}" id="__attribute2"/>
+											<ObjectAttribute text="{Lotsenname}" id="__attribute2"/>
 										</cells>
 									</ColumnListItem>
 								</items>

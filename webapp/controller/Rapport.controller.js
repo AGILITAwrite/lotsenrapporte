@@ -472,7 +472,6 @@ sap.ui.define([
 			//oRapportModel.refresh();
 			//));
 
-			
 			this.getView().setModel(oRapportModel);
 			
 			this.getView().getModel("tarifeSet").destroy();
@@ -480,10 +479,6 @@ sap.ui.define([
 			this.getView().getModel("Schiff").destroy();
 			
 			this.getView().unbindElement("");
-
-
-
-
 		},
 		_createSchiffsModel: function() {
 			//var oSchiff = this.getModel("Schiff");

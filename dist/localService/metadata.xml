@@ -10,6 +10,8 @@
 					sap:filterable="false"/>
 				<Property Name="Bemerkung" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Bemerkung Rapport" sap:sortable="false"
 					sap:filterable="false"/>
+				<Property Name="Signaturimage" Type="Edm.String" sap:label="Signatur" sap:sortable="false" sap:filterable="false" />
+				<Property Name="Lotsenname" Type="Edm.String" MaxLength="80" sap:label="Vollst.Name" sap:sortable="false" sap:filterable="false" />
 				<Property Name="EniNr" Type="Edm.String" MaxLength="8" sap:label="ENI" sap:sortable="false" sap:filterable="false"/>
 				<Property Name="Signatur" Type="Edm.String" Nullable="false" sap:label="Signatur" sap:sortable="false" sap:filterable="false"/>
 				<Property Name="Datum" Type="Edm.DateTime" Precision="7" sap:label="Datum" sap:sortable="false" sap:filterable="false"/>
