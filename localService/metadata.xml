@@ -1,0 +1,210 @@
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZLOTSENAPP2_SRV" xml:lang="en" sap:schema-version="1">
+			<EntityType Name="Rapporte" sap:content-version="1">
+				<Key>
+					<PropertyRef Name="Rapportid"/>
+				</Key>
+				<Property Name="Rapportid" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Rapport ID" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="Bemerkung" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Bemerkung Rapport" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="Signaturimage" Type="Edm.String" sap:label="Signatur" sap:sortable="false" sap:filterable="false" />
+				<Property Name="Lotsenname" Type="Edm.String" MaxLength="80" sap:label="Vollst.Name" sap:sortable="false" sap:filterable="false" />
+				<Property Name="EniNr" Type="Edm.String" MaxLength="8" sap:label="ENI" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Signatur" Type="Edm.String" Nullable="false" sap:label="Signatur" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Datum" Type="Edm.DateTime" Precision="7" sap:label="Datum" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Zeit" Type="Edm.Time" Precision="0" sap:label="Uhrzeit" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Talfahrt" Type="Edm.Boolean" sap:label="Tal oder Bergfahrt" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="MrbU2000t" Type="Edm.Boolean" sap:label="MRB u. 2000T" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="MrbUe2000t" Type="Edm.Boolean" sap:label="MRB ü. 2000t" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="BRU125m" Type="Edm.Boolean" sap:label="Basel Rheinf. b 110m" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="BRSchubverband" Type="Edm.Boolean" sap:label="Basel Rheinf. Schubv" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="BaAug" Type="Edm.Boolean" sap:label="Basel Augst" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="BirAug" Type="Edm.Boolean" sap:label="Birsfelden Augst" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="AllgemeineDienstleistung" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="Meinh" sap:label="Allg. Dienstleistung"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Nachtzuschlag" Type="Edm.Boolean" sap:label="Nachtzuschlag" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="ZLotsenFeiertagszuschlag" Type="Edm.Boolean" sap:label="Feiertagszuschlag" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Ernam" Type="Edm.String" MaxLength="12" sap:label="Benutzername" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Erdat" Type="Edm.DateTime" Precision="7" sap:label="Datum" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Ertime" Type="Edm.Time" Precision="0" sap:label="Uhrzeit" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Aenam" Type="Edm.String" MaxLength="12" sap:label="Benutzername" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Aedat" Type="Edm.DateTime" Precision="7" sap:label="Datum" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Aetime" Type="Edm.Time" Precision="0" sap:label="Uhrzeit" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Loevm" Type="Edm.Boolean" sap:label="Löschen" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Longitude" Type="Edm.Double" sap:label="Länge" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Latitude" Type="Edm.Double" sap:label="Breite" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Altitude" Type="Edm.Decimal" Precision="4" Scale="0" sap:label="Höhe über NNull" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Meinh" Type="Edm.String" MaxLength="3" sap:label="Mengeneinheit" sap:sortable="false" sap:filterable="false"
+					sap:semantics="unit-of-measure"/>
+			</EntityType>
+			<EntityType Name="Debitoren" sap:content-version="1">
+				<Key>
+					<PropertyRef Name="Kunnr"/>
+				</Key>
+				<Property Name="Kunnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Customer" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false"/>
+				<Property Name="Land1" Type="Edm.String" MaxLength="3" sap:label="Country" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="Name1" Type="Edm.String" MaxLength="35" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+				<Property Name="Name2" Type="Edm.String" MaxLength="35" sap:label="Name 2" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="Ort01" Type="Edm.String" MaxLength="35" sap:label="City" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="Pstlz" Type="Edm.String" MaxLength="10" sap:label="Postal Code" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Regio" Type="Edm.String" MaxLength="3" sap:label="Region" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="Stras" Type="Edm.String" MaxLength="35" sap:label="Street" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="Adrnr" Type="Edm.String" MaxLength="10" sap:label="Address" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="Anred" Type="Edm.String" MaxLength="15" sap:label="Title" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="Loevm" Type="Edm.Boolean" sap:label="Deletion flag" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="Name3" Type="Edm.String" MaxLength="35" sap:label="Name 3" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="Name4" Type="Edm.String" MaxLength="35" sap:label="Name 4" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="Niels" Type="Edm.String" MaxLength="2" sap:label="Nielsen ID" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Ort02" Type="Edm.String" MaxLength="35" sap:label="District" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Pfach" Type="Edm.String" MaxLength="10" sap:label="PO Box" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="Pstl2" Type="Edm.String" MaxLength="10" sap:label="PO Box PCode" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Counc" Type="Edm.String" MaxLength="3" sap:label="County code" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Cityc" Type="Edm.String" MaxLength="4" sap:label="City code" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Pfort" Type="Edm.String" MaxLength="35" sap:label="P.O.Box city" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<NavigationProperty Name="Schiffe" Relationship="ZLOTSENAPP2_SRV.ASSOC_DEBITOR_SCHIFFE" FromRole="FromRole_ASSOC_DEBITOR_SCHIFFE"
+					ToRole="ToRole_ASSOC_DEBITOR_SCHIFFE"/>
+			</EntityType>
+			<EntityType Name="Schiffe" sap:content-version="1">
+				<Key>
+					<PropertyRef Name="Schiffsnummer"/>
+				</Key>
+				<Property Name="Name" Type="Edm.String" MaxLength="30" sap:label="Schiffsname" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false"/>
+				<Property Name="Schiffsnummer" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="ENI" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Matnr" Type="Edm.String" MaxLength="40" sap:label="Material" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Schiffstyp" Type="Edm.String" MaxLength="70" sap:label="Char. Value" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Nationalitaet" Type="Edm.String" MaxLength="3" sap:label="Flagge" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Werftname" Type="Edm.String" MaxLength="50" sap:label="Werftname" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Werftort" Type="Edm.String" MaxLength="35" sap:label="Werftort" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="SchiffsmotorTxt" Type="Edm.String" MaxLength="30" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="Verdraengung" Type="Edm.Decimal" Precision="10" Scale="3" sap:label="Verdrängung in m3" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Schiffer" Type="Edm.String" MaxLength="100" sap:label="Name" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="TelNumber" Type="Edm.String" MaxLength="100" sap:label="Telephone" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Email" Type="Edm.String" MaxLength="100" sap:label="Email" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="Debitor" Type="Edm.String" MaxLength="10" sap:label="Customer" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false"/>
+				<NavigationProperty Name="Debitoren" Relationship="ZLOTSENAPP2_SRV.ASSOC_DEBITOR_SCHIFFE" FromRole="ToRole_ASSOC_DEBITOR_SCHIFFE"
+					ToRole="FromRole_ASSOC_DEBITOR_SCHIFFE"/>
+				<NavigationProperty Name="RapporteSet" Relationship="ZLOTSENAPP2_SRV.ASSOC_SCHIFFE_RAPPORT" FromRole="FromRole_ASSOC_SCHIFFE_RAPPORT"
+					ToRole="ToRole_ASSOC_SCHIFFE_RAPPORT"/>
+			</EntityType>
+			<EntityType Name="Tarife" sap:content-version="1">
+				<Key>
+					<PropertyRef Name="Tarifart"/>
+				</Key>
+				<Property Name="Tarifart" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Tarifart" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="MrbU2000t" Type="Edm.Decimal" Precision="7" Scale="3" sap:label="Tarif" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="MrbUe2000t" Type="Edm.Decimal" Precision="7" Scale="3" sap:label="Tarif" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="BRU125m" Type="Edm.Decimal" Precision="7" Scale="3" sap:label="Tarif" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="BRSchubverband" Type="Edm.Decimal" Precision="7" Scale="3" sap:label="Tarif" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="BaAug" Type="Edm.Decimal" Precision="7" Scale="3" sap:label="Tarif" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="BirAug" Type="Edm.Decimal" Precision="7" Scale="3" sap:label="Tarif" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="AllgemeineDienstleistung" Type="Edm.Decimal" Precision="7" Scale="3" sap:label="Tarif" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+			</EntityType>
+			<EntityType Name="Benutzer" sap:content-version="1">
+				<Key>
+					<PropertyRef Name="AddrNo"/>
+				</Key>
+				<Property Name="PersNo" Type="Edm.String" MaxLength="10" sap:label="Person number" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="TitleP" Type="Edm.String" MaxLength="30" sap:label="Title" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/>
+				<Property Name="AddrNo" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Address number" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Firstname" Type="Edm.String" MaxLength="40" sap:label="First name" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Lastname" Type="Edm.String" MaxLength="40" sap:label="Last name" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/>
+			</EntityType>
+			<Association Name="ASSOC_DEBITOR_SCHIFFE" sap:content-version="1">
+				<End Type="ZLOTSENAPP2_SRV.Debitoren" Multiplicity="0..1" Role="FromRole_ASSOC_DEBITOR_SCHIFFE"/>
+				<End Type="ZLOTSENAPP2_SRV.Schiffe" Multiplicity="*" Role="ToRole_ASSOC_DEBITOR_SCHIFFE"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_ASSOC_DEBITOR_SCHIFFE">
+						<PropertyRef Name="Kunnr"/>
+					</Principal>
+					<Dependent Role="ToRole_ASSOC_DEBITOR_SCHIFFE">
+						<PropertyRef Name="Debitor"/>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="ASSOC_SCHIFFE_RAPPORT" sap:content-version="1">
+				<End Type="ZLOTSENAPP2_SRV.Schiffe" Multiplicity="1" Role="FromRole_ASSOC_SCHIFFE_RAPPORT"/>
+				<End Type="ZLOTSENAPP2_SRV.Rapporte" Multiplicity="*" Role="ToRole_ASSOC_SCHIFFE_RAPPORT"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_ASSOC_SCHIFFE_RAPPORT">
+						<PropertyRef Name="Schiffsnummer"/>
+					</Principal>
+					<Dependent Role="ToRole_ASSOC_SCHIFFE_RAPPORT">
+						<PropertyRef Name="EniNr"/>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<EntityContainer Name="ZLOTSENAPP2_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+				<EntitySet Name="RapporteSet" EntityType="ZLOTSENAPP2_SRV.Rapporte" sap:creatable="false" sap:updatable="false" sap:deletable="false"
+					sap:pageable="false" sap:content-version="1"/>
+				<EntitySet Name="DebitorenSet" EntityType="ZLOTSENAPP2_SRV.Debitoren" sap:creatable="false" sap:updatable="false" sap:deletable="false"
+					sap:pageable="false" sap:content-version="1"/>
+				<EntitySet Name="SchiffeSet" EntityType="ZLOTSENAPP2_SRV.Schiffe" sap:creatable="false" sap:updatable="false" sap:deletable="false"
+					sap:pageable="false" sap:content-version="1"/>
+				<EntitySet Name="TarifeSet" EntityType="ZLOTSENAPP2_SRV.Tarife" sap:creatable="false" sap:updatable="false" sap:deletable="false"
+					sap:pageable="false" sap:content-version="1"/>
+				<EntitySet Name="BenutzerSet" EntityType="ZLOTSENAPP2_SRV.Benutzer" sap:creatable="false" sap:updatable="false" sap:deletable="false"
+					sap:pageable="false" sap:content-version="1"/>
+				<AssociationSet Name="ASSOC_SCHIFFE_RAPPORTSet" Association="ZLOTSENAPP2_SRV.ASSOC_SCHIFFE_RAPPORT" sap:creatable="false"
+					sap:updatable="false" sap:deletable="false" sap:content-version="1">
+					<End EntitySet="SchiffeSet" Role="FromRole_ASSOC_SCHIFFE_RAPPORT"/>
+					<End EntitySet="RapporteSet" Role="ToRole_ASSOC_SCHIFFE_RAPPORT"/>
+				</AssociationSet>
+				<AssociationSet Name="ASSOC_DEBITOR_SCHIFFESet" Association="ZLOTSENAPP2_SRV.ASSOC_DEBITOR_SCHIFFE" sap:creatable="false"
+					sap:updatable="false" sap:deletable="false" sap:content-version="1">
+					<End EntitySet="DebitorenSet" Role="FromRole_ASSOC_DEBITOR_SCHIFFE"/>
+					<End EntitySet="SchiffeSet" Role="ToRole_ASSOC_DEBITOR_SCHIFFE"/>
+				</AssociationSet>
+			</EntityContainer>
+			<atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZLOTSENAPP2_SRV/$metadata"/>
+			<atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZLOTSENAPP2_SRV/$metadata"/>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>
