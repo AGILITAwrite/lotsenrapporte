@@ -34,7 +34,7 @@ sap.ui.define([
 			// this._createTarifModel();
 			//this._createSignatureModel();
 			//this._createRapportModel();
-			// this._createBenutzerModel();
+			// this._getBenutzername();
 
 			/*			var oRapportModel = this.getModel();
 						var oContext = this.getView().getBindingContext();
@@ -68,7 +68,8 @@ sap.ui.define([
 				}, onewRapport);
 
 				oRapporteModel.setProperty("EniNr", sObjectId, onewRapport);
-
+				oRapporteModel.setProperty("Lotsenname", this._getBenutzername(), onewRapport);
+				
 				var sObjectPath = onewRapport.getPath();
 				this._bindView(sObjectPath);
 			}.bind(this));
@@ -141,7 +142,6 @@ sap.ui.define([
 
 			this._createSignatureModel(oSignature);
 			this._createTarifModel();
-			this._createBenutzerModel();
 			this._createSchiffsModel();
 
 			/*if(this.getView().getModel().hasPendingChanges() && !this.getView().getModel("rapportView").getProperty("/newRapport")){
@@ -392,8 +392,8 @@ sap.ui.define([
 				oRapporteContext.getProperty("AllgemeineDienstleistung") !== "" &&
 				oRapporteContext.getProperty("AllgemeineDienstleistung") != null
 			) {
-				total = parseFloat(total) + (parseFloat(oTarifModel.getProperty("/d/AllgemeineDienstleistung")) * parseFloat(oRapporteModel.getProperty(
-					"AllgemeineDienstleistung")));
+				total = parseFloat(total) + (parseFloat(oTarifModel.getProperty("/d/AllgemeineDienstleistung")) * 
+						parseFloat(oRapporteContext.getProperty("AllgemeineDienstleistung")));
 			}
 
 			this.getView().byId("__Total").setProperty("text", total + " CHF");
@@ -436,14 +436,15 @@ sap.ui.define([
 
 			this.getView().setBindingContext(onewRapport);
 		},
-		_createBenutzerModel: function() {
+		_getBenutzername: function() {
 			var oBenutzerModel = new JSONModel({
 				busy: false,
 				delay: 0
 			});
 			var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/BenutzerSet('1')";
 			oBenutzerModel.loadData(URL, true, false);
-			this.setModel(oBenutzerModel, "benutzerSet");
+			//this.setModel(oBenutzerModel, "benutzerSet");
+			return oBenutzerModel.getProperty("/d/Firstname") + " " + oBenutzerModel.getProperty("/d/Lastname");
 		},
 		_destory: function(bSave) {
 			var oContext = this.getView().getBindingContext();
@@ -475,7 +476,7 @@ sap.ui.define([
 			this.getView().setModel(oRapportModel);
 			
 			this.getView().getModel("tarifeSet").destroy();
-			this.getView().getModel("benutzerSet").destroy();
+			//this.getView().getModel("benutzerSet").destroy();
 			this.getView().getModel("Schiff").destroy();
 			
 			this.getView().unbindElement("");
