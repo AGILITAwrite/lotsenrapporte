@@ -44,6 +44,7 @@
 				<Key>
 					<PropertyRef Name="Kunnr"/>
 				</Key>
+				<Property Name="Email" Type="Edm.String" MaxLength="241" sap:label="E-Mail-Adresse" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
 				<Property Name="Kunnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Customer" sap:creatable="false" sap:updatable="false"
 					sap:sortable="false"/>
 				<Property Name="Land1" Type="Edm.String" MaxLength="3" sap:label="Country" sap:creatable="false" sap:updatable="false" sap:sortable="false"
@@ -90,6 +91,7 @@
 				<Key>
 					<PropertyRef Name="Schiffsnummer"/>
 				</Key>
+				<Property Name="EcocardNr" Type="Edm.String" MaxLength="10" sap:label="Eco Card Nummer" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
 				<Property Name="Name" Type="Edm.String" MaxLength="30" sap:label="Schiffsname" sap:creatable="false" sap:updatable="false"
 					sap:sortable="false"/>
 				<Property Name="Schiffsnummer" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="ENI" sap:creatable="false" sap:updatable="false"
