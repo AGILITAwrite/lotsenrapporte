@@ -71,6 +71,7 @@ sap.ui.define([
 					ms: new Date().getTime(),
 					__edmtype: "Edm.Time"
 				}, onewRapport);
+				
 
 				oRapporteModel.setProperty("EniNr", sObjectId, onewRapport);
 				oRapporteModel.setProperty("Lotsenname", this._getBenutzername(), onewRapport);
