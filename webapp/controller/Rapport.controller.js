@@ -85,7 +85,7 @@ sap.ui.define([
 		this._logChange("_onRouteMachedOld Start");
 			//this._resetModel();
 			this.getView().getModel("rapportView").setProperty("/newRapport", false);
-			this.getView().getModel("rapportView").setProperty("/changeMode", false); // zum Editeren von bestehenden rapporten hier aktivieren.
+			this.getView().getModel("rapportView").setProperty("/changeMode", true); // zum Editeren von bestehenden rapporten hier aktivieren.
 
 			var sObjectId = oEvent.getParameter("arguments").objectId;
 			this.getModel().metadataLoaded().then(function() {
@@ -193,7 +193,7 @@ sap.ui.define([
 			oViewModel.setProperty("/busy", true);
 			// Restore original busy indicator delay for the detail view
 			oViewModel.setProperty("/delay", iOriginalViewBusyDelay);
-			this._logChange("onMetadataLoaded");
+			//this._logChange("onMetadataLoaded");
 		},
 		/**
 		 *@memberOf ch.portof.controller.Rapport
@@ -205,7 +205,7 @@ sap.ui.define([
 
 			var oContext = this.getView().getBindingContext();
 			var schiffsnr = oContext.getProperty("EniNr");
-			this._destory();
+			this._destory(false);
 			/*
 			var oRapportModel = this.getView().getModel();
 			if(this.getView().getModel("rapportView").getProperty(""))
@@ -234,6 +234,7 @@ sap.ui.define([
 		 *@memberOf ch.portof.controller.Rapport
 		 */
 		onSave: function() {
+			this._logChange("onSave Start");
 			var oRapportModel = this.getModel();
 			var oContext = this.getView().getBindingContext();
 
@@ -257,14 +258,16 @@ sap.ui.define([
 //			oRapportModel.attachEventOnce("batchRequestFailed", jQuery.proxy(this._submitError, this));
 			
 			oRapportModel.submitChanges( 
-				/*{success: jQuery.proxy(this._submitSuccess, this),
+				{
+				success: jQuery.proxy(this._submitSuccess, this),
 				error: jQuery.proxy(this._submitError, this)
-			} */
+			} 
 			);
+			this._logChange("onSave End");
 //			oRapportModel.att;
-			this._submitSuccess();
+			//this._submitSuccess();
 			//var oContext = this.getBindingContext();
-			var schiffsnr = oContext.getProperty("EniNr");
+			//var schiffsnr = oContext.getProperty("EniNr");
 /*			this.getView().getModel("rapportView").setProperty("/newRapport", false);
 
 			var schiffsnr = oContext.getProperty("EniNr");
@@ -370,12 +373,12 @@ sap.ui.define([
 			if (parseInt(oRapporteContext.getProperty("AllgemeineDienstleistung"), 10) !== 0 &&
 				oRapporteContext.getProperty("AllgemeineDienstleistung") !== "" &&
 				oRapporteContext.getProperty("AllgemeineDienstleistung") != null) {
-				oRapporteModel.setProperty("MrbU2000t", false, oRapporteContext);
-				oRapporteModel.setProperty("MrbUe2000t", false, oRapporteContext);
-				oRapporteModel.setProperty("BRU125m", false, oRapporteContext);
-				oRapporteModel.setProperty("BRSchubverband", false, oRapporteContext);
-				oRapporteModel.setProperty("BaAug", false, oRapporteContext);
-				oRapporteModel.setProperty("BirAug", false, oRapporteContext);
+				oRapporteModel.setProperty("MrbU2000t", null, oRapporteContext);
+				oRapporteModel.setProperty("MrbUe2000t", null, oRapporteContext);
+				oRapporteModel.setProperty("BRU125m", null, oRapporteContext);
+				oRapporteModel.setProperty("BRSchubverband", null, oRapporteContext);
+				oRapporteModel.setProperty("BaAug", null, oRapporteContext);
+				oRapporteModel.setProperty("BirAug", null, oRapporteContext);
 			}
 
 			if (oRapporteContext.getProperty("MrbU2000t") === true ||
@@ -384,7 +387,7 @@ sap.ui.define([
 				oRapporteContext.getProperty("BRSchubverband") === true ||
 				oRapporteContext.getProperty("BaAug") === true ||
 				oRapporteContext.getProperty("BirAug") === true) {
-				oRapporteModel.setProperty("AllgemeineDienstleistung", "0", oRapporteContext);
+				oRapporteModel.setProperty("AllgemeineDienstleistung", null, oRapporteContext);
 			}
 
 			var total = 0;
@@ -417,7 +420,7 @@ sap.ui.define([
 			}
 
 			this.getView().byId("__Total").setProperty("text", total + " CHF");
-	this._logChange("_calc End");
+			this._logChange("_calc End");
 		},
 		_createSignatureModel: function(oSignature) {
 			// Signatur 
@@ -482,7 +485,10 @@ sap.ui.define([
 			// 	fnError: this._resetError
 			// } 
 			);
-			//jQuery.sap.log.error( "ResetChange" + " " +  "Rapport: " + this.getView().getBindingContext().getProperty("Rapportid") + "SchiffNr" + this.getView().getBindingContext().getProperty("EniNr")  );
+			oRapportModel.refresh();
+			oRapportModel.updateBindings();
+
+			jQuery.sap.log.error( "ResetChange" + " " +  "Rapport: " + this.getView().getBindingContext().getProperty("Rapportid") + "SchiffNr" + this.getView().getBindingContext().getProperty("EniNr")  );
 			this._logChange("_destory Middle");
 				
 /*				{fnSuccess: function(oData){
@@ -501,7 +507,8 @@ sap.ui.define([
 			//this.getView().getModel("benutzerSet").destroy();
 			this.getView().getModel("Schiff").destroy();
 			this._logChange("_destory End");
-			//this.getView().unbindElement("");
+			//this.getView().unbindElement();
+			//this._logChange("_destory after unbind");
 		},
 		_createSchiffsModel: function() {
 
@@ -604,22 +611,22 @@ sap.ui.define([
 				//this.setModel(oData, "Schiff");
 				//this.getView().setBindingContext(oContext, "Schiff");
 				sap.m.MessageToast.show("OK!!!!!!!!!!!!!!!!!");
-				//jQuery.sap.log.error( "ResetSucces" + " " +  "Rapport: " + this.getView().getBindingContext().getProperty("Rapportid") + "SchiffNr" + this.getView().getBindingContext().getProperty("EniNr")  );
+				jQuery.sap.log.error( "ResetSucces" + " " +  "Rapport: " + this.getView().getBindingContext().getProperty("Rapportid") + "SchiffNr" + this.getView().getBindingContext().getProperty("EniNr")  );
 			
 		},
 		_resetError: function() {
 			sap.m.MessageToast.show("FEHLER!!!!!!!!!!!!!!!!!");
-			//jQuery.sap.log.error( "ResetError" + " " +  "Rapport: " + this.getView().getBindingContext().getProperty("Rapportid") + "SchiffNr" + this.getView().getBindingContext().getProperty("EniNr")  );
+			jQuery.sap.log.error( "ResetError" + " " +  "Rapport: " + this.getView().getBindingContext().getProperty("Rapportid") + "SchiffNr" + this.getView().getBindingContext().getProperty("EniNr")  );
 			},
 			
 		_logChange: function(sMethod) {
 			//this.getView().getModel().hasPendingChanges()
 			//if (this.getView().getModel()){
-			//if(this.getView().getModel().hasPendingChanges() || this.getView().getModel().hasPendingRequests()){
+			if(this.getView().getModel().hasPendingChanges() || this.getView().getModel().hasPendingRequests()){
 				//this.console.log( sMethod + " " +  "Rapport: " + this.getView().getBindingContext().getProperty("RapportNr") + "SchiffNr" + this.getView().getBindingContext().getProperty("RapportNr")  );
-			//jQuery.sap.log.error( sMethod + " " +  "Rapport: " + this.getView().getBindingContext().getProperty("Rapportid") + "SchiffNr" + this.getView().getBindingContext().getProperty("EniNr")  );
+				jQuery.sap.log.error( sMethod + " " +  "Rapport: " + this.getView().getBindingContext().getProperty("Rapportid") + "SchiffNr" + this.getView().getBindingContext().getProperty("EniNr")  );
 				
-			//};
+			};
 			//}
 			
 		}
