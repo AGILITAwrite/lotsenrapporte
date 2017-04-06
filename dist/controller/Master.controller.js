@@ -100,7 +100,7 @@ sap.ui.define([
 					sQuery = sQuery.toUpperCase();
 					this._oListFilterState.aSearch = [new Filter("Name", FilterOperator.Contains, sQuery)];
 				} else {
-					this._oListFilterState.aSearch = [new Filter("Schiffsnummer", FilterOperator.EQ, sQuery)];
+					this._oListFilterState.aSearch = [new Filter("Schiffsnummer", FilterOperator.StartsWith, sQuery)];
 				}
 			} else {
 				this._oListFilterState.aSearch = [];

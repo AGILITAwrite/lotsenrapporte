@@ -45,6 +45,12 @@ sap.ui.define([], function() {
 			} else {
 				return value;
 			}
+		},
+		fnBooleanFormatter: function(value) {
+			if (value === false){
+				value = null;
+			}
+			return value;
 		}
 	};
 

@@ -41,9 +41,6 @@
             "raw": "i18n/i18n.properties"
         },
         {
-            "name": "i18n/backup18n.properties"
-        },
-        {
             "name": "model/models.js"
         },
         {

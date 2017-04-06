@@ -1,23 +1,25 @@
 <mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" controllerName="ch.portof.controller.Detail">
-	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}"
-		busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
+	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}" busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
 		<semantic:content>
 			<ObjectHeader id="objectHeader" title="{Name}">
 				<attributes>
 					<ObjectAttribute text="{Schiffsnummer}" id="__attribute3" title="{/#Schiffe/Schiffsnummer/@sap:label}"/>
 					<ObjectAttribute text="{Nationalitaet}" id="__attribute6" title="{/#Schiffe/Nationalitaet/@sap:label}"/>
+					<ObjectAttribute text="{EcocardNr}" id="__attribute4" title="{/#Schiffe/EcocardNr/@sap:label}"/>
 				</attributes>
 			</ObjectHeader>
 			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
 				<items>
 					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://hint" tooltip="{i18n>detailIconTabBarInfo}" text="{i18n>detailStammdaten}">
 						<content>
-							<ObjectHeader binding="{Debitoren/}" number="{Kunnr}" introActive="true" titleActive="true" id="debitorHeader1" title="{Name1} {Name2}">
+							<ObjectHeader binding="{Debitoren/}" number="{Kunnr}" introActive="true" titleActive="true" id="debitorHeader1" title="{Name1}">
 								<attributes>
-									<ObjectAttribute text="{Stras}" id="__attribute125" title="Strasse"/>
-									<ObjectAttribute text="{Pstlz} {Ort01}" id="__attribute126" title="Plz/Ort"/>
-									<ObjectAttribute text="{Regio}" id="__attribute127" title="Region"/>
-									<ObjectAttribute text="{Land1}" id="__attribute128" title="Land"/>
+									<ObjectAttribute text="{Name2}" id="__attribute8" title="Zusatz"/>
+									<ObjectAttribute text="{Stras}" id="__attribute125" title="Adresse"/>
+									<ObjectAttribute text="{Pstlz} {Ort01}" id="__attribute126" title="PLZ / Ort"/>
+									<ObjectAttribute text="{Pstl2}{Pfach}" id="__attribute5" title="Postfach"/>
+									<ObjectAttribute text="{Land1}" id="__attribute128" title="Ländercode"/>
+									<ObjectAttribute id="__attribute7" title="Email" text="{Email}"/>
 								</attributes>
 							</ObjectHeader>
 							<!--					    <Input binding="{/SchiffeSet('07001318')/Debitoren}" value="{Name1}" />
@@ -30,8 +32,7 @@
 					</IconTabFilter>
 					<IconTabFilter text="{i18n>detailRapportListe}" icon="sap-icon://task" iconColor="Critical" id="__filter0">
 						<content>
-							<Table id="lineItemsList" width="auto" items="{RapporteSet}" updateFinished="onListUpdateFinished"
-								noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
+							<Table id="lineItemsList" width="auto" items="{RapporteSet}" updateFinished="onListUpdateFinished" noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
 								<headerToolbar>
 									<Toolbar id="lineItemsToolbar">
 										<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}"/>
