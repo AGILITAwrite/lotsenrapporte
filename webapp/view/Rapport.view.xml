@@ -49,6 +49,11 @@
 								</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
 						</sap.ui.layout.form:formElements>
+						<sap.ui.layout.form:FormElement id="__element13" label=" ">
+						<sap.ui.layout.form:fields>
+						    <Text text="* gemäss Gebürentarif" id="__text15"/>
+						</sap.ui.layout.form:fields>
+						</sap.ui.layout.form:FormElement>
 					</sap.ui.layout.form:FormContainer>
 					<sap.ui.layout.form:FormContainer title="Tabelle" id="__container0" expandable="true">
 						<sap.ui.layout.form:FormElement id="__element10">
@@ -57,7 +62,7 @@
 									<items>
 										<ColumnListItem id="__item0">
 											<cells>
-												<StandardListItem type="Inactive" title="Mittlere Rheinbrücke" description="Basel UW Birsfelden (v.v.)" id="__item7" adaptTitleSize="false"/>
+												<StandardListItem type="Inactive" title="Mittlere Rheinbrücke" description="Basel - UW Birsfelden (v.v.)" id="__item7" adaptTitleSize="false"/>
 												<!--<CheckBox id="__box0" selected="{MrbU2000t}" select="_calc"/>-->
 												<RadioButton selected="{MrbU2000t}" id="__button0" groupName="radio1" select="_calc" editable="{rapportView>/changeMode}"/>
 												<Text text="bis 2'000 t" id="__text26"/>
@@ -66,7 +71,7 @@
 										</ColumnListItem>
 										<ColumnListItem id="__item1">
 											<cells>
-												<StandardListItem type="Inactive" title="Mittlere Rheinbrücke" description="Basel UW Birsfelden (v.v.)" id="__item8"/>
+												<StandardListItem type="Inactive" title="Mittlere Rheinbrücke" description="Basel - UW Birsfelden (v.v.)" id="__item8"/>
 												<!--<CheckBox id="__box1" selected="{MrbUe2000t}" select="_calc"/>-->
 												<RadioButton selected="{MrbUe2000t}" id="__button1" groupName="radio1" select="_calc" editable="{rapportView>/changeMode}"/>
 												<Text text="&gt; 100m/2'000 t" id="__text29"/>
@@ -75,7 +80,7 @@
 										</ColumnListItem>
 										<ColumnListItem id="__item2">
 											<cells>
-												<StandardListItem type="Inactive" title="Gem.RPVO Basel - Rheinfelden" description="(hoheitliche / nicht Mwst.pflichtig)" id="__item9"/>
+												<StandardListItem type="Inactive" title="Gem.RPVO Basel - Rheinfelden" description="(hoheitlich / nicht Mwst.pflichtig)" id="__item9"/>
 												<!--<CheckBox id="__box2" selected="{BRU125m}" select="_calc"/>-->
 												<RadioButton selected="{BRU125m}" id="__button2" groupName="radio1" select="_calc" editable="{rapportView>/changeMode}"/>
 												<Text text="&gt; 110-125m / 2'000 t" id="__text32"/>
@@ -84,7 +89,7 @@
 										</ColumnListItem>
 										<ColumnListItem id="__item3">
 											<cells>
-												<StandardListItem type="Inactive" title="Gem.RPVO Basel - Rheinfelden" description="(hoheitliche / nicht Mwst.pflichtig)" id="__item10"/>
+												<StandardListItem type="Inactive" title="Gem.RPVO Basel - Rheinfelden" description="(hoheitlich / nicht Mwst.pflichtig)" id="__item10"/>
 												<!--<CheckBox id="__box3" selected="{BRSchubverband}" select="_calc"/>-->
 												<RadioButton selected="{BRSchubverband}" id="__button3" groupName="radio1" select="_calc" editable="{rapportView>/changeMode}"/>
 												<Text text="Schubverband" id="__text35"/>
@@ -215,9 +220,31 @@
 							</sap.ui.layout.form:FormElement>
 						</sap.ui.layout.form:formElements>
 					</sap.ui.layout.form:FormContainer>
+					<sap.ui.layout.form:FormContainer title="Tarif Informationen" id="__container6" expandable="true">
+					    <sap.ui.layout.form:formElements>
+					        <sap.ui.layout.form:FormElement label="Feiertage" id="__element7">
+					        <sap.ui.layout.form:fields>
+					            <Text text="Neujahr, Karfreitag, 2 Ostertage, Auffahrt, 2 Pfingsttage, 1. Mai, 2 Weihnachtstage" id="__text10"/>
+					        </sap.ui.layout.form:fields>
+					        </sap.ui.layout.form:FormElement>
+					        <sap.ui.layout.form:FormElement label="Nachtstunde" id="__element11">
+					        <sap.ui.layout.form:fields>
+					            <Text text="von 20:00 bis 06:00 Uhr" id="__text11"/>
+					        </sap.ui.layout.form:fields>
+					        </sap.ui.layout.form:FormElement>
+					        <sap.ui.layout.form:FormElement id="__element12" label=" ">
+					        <sap.ui.layout.form:fields>
+					            <Text text="Gemäss Gebürentarif gültig ab 01.01.2017&#10;Für die Punkte LD1, LD3, LD4 und LD5 kann gegebenenfalls MWST verrechnet werden. &#10;LD=Lotsendienstleistungen" id="__text12"/>
+					        </sap.ui.layout.form:fields>
+					        </sap.ui.layout.form:FormElement>
+					    </sap.ui.layout.form:formElements>
+					<sap.ui.layout.form:customData>
+					    <core:CustomData key="w5g.dt.editable" value="true" id="__data36"/>
+					</sap.ui.layout.form:customData>
+					</sap.ui.layout.form:FormContainer>
 				</sap.ui.layout.form:formContainers>
 				<sap.ui.layout.form:layout>
-					<sap.ui.layout.form:ResponsiveGridLayout id="__layout0" columnsL="1"/>
+					<sap.ui.layout.form:ResponsiveGridLayout id="__layout0" columnsL="1" labelSpanM="3"/>
 				</sap.ui.layout.form:layout>
 			</sap.ui.layout.form:Form>
 		</semantic:content>
