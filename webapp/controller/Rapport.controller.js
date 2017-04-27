@@ -41,7 +41,7 @@ sap.ui.define([
 			this.getView().getModel("rapportView").setProperty("/newRapport", true);
 			this.getView().getModel("rapportView").setProperty("/changeMode", true);
 			var sObjectId = oEvent.getParameter("arguments").objectId;
-
+			this.getModel().resetChanges( );
 			this.getModel().metadataLoaded().then(function() {
 				var oRapporteModel = this.getView().getModel();
 				var onewRapport = oRapporteModel.createEntry("/RapporteSet");
@@ -63,7 +63,7 @@ sap.ui.define([
 		_onRouteMatchedOld: function(oEvent) {
 			//this._resetModel();
 			this.getView().getModel("rapportView").setProperty("/newRapport", false);
-			this.getView().getModel("rapportView").setProperty("/changeMode", true); // zum Editeren von bestehenden rapporten hier aktivieren.
+			this.getView().getModel("rapportView").setProperty("/changeMode", false); // zum Editeren von bestehenden rapporten hier aktivieren.
 
 			var sObjectId = oEvent.getParameter("arguments").objectId;
 			this.getModel().metadataLoaded().then(function() {
