@@ -58,11 +58,11 @@
 					<sap.ui.layout.form:FormContainer title="Tabelle" id="__container0" expandable="true">
 						<sap.ui.layout.form:FormElement id="__element10">
 							<sap.ui.layout.form:fields>
-								<Table noDataText="Drop column list items here and columns in the area above" id="__table0">
+								<Table noDataText="Drop column list items here and columns in the area above" id="__table0" showUnread="true" includeItemInSelection="true" keyboardMode="Edit">
 									<items>
-										<ColumnListItem id="__item0">
+										<ColumnListItem id="__item0" class="sapThemeHighlight-asColor" type="Active" selected="true">
 											<cells>
-												<StandardListItem type="Inactive" title="Mittlere Rheinbrücke" description="Basel - UW Birsfelden (v.v.)" id="__item7" adaptTitleSize="false"/>
+												<StandardListItem title="Mittlere Rheinbrücke" description="Basel - UW Birsfelden (v.v.)" id="__item7" adaptTitleSize="false"/>
 												<!--<CheckBox id="__box0" selected="{MrbU2000t}" select="_calc"/>-->
 												<RadioButton selected="{MrbU2000t}" id="__button0" groupName="radio1" select="_calc" editable="{rapportView>/changeMode}"/>
 												<Text text="bis 2'000 t" id="__text26"/>
@@ -143,12 +143,12 @@
 												<Label id="__label7" visible="false" text="Auswahl" width="20px"/>
 											</header>
 										</Column>
-										<Column id="__column2" minScreenWidth="800px" vAlign="Middle" demandPopin="true">
+										<Column id="__column2" minScreenWidth="800px" demandPopin="true" popinDisplay="Inline">
 											<header>
 												<Label text="Schiffstyp" id="__label8"/>
 											</header>
 										</Column>
-										<Column id="__column3" minScreenWidth="800px" demandPopin="true">
+										<Column id="__column3" minScreenWidth="800px" demandPopin="true" popinDisplay="Inline">
 											<header>
 												<Label text="Grundtarif" width="100%" id="__label5"/>
 											</header>
@@ -157,6 +157,13 @@
 								</Table>
 							</sap.ui.layout.form:fields>
 						</sap.ui.layout.form:FormElement>
+					<sap.ui.layout.form:formElements>
+					    <sap.ui.layout.form:FormElement id="__element15">
+					    <sap.ui.layout.form:fields>
+					        <Button text="Eingaben Löschen" width="150px" id="__button6" type="Reject" press="onResetSelection" visible="{rapportView>/changeMode}"/>
+					    </sap.ui.layout.form:fields>
+					    </sap.ui.layout.form:FormElement>
+					</sap.ui.layout.form:formElements>
 					</sap.ui.layout.form:FormContainer>
 					<sap.ui.layout.form:FormContainer title="Debitorenadresse" id="__container5" expandable="true">
 					    <sap.ui.layout.form:formElements>
@@ -179,6 +186,12 @@
 					    </sap.ui.layout.form:formElements>
 					</sap.ui.layout.form:FormContainer>
 					<sap.ui.layout.form:FormContainer title="Unterschrift" id="__container2" expandable="true">
+					<sap.ui.layout.form:formElements>						
+						<sap.ui.layout.form:FormElement id="__element14">
+					    <sap.ui.layout.form:fields>
+					        <Text class="myConfirmation" text="Hiermit bestätigen wir, dass die obigen Angaben zutreffen und dass das Schiff bei Antritt der Reise in einem einwandfreien technischen und nautischen Zustand ist." id="__text13"/>
+					    </sap.ui.layout.form:fields>
+					    </sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:FormElement id="__element1">
 							<sap.ui.layout.form:fields>
 								<Panel id="signaturePanel">
@@ -200,7 +213,7 @@
 												<sap.ui.core:CustomData id="__data71" key="sap-ui-fastnavgroup" value="true" writeToDom="true"/>
 											</customData>
 											<content>
-												<Button id="SignatureReset" press="onSignatureReset" text="Unterschrift zurücksetzen" width="200px" enabled="{rapportView>/changeMode}"/>
+												<Button id="SignatureReset" press="onSignatureReset" text="Unterschrift zurücksetzen" width="200px" enabled="{rapportView>/changeMode}" type="Reject" visible="{rapportView>/changeMode}"/>
 											</content>
 										</Toolbar>
 									</infoToolbar>
@@ -210,6 +223,9 @@
 								<sap.ui.layout.form:GridElementData id="__data26" hCells="2"/>
 							</sap.ui.layout.form:layoutData>
 						</sap.ui.layout.form:FormElement>
+
+						
+					</sap.ui.layout.form:formElements>
 					</sap.ui.layout.form:FormContainer>
 					<sap.ui.layout.form:FormContainer title="Bemerkung" id="__container4" expandable="true">
 						<sap.ui.layout.form:formElements>
@@ -248,7 +264,9 @@
 				</sap.ui.layout.form:layout>
 			</sap.ui.layout.form:Form>
 		</semantic:content>
-		<semantic:negativeAction/>
+		<semantic:negativeAction>
+		    <semantic:NegativeAction text="Annullieren" id="__action2" enabled="{rapportView>/annullierenVisible}" visible="{rapportView>/annullierenVisible}" press="onAnnullieren"/>
+		</semantic:negativeAction>
 		<semantic:layoutData/>
 	</semantic:DetailPage>
 </mvc:View>
