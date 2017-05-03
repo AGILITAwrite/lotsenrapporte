@@ -2,3 +2,17 @@
   font-weight: bold;
   text-decoration: underline;
 }
+tr.myBackground td{
+  background-color: LightSkyBlue ;
+}
+/*li.myBackground2 sapMListBGTranslucent sapMLIB{
+  background-color: red;
+}*/
+.sapMListBGTranslucent .myBackground2{
+  background-color: LightSkyBlue ;
+
+}
+tr.myBorderRedFat td{
+	border-color: red;
+    border-width: 2px;
+}

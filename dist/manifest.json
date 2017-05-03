@@ -172,6 +172,11 @@
                 {
                     "uri": "libs/jSignature.min.js"
                 }
+            ],
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
             ]
         }
     },

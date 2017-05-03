@@ -7,6 +7,9 @@
             "name": "test.html"
         },
         {
+            "name": "css/style.css"
+        },
+        {
             "name": "view/DetailNoObjectsAvailable.view.xml"
         },
         {

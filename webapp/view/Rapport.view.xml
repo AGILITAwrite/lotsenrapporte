@@ -58,9 +58,9 @@
 					<sap.ui.layout.form:FormContainer title="Tabelle" id="__container0" expandable="true">
 						<sap.ui.layout.form:FormElement id="__element10">
 							<sap.ui.layout.form:fields>
-								<Table noDataText="Drop column list items here and columns in the area above" id="__table0" showUnread="true" includeItemInSelection="true" keyboardMode="Edit">
+								<Table noDataText="Drop column list items here and columns in the area above" id="__table0">
 									<items>
-										<ColumnListItem id="__item0" class="sapThemeHighlight-asColor" type="Active" selected="true">
+										<ColumnListItem id="__item0">
 											<cells>
 												<StandardListItem title="Mittlere Rheinbrücke" description="Basel - UW Birsfelden (v.v.)" id="__item7" adaptTitleSize="false"/>
 												<!--<CheckBox id="__box0" selected="{MrbU2000t}" select="_calc"/>-->
@@ -69,16 +69,16 @@
 												<Text text="{ path: 'tarifeSet>/d/MrbU2000t', formatter: '.formatter.currencyValue' } CHF" id="__text27"/>
 											</cells>
 										</ColumnListItem>
-										<ColumnListItem id="__item1">
+										<ColumnListItem id="__item1" class="myBackground">
 											<cells>
-												<StandardListItem type="Inactive" title="Mittlere Rheinbrücke" description="Basel - UW Birsfelden (v.v.)" id="__item8"/>
+												<StandardListItem type="Inactive" title="Mittlere Rheinbrücke" description="Basel - UW Birsfelden (v.v.)" id="__item8" class="myBackground2"/>
 												<!--<CheckBox id="__box1" selected="{MrbUe2000t}" select="_calc"/>-->
-												<RadioButton selected="{MrbUe2000t}" id="__button1" groupName="radio1" select="_calc" editable="{rapportView>/changeMode}"/>
+												<RadioButton selected="{MrbUe2000t}" id="__button1" groupName="radio1" select="_calc" editable="{rapportView>/changeMode}" />
 												<Text text="&gt; 100m/2'000 t" id="__text29"/>
 												<Text text="{ path: 'tarifeSet>/d/MrbUe2000t', formatter: '.formatter.currencyValue' } CHF" id="__text30"/>
 											</cells>
 										</ColumnListItem>
-										<ColumnListItem id="__item2">
+										<ColumnListItem id="__item2" class="myBorderRedFat">
 											<cells>
 												<StandardListItem type="Inactive" title="Gem.RPVO Basel - Rheinfelden" description="(hoheitlich / nicht Mwst.pflichtig)" id="__item9"/>
 												<!--<CheckBox id="__box2" selected="{BRU125m}" select="_calc"/>-->
@@ -87,7 +87,7 @@
 												<Text text="{ path: 'tarifeSet>/d/BRU125m', formatter: '.formatter.currencyValue' } CHF" id="__text33"/>
 											</cells>
 										</ColumnListItem>
-										<ColumnListItem id="__item3">
+										<ColumnListItem id="__item3" >
 											<cells>
 												<StandardListItem type="Inactive" title="Gem.RPVO Basel - Rheinfelden" description="(hoheitlich / nicht Mwst.pflichtig)" id="__item10"/>
 												<!--<CheckBox id="__box3" selected="{BRSchubverband}" select="_calc"/>-->
@@ -96,7 +96,7 @@
 												<Text text="{ path: 'tarifeSet>/d/BRSchubverband', formatter: '.formatter.currencyValue' } CHF" id="__text36"/>
 											</cells>
 										</ColumnListItem>
-										<ColumnListItem id="__item4">
+										<ColumnListItem id="__item4" class="myBorderRedFat">
 											<cells>
 												<StandardListItem type="Inactive" title="Basel - Augst (v.v)" id="__item11"/>
 												<!--<CheckBox id="__box4" selected="{BaAug}" select="_calc"/>-->
@@ -189,7 +189,7 @@
 					<sap.ui.layout.form:formElements>						
 						<sap.ui.layout.form:FormElement id="__element14">
 					    <sap.ui.layout.form:fields>
-					        <Text class="myConfirmation" text="Hiermit bestätigen wir, dass die obigen Angaben zutreffen und dass das Schiff bei Antritt der Reise in einem einwandfreien technischen und nautischen Zustand ist." id="__text13"/>
+					        <Text class="myConfirmation sapThemeHighlight-asColor" text="Hiermit bestätigen wir, dass die obigen Angaben zutreffen und dass das Schiff bei Antritt der Reise in einem einwandfreien technischen und nautischen Zustand ist." id="__text13"/>
 					    </sap.ui.layout.form:fields>
 					    </sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:FormElement id="__element1">
