@@ -51,7 +51,7 @@ sap.ui.define([
 				}, onewRapport);
 				oRapporteModel.setProperty("EniNr", sObjectId, onewRapport);
 				oRapporteModel.setProperty("Lotsenname", this._getBenutzername(), onewRapport);
-				oRapporteModel.setProperty("MrbUe2000t", true, onewRapport);
+				// oRapporteModel.setProperty("MrbUe2000t", true, onewRapport);
 				//oRapporteModel.setProperty("Bemerkung", "", onewRapport);
 				var sObjectPath = onewRapport.getPath();
 				this._bindView(sObjectPath);

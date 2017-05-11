@@ -157,6 +157,7 @@ sap.ui.define([
 		onCancel: function() {
 			var oContext = this.getView().getBindingContext();
 			var schiffsnr = oContext.getProperty("EniNr");
+			this.onSignatureReset( );
 			this._destory(false);
 			this.getRouter().navTo("object", {
 				objectId: schiffsnr

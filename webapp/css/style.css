@@ -2,6 +2,15 @@
   font-weight: bold;
   text-decoration: underline;
 }
+.myTotal {
+  font-weight: bold;
+}
+.sapMText.myTotalmix {
+    font-weight: bold;	
+}
+tr[data-background=true].myBackgroundLoevm {
+  background-color: #ffcccc;
+}
 tr.myBackground td{
   background-color: LightSkyBlue ;
 }
