@@ -125,10 +125,10 @@
 										</ColumnListItem>
 										<ColumnListItem id="__item15">
 											<cells>
-												<StandardListItem title="Total" id="__item14"/>
-												<Text text="" id="__text47" visible="false"/>
-												<Text text="" id="__text48" visible="false"/>
-												<Text text="" id="__Total"/>
+												<StandardListItem title="Total" id="__item14" class="myTotal"/>
+												<Text text="" id="__text47" visible="false" class="myTotal"/>
+												<Text text="" id="__text48" visible="false" class="myTotal"/>
+												<Text text="" id="__Total"  class="myTotalmix"/>
 											</cells>
 										</ColumnListItem>
 									</items>
@@ -189,7 +189,7 @@
 					<sap.ui.layout.form:formElements>						
 						<sap.ui.layout.form:FormElement id="__element14">
 					    <sap.ui.layout.form:fields>
-					        <Text class="myConfirmation sapThemeHighlight-asColor" text="Hiermit bestätigen wir, dass die obigen Angaben zutreffen und dass das Schiff bei Antritt der Reise in einem einwandfreien technischen und nautischen Zustand ist." id="__text13"/>
+					        <Text class="myConfirmation" text="Hiermit bestätigen wir, dass die obigen Angaben zutreffen und dass das Schiff bei Antritt der Reise in einem einwandfreien technischen und nautischen Zustand ist." id="__text13"/>
 					    </sap.ui.layout.form:fields>
 					    </sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:FormElement id="__element1">
