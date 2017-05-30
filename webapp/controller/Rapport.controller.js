@@ -395,7 +395,14 @@ sap.ui.define([
 			}, true);
 		},
 		_submitError: function() {
-			sap.m.MessageToast.show("Fehler beim speichern des Rapports");
+			 sap.m.MessageToast.show("Fehler beim speichern des Rapports");
+					// 		 sap.m.MessageBox.show("Fehler beim speichern des Rapports!", {
+     //     icon: sap.m.MessageBox.Icon.ERROR,
+     //     title: "Fehler"//,
+     //     //actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+     //     //onClose: function(oAction) { error = true; } 
+				 //}	
+				 //);
 		},
 		_logChange: function(sMethod) {
 			if (this.getView().getModel().hasPendingChanges() || this.getView().getModel().hasPendingRequests()) {
