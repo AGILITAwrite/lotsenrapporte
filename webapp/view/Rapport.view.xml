@@ -49,7 +49,7 @@
 								</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
 						</sap.ui.layout.form:formElements>
-						<sap.ui.layout.form:FormElement id="__element13" label=" ">
+						<sap.ui.layout.form:FormElement id="__element13">
 						<sap.ui.layout.form:fields>
 						    <Text text="* gemäss Gebürentarif" id="__text15"/>
 						</sap.ui.layout.form:fields>
