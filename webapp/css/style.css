@@ -25,3 +25,7 @@ tr.myBorderRedFat td{
 	border-color: red;
     border-width: 2px;
 }
+tr.myBorderBlackFat td{
+	border-color: black;
+    border-width: 2px;
+}
