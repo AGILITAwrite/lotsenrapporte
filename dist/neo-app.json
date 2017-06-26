@@ -5,7 +5,7 @@
 			"type": "service",
 			"name": "sapui5",
 			"entryPath": "/resources",
-			"version": "1.38.11"
+			"version": "1.38.21"
 		},
 		"description": "SAPUI5 Resources"
 	}, {
@@ -14,7 +14,7 @@
 			"type": "service",
 			"name": "sapui5",
 			"entryPath": "/test-resources",
-			"version": "1.38.11"
+			"version": "1.38.21"
 		},
 		"description": "SAPUI5 Test Resources"
 	}, {
@@ -23,7 +23,7 @@
 			"type": "service",
 			"name": "sapui5",
 			"entryPath": "/resources",
-			"version": "1.38.11"
+			"version": "1.38.21"
 		},
 		"description": "SAPUI5 Resources"
 	}, {
@@ -32,7 +32,7 @@
 			"type": "service",
 			"name": "sapui5",
 			"entryPath": "/test-resources",
-			"version": "1.38.11"
+			"version": "1.38.21"
 		},
 		"description": "SAPUI5 Test Resources"
 	}, {

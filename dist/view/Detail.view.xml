@@ -87,9 +87,6 @@
 				</items>
 			</IconTabBar>
 		</semantic:content>
-		<semantic:sendEmailAction>
-			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
-		</semantic:sendEmailAction>
 		<semantic:positiveAction>
 			<semantic:PositiveAction text="neuer Lotsenrapport" id="__action3" press="newRapport"/>
 		</semantic:positiveAction>
