@@ -20,7 +20,8 @@ sap.ui.define([
 				initSignature: false,
 				newRapport: false,
 				changeMode: false,
-				annullierenVisible: false
+				annullierenVisible: false,
+				confirmed: false
 			});
 			this.setModel(oViewModel, "rapportView");
 			this.getRouter().getRoute("rapportNewRoute").attachMatched(this._onRouteMatchedNew, this);
@@ -38,6 +39,7 @@ sap.ui.define([
 			this.getView().getModel("rapportView").setProperty("/newRapport", true);
 			this.getView().getModel("rapportView").setProperty("/changeMode", true);
 			this.getView().getModel("rapportView").setProperty("/annullierenVisible", false);
+			this.getView().getModel("rapportView").setProperty("/confirmed", false);
 			// Annullieren von neuen Rapporten nicht möglich
 			var sObjectId = oEvent.getParameter("arguments").objectId;
 			this.getModel().resetChanges();
@@ -61,6 +63,7 @@ sap.ui.define([
 			//this._resetModel();
 			this.getView().getModel("rapportView").setProperty("/newRapport", false);
 			this.getView().getModel("rapportView").setProperty("/changeMode", false);
+			this.getView().getModel("rapportView").setProperty("/confirmed", true); // Rapport kann nur gespeichert werden wenn Flag gesetzt
 			// zum Editeren von bestehenden rapporten hier aktivieren.
 			this.getView().getModel("rapportView").setProperty("/annullierenVisible", true);
 			// Annullieren von gespeicherten Rapporten möglich
@@ -180,9 +183,12 @@ sap.ui.define([
 					}
 				}
 			}
-
+			var minDate = new Date();
+			minDate.setDate(minDate.getDate() - 2); //Lotsenrapporte nur bis und mit Vortag erfassbar
 			if (oContext.getProperty("Datum") >= new Date() || (oContext.getProperty("Datum").toDateString() === new Date().toDateString() &&
-					this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))) >= this.formatter.time(new Date()) )) {
+					this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))) >= this.formatter.time(new Date())) // Datum in der Zukunft  
+
+			) {
 
 				sap.m.MessageBox.show("Der Lotsenrapport darf nicht in die Zukunft erfasst werden! \ Bitte das Datum anpassen", {
 					icon: sap.m.MessageBox.Icon.ERROR,
@@ -190,10 +196,21 @@ sap.ui.define([
 						//actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
 						//onClose: function(oAction) { error = true; } 
 				});
+			} else if (oContext.getProperty("Datum") < minDate) { //Lotsenrapporte nur bis und mit Vortag erfassbar
+				sap.m.MessageBox.show("Der Lotsenrapport nicht mehr als 1 Tag in die Vergangeheit erfasst werden! \ Bitte das Datum anpassen", {
+					icon: sap.m.MessageBox.Icon.ERROR,
+					title: "Fehler" //,
+						//actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+						//onClose: function(oAction) { error = true; } 
+				});
 			} else {
-				if (!oContext.getProperty("Signatur")) {
+				
+				
+				
+				if (!oContext.getProperty("Signatur") || 	!this.getModel("rapportView").getProperty("/confirmed")) { // 
+				//!this.getView().byId("__boxCheckConfirm0").getSelected()) { // 
 
-					sap.m.MessageBox.show("Der Lotsenrapport muss vor dem Speicher unterschrieben werden!", {
+					sap.m.MessageBox.show("Der Lotsenrapport muss vor dem Speichern bestätigt und unterschrieben werden!", {
 						icon: sap.m.MessageBox.Icon.ERROR,
 						title: "Fehler" //,
 							//actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],

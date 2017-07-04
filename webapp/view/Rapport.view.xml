@@ -189,7 +189,12 @@
 					<sap.ui.layout.form:formElements>						
 						<sap.ui.layout.form:FormElement id="__element14">
 					    <sap.ui.layout.form:fields>
-					        <Text class="myConfirmation" text="Hiermit bestätigen wir, dass die obigen Angaben zutreffen und dass das Schiff bei Antritt der Reise in einem einwandfreien technischen und nautischen Zustand ist." id="__text13"/>
+					        <HBox width="100%" id="__hbox0">
+					            <items>
+					                <CheckBox id="__boxCheckConfirm0" selected="{rapportView>/confirmed}"/>
+					                <Text class="myConfirmation" text="Hiermit bestätigen wir, dass die obigen Angaben zutreffen und dass das Schiff bei Antritt der Reise in einem einwandfreien technischen und nautischen Zustand ist." id="__text13"/>
+					            </items>
+					        </HBox>
 					    </sap.ui.layout.form:fields>
 					    </sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:FormElement id="__element1">

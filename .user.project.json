@@ -1,24 +1,6 @@
 {
   "run": [
     {
-      "filePath": "/webapp/Component.js",
-      "previewMode": 1,
-      "dataMode": 1,
-      "workspace": "withoutWorkspace",
-      "ui5ActiveVersion": null,
-      "ui5VerSource": null,
-      "isDefaultVersion": 0,
-      "urlParameters": [],
-      "hashParameter": "",
-      "backendSystem": [],
-      "_metadata": {
-        "runnerId": "fiorirunner",
-        "id": 6224106,
-        "displayName": "Run Component.js",
-        "lastRunTimeStamp": 1498485645422
-      }
-    },
-    {
       "filePath": "/LotsenRapporte/webapp/index.html",
       "previewMode": 1,
       "dataMode": 1,
@@ -49,7 +31,25 @@
         "id": 87567846,
         "runnerId": "webapprunner",
         "displayName": "App",
-        "lastRunTimeStamp": 1498485613392
+        "lastRunTimeStamp": 1499087346043
+      }
+    },
+    {
+      "filePath": "/webapp/Component.js",
+      "previewMode": 1,
+      "dataMode": 1,
+      "workspace": "withoutWorkspace",
+      "ui5ActiveVersion": null,
+      "ui5VerSource": null,
+      "isDefaultVersion": 0,
+      "urlParameters": [],
+      "hashParameter": "",
+      "backendSystem": [],
+      "_metadata": {
+        "runnerId": "fiorirunner",
+        "id": 6224106,
+        "displayName": "Run Component.js",
+        "lastRunTimeStamp": 1499085608423
       }
     },
     {
