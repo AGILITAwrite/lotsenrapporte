@@ -43,12 +43,16 @@ sap.ui.define([
 			// Annullieren von neuen Rapporten nicht möglich
 			var sObjectId = oEvent.getParameter("arguments").objectId;
 			this.getModel().resetChanges();
+			//var dateTime = new Date();
+
 			this.getModel().metadataLoaded().then(function() {
 				var oRapporteModel = this.getView().getModel();
 				var onewRapport = oRapporteModel.createEntry("/RapporteSet");
 				oRapporteModel.setProperty("Datum", new Date(), onewRapport);
 				oRapporteModel.setProperty("Zeit", {
-					ms: new Date().getTime(),
+				//	ms:	( dateTime.getTime() - dateTime.getTimezoneOffset() * 60000 ), // UTC Time in Locale umrechnen
+					ms: formatter.timeToLocale( new Date() ),
+				//	ms: new Date().getTime(),
 					__edmtype: "Edm.Time"
 				}, onewRapport);
 				oRapporteModel.setProperty("EniNr", sObjectId, onewRapport);

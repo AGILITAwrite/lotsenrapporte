@@ -32,7 +32,7 @@
 					</IconTabFilter>
 					<IconTabFilter text="{i18n>detailRapportListe}" icon="sap-icon://task" iconColor="Critical" id="__filter0">
 						<content>
-							<Table id="lineItemsList" width="auto" items="{RapporteSet}" updateFinished="onListUpdateFinished" noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin" growingScrollToLoad="true" growing="true" growingThreshold="40">
+							<Table id="lineItemsList" width="auto" items="{RapporteSet}" updateFinished="onListUpdateFinished" noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin" growingScrollToLoad="true" growing="true">
 								<headerToolbar>
 									<Toolbar id="lineItemsToolbar">
 										<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}"/>

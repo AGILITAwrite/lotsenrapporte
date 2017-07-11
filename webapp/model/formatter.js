@@ -36,7 +36,7 @@ sap.ui.define([], function() {
 					//pattern: "\'PT\'HH\'H\'mm\'M\'ss\'S\'"
 				});
 				//falls Zeitzonen Konvertierung nötig
-				var TZOffsetMs = 0; //new Date().getTimezoneOffset() * 60 * 1000;
+				var TZOffsetMs = new Date(0).getTimezoneOffset() * 60 * 1000;
 				//                             console.log(TZOffsetMs);
 				var timeStr = oTimeFormat.format(new Date( timeinmiliseconds + TZOffsetMs));
 				//                             console.log(timeStr);
@@ -45,6 +45,9 @@ sap.ui.define([], function() {
 			} else {
 				return value;
 			}
+		},
+		timeToLocale: function(value) {
+			return ( value.getTime() - value.getTimezoneOffset() * 60000 );
 		},
 		fnBooleanFormatter: function(value) {
 			if (value === false){

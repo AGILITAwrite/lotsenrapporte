@@ -21,7 +21,7 @@
 													source: { pattern : '\'PT\'HH\'H\'mm\'M\'ss\'S\''  } 
 												} 
 											}"/>-->
-								<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker" value="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time' , formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm'}}" editable="{rapportView>/changeMode}" change="_updateTarifeNewDate"/>
+								<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker" value="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time' , formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm', UTC : true }}" editable="{rapportView>/changeMode}" change="_updateTarifeNewDate"/>
 							</sap.ui.layout.form:fields>
 						</sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:FormElement id="__element8" label="Berg-/Talfahrt">

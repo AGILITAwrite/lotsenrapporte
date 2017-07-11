@@ -14,14 +14,14 @@
 					<sap.ui.layout.form:FormContainer title="Kopfdaten {Rapportid}" id="__container1" expandable="true">
 						<sap.ui.layout.form:FormElement id="__element2" label="Datum/Zeit">
 							<sap.ui.layout.form:fields>
-								<DatePicker width="100%" id="startDatePicker" valueFormat="yyyyMMdd" placeholder="dd.MM.yyyy" displayFormat="dd.MM.yyyy" value="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}" editable="{rapportView>/changeMode}"/>
+								<DatePicker width="100%" id="startDatePicker" valueFormat="yyyyMMdd" placeholder="dd.MM.yyyy" displayFormat="dd.MM.yyyy" value="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}" editable="{rapportView>/changeMode}" change="_updateTarifeNewDate"/>
 								<!--								<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker"   
 									value="{ path: 'Zeit', type: 'sap.ui.model.type.Time', 
 												formatOptions: { pattern: 'HH:mm', 
 													source: { pattern : '\'PT\'HH\'H\'mm\'M\'ss\'S\''  } 
 												} 
 											}"/>-->
-								<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker" value="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time' , formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm'}}" editable="{rapportView>/changeMode}"/>
+								<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker" value="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time' , formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm'}}" editable="{rapportView>/changeMode}" change="_updateTarifeNewDate"/>
 							</sap.ui.layout.form:fields>
 						</sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:FormElement id="__element8" label="Berg-/Talfahrt">
