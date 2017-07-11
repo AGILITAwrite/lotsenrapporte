@@ -204,11 +204,9 @@ sap.ui.define([
 						//onClose: function(oAction) { error = true; } 
 				});
 			} else {
-				
-				
-				
-				if (!oContext.getProperty("Signatur") || 	!this.getModel("rapportView").getProperty("/confirmed")) { // 
-				//!this.getView().byId("__boxCheckConfirm0").getSelected()) { // 
+
+				if (!oContext.getProperty("Signatur") || !this.getModel("rapportView").getProperty("/confirmed")) { // 
+					//!this.getView().byId("__boxCheckConfirm0").getSelected()) { // 
 
 					sap.m.MessageBox.show("Der Lotsenrapport muss vor dem Speichern bestätigt und unterschrieben werden!", {
 						icon: sap.m.MessageBox.Icon.ERROR,
@@ -217,9 +215,13 @@ sap.ui.define([
 							//onClose: function(oAction) { error = true; } 
 					});
 				} else {
+					
+			// 					var dateTime = new Date();
+			// ( dateTime.getTime() - dateTime.getTimezoneOffset() * 60000 )
 
 					// die Zeit wird beim Lesen des Models in MS umgewandelt und muss aber beim speichern manuell in EdmTime umgewandelt werden, da das nicht wieder automatisch gemacht wird
-					oRapportModel.setProperty("Zeit", this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))), oContext);
+					//oRapportModel.setProperty("Zeit", this.formatter.time(new Date( oContext.getProperty("Zeit/ms") - new Date().getTimezoneOffset() * 60000 )), oContext);
+					 oRapportModel.setProperty("Zeit", this.formatter.time(new Date( oContext.getProperty("Zeit/ms")     )), oContext);
 					//			oRapportModel.attachEventOnce("batchRequestCompleted", jQuery.proxy(this._submitSuccess, this));
 					//			oRapportModel.attachEventOnce("batchRequestFailed", jQuery.proxy(this._submitError, this));
 					oRapportModel.submitChanges({
@@ -277,15 +279,33 @@ sap.ui.define([
 			// Ermitteln der Tarife 
 			//TODO dem oData Service muss noch Datum und Uhrzeit mitgegeben werden, um den Nacht/Sonntagszuschlag automatisch zu ermitteln
 			var oRapporteModel = this.getView().getBindingContext();
+			var date = oRapporteModel.getProperty("Datum").toISOString().slice(0, -1);
+			var time = this.formatter.time(new Date(oRapporteModel.getProperty("Zeit/ms")));
+			//var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/TarifeSet(Datum=datetime'" + date + "',Tarifart='',Zeit=time'" + time + "')";
+
 			var oTarifModel = this.getView().getModel("tarifeSet");
 			var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/TarifeSet";
+			/*		if (oRapporteModel.getProperty("ZLotsenFeiertagszuschlag")) {
+						URL = URL + "('FR')";
+					} else if (oRapporteModel.getProperty("Nachtzuschlag")) {
+						URL = URL + "('SA')";
+					} else {
+						URL = URL + "('NO')";
+					}*/
+
+			var tarifArt;
 			if (oRapporteModel.getProperty("ZLotsenFeiertagszuschlag")) {
-				URL = URL + "('FR')";
+				//URL = URL + "(Datum=datetime'" + date + "',Tarifart='FR',Zeit=time'" + time + "')";
+				tarifArt = "FR";
 			} else if (oRapporteModel.getProperty("Nachtzuschlag")) {
-				URL = URL + "('SA')";
+				//URL = URL + "(Datum=datetime'" + date + "',Tarifart='SA',Zeit=time'" + time + "')";
+				tarifArt = "SA";
 			} else {
-				URL = URL + "('NO')";
+				//URL = URL + "(Datum=datetime'" + date + "',Tarifart='NO',Zeit=time'" + time + "')";
+				tarifArt = "NO";
 			}
+			var URL = URL + "(Datum=datetime'" + date + "',Tarifart='" + tarifArt + "',Zeit=time'" + time + "')";
+
 			oTarifModel.loadData(URL, true, false);
 			this.setModel(oTarifModel, "tarifeSet");
 			this._calc();
@@ -358,8 +378,48 @@ sap.ui.define([
 				busy: false,
 				delay: 0
 			});
-			var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/TarifeSet('NO')";
+			// var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/TarifeSet('NO')";
+			this.setModel(oTarifModel, "tarifeSet");
+			this._updateTarifeNewDate();
+			/*			var oContext = this.getView().getBindingContext();
+						var date = oContext.getProperty("Datum").toISOString().slice(0, -1);
+						var time = this.formatter.time(new Date(oContext.getProperty("Zeit/ms")));
+						var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/TarifeSet(Datum=datetime'" + date + "',Tarifart='',Zeit=time'" + time + "')";
+						
+						oTarifModel.loadData(URL, true, false);
+						this.setModel(oTarifModel, "tarifeSet");*/
+		},
+		_updateTarifeNewDate: function() {
+			var oTarifModel = this.getView().getModel("tarifeSet");
+			var oContext = this.getView().getBindingContext();
+			var date = oContext.getProperty("Datum").toISOString().slice(0, -1);
+			var time = this.formatter.time(new Date(oContext.getProperty("Zeit/ms")));
+			//var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+			//var localISOTime = (new Date(Date.now() - tzoffset)).toISOString().slice(0,-1);
+			//var time = this.formatter.time(new Date(oContext.getProperty("Zeit/ms")) + tzoffset );
+			var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/TarifeSet(Datum=datetime'" + date + "',Tarifart='',Zeit=time'" + time + "')";
+			//var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/TarifeSet(Datum='" + date + "',Tarifart='',Zeit='" + time + "')";
+			//var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/TarifeSet(Datum=datetime'2017-07-01T00:00:00',Tarifart='',Zeit=time'PT07H28M45S')";
+
 			oTarifModel.loadData(URL, true, false);
+
+			var tarifart = oTarifModel.getProperty("/d/Tarifart");
+			var oRapporteModel = this.getView().getModel();
+			switch (tarifart) {
+				case 'FR':
+					oRapporteModel.setProperty("ZLotsenFeiertagszuschlag", true, oContext);
+					oRapporteModel.setProperty("Nachtzuschlag", false, oContext);
+					break;
+				case 'SA':
+					oRapporteModel.setProperty("Nachtzuschlag", true, oContext);
+					oRapporteModel.setProperty("ZLotsenFeiertagszuschlag", false, oContext);
+					break;
+				default:
+					oRapporteModel.setProperty("Nachtzuschlag", false, oContext);
+					oRapporteModel.setProperty("ZLotsenFeiertagszuschlag", false, oContext);
+					break;
+			}
+
 			this.setModel(oTarifModel, "tarifeSet");
 		},
 		_createSchiffsModel: function() {
