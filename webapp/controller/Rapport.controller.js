@@ -397,7 +397,9 @@ sap.ui.define([
 		_updateTarifeNewDate: function() {
 			var oTarifModel = this.getView().getModel("tarifeSet");
 			var oContext = this.getView().getBindingContext();
-			var date = oContext.getProperty("Datum").toISOString().slice(0, -1);
+			//var date = oContext.getProperty("Datum").toISOString().slice(0, -1);
+			var date = this.formatter.UTCTimeToLocale(oContext.getProperty("Datum")).toJSON().slice(0, -1);
+			
 			var time = this.formatter.time(new Date(oContext.getProperty("Zeit/ms")));
 			//var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
 			//var localISOTime = (new Date(Date.now() - tzoffset)).toISOString().slice(0,-1);
