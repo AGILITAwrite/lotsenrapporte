@@ -51,7 +51,7 @@ sap.ui.define([
 				oRapporteModel.setProperty("Datum", new Date(), onewRapport);
 				oRapporteModel.setProperty("Zeit", {
 				//	ms:	( dateTime.getTime() - dateTime.getTimezoneOffset() * 60000 ), // UTC Time in Locale umrechnen
-					ms: formatter.timeToLocale( new Date() ),
+					ms: formatter.UTCTimeToLocale( new Date() ).getTime(),
 				//	ms: new Date().getTime(),
 					__edmtype: "Edm.Time"
 				}, onewRapport);
@@ -190,7 +190,8 @@ sap.ui.define([
 			var minDate = new Date();
 			minDate.setDate(minDate.getDate() - 2); //Lotsenrapporte nur bis und mit Vortag erfassbar
 			if (oContext.getProperty("Datum") >= new Date() || (oContext.getProperty("Datum").toDateString() === new Date().toDateString() &&
-					this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))) >= this.formatter.time(new Date())) // Datum in der Zukunft  
+				this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))) >= this.formatter.UTCTimeToLocale( new Date())) // Datum in der Zukunft 
+				//this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))) >= this.formatter.time(new Date())) // Datum in der Zukunft  
 
 			) {
 
