@@ -290,19 +290,19 @@ sap.ui.define([
 
 			var oTarifModel = this.getView().getModel("tarifeSet");
 			var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/TarifeSet";
-			/*		if (oRapporteModel.getProperty("ZLotsenFeiertagszuschlag")) {
+			/*		if (oRapporteModel.getProperty("Feiertagszuschlag")) {
 						URL = URL + "('FR')";
-					} else if (oRapporteModel.getProperty("Nachtzuschlag")) {
+					} else if (oRapporteModel.getProperty("Samstagszuschlag")) {
 						URL = URL + "('SA')";
 					} else {
 						URL = URL + "('NO')";
 					}*/
 
 			var tarifArt;
-			if (oRapporteModel.getProperty("ZLotsenFeiertagszuschlag")) {
+			if (oRapporteModel.getProperty("Feiertagszuschlag")) {
 				//URL = URL + "(Datum=datetime'" + date + "',Tarifart='FR',Zeit=time'" + time + "')";
 				tarifArt = "FR";
-			} else if (oRapporteModel.getProperty("Nachtzuschlag")) {
+			} else if (oRapporteModel.getProperty("Samstagszuschlag")) {
 				//URL = URL + "(Datum=datetime'" + date + "',Tarifart='SA',Zeit=time'" + time + "')";
 				tarifArt = "SA";
 			} else {
@@ -414,16 +414,16 @@ sap.ui.define([
 			var oRapporteModel = this.getView().getModel();
 			switch (tarifart) {
 				case 'FR':
-					oRapporteModel.setProperty("ZLotsenFeiertagszuschlag", true, oContext);
-					oRapporteModel.setProperty("Nachtzuschlag", false, oContext);
+					oRapporteModel.setProperty("Feiertagszuschlag", true, oContext);
+					oRapporteModel.setProperty("Samstagszuschlag", false, oContext);
 					break;
 				case 'SA':
-					oRapporteModel.setProperty("Nachtzuschlag", true, oContext);
-					oRapporteModel.setProperty("ZLotsenFeiertagszuschlag", false, oContext);
+					oRapporteModel.setProperty("Samstagszuschlag", true, oContext);
+					oRapporteModel.setProperty("Feiertagszuschlag", false, oContext);
 					break;
 				default:
-					oRapporteModel.setProperty("Nachtzuschlag", false, oContext);
-					oRapporteModel.setProperty("ZLotsenFeiertagszuschlag", false, oContext);
+					oRapporteModel.setProperty("Samstagszuschlag", false, oContext);
+					oRapporteModel.setProperty("Feiertagszuschlag", false, oContext);
 					break;
 			}
 

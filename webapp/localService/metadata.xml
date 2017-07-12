@@ -25,8 +25,8 @@
 				<Property Name="BirAug" Type="Edm.Boolean" sap:label="Birsfelden Augst" sap:sortable="false" sap:filterable="false"/>
 				<Property Name="AllgemeineDienstleistung" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="Meinh" sap:label="Allg. Dienstleistung"
 					sap:sortable="false" sap:filterable="false"/>
-				<Property Name="Nachtzuschlag" Type="Edm.Boolean" sap:label="Nachtzuschlag" sap:sortable="false" sap:filterable="false"/>
-				<Property Name="ZLotsenFeiertagszuschlag" Type="Edm.Boolean" sap:label="Feiertagszuschlag" sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Samstagszuschlag" Type="Edm.Boolean" sap:unicode="false" sap:label="Samstagszuschlag" sap:sortable="false" sap:filterable="false" />
+				<Property Name="Feiertagszuschlag" Type="Edm.Boolean" sap:unicode="false" sap:label="Feiertagszuschlag" sap:sortable="false" sap:filterable="false" />
 				<Property Name="Ernam" Type="Edm.String" MaxLength="12" sap:label="Benutzername" sap:sortable="false" sap:filterable="false"/>
 				<Property Name="Erdat" Type="Edm.DateTime" Precision="7" sap:label="Datum" sap:sortable="false" sap:filterable="false"/>
 				<Property Name="Ertime" Type="Edm.Time" Precision="0" sap:label="Uhrzeit" sap:sortable="false" sap:filterable="false"/>
