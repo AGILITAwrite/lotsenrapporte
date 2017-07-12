@@ -32,7 +32,7 @@
 					</IconTabFilter>
 					<IconTabFilter text="{i18n>detailRapportListe}" icon="sap-icon://task" iconColor="Critical" id="__filter0">
 						<content>
-							<Table id="lineItemsList" width="auto" items="{RapporteSet}" updateFinished="onListUpdateFinished" noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
+							<Table id="lineItemsList" width="auto" items="{RapporteSet}" updateFinished="onListUpdateFinished" noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin" growingScrollToLoad="true" growing="true">
 								<headerToolbar>
 									<Toolbar id="lineItemsToolbar">
 										<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}"/>
@@ -70,9 +70,9 @@
 											<ObjectIdentifier title="{Rapportid}"/>
 											<ObjectAttribute text="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}" id="__attribute0"/>
 											<!--<ObjectAttribute id="__attribute1" text="{ path: 'Zeit.ms', type: 'sap.ui.model.type.Time', formatOptions: { pattern: 'HH:mm', source: { pattern : '\'PT\'HH\'H\'mm\'M\'ss\'S\''}}}"/>-->
-											<ObjectAttribute id="__attribute1" text="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time' ,formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm'}}"/>
+											<ObjectAttribute id="__attribute1" text="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time' ,formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm', UTC : true }}"/>
 											<ObjectAttribute text="{Lotsenname}" id="__attribute2"/>
-											<CheckBox id="__box0" selected="{Loevm}"/>
+											<CheckBox id="__box0" selected="{Loevm}" editable="false"/>
 											<!--<ObjectAttribute text="{= ${Loevm}.toString()}" id="__attribute9"/>-->
 											
 										</cells>

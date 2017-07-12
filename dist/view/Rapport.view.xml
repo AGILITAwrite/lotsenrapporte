@@ -21,7 +21,7 @@
 													source: { pattern : '\'PT\'HH\'H\'mm\'M\'ss\'S\''  } 
 												} 
 											}"/>-->
-								<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker" value="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time' , formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm'}}" editable="{rapportView>/changeMode}" change="_updateTarifeNewDate"/>
+								<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker" value="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time' , formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm', UTC : true }}" editable="{rapportView>/changeMode}" change="_updateTarifeNewDate"/>
 							</sap.ui.layout.form:fields>
 						</sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:FormElement id="__element8" label="Berg-/Talfahrt">
@@ -39,13 +39,13 @@
 					<sap.ui.layout.form:FormContainer title="Zuschläge" id="__container3" expandable="true">
 						<sap.ui.layout.form:FormElement id="__element0" label="Samstags">
 							<sap.ui.layout.form:fields>
-								<Switch id="__samstagsZuschlag" state="{Nachtzuschlag}" change="_updateTarife" enabled="{rapportView>/changeMode}"/>
+								<Switch id="__samstagsZuschlag" state="{Samstagszuschlag}" change="_updateTarife" enabled="{rapportView>/changeMode}"/>
 							</sap.ui.layout.form:fields>
 						</sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:formElements>
 							<sap.ui.layout.form:FormElement label="Sonn-/Feiertags/Nacht" id="__element4">
 								<sap.ui.layout.form:fields>
-									<Switch id="__feiertagsZuschlag" state="{ZLotsenFeiertagszuschlag}" change="_updateTarife" enabled="{rapportView>/changeMode}"/>
+									<Switch id="__feiertagsZuschlag" state="{Feiertagszuschlag}" change="_updateTarife" enabled="{rapportView>/changeMode}"/>
 								</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
 						</sap.ui.layout.form:formElements>

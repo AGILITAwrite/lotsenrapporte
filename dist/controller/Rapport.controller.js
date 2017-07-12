@@ -43,12 +43,16 @@ sap.ui.define([
 			// Annullieren von neuen Rapporten nicht möglich
 			var sObjectId = oEvent.getParameter("arguments").objectId;
 			this.getModel().resetChanges();
+			//var dateTime = new Date();
+
 			this.getModel().metadataLoaded().then(function() {
 				var oRapporteModel = this.getView().getModel();
 				var onewRapport = oRapporteModel.createEntry("/RapporteSet");
 				oRapporteModel.setProperty("Datum", new Date(), onewRapport);
 				oRapporteModel.setProperty("Zeit", {
-					ms: new Date().getTime(),
+				//	ms:	( dateTime.getTime() - dateTime.getTimezoneOffset() * 60000 ), // UTC Time in Locale umrechnen
+					ms: formatter.UTCTimeToLocale( new Date() ).getTime(),
+				//	ms: new Date().getTime(),
 					__edmtype: "Edm.Time"
 				}, onewRapport);
 				oRapporteModel.setProperty("EniNr", sObjectId, onewRapport);
@@ -186,7 +190,8 @@ sap.ui.define([
 			var minDate = new Date();
 			minDate.setDate(minDate.getDate() - 2); //Lotsenrapporte nur bis und mit Vortag erfassbar
 			if (oContext.getProperty("Datum") >= new Date() || (oContext.getProperty("Datum").toDateString() === new Date().toDateString() &&
-					this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))) >= this.formatter.time(new Date())) // Datum in der Zukunft  
+				this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))) >= this.formatter.UTCTimeToLocale( new Date())) // Datum in der Zukunft 
+				//this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))) >= this.formatter.time(new Date())) // Datum in der Zukunft  
 
 			) {
 
@@ -215,9 +220,13 @@ sap.ui.define([
 							//onClose: function(oAction) { error = true; } 
 					});
 				} else {
+					
+			// 					var dateTime = new Date();
+			// ( dateTime.getTime() - dateTime.getTimezoneOffset() * 60000 )
 
 					// die Zeit wird beim Lesen des Models in MS umgewandelt und muss aber beim speichern manuell in EdmTime umgewandelt werden, da das nicht wieder automatisch gemacht wird
-					oRapportModel.setProperty("Zeit", this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))), oContext);
+					//oRapportModel.setProperty("Zeit", this.formatter.time(new Date( oContext.getProperty("Zeit/ms") - new Date().getTimezoneOffset() * 60000 )), oContext);
+					 oRapportModel.setProperty("Zeit", this.formatter.time(new Date( oContext.getProperty("Zeit/ms")     )), oContext);
 					//			oRapportModel.attachEventOnce("batchRequestCompleted", jQuery.proxy(this._submitSuccess, this));
 					//			oRapportModel.attachEventOnce("batchRequestFailed", jQuery.proxy(this._submitError, this));
 					oRapportModel.submitChanges({
@@ -281,19 +290,19 @@ sap.ui.define([
 
 			var oTarifModel = this.getView().getModel("tarifeSet");
 			var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/TarifeSet";
-			/*		if (oRapporteModel.getProperty("ZLotsenFeiertagszuschlag")) {
+			/*		if (oRapporteModel.getProperty("Feiertagszuschlag")) {
 						URL = URL + "('FR')";
-					} else if (oRapporteModel.getProperty("Nachtzuschlag")) {
+					} else if (oRapporteModel.getProperty("Samstagszuschlag")) {
 						URL = URL + "('SA')";
 					} else {
 						URL = URL + "('NO')";
 					}*/
 
 			var tarifArt;
-			if (oRapporteModel.getProperty("ZLotsenFeiertagszuschlag")) {
+			if (oRapporteModel.getProperty("Feiertagszuschlag")) {
 				//URL = URL + "(Datum=datetime'" + date + "',Tarifart='FR',Zeit=time'" + time + "')";
 				tarifArt = "FR";
-			} else if (oRapporteModel.getProperty("Nachtzuschlag")) {
+			} else if (oRapporteModel.getProperty("Samstagszuschlag")) {
 				//URL = URL + "(Datum=datetime'" + date + "',Tarifart='SA',Zeit=time'" + time + "')";
 				tarifArt = "SA";
 			} else {
@@ -388,7 +397,9 @@ sap.ui.define([
 		_updateTarifeNewDate: function() {
 			var oTarifModel = this.getView().getModel("tarifeSet");
 			var oContext = this.getView().getBindingContext();
-			var date = oContext.getProperty("Datum").toISOString().slice(0, -1);
+			//var date = oContext.getProperty("Datum").toISOString().slice(0, -1);
+			var date = this.formatter.UTCTimeToLocale(oContext.getProperty("Datum")).toJSON().slice(0, -1);
+			
 			var time = this.formatter.time(new Date(oContext.getProperty("Zeit/ms")));
 			//var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
 			//var localISOTime = (new Date(Date.now() - tzoffset)).toISOString().slice(0,-1);
@@ -403,16 +414,16 @@ sap.ui.define([
 			var oRapporteModel = this.getView().getModel();
 			switch (tarifart) {
 				case 'FR':
-					oRapporteModel.setProperty("ZLotsenFeiertagszuschlag", true, oContext);
-					oRapporteModel.setProperty("Nachtzuschlag", false, oContext);
+					oRapporteModel.setProperty("Feiertagszuschlag", true, oContext);
+					oRapporteModel.setProperty("Samstagszuschlag", false, oContext);
 					break;
 				case 'SA':
-					oRapporteModel.setProperty("Nachtzuschlag", true, oContext);
-					oRapporteModel.setProperty("ZLotsenFeiertagszuschlag", false, oContext);
+					oRapporteModel.setProperty("Samstagszuschlag", true, oContext);
+					oRapporteModel.setProperty("Feiertagszuschlag", false, oContext);
 					break;
 				default:
-					oRapporteModel.setProperty("Nachtzuschlag", false, oContext);
-					oRapporteModel.setProperty("ZLotsenFeiertagszuschlag", false, oContext);
+					oRapporteModel.setProperty("Samstagszuschlag", false, oContext);
+					oRapporteModel.setProperty("Feiertagszuschlag", false, oContext);
 					break;
 			}
 
