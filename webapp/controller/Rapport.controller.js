@@ -184,6 +184,8 @@ sap.ui.define([
 					var isSignatureProvided = oSignatureBase30[1].length > 1 ? true : false;
 					if (isSignatureProvided) {
 						oRapportModel.setProperty("Signatur", oSignatureBase30[1], oContext);
+					} else {
+						oRapportModel.setProperty("Signatur", null, oContext);
 					}
 				}
 			}
