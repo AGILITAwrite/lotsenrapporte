@@ -192,7 +192,7 @@ sap.ui.define([
 			var minDate = new Date();
 			minDate.setDate(minDate.getDate() - 2); //Lotsenrapporte nur bis und mit Vortag erfassbar
 			if (oContext.getProperty("Datum") >= new Date() || (oContext.getProperty("Datum").toDateString() === new Date().toDateString() &&
-				this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))) >= this.formatter.UTCTimeToLocale( new Date())) // Datum in der Zukunft 
+				this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))) >= this.formatter.time(this.formatter.UTCTimeToLocale( new Date()))) // Datum in der Zukunft 
 				//this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))) >= this.formatter.time(new Date())) // Datum in der Zukunft  
 
 			) {
@@ -253,7 +253,9 @@ sap.ui.define([
 				var oSignaturePanel = this.getView().byId("signaturePanel");
 				var oSignatureDiv = new sap.ui.core.HTML("signature", {
 					// the static content as a long string literal
-					content: "<div style='width: 340px; height: 128px; border: 1px solid black'></d/**/iv>",
+					// content: "<div style='width: 340px; height: 128px; border: 1px solid black'></div>",
+					//content: "<div style='width: 340px; height: 100%; border: 1px solid black'></div>",
+					content: "<div style='width: 340px; height: 85px; border: 1px solid black'></div>",
 					//preferDOM : true,
 					afterRendering: function(e) {
 						// Init darf nur einmal aufgerufen
