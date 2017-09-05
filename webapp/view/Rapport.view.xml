@@ -80,7 +80,7 @@
 										</ColumnListItem>
 										<ColumnListItem id="__item2" class="myBorderRedFat">
 											<cells>
-												<StandardListItem type="Inactive" title="Gem.RPVO Basel - Rheinfelden" description="(hoheitlich / nicht Mwst.pflichtig)" id="__item9"/>
+												<StandardListItem type="Inactive" title="Gem.RPVO Basel - Birsfelden (v.v)" description="(hoheitlich / nicht Mwst.pflichtig)" id="__item9"/>
 												<!--<CheckBox id="__box2" selected="{BRU125m}" select="_calc"/>-->
 												<RadioButton selected="{BRU125m}" id="__button2" groupName="radio1" select="_calc" editable="{rapportView>/changeMode}"/>
 												<Text text="&gt; 110-125m / 2'000 t" id="__text32"/>
@@ -89,7 +89,7 @@
 										</ColumnListItem>
 										<ColumnListItem id="__item3" class="myBorderBlackFat">
 											<cells>
-												<StandardListItem type="Inactive" title="Gem.RPVO Basel - Rheinfelden" description="(hoheitlich / nicht Mwst.pflichtig)" id="__item10"/>
+												<StandardListItem type="Inactive" title="Gem.RPVO Basel - Birsfelden" description="(hoheitlich / nicht Mwst.pflichtig)" id="__item10"/>
 												<!--<CheckBox id="__box3" selected="{BRSchubverband}" select="_calc"/>-->
 												<RadioButton selected="{BRSchubverband}" id="__button3" groupName="radio1" select="_calc" editable="{rapportView>/changeMode}"/>
 												<Text text="Schubverband" id="__text35"/>
@@ -192,7 +192,7 @@
 					        <HBox width="100%" id="__hbox0">
 					            <items>
 					                <CheckBox id="__boxCheckConfirm0" selected="{rapportView>/confirmed}"/>
-					                <Text class="myConfirmation" text="Hiermit bestätigen wir, dass die obigen Angaben zutreffen und dass das Schiff bei Antritt der Reise in einem einwandfreien technischen und nautischen Zustand ist." id="__text13"/>
+					                <Text class="myConfirmation" text="Hiermit bestätigen wir, dass die obigen Angaben zutreffen und dass das Schiff bei Antritt der Reise in einem einwandfreien technischen und nautischen Zustand ist.&#10;&#10;Nous certifions par le présent document que les indications fournies sont correctes et que le navire est dans un état technique et nautique irréprochable au début du voyage.&#10;&#10;Hiermee bevestigen wij de correctheid van de bovenstaande informatie en dat het schip bij het begin van de reis in een technisch en nautisch perfecte staat verkeerde.&#10;&#10;We hereby confirm that the information listed above is accurate and that the ship is in good technical and nautical condition at the start of the journey." id="__text13"/>
 					            </items>
 					        </HBox>
 					    </sap.ui.layout.form:fields>
@@ -245,7 +245,7 @@
 					    <sap.ui.layout.form:formElements>
 					        <sap.ui.layout.form:FormElement label="Feiertage" id="__element7">
 					        <sap.ui.layout.form:fields>
-					            <Text text="Neujahr, Karfreitag, 2 Ostertage, Auffahrt, 2 Pfingsttage, 1. Mai, 2 Weihnachtstage" id="__text10"/>
+					            <Text text="Neujahr, Karfreitag, 2 Ostertage, Auffahrt, 2 Pfingsttage, 1. Mai, 1. August, 25. 2 Weihnachtstage" id="__text10"/>
 					        </sap.ui.layout.form:fields>
 					        </sap.ui.layout.form:FormElement>
 					        <sap.ui.layout.form:FormElement label="Nachtstunde" id="__element11">
