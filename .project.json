@@ -14,7 +14,7 @@
       "test.html"
     ],
     "buildRequired": true,
-    "lastBuildDateTime": "Wed, 19 Jul 2017 13:09:15 GMT"
+    "lastBuildDateTime": "Fri, 08 Sep 2017 08:21:24 GMT"
   },
   "dataBinding": {
     "/webapp/view/App.view.xml": {
@@ -98,7 +98,7 @@
   "hcpdeploy": {
     "account": "a88ba9460",
     "name": "lotsenrapporte",
-    "lastVersionWeTriedToDeploy": "1.0.36"
+    "lastVersionWeTriedToDeploy": "1.0.37"
   },
   "deploy": {
     "destination": "SRH_DEV_200",
