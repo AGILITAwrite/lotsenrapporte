@@ -96,7 +96,7 @@ sap.ui.define([
 			var sQuery = oEvent.getParameter("query");
 
 			if (sQuery) {
-				if (/^[a-zA-Z]+$/.test(sQuery)) {
+				if (/^[a-zA-Z -_]+$/.test(sQuery)) {
 					sQuery = sQuery.toUpperCase();
 					this._oListFilterState.aSearch = [new Filter("Name", FilterOperator.Contains, sQuery)];
 				} else {
