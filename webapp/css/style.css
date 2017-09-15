@@ -8,6 +8,9 @@
 .sapMText.myTotalmix {
     font-weight: bold;	
 }
+.myDebitorMissing[data-missing=true] h1 span{
+	color: #ffcccc !important;
+}
 tr[data-background=true].myBackgroundLoevm {
   background-color: #ffcccc;
 }
