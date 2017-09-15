@@ -1,0 +1,34 @@
+.myConfirmation {
+  font-weight: bold;
+  text-decoration: underline;
+}
+.myTotal {
+  font-weight: bold;
+}
+.sapMText.myTotalmix {
+    font-weight: bold;	
+}
+.myDebitorMissing[data-missing=true] h1 span{
+	color: #ffcccc !important;
+}
+tr[data-background=true].myBackgroundLoevm {
+  background-color: #ffcccc;
+}
+tr.myBackground td{
+  background-color: LightSkyBlue ;
+}
+/*li.myBackground2 sapMListBGTranslucent sapMLIB{
+  background-color: red;
+}*/
+.sapMListBGTranslucent .myBackground2{
+  background-color: LightSkyBlue ;
+
+}
+tr.myBorderRedFat td{
+	border-color: red;
+    border-width: 2px;
+}
+tr.myBorderBlackFat td{
+	border-color: black;
+    border-width: 2px;
+}
