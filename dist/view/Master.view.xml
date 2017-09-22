@@ -65,7 +65,11 @@
 						title="{Name}"
 						number="{Schiffsnummer}" 
 						intro="{Schiffstyp}"
-						class="myDebitorMissing">
+						class="myDebitorMissingList">
+				<customData>
+					<sap.ui.core:CustomData xmlns:sap.ui.core="sap.ui.core" id="__data10" key="missing"  binding="{Debitoren/}" value="{= ${ path: 'Kunnr', formatter: '.formatter.convertToBool' }.toString()}" writeToDom="true"/>
+						<!--<sap.ui.core:CustomData xmlns:sap.ui.core="sap.ui.core" id="__data10" key="missing" value="true" writeToDom="true"/>-->
+				</customData>
 					</ObjectListItem>
 				</items>
 			</List>

@@ -13,8 +13,8 @@
     "excludedFiles": [
       "test.html"
     ],
-    "buildRequired": true,
-    "lastBuildDateTime": "Fri, 15 Sep 2017 08:23:59 GMT"
+    "buildRequired": false,
+    "lastBuildDateTime": "Fri, 22 Sep 2017 12:20:33 GMT"
   },
   "dataBinding": {
     "/webapp/view/App.view.xml": {
@@ -98,7 +98,7 @@
   "hcpdeploy": {
     "account": "a88ba9460",
     "name": "lotsenrapporte",
-    "lastVersionWeTriedToDeploy": "1.0.39"
+    "lastVersionWeTriedToDeploy": "1.0.40"
   },
   "deploy": {
     "destination": "SRH_DEV_200",
