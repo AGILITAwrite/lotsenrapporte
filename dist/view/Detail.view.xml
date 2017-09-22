@@ -2,9 +2,13 @@
 	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}" busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
 		<semantic:content>
 			<ObjectHeader id="objectHeader" title="{Name}">
+				<!--<customData>-->
+				<!--<sap.ui.core:CustomData xmlns:sap.ui.core="sap.ui.core" id="__data10" key="missing" value="{= ${Debitoren/Kunnr}}" writeToDom="true"/>-->
+				<!--</customData>-->
 				<attributes>
 					<ObjectAttribute text="{Schiffsnummer}" id="__attribute3" title="{/#Schiffe/Schiffsnummer/@sap:label}"/>
 					<ObjectAttribute text="{Nationalitaet}" id="__attribute6" title="{/#Schiffe/Nationalitaet/@sap:label}"/>
+					<ObjectAttribute text="{Schiffstyp}" id="__attribute12" title="{/#Schiffe/Schiffstyp/@sap:label}"/>
 					<ObjectAttribute text="{EcocardNr}" id="__attribute4" title="{/#Schiffe/EcocardNr/@sap:label}"/>
 				</attributes>
 			</ObjectHeader>

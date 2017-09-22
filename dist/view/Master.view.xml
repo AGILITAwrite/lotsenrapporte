@@ -63,7 +63,9 @@
 						type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}"
 						press="onSelectionChange"
 						title="{Name}"
->
+						number="{Schiffsnummer}" 
+						intro="{Schiffstyp}"
+						class="myDebitorMissing">
 					</ObjectListItem>
 				</items>
 			</List>

@@ -245,7 +245,8 @@
 					    <sap.ui.layout.form:formElements>
 					        <sap.ui.layout.form:FormElement label="Feiertage" id="__element7">
 					        <sap.ui.layout.form:fields>
-					            <Text text="Neujahr, Karfreitag, 2 Ostertage, Auffahrt, 2 Pfingsttage, 1. Mai, 1. August, 25. 2 Weihnachtstage" id="__text10"/>
+					            <!--<Text text="Neujahr, Karfreitag, 2 Ostertage, Auffahrt, 2 Pfingsttage, 1. Mai, 1. August, 25. 2 Weihnachtstage" id="__text10"/>-->
+					            <Text text="Neujahr, Karfreitag, Ostermontag, 1. Mai, Auffahrt, Pfingstmontag, 1. August, Weihnachten, Stephanstag" id="__text10"/>
 					        </sap.ui.layout.form:fields>
 					        </sap.ui.layout.form:FormElement>
 					        <sap.ui.layout.form:FormElement label="Nachtstunde" id="__element11">
@@ -255,7 +256,7 @@
 					        </sap.ui.layout.form:FormElement>
 					        <sap.ui.layout.form:FormElement id="__element12" label=" ">
 					        <sap.ui.layout.form:fields>
-					            <Text text="Gemäss Gebührentarif gültig ab 01.01.2017Für die Punkte LD1, LD3, LD4 und LD5 kann gegebenenfalls MWST verrechnet werden. LD=Lotsendienstleistungen" id="__text12"/>
+					            <Text text="Gemäss Gebührentarif gültig ab 01.01.2017. Für die Punkte LD1, LD3, LD4 und LD5 kann gegebenenfalls MWST verrechnet werden. LD=Lotsendienstleistungen" id="__text12"/>
 					        </sap.ui.layout.form:fields>
 					        </sap.ui.layout.form:FormElement>
 					    </sap.ui.layout.form:formElements>
