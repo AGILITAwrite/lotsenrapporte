@@ -21,7 +21,8 @@ sap.ui.define([
 				newRapport: false,
 				changeMode: false,
 				annullierenVisible: false,
-				confirmed: false
+				confirmed: false,
+				fahrtrichtung: ""
 			});
 			this.setModel(oViewModel, "rapportView");
 			this.getRouter().getRoute("rapportNewRoute").attachMatched(this._onRouteMatchedNew, this);
@@ -57,6 +58,7 @@ sap.ui.define([
 				}, onewRapport);
 				oRapporteModel.setProperty("EniNr", sObjectId, onewRapport);
 				oRapporteModel.setProperty("Lotsenname", this._getBenutzername(), onewRapport);
+				//oRapporteModel.setProperty("Talfahrt", true, onewRapport);
 				// oRapporteModel.setProperty("MrbUe2000t", true, onewRapport);
 				//oRapporteModel.setProperty("Bemerkung", "", onewRapport);
 				var sObjectPath = onewRapport.getPath();
@@ -145,6 +147,7 @@ sap.ui.define([
 				location.href
 			]
 			));*/
+			this._setFahrtrichtung();
 		},
 		_onMetadataLoaded: function() {
 			// Store original busy indicator delay for the detail view
@@ -544,6 +547,18 @@ sap.ui.define([
 
 			this._resetRadioButtons(oRapporteModel, oRapporteContext);
 			oRapporteModel.setProperty("AllgemeineDienstleistung", null, oRapporteContext);
+		},
+				/**
+		 *@memberOf ch.portof.controller.Rapport
+		 */
+		_setFahrtrichtung: function() {
+			var oRapporteContext = this.getView().getBindingContext();
+			if (oRapporteContext.getProperty("Talfahrt") === true ) {
+				this.getView().getModel("rapportView").setProperty("/fahrtrichtung", 'Talfahrt');
+			} else {
+				this.getView().getModel("rapportView").setProperty("/fahrtrichtung", 'Bergfahrt');				
+			}
 		}
+		
 	});
 });
