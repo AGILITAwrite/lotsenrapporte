@@ -1,10 +1,10 @@
 <mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" controllerName="ch.portof.controller.Detail">
 	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}" busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
 		<semantic:content>
-			<ObjectHeader id="objectHeader" title="{Name}">
-				<!--<customData>-->
-				<!--<sap.ui.core:CustomData xmlns:sap.ui.core="sap.ui.core" id="__data10" key="missing" value="{= ${Debitoren/Kunnr}}" writeToDom="true"/>-->
-				<!--</customData>-->
+			<ObjectHeader id="objectHeader" title="{Name}" class="myDebitorMissing">
+				<customData>
+					<sap.ui.core:CustomData xmlns:sap.ui.core="sap.ui.core" id="__data10" key="missing"  binding="{Debitoren/}" value="{= ${ path: 'Kunnr', formatter: '.formatter.convertToBool' }.toString()}" writeToDom="true"/>
+				</customData>
 				<attributes>
 					<ObjectAttribute text="{Schiffsnummer}" id="__attribute3" title="{/#Schiffe/Schiffsnummer/@sap:label}"/>
 					<ObjectAttribute text="{Nationalitaet}" id="__attribute6" title="{/#Schiffe/Nationalitaet/@sap:label}"/>
@@ -16,8 +16,12 @@
 				<items>
 					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://hint" tooltip="{i18n>detailIconTabBarInfo}" text="{i18n>detailStammdaten}">
 						<content>
-							<ObjectHeader binding="{Debitoren/}" number="{Kunnr}" introActive="true" titleActive="true" id="debitorHeader1" title="{Name1}">
+							<ObjectHeader binding="{Debitoren/}" number="{Kunnr}" introActive="true" titleActive="true" id="debitorHeader1" title="{Name1}" class="myDebitorMissingBox">
+							<customData>
+								<sap.ui.core:CustomData xmlns:sap.ui.core="sap.ui.core" id="__data11" key="missing" value="{= ${ path: 'Kunnr', formatter: '.formatter.convertToBool' }.toString()}" writeToDom="true"/>
+							</customData>
 								<attributes>
+
 									<ObjectAttribute text="{Name2}" id="__attribute8" title="Zusatz"/>
 									<ObjectAttribute text="{Stras}" id="__attribute125" title="Adresse"/>
 									<ObjectAttribute text="{Pstlz} {Ort01}" id="__attribute126" title="PLZ / Ort"/>

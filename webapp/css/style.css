@@ -9,8 +9,18 @@
     font-weight: bold;	
 }
 .myDebitorMissing[data-missing=true] h1 span{
-	color: #ffcccc !important;
+	color: #ff0000;
 }
+li.myDebitorMissingList.sapMLIB.sapMLIBSelected[data-missing=true]{
+	background-color:  #f88686
+}
+li.myDebitorMissingList.sapMLIB[data-missing=true]{
+	background-color: #ffcccc;
+}
+.myDebitorMissingBox.sapMOH.sapMOHBgTransparent[data-missing=true]{
+	background-color: #ffcccc;
+}
+
 tr[data-background=true].myBackgroundLoevm {
   background-color: #ffcccc;
 }

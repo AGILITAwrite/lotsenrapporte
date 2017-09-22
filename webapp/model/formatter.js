@@ -58,6 +58,14 @@ sap.ui.define([], function() {
 				value = null;
 			}
 			return value;
+		},
+		convertToBool: function(value) {
+			// return true;
+			if ( value == null || value == "" ) {
+				return true;                                                
+			} else {
+				return false;
+			}
 		}
 	};
 
