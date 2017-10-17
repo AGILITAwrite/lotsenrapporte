@@ -226,6 +226,17 @@ sap.ui.define([
 					});
 				} else {
 					
+					if (!oContext.getProperty("Bemerkung") && !this.getModel("Debitor").getProperty("/d/Kunnr")) { // 
+					//!this.getView().byId("__boxCheckConfirm0").getSelected()) { // 
+
+					sap.m.MessageBox.show("Rechnungsadresse unbekannt. Bitte nach Rechnungsadresse ins Bemerkungsfeld schreiben!", {
+						icon: sap.m.MessageBox.Icon.ERROR,
+						title: "Fehler" //,
+							//actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+							//onClose: function(oAction) { error = true; } 
+					});
+				} else {
+					
 			// 					var dateTime = new Date();
 			// ( dateTime.getTime() - dateTime.getTimezoneOffset() * 60000 )
 
@@ -238,6 +249,7 @@ sap.ui.define([
 						success: jQuery.proxy(this._submitSuccess, this),
 						error: jQuery.proxy(this._submitError, this)
 					});
+				}
 				}
 			}
 		},
