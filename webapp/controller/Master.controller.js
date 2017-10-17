@@ -96,11 +96,11 @@ sap.ui.define([
 			var sQuery = oEvent.getParameter("query");
 
 			if (sQuery) {
-				if (/^[a-zA-Z -_]+$/.test(sQuery)) {
+				if (/^[0-9]+$/.test(sQuery)) {
+					this._oListFilterState.aSearch = [new Filter("Schiffsnummer", FilterOperator.StartsWith, sQuery)];
+				} else {
 					sQuery = sQuery.toUpperCase();
 					this._oListFilterState.aSearch = [new Filter("Name", FilterOperator.Contains, sQuery)];
-				} else {
-					this._oListFilterState.aSearch = [new Filter("Schiffsnummer", FilterOperator.StartsWith, sQuery)];
 				}
 			} else {
 				this._oListFilterState.aSearch = [];
