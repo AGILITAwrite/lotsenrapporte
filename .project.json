@@ -13,7 +13,7 @@
     "excludedFiles": [
       "test.html"
     ],
-    "buildRequired": false,
+    "buildRequired": true,
     "lastBuildDateTime": "Fri, 22 Sep 2017 12:20:33 GMT"
   },
   "dataBinding": {
