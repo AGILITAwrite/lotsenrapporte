@@ -229,7 +229,7 @@ sap.ui.define([
 					if (!oContext.getProperty("Bemerkung") && !this.getModel("Debitor").getProperty("/d/Kunnr")) { // 
 					//!this.getView().byId("__boxCheckConfirm0").getSelected()) { // 
 
-					sap.m.MessageBox.show("Rechnungsadresse unbekannt. Bitte nach Rechnungsadresse ins Bemerkungsfeld schreiben!", {
+					sap.m.MessageBox.show("Rechnungsadresse unbekannt. Bitte Rechnungsadresse ins Bemerkungsfeld schreiben!", {
 						icon: sap.m.MessageBox.Icon.ERROR,
 						title: "Fehler" //,
 							//actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
@@ -270,7 +270,9 @@ sap.ui.define([
 					// the static content as a long string literal
 					// content: "<div style='width: 340px; height: 128px; border: 1px solid black'></div>",
 					//content: "<div style='width: 340px; height: 100%; border: 1px solid black'></div>",
-					content: "<div style='width: 340px; height: 85px; border: 1px solid black'></div>",
+					// content: "<div id="parentofsignature style='width: 340px; height: 85px; border: 1px solid black'></div>",
+					content: "<div id='signatureparent'><div id='signature'></div> </div>",
+
 					//preferDOM : true,
 					afterRendering: function(e) {
 						// Init darf nur einmal aufgerufen
