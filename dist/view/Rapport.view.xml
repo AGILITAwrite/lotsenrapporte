@@ -209,7 +209,7 @@
 										<items>
 											<CheckBox id="__boxCheckConfirm0" selected="{rapportView>/confirmed}"/>
 											<Text class="myConfirmation"
-												text="Hiermit bestätigen wir, dass die obigen Angaben zutreffen und dass das Schiff bei Antritt der Reise in einem einwandfreien technischen und nautischen Zustand ist.&#10;&#10;Nous certifions par le présent document que les indications fournies sont correctes et que le navire est dans un état technique et nautique irréprochable au début du voyage.&#10;&#10;Hiermee bevestigen wij de correctheid van de bovenstaande informatie en dat het schip bij het begin van de reis in een technisch en nautisch perfecte staat verkeerde.&#10;&#10;We hereby confirm that the information listed above is accurate and that the ship is in good technical and nautical condition at the start of the journey."
+												text="Hiermit bestätigen wir, dass die obigen Angaben zutreffen und dass das Schiff bei Antritt der Reise in einem einwandfreien technischen und nautischen Zustand ist.&#10;&#10;Nous certifions par le présent document que les indications fournies sont correctes et que le navire est dans un état technique et nautique irréprochable au début du voyage.&#10;&#10;Hiermee bevestigen wij de correctheid van de bovenstaande informatie en dat het schip bij het begin van de reis in een technisch en nautisch perfecte staat verkeerd.&#10;&#10;We hereby confirm that the information listed above is accurate and that the ship is in good technical and nautical condition at the start of the journey."
 												id="__text13"/>
 										</items>
 									</HBox>
@@ -274,7 +274,7 @@
 							<sap.ui.layout.form:FormElement id="__element12" label=" ">
 								<sap.ui.layout.form:fields>
 									<Text
-										text="Gemäss Gebührentarif gültig ab 01.01.2017. Für die Punkte LD1, LD3, LD4 und LD5 kann gegebenenfalls MWST verrechnet werden. LD=Lotsendienstleistungen"
+										text="* Gemäss Gebührentarif gültig ab 01.01.2017. Für die Punkte LD1, LD3, LD4 und LD5 kann gegebenenfalls MWST verrechnet werden. LD=Lotsendienstleistungen"
 										id="__text12"/>
 								</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
