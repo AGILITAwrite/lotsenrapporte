@@ -13,13 +13,10 @@
     "excludedFiles": [
       "test.html"
     ],
-    "buildRequired": false,
+    "buildRequired": true,
     "lastBuildDateTime": "Tue, 24 Oct 2017 12:19:39 GMT"
   },
   "dataBinding": {
-    "/webapp/view/App.view.xml": {
-      "entitySet": "UNBINDKEY"
-    },
     "/webapp/view/NotFound.view.xml": {
       "entitySet": "UNBINDKEY"
     },
@@ -38,6 +35,9 @@
     "/webapp/view/Rapport.view.xml": {
       "entitySet": "RapporteSet",
       "DefaultBindingMode": "sap.ui.model.BindingMode.TwoWay"
+    },
+    "/webapp/view/Reporting.view.xml": {
+      "entitySet": "RapporteSet"
     }
   },
   "generation": [
@@ -49,7 +49,7 @@
     {
       "templateId": "ui5template.basicSAPUI5ApplicationComponent",
       "templateVersion": "1.4.0",
-      "dateTimeStamp": "Tue, 13 Dec 2016 11:10:00 GMT"
+      "dateTimeStamp": "Mon, 06 Nov 2017 13:36:15 GMT"
     }
   ],
   "translation": {

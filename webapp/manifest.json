@@ -137,6 +137,14 @@
 						"master",
 						"rapportTarget"
 					]
+				},
+				{
+					"pattern": "showReport",
+					"name": "showReportingRoute",
+					"target": [
+						"master",
+						"showReportTarget"
+					]
 				}
 			],
 			"targets": {
@@ -155,6 +163,11 @@
 					"viewName": "Rapport",
 					"viewId": "rapport",
 					"viewLevel": 3
+				},
+				"showReportTarget": {
+					"viewName": "Reporting",
+					"viewId": "report",
+					"viewLevel": 2
 				},
 				"detailObjectNotFound": {
 					"viewName": "DetailObjectNotFound",
