@@ -4,7 +4,9 @@
 		<pages>
 			<Page title="Title">
 				<content>
-					<Table id="lineItemsList" width="auto" items="{/RapporteSet}" updateFinished="onListUpdateFinished"
+					<Table id="lineItemsList" width="auto" 
+						items="{ path : '/RapporteSet', filters : [ { path : 'Ernam', operator : 'EQ', value1 : 'KVM'} ] }" 
+						updateFinished="onListUpdateFinished"
 						noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin"
 						growingScrollToLoad="true" growing="true">
 						<headerToolbar>
