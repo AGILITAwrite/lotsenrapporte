@@ -1,12 +1,10 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns="sap.m" controllerName="ch.portof.controller.Reporting"
-	xmlns:html="http://www.w3.org/1999/xhtml">
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns="sap.m"
+	controllerName="ch.portof.controller.Reporting" xmlns:html="http://www.w3.org/1999/xhtml">
 	<App>
 		<pages>
-			<Page title="Title">
+			<Page title="Lotsenrapporte">
 				<content>
-					<Table id="lineItemsList" width="auto" 
-						items="{ path : '/RapporteSet', filters : [ { path : 'Ernam', operator : 'EQ', value1 : 'KVM'} ] }" 
-						updateFinished="onListUpdateFinished"
+					<Table id="lineItemsList" width="auto" items="{ path : '/RapporteSet' }" updateFinished="onListUpdateFinished"
 						noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin"
 						growingScrollToLoad="true" growing="true">
 						<headerToolbar>
@@ -44,6 +42,7 @@
 								</customData>
 								<cells>
 									<ObjectIdentifier title="{Rapportid}"/>
+									<!-- SCHIFFSNAME EINFÜGEN -->
 									<ObjectAttribute text="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}" id="__attribute0"/>
 									<!--<ObjectAttribute id="__attribute1" text="{ path: 'Zeit.ms', type: 'sap.ui.model.type.Time', formatOptions: { pattern: 'HH:mm', source: { pattern : '\'PT\'HH\'H\'mm\'M\'ss\'S\''}}}"/>-->
 									<ObjectAttribute id="__attribute1"

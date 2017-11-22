@@ -16,12 +16,18 @@ sap.ui.define([
 			var oViewModel = new JSONModel({
 				busy: false,
 				delay: 0,
+				username: "XYLAN",
 				lineItemListTitle: this.getResourceBundle().getText("detailLineItemTableHeading")
 			});
+			if (typeof sap.ushell.Container !== 'undefined') {
+    			// the variable is defined
+    			oViewModel.setProperty("username", sap.ushell.Container.getUser().getId());
+			}  
+			
 			this.setModel(oViewModel, "reportView");
 			this.getRouter().getRoute("showReportingRoute").attachMatched(this._onRouteMatched, this);
 			this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
-		},
+	},
 		_onRouteMatched: function(oEvent) {
 			// var sObjectId = oEvent.getParameter("arguments").objectId;
 			this.getModel().metadataLoaded().then(function() {
@@ -29,7 +35,7 @@ sap.ui.define([
 				 	Rapportid: "0000000309"
 				 });
 				//sObjectPath = "?$filter=Ernam eq 'XYLAN'";
-				var sObjectPath = "RapporteSet/?$filter=Ernam%20eq%20%27KVM%27";
+				var sObjectPath = "RapporteSet";
 				this._bindView("/" + sObjectPath );
 			}.bind(this));
 		},
@@ -38,6 +44,8 @@ sap.ui.define([
 		_bindView: function(sObjectPath) {
 			// Set busy indicator during view binding
 			var oViewModel = this.getModel("reportView");
+			
+			
 			// If the view was not bound yet its not busy, only if the binding requests data it is set to busy again
 			oViewModel.setProperty("/busy", false);
 			this.getView().bindElement({
@@ -51,6 +59,7 @@ sap.ui.define([
 						oViewModel.setProperty("/busy", false);
 					}
 				}
+				
 			});
 		},
 		_onBindingChange: function() {
@@ -79,6 +88,17 @@ sap.ui.define([
 			// 	sObjectId,
 			// 	location.href
 			// ]));
+			var oSelect, oBinding, aFilters;
+
+var sFilterValue = oViewModel.getProperty("/username"); // I assume you can get the filter value from somewhere...
+oSelect = this.getView().byId("lineItemsList"); //get the reference to your Select control
+oBinding = oSelect.getBinding("items");
+aFilters = [];
+
+if (sFilterValue){
+    aFilters.push( new sap.ui.model.Filter("Ernam", sap.ui.model.FilterOperator.EQ, sFilterValue) );
+}
+oBinding.filter(aFilters, sap.ui.model.FilterType.Control);  //apply the filter sap.ui.model.FilterType.Application
 		},
 		_onMetadataLoaded: function() {
 			// Store original busy indicator delay for the detail view
