@@ -531,13 +531,24 @@ sap.ui.define([
 			}
 		},
 		_submitSuccess: function(oData) {
+			var oViewModel = this.getModel("rapportView");
 			sap.m.MessageToast.show("Rapport wurde erfolgreich gespeichert");
-			this.getView().getModel("rapportView").setProperty("/newRapport", false);
+			oViewModel.setProperty("/newRapport", false);
 			var schiffsnr = this.getView().getBindingContext().getProperty("EniNr");
 			this._destory(true);
-			this.getRouter().navTo("object", {
-				objectId: schiffsnr
-			}, true);
+			
+			// alte navigation
+			// this.getRouter().navTo("object", {
+			// 	objectId: schiffsnr
+			// }, true);
+			
+			if (oViewModel.getProperty("/reporting") === true) {
+				this.getRouter().navTo("showReportingRoute", {}, true);
+			} else {
+				this.getRouter().navTo("object", {
+					objectId: schiffsnr
+				}, true);
+			}
 		},
 		_submitError: function() {
 			sap.m.MessageToast.show("Fehler beim speichern des Rapports");
@@ -572,6 +583,7 @@ sap.ui.define([
 			var oContext = this.getView().getBindingContext();
 			//oRapportModel.setProperty("Zeit", this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))), oContext);
 			oRapportModel.setProperty("Loevm", true, oContext);
+			oRapportModel.setProperty("Zeit", this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))), oContext);
 			//			oRapportModel.attachEventOnce("batchRequestCompleted", jQuery.proxy(this._submitSuccess, this));
 			//			oRapportModel.attachEventOnce("batchRequestFailed", jQuery.proxy(this._submitError, this));
 			oRapportModel.submitChanges({
