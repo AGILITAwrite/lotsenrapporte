@@ -1,0 +1,61 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns="sap.m"
+	controllerName="ch.portof.controller.Reporting" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page title="Lotsenrapporte">
+				<content>
+					<Table id="lineItemsList" width="auto" items="{ path : '/RapporteSet' }" updateFinished="onListUpdateFinished"
+						noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin"
+						growingScrollToLoad="true" growing="true">
+						<headerToolbar>
+							<Toolbar id="lineItemsToolbar">
+								<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}"/>
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+							<Column>
+								<Text text="{i18n>detailLineItemTableIDColumn}"/>
+							</Column>
+							<Column minScreenWidth="Tablet" demandPopin="true">
+								<Text text="{i18n>detailLineItemTableUnitAttirbut1Column}"/>
+							</Column>
+							<Column id="__column2">
+								<header>
+									<Text text="{i18n>detailLineItemTableUnitAttirbut2Column}" id="__text20"/>
+								</header>
+							</Column>
+							<Column id="__column3">
+								<header>
+									<Text text="{i18n>detailLineItemTableUnitAttirbut3Column}" id="__text21"/>
+								</header>
+							</Column>
+							<Column id="__column4">
+								<header>
+									<Text text="{i18n>detailLineItemTableUnitAttirbut4Column}" id="__text22"/>
+								</header>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem press="_onListItemPressed" type="Active" class="myBackgroundLoevm">
+								<customData>
+									<sap.ui.core:CustomData xmlns:sap.ui.core="sap.ui.core" id="__data9" key="background" value="{= ${Loevm}.toString()}" writeToDom="true"/>
+								</customData>
+								<cells>
+									<ObjectIdentifier title="{Rapportid}"/>
+									<!-- SCHIFFSNAME EINFÜGEN -->
+									<ObjectAttribute text="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}" id="__attribute0"/>
+									<!--<ObjectAttribute id="__attribute1" text="{ path: 'Zeit.ms', type: 'sap.ui.model.type.Time', formatOptions: { pattern: 'HH:mm', source: { pattern : '\'PT\'HH\'H\'mm\'M\'ss\'S\''}}}"/>-->
+									<ObjectAttribute id="__attribute1"
+										text="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time' ,formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm', UTC : true }}"/>
+									<ObjectAttribute text="{Lotsenname}" id="__attribute2"/>
+									<CheckBox id="__box0" selected="{Loevm}" editable="false"/>
+									<!--<ObjectAttribute text="{= ${Loevm}.toString()}" id="__attribute9"/>-->
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
