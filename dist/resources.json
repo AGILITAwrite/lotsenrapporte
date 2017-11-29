@@ -31,6 +31,9 @@
             "name": "view/App.view.xml"
         },
         {
+            "name": "view/Reporting.view.xml"
+        },
+        {
             "name": "view/ViewSettingsDialog.fragment.xml"
         },
         {
@@ -138,6 +141,9 @@
         },
         {
             "name": "localService/mockserver.js"
+        },
+        {
+            "name": "controller/Reporting.controller.js"
         },
         {
             "name": "controller/App.controller.js"

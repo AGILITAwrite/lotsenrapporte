@@ -13,7 +13,7 @@
 				class="myDebitorMissing">
 				<customData>
 					<sap.ui.core:CustomData xmlns:sap.ui.core="sap.ui.core" id="__data10" key="missing"
-						value="{= ${ path: 'Debitor>/d/Kunnr', formatter: '.formatter.convertToBool' }.toString()}" writeToDom="true"/>
+						value="${ path: 'Debitor>/d/Kunnr', formatter: '.formatter.convertToBool' }.toString()" writeToDom="true"/>
 				</customData>
 			</ObjectHeader>
 			<sap.ui.layout.form:Form xmlns:sap.ui.layout.form="sap.ui.layout.form" editable="true" id="__form1">

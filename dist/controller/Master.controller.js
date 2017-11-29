@@ -265,6 +265,14 @@ sap.ui.define([
 			var oViewModel = this.getModel("masterView");
 			oViewModel.setProperty("/isFilterBarVisible", (this._oListFilterState.aFilter.length > 0));
 			oViewModel.setProperty("/filterBarLabel", this.getResourceBundle().getText("masterFilterBarText", [sFilterBarText]));
+		},
+		/**
+		 *@memberOf ch.portof.controller.Master
+		 */
+		showReporting: function( ) {
+			this.getRouter().navTo("showReportingRoute", {
+				//objectId: "04803200" //this.getView().getBindingContext().getProperty("Schiffsnummer")""
+			}, true); //this.getRouter().navTo("rapport");
 		}
 
 	});
