@@ -139,6 +139,14 @@
 					]
 				},
 				{
+					"pattern": "RapportReport/{objectId}",
+					"name": "rapportRouteReport",
+					"target": [
+						"master",
+						"rapportTarget"
+					]
+				},
+				{
 					"pattern": "showReport",
 					"name": "showReportingRoute",
 					"target": [

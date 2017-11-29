@@ -3,8 +3,9 @@ sap.ui.define([
 	"ch/portof/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
 	"ch/portof/model/formatter",
-	"ch/portof/controller/ErrorHandler"
-], function(BaseController, JSONModel, formatter, ErrorHandler) {
+	"ch/portof/controller/ErrorHandler",
+	"sap/ui/core/routing/History"
+], function(BaseController, JSONModel, formatter, ErrorHandler, History) {
 	"use strict";
 	return BaseController.extend("ch.portof.controller.Rapport", {
 		/**
@@ -22,11 +23,13 @@ sap.ui.define([
 				changeMode: false,
 				annullierenVisible: false,
 				confirmed: false,
-				fahrtrichtung: ""
+				fahrtrichtung: "",
+				reporting: false
 			});
 			this.setModel(oViewModel, "rapportView");
 			this.getRouter().getRoute("rapportNewRoute").attachMatched(this._onRouteMatchedNew, this);
 			this.getRouter().getRoute("rapportRoute").attachMatched(this._onRouteMatchedOld, this);
+			this.getRouter().getRoute("rapportRouteReport").attachMatched(this._onRouteMatchedReport, this);
 			this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
 		},
 		/**
@@ -41,6 +44,7 @@ sap.ui.define([
 			this.getView().getModel("rapportView").setProperty("/changeMode", true);
 			this.getView().getModel("rapportView").setProperty("/annullierenVisible", false);
 			this.getView().getModel("rapportView").setProperty("/confirmed", false);
+			this.getView().getModel("rapportView").setProperty("/reporting", false);
 			// Annullieren von neuen Rapporten nicht möglich
 			var sObjectId = oEvent.getParameter("arguments").objectId;
 			this.getModel().resetChanges();
@@ -51,9 +55,9 @@ sap.ui.define([
 				var onewRapport = oRapporteModel.createEntry("/RapporteSet");
 				oRapporteModel.setProperty("Datum", new Date(), onewRapport);
 				oRapporteModel.setProperty("Zeit", {
-				//	ms:	( dateTime.getTime() - dateTime.getTimezoneOffset() * 60000 ), // UTC Time in Locale umrechnen
-					ms: formatter.UTCTimeToLocale( new Date() ).getTime(),
-				//	ms: new Date().getTime(),
+					//	ms:	( dateTime.getTime() - dateTime.getTimezoneOffset() * 60000 ), // UTC Time in Locale umrechnen
+					ms: formatter.UTCTimeToLocale(new Date()).getTime(),
+					//	ms: new Date().getTime(),
 					__edmtype: "Edm.Time"
 				}, onewRapport);
 				oRapporteModel.setProperty("EniNr", sObjectId, onewRapport);
@@ -70,6 +74,7 @@ sap.ui.define([
 			this.getView().getModel("rapportView").setProperty("/newRapport", false);
 			this.getView().getModel("rapportView").setProperty("/changeMode", false);
 			this.getView().getModel("rapportView").setProperty("/confirmed", true); // Rapport kann nur gespeichert werden wenn Flag gesetzt
+			this.getView().getModel("rapportView").setProperty("/reporting", false);
 			// zum Editeren von bestehenden rapporten hier aktivieren.
 			this.getView().getModel("rapportView").setProperty("/annullierenVisible", true);
 			// Annullieren von gespeicherten Rapporten möglich
@@ -80,6 +85,12 @@ sap.ui.define([
 				});
 				this._bindView("/" + sObjectPath);
 			}.bind(this));
+		},
+		_onRouteMatchedReport: function(oEvent) {
+			//property reporting setzen und dann normale route für bestehenden Rapport aufrufen
+
+			this._onRouteMatchedOld(oEvent);
+			this.getView().getModel("rapportView").setProperty("/reporting", true);
 		},
 		/**
 		 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
@@ -165,13 +176,30 @@ sap.ui.define([
 		 *@memberOf ch.portof.controller.Rapport
 		 */
 		onCancel: function() {
+			var oViewModel = this.getModel("rapportView");
 			var oContext = this.getView().getBindingContext();
 			var schiffsnr = oContext.getProperty("EniNr");
 			this.onSignatureReset();
 			this._destory(false);
-			this.getRouter().navTo("object", {
-				objectId: schiffsnr
-			}, true);
+
+			if (oViewModel.getProperty("/reporting") === true) {
+				this.getRouter().navTo("showReportingRoute", {}, true);
+			} else {
+				this.getRouter().navTo("object", {
+					objectId: schiffsnr
+				}, true);
+			}
+
+			// versuch zur navigation
+			// var oHistory = History.getInstance();
+			// var sPreviousHash = oHistory.getPreviousHash();
+
+			// if (sPreviousHash !== undefined) {
+			// 	window.history.go(-1);
+			// } else {
+			// 	var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			// 	oRouter.navTo("overview", true);
+			// }
 		},
 		/**
 		 *@memberOf ch.portof.controller.Rapport
@@ -195,7 +223,8 @@ sap.ui.define([
 			var minDate = new Date();
 			minDate.setDate(minDate.getDate() - 2); //Lotsenrapporte nur bis und mit Vortag erfassbar
 			if (oContext.getProperty("Datum") >= new Date() || (oContext.getProperty("Datum").toDateString() === new Date().toDateString() &&
-				this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))) >= this.formatter.time(this.formatter.UTCTimeToLocale( new Date()))) // Datum in der Zukunft 
+					this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))) >= this.formatter.time(this.formatter.UTCTimeToLocale(new Date()))
+				) // Datum in der Zukunft 
 				//this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))) >= this.formatter.time(new Date())) // Datum in der Zukunft  
 
 			) {
@@ -225,31 +254,31 @@ sap.ui.define([
 							//onClose: function(oAction) { error = true; } 
 					});
 				} else {
-					
+
 					if (!oContext.getProperty("Bemerkung") && !this.getModel("Debitor").getProperty("/d/Kunnr")) { // 
-					//!this.getView().byId("__boxCheckConfirm0").getSelected()) { // 
+						//!this.getView().byId("__boxCheckConfirm0").getSelected()) { // 
 
-					sap.m.MessageBox.show("Rechnungsadresse unbekannt. Bitte Rechnungsadresse ins Bemerkungsfeld schreiben!", {
-						icon: sap.m.MessageBox.Icon.ERROR,
-						title: "Fehler" //,
-							//actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
-							//onClose: function(oAction) { error = true; } 
-					});
-				} else {
-					
-			// 					var dateTime = new Date();
-			// ( dateTime.getTime() - dateTime.getTimezoneOffset() * 60000 )
+						sap.m.MessageBox.show("Rechnungsadresse unbekannt. Bitte Rechnungsadresse ins Bemerkungsfeld schreiben!", {
+							icon: sap.m.MessageBox.Icon.ERROR,
+							title: "Fehler" //,
+								//actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+								//onClose: function(oAction) { error = true; } 
+						});
+					} else {
 
-					// die Zeit wird beim Lesen des Models in MS umgewandelt und muss aber beim speichern manuell in EdmTime umgewandelt werden, da das nicht wieder automatisch gemacht wird
-					//oRapportModel.setProperty("Zeit", this.formatter.time(new Date( oContext.getProperty("Zeit/ms") - new Date().getTimezoneOffset() * 60000 )), oContext);
-					 oRapportModel.setProperty("Zeit", this.formatter.time(new Date( oContext.getProperty("Zeit/ms")     )), oContext);
-					//			oRapportModel.attachEventOnce("batchRequestCompleted", jQuery.proxy(this._submitSuccess, this));
-					//			oRapportModel.attachEventOnce("batchRequestFailed", jQuery.proxy(this._submitError, this));
-					oRapportModel.submitChanges({
-						success: jQuery.proxy(this._submitSuccess, this),
-						error: jQuery.proxy(this._submitError, this)
-					});
-				}
+						// 					var dateTime = new Date();
+						// ( dateTime.getTime() - dateTime.getTimezoneOffset() * 60000 )
+
+						// die Zeit wird beim Lesen des Models in MS umgewandelt und muss aber beim speichern manuell in EdmTime umgewandelt werden, da das nicht wieder automatisch gemacht wird
+						//oRapportModel.setProperty("Zeit", this.formatter.time(new Date( oContext.getProperty("Zeit/ms") - new Date().getTimezoneOffset() * 60000 )), oContext);
+						oRapportModel.setProperty("Zeit", this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))), oContext);
+						//			oRapportModel.attachEventOnce("batchRequestCompleted", jQuery.proxy(this._submitSuccess, this));
+						//			oRapportModel.attachEventOnce("batchRequestFailed", jQuery.proxy(this._submitError, this));
+						oRapportModel.submitChanges({
+							success: jQuery.proxy(this._submitSuccess, this),
+							error: jQuery.proxy(this._submitError, this)
+						});
+					}
 				}
 			}
 		},
@@ -420,7 +449,7 @@ sap.ui.define([
 			var oContext = this.getView().getBindingContext();
 			//var date = oContext.getProperty("Datum").toISOString().slice(0, -1);
 			var date = this.formatter.UTCTimeToLocale(oContext.getProperty("Datum")).toJSON().slice(0, -1);
-			
+
 			var time = this.formatter.time(new Date(oContext.getProperty("Zeit/ms")));
 			//var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
 			//var localISOTime = (new Date(Date.now() - tzoffset)).toISOString().slice(0,-1);
@@ -562,17 +591,17 @@ sap.ui.define([
 			this._resetRadioButtons(oRapporteModel, oRapporteContext);
 			oRapporteModel.setProperty("AllgemeineDienstleistung", null, oRapporteContext);
 		},
-				/**
+		/**
 		 *@memberOf ch.portof.controller.Rapport
 		 */
 		_setFahrtrichtung: function() {
 			var oRapporteContext = this.getView().getBindingContext();
-			if (oRapporteContext.getProperty("Talfahrt") === true ) {
+			if (oRapporteContext.getProperty("Talfahrt") === true) {
 				this.getView().getModel("rapportView").setProperty("/fahrtrichtung", 'Talfahrt');
 			} else {
-				this.getView().getModel("rapportView").setProperty("/fahrtrichtung", 'Bergfahrt');				
+				this.getView().getModel("rapportView").setProperty("/fahrtrichtung", 'Bergfahrt');
 			}
 		}
-		
+
 	});
 });
