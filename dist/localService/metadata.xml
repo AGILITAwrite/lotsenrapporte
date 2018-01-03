@@ -39,6 +39,7 @@
 				<Property Name="Altitude" Type="Edm.Decimal" Precision="4" Scale="0" sap:label="Höhe über NNull" sap:sortable="false" sap:filterable="false"/>
 				<Property Name="Meinh" Type="Edm.String" MaxLength="3" sap:label="Mengeneinheit" sap:sortable="false" sap:filterable="false"
 					sap:semantics="unit-of-measure"/>
+				<Property Name="Schiffsname" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="Schiffsname" sap:sortable="false" sap:filterable="false" />
 			</EntityType>
 			<EntityType Name="Debitoren" sap:content-version="1">
 				<Key>

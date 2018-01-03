@@ -21,7 +21,7 @@ sap.ui.define([
 			});
 			if (typeof sap.ushell.Container !== 'undefined') {
 				// the variable is defined
-				oViewModel.setProperty("username", sap.ushell.Container.getUser().getId());
+				oViewModel.setProperty("/username", sap.ushell.Container.getUser().getId());
 			}
 
 			this.setModel(oViewModel, "reportView");

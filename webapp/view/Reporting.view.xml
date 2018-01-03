@@ -47,7 +47,7 @@
 								</customData>
 								<cells>
 									<ObjectIdentifier title="{Rapportid}"/>
-									<ObjectAttribute binding="{Schiffe/}"  text="{Name}" id="__attribute4"/>
+									<ObjectAttribute text="{Schiffsname}" id="__attribute5"/>
 									<!-- SCHIFFSNAME EINFÜGEN -->
 									<ObjectAttribute text="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}" id="__attribute0"/>
 									<!--<ObjectAttribute id="__attribute1" text="{ path: 'Zeit.ms', type: 'sap.ui.model.type.Time', formatOptions: { pattern: 'HH:mm', source: { pattern : '\'PT\'HH\'H\'mm\'M\'ss\'S\''}}}"/>-->
