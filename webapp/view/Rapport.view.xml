@@ -18,7 +18,7 @@
 			</ObjectHeader>
 			<sap.ui.layout.form:Form xmlns:sap.ui.layout.form="sap.ui.layout.form" editable="true" id="__form1">
 				<sap.ui.layout.form:formContainers>
-					<sap.ui.layout.form:FormContainer title="Kopfdaten {Rapportid}" id="__container1" expandable="true">
+					<sap.ui.layout.form:FormContainer title="Kopfdaten {= parseFloat(${Rapportid}) }" id="__container1" expandable="true">
 						<sap.ui.layout.form:FormElement id="__element2" label="Datum/Zeit">
 							<sap.ui.layout.form:fields>
 								<DatePicker width="100%" id="startDatePicker" valueFormat="yyyyMMdd" placeholder="dd.MM.yyyy" displayFormat="dd.MM.yyyy"
