@@ -63,7 +63,7 @@
 						</sap.ui.layout.form:formElements>
 						<sap.ui.layout.form:FormElement id="__element13">
 							<sap.ui.layout.form:fields>
-								<Text text="* gemäss Gebürentarif" id="__text15"/>
+								<Text text="* gemäss Gebührentarif" id="__text15"/>
 							</sap.ui.layout.form:fields>
 						</sap.ui.layout.form:FormElement>
 					</sap.ui.layout.form:FormContainer>
