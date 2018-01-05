@@ -1,12 +1,9 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns="sap.m"
-	controllerName="ch.portof.controller.Reporting" xmlns:html="http://www.w3.org/1999/xhtml">
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="ch.portof.controller.Reporting">
 	<App>
 		<pages>
-			<Page title="Lotsenrapporte">
+			<Page title="Lotsenrapporte" navButtonPress="onNavBack" showNavButton="{device>/system/phone}">
 				<content>
-					<Table id="lineItemsList" width="auto" items="{ path : '/RapporteSet' }" updateFinished="onListUpdateFinished"
-						noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin"
-						growingScrollToLoad="true" growing="true">
+					<Table id="lineItemsList" width="auto" items="{ path : '/RapporteSet' }" updateFinished="onListUpdateFinished" noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin" growingScrollToLoad="true" growing="true">
 						<headerToolbar>
 							<Toolbar id="lineItemsToolbar">
 								<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}"/>
@@ -46,13 +43,12 @@
 									<sap.ui.core:CustomData xmlns:sap.ui.core="sap.ui.core" id="__data9" key="background" value="{= ${Loevm}.toString()}" writeToDom="true"/>
 								</customData>
 								<cells>
-									<ObjectIdentifier title="{Rapportid}"/>
+									<ObjectIdentifier title="{= parseFloat(${Rapportid}) }"/>
 									<ObjectAttribute text="{Schiffsname}" id="__attribute5"/>
 									<!-- SCHIFFSNAME EINFÜGEN -->
 									<ObjectAttribute text="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}" id="__attribute0"/>
 									<!--<ObjectAttribute id="__attribute1" text="{ path: 'Zeit.ms', type: 'sap.ui.model.type.Time', formatOptions: { pattern: 'HH:mm', source: { pattern : '\'PT\'HH\'H\'mm\'M\'ss\'S\''}}}"/>-->
-									<ObjectAttribute id="__attribute1"
-										text="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time' ,formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm', UTC : true }}"/>
+									<ObjectAttribute id="__attribute1" text="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time' ,formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm', UTC : true }}"/>
 									<ObjectAttribute text="{Lotsenname}" id="__attribute2"/>
 									<CheckBox id="__box0" selected="{Loevm}" editable="false"/>
 									<!--<ObjectAttribute text="{= ${Loevm}.toString()}" id="__attribute9"/>-->
