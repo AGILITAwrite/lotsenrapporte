@@ -141,7 +141,7 @@
 												<StandardListItem title="Total" id="__item14" class="myTotal"/>
 												<Text text="" id="__text47" visible="false" class="myTotal"/>
 												<Text text="" id="__text48" visible="false" class="myTotal"/>
-												<Text text="" id="__Total" class="myTotalmix"/>
+												<Text text="{rapportView>/total}" id="__Total" class="myTotalmix"/>
 											</cells>
 										</ColumnListItem>
 									</items>

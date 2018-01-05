@@ -24,7 +24,8 @@ sap.ui.define([
 				annullierenVisible: false,
 				confirmed: false,
 				fahrtrichtung: "",
-				reporting: false
+				reporting: false,
+				total: 0
 			});
 			this.setModel(oViewModel, "rapportView");
 			this.getRouter().getRoute("rapportNewRoute").attachMatched(this._onRouteMatchedNew, this);
@@ -265,6 +266,16 @@ sap.ui.define([
 								//onClose: function(oAction) { error = true; } 
 						});
 					} else {
+						if ( this.getModel("rapportView").getProperty("/total") === 0 ) { // 
+						//!this.getView().byId("__boxCheckConfirm0").getSelected()) { // 
+
+						sap.m.MessageBox.show("Bitte eine Leistung auswählen!", {
+							icon: sap.m.MessageBox.Icon.ERROR,
+							title: "Fehler" //,
+								//actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+								//onClose: function(oAction) { error = true; } 
+						});
+					} else {
 
 						// 					var dateTime = new Date();
 						// ( dateTime.getTime() - dateTime.getTimezoneOffset() * 60000 )
@@ -278,6 +289,8 @@ sap.ui.define([
 							success: jQuery.proxy(this._submitSuccess, this),
 							error: jQuery.proxy(this._submitError, this)
 						});
+					}
+						
 					}
 				}
 			}
@@ -390,6 +403,7 @@ sap.ui.define([
 			}*/
 			// rechnen des Totalbetrags
 			var total = 0;
+			this.getView().getModel("rapportView").setProperty("/total", total);
 			if (oRapporteContext.getProperty("MrbU2000t")) {
 				total = parseFloat(oTarifModel.getProperty("/d/MrbU2000t"));
 			}
@@ -413,7 +427,8 @@ sap.ui.define([
 				total = parseFloat(total) + parseFloat(oTarifModel.getProperty("/d/AllgemeineDienstleistung")) * parseFloat(oRapporteContext.getProperty(
 					"AllgemeineDienstleistung"));
 			}
-			this.getView().byId("__Total").setProperty("text", total + " CHF");
+			//this.getView().byId("__Total").setProperty("text", total + " CHF");
+			this.getView().getModel("rapportView").setProperty("/total", total);
 		},
 		_createSignatureModel: function(oSignature) {
 			// Model zum handling der Signatur erzeugen
@@ -573,6 +588,8 @@ sap.ui.define([
 			oRapporteModel.setProperty("BRSchubverband", false, oRapporteContext);
 			oRapporteModel.setProperty("BaAug", false, oRapporteContext);
 			oRapporteModel.setProperty("BirAug", false, oRapporteContext);
+			oRapporteModel.setProperty("AllgemeineDienstleistung", 0, oRapporteContext);
+			this._calc();
 		},
 		/**
 		 *@memberOf ch.portof.controller.Rapport
