@@ -63,7 +63,7 @@
 						</sap.ui.layout.form:formElements>
 						<sap.ui.layout.form:FormElement id="__element13">
 							<sap.ui.layout.form:fields>
-								<Text text="* gemäss Gebürentarif" id="__text15"/>
+								<Text text="* gemäss Gebührentarif" id="__text15"/>
 							</sap.ui.layout.form:fields>
 						</sap.ui.layout.form:FormElement>
 					</sap.ui.layout.form:FormContainer>
@@ -141,7 +141,7 @@
 												<StandardListItem title="Total" id="__item14" class="myTotal"/>
 												<Text text="" id="__text47" visible="false" class="myTotal"/>
 												<Text text="" id="__text48" visible="false" class="myTotal"/>
-												<Text text="" id="__Total" class="myTotalmix"/>
+												<Text text="{rapportView>/total}" id="__Total" class="myTotalmix"/>
 											</cells>
 										</ColumnListItem>
 									</items>

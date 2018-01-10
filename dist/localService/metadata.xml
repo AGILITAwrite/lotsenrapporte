@@ -149,6 +149,7 @@
 				<Key>
 					<PropertyRef Name="AddrNo"/>
 				</Key>
+				<Property Name="Ispoweruser" Type="Edm.Boolean" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
 				<Property Name="PersNo" Type="Edm.String" MaxLength="10" sap:label="Person number" sap:creatable="false" sap:updatable="false"
 					sap:sortable="false" sap:filterable="false"/>
 				<Property Name="TitleP" Type="Edm.String" MaxLength="30" sap:label="Title" sap:creatable="false" sap:updatable="false" sap:sortable="false"

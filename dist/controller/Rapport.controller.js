@@ -24,9 +24,13 @@ sap.ui.define([
 				annullierenVisible: false,
 				confirmed: false,
 				fahrtrichtung: "",
-				reporting: false
+				reporting: false,
+				total: 0,
+				poweruser: false,
+				lotsenname: ""
 			});
 			this.setModel(oViewModel, "rapportView");
+			this._getBenutzer();
 			this.getRouter().getRoute("rapportNewRoute").attachMatched(this._onRouteMatchedNew, this);
 			this.getRouter().getRoute("rapportRoute").attachMatched(this._onRouteMatchedOld, this);
 			this.getRouter().getRoute("rapportRouteReport").attachMatched(this._onRouteMatchedReport, this);
@@ -61,7 +65,8 @@ sap.ui.define([
 					__edmtype: "Edm.Time"
 				}, onewRapport);
 				oRapporteModel.setProperty("EniNr", sObjectId, onewRapport);
-				oRapporteModel.setProperty("Lotsenname", this._getBenutzername(), onewRapport);
+				//oRapporteModel.setProperty("Lotsenname", this._getBenutzername(), onewRapport);
+				oRapporteModel.setProperty("Lotsenname", this.getModel("rapportView").getProperty("/lotsenname"), onewRapport);
 				//oRapporteModel.setProperty("Talfahrt", true, onewRapport);
 				// oRapporteModel.setProperty("MrbUe2000t", true, onewRapport);
 				//oRapporteModel.setProperty("Bemerkung", "", onewRapport);
@@ -235,7 +240,9 @@ sap.ui.define([
 						//actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
 						//onClose: function(oAction) { error = true; } 
 				});
-			} else if (oContext.getProperty("Datum") < minDate) { //Lotsenrapporte nur bis und mit Vortag erfassbar
+			} else if (oContext.getProperty("Datum") < minDate && //Lotsenrapporte nur bis und mit Vortag erfassbar
+						!this.getModel("rapportView").getProperty("/poweruser") // Ausnahme für 
+						) { 
 				sap.m.MessageBox.show("Der Lotsenrapport nicht mehr als 1 Tag in die Vergangeheit erfasst werden! \ Bitte das Datum anpassen", {
 					icon: sap.m.MessageBox.Icon.ERROR,
 					title: "Fehler" //,
@@ -244,7 +251,10 @@ sap.ui.define([
 				});
 			} else {
 
-				if (!oContext.getProperty("Signatur") || !this.getModel("rapportView").getProperty("/confirmed")) { // 
+				if ( ( !oContext.getProperty("Signatur") // Muss unterschrieben sein 
+					 && !this.getModel("rapportView").getProperty("/poweruser")  // oder Poweruser 
+				)
+				|| !this.getModel("rapportView").getProperty("/confirmed")) { // 
 					//!this.getView().byId("__boxCheckConfirm0").getSelected()) { // 
 
 					sap.m.MessageBox.show("Der Lotsenrapport muss vor dem Speichern bestätigt und unterschrieben werden!", {
@@ -265,6 +275,16 @@ sap.ui.define([
 								//onClose: function(oAction) { error = true; } 
 						});
 					} else {
+						if ( this.getModel("rapportView").getProperty("/total") === 0 ) { // 
+						//!this.getView().byId("__boxCheckConfirm0").getSelected()) { // 
+
+						sap.m.MessageBox.show("Bitte eine Leistung auswählen!", {
+							icon: sap.m.MessageBox.Icon.ERROR,
+							title: "Fehler" //,
+								//actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+								//onClose: function(oAction) { error = true; } 
+						});
+					} else {
 
 						// 					var dateTime = new Date();
 						// ( dateTime.getTime() - dateTime.getTimezoneOffset() * 60000 )
@@ -278,6 +298,8 @@ sap.ui.define([
 							success: jQuery.proxy(this._submitSuccess, this),
 							error: jQuery.proxy(this._submitError, this)
 						});
+					}
+						
 					}
 				}
 			}
@@ -390,6 +412,7 @@ sap.ui.define([
 			}*/
 			// rechnen des Totalbetrags
 			var total = 0;
+			this.getView().getModel("rapportView").setProperty("/total", total);
 			if (oRapporteContext.getProperty("MrbU2000t")) {
 				total = parseFloat(oTarifModel.getProperty("/d/MrbU2000t"));
 			}
@@ -413,7 +436,8 @@ sap.ui.define([
 				total = parseFloat(total) + parseFloat(oTarifModel.getProperty("/d/AllgemeineDienstleistung")) * parseFloat(oRapporteContext.getProperty(
 					"AllgemeineDienstleistung"));
 			}
-			this.getView().byId("__Total").setProperty("text", total + " CHF");
+			//this.getView().byId("__Total").setProperty("text", total + " CHF");
+			this.getView().getModel("rapportView").setProperty("/total", total);
 		},
 		_createSignatureModel: function(oSignature) {
 			// Model zum handling der Signatur erzeugen
@@ -501,7 +525,7 @@ sap.ui.define([
 			oDebitor.loadData(sUrlDebi, true, false);
 			this.setModel(oDebitor, "Debitor");
 		},
-		_getBenutzername: function() {
+		/*_getBenutzername: function() {
 			// Ermitteln des Lotsennamens
 			var oBenutzerModel = new JSONModel({
 				busy: false,
@@ -509,6 +533,19 @@ sap.ui.define([
 			});
 			var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/BenutzerSet('1')";
 			oBenutzerModel.loadData(URL, true, false);
+			return oBenutzerModel.getProperty("/d/Firstname") + " " + oBenutzerModel.getProperty("/d/Lastname");
+		},*/
+		
+		_getBenutzer: function() {
+			// Ermitteln des Lotsennamens
+			var oBenutzerModel = new JSONModel({
+				busy: false,
+				delay: 0
+			});
+			var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/BenutzerSet('1')";
+			oBenutzerModel.loadData(URL, true, false);
+			this.getView().getModel("rapportView").setProperty("/lotsenname", oBenutzerModel.getProperty("/d/Firstname") + " " + oBenutzerModel.getProperty("/d/Lastname") );
+			this.getView().getModel("rapportView").setProperty("/poweruser", oBenutzerModel.getProperty("/d/Ispoweruser") );
 			return oBenutzerModel.getProperty("/d/Firstname") + " " + oBenutzerModel.getProperty("/d/Lastname");
 		},
 		_destory: function(bSave) {
@@ -573,6 +610,8 @@ sap.ui.define([
 			oRapporteModel.setProperty("BRSchubverband", false, oRapporteContext);
 			oRapporteModel.setProperty("BaAug", false, oRapporteContext);
 			oRapporteModel.setProperty("BirAug", false, oRapporteContext);
+			oRapporteModel.setProperty("AllgemeineDienstleistung", 0, oRapporteContext);
+			this._calc();
 		},
 		/**
 		 *@memberOf ch.portof.controller.Rapport
