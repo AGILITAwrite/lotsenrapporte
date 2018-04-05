@@ -197,6 +197,12 @@ sap.ui.define([
 				objectId: this.getView().getBindingContext().getProperty("Schiffsnummer")
 			}, true); //this.getRouter().navTo("rapport");
 		},
+		newRapportSSB: function() {
+
+			this.getRouter().navTo("rapportNewSSBRoute", {
+				objectId: this.getView().getBindingContext().getProperty("Schiffsnummer")
+			}, true);
+		},
 		/**
 		 *@memberOf ch.portof.controller.Detail
 		 */

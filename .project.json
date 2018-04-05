@@ -13,8 +13,8 @@
     "excludedFiles": [
       "test.html"
     ],
-    "buildRequired": false,
-    "lastBuildDateTime": "Wed, 10 Jan 2018 14:22:25 GMT"
+    "buildRequired": true,
+    "lastBuildDateTime": "Tue, 16 Jan 2018 15:51:08 GMT"
   },
   "dataBinding": {
     "/webapp/view/NotFound.view.xml": {
@@ -36,6 +36,10 @@
       "entitySet": "RapporteSet",
       "DefaultBindingMode": "sap.ui.model.BindingMode.TwoWay"
     },
+    "/webapp/view/RapportSSB.view.xml": {
+      "entitySet": "RapporteSet",
+      "DefaultBindingMode": "sap.ui.model.BindingMode.TwoWay"
+    },
     "/webapp/view/Reporting.view.xml": {
       "entitySet": "RapporteSet"
     }
@@ -49,7 +53,7 @@
     {
       "templateId": "ui5template.basicSAPUI5ApplicationComponent",
       "templateVersion": "1.4.0",
-      "dateTimeStamp": "Mon, 06 Nov 2017 13:36:15 GMT"
+      "dateTimeStamp": "Mon, 12 Feb 2018 15:03:58 GMT"
     }
   ],
   "translation": {
@@ -98,7 +102,7 @@
   "hcpdeploy": {
     "account": "a88ba9460",
     "name": "lotsenrapporte",
-    "lastVersionWeTriedToDeploy": "1.0.46"
+    "lastVersionWeTriedToDeploy": "1.0.48"
   },
   "deploy": {
     "destination": "SRH_DEV_200",
