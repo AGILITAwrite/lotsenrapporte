@@ -45,18 +45,24 @@ tr.myBorderBlackFat td{
 canvas.jSignature{
   width: 340px !important; 
   height: 84px !important;
+  /*background-color:darkgrey !important; */
+	
 }
 #signatureparent {
   color:darkblue;
-
+ /* background-color:darkgrey !important; */
   padding: 2px;
   width: 344px; 
   height: 90px;
 }
 
 #signature {
-
   padding: 0 0 0 0; 
   margin: 0 0 0 0;
   border: 2px dotted black;
+ /*  background-color:lightgrey !important; */
+	
+}
+.signature {
+	background-color:white; 
 }

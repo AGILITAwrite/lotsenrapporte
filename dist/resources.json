@@ -34,6 +34,9 @@
             "name": "view/Reporting.view.xml"
         },
         {
+            "name": "view/RapportSSB.view.xml"
+        },
+        {
             "name": "view/ViewSettingsDialog.fragment.xml"
         },
         {
@@ -41,6 +44,9 @@
         },
         {
             "name": "libs/jSignature.min.js"
+        },
+        {
+            "name": "libs/jSignature.CompressorBase30.js"
         },
         {
             "name": "i18n/i18n.properties",
@@ -71,10 +77,10 @@
             "name": "test/integration/pages/Detail.js"
         },
         {
-            "name": "test/integration/pages/Common.js"
+            "name": "test/integration/pages/App.js"
         },
         {
-            "name": "test/integration/pages/App.js"
+            "name": "test/integration/pages/Common.js"
         },
         {
             "name": "test/integration/pages/Browser.js"
@@ -144,6 +150,9 @@
         },
         {
             "name": "controller/Reporting.controller.js"
+        },
+        {
+            "name": "controller/RapportSSB.controller.js"
         },
         {
             "name": "controller/App.controller.js"

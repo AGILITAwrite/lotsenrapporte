@@ -139,6 +139,22 @@
                     ]
                 },
                 {
+                    "pattern": "RapportNewSSB/{objectId}",
+                    "name": "rapportNewSSBRoute",
+                    "target": [
+                        "master",
+                        "rapportSSBTarget"
+                    ]
+                },
+                {
+                    "pattern": "RapportSSB/{objectId}",
+                    "name": "rapportSSBRoute",
+                    "target": [
+                        "master",
+                        "rapportSSBTarget"
+                    ]
+                },
+                {
                     "pattern": "RapportReport/{objectId}",
                     "name": "rapportRouteReport",
                     "target": [
@@ -172,6 +188,11 @@
                     "viewId": "rapport",
                     "viewLevel": 3
                 },
+                "rapportSSBTarget": {
+                    "viewName": "RapportSSB",
+                    "viewId": "rapportSSB",
+                    "viewLevel": 3
+                },
                 "showReportTarget": {
                     "viewName": "Reporting",
                     "viewId": "report",
@@ -195,6 +216,9 @@
             "js": [
                 {
                     "uri": "libs/jSignature.min.js"
+                },
+                {
+                    "uri": "libs/jSignature.CompressorBase30.js"
                 }
             ],
             "css": [

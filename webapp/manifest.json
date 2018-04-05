@@ -216,10 +216,9 @@
 			"js": [
 				{
 					"uri": "libs/jSignature.min.js"
-					
 				},
 				{
-				"uri": "libs/jSignature.CompressorBase30.js"
+					"uri": "libs/jSignature.CompressorBase30.js"
 				}
 			],
 			"css": [

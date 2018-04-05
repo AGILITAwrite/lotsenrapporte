@@ -1,5 +1,4 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m"
-	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" controllerName="ch.portof.controller.Rapport">
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" controllerName="ch.portof.controller.Rapport">
 	<!-- bindingContexts="RapporteSet" -->
 	<semantic:DetailPage xmlns:sap.m.semantic="sap.m.semantic" title="Semantic Page" id="__page2">
 		<semantic:saveAction>
@@ -9,11 +8,9 @@
 			<semantic:CancelAction id="__action1" press="onCancel"/>
 		</semantic:cancelAction>
 		<semantic:content>
-			<ObjectHeader title="{Schiff>/d/Name}" introActive="true" id="__header0" number="{Schiff>/d/Schiffsnummer}" condensed="true"
-				class="myDebitorMissing">
+			<ObjectHeader title="{Schiff>/d/Name}" introActive="true" id="__header0" number="{Schiff>/d/Schiffsnummer}" condensed="true" class="myDebitorMissing">
 				<customData>
-					<sap.ui.core:CustomData xmlns:sap.ui.core="sap.ui.core" id="__data10" key="missing"
-						value="${ path: 'Debitor>/d/Kunnr', formatter: '.formatter.convertToBool' }.toString()" writeToDom="true"/>
+					<sap.ui.core:CustomData xmlns:sap.ui.core="sap.ui.core" id="__data10" key="missing" value="${ path: 'Debitor>/d/Kunnr', formatter: '.formatter.convertToBool' }.toString()" writeToDom="true"/>
 				</customData>
 			</ObjectHeader>
 			<sap.ui.layout.form:Form xmlns:sap.ui.layout.form="sap.ui.layout.form" editable="true" id="__form1">
@@ -21,18 +18,14 @@
 					<sap.ui.layout.form:FormContainer title="Kopfdaten {= parseFloat(${Rapportid}) }" id="__container1" expandable="true">
 						<sap.ui.layout.form:FormElement id="__element2" label="Datum/Zeit">
 							<sap.ui.layout.form:fields>
-								<DatePicker width="100%" id="startDatePicker" valueFormat="yyyyMMdd" placeholder="dd.MM.yyyy" displayFormat="dd.MM.yyyy"
-									value="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}" editable="{rapportView>/changeMode}"
-									change="_updateTarifeNewDate"/>
+								<DatePicker width="100%" id="startDatePicker" valueFormat="yyyyMMdd" placeholder="dd.MM.yyyy" displayFormat="dd.MM.yyyy" value="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}" editable="{rapportView>/changeMode}" change="_updateTarifeNewDate"/>
 								<!--								<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker"   
 									value="{ path: 'Zeit', type: 'sap.ui.model.type.Time', 
 												formatOptions: { pattern: 'HH:mm', 
 													source: { pattern : '\'PT\'HH\'H\'mm\'M\'ss\'S\''  } 
 												} 
 											}"/>-->
-								<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker"
-									value="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time' , formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm', UTC : true }}"
-									editable="{rapportView>/changeMode}" change="_updateTarifeNewDate"/>
+								<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker" value="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time' , formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm', UTC : true }}" editable="{rapportView>/changeMode}" change="_updateTarifeNewDate"/>
 							</sap.ui.layout.form:fields>
 						</sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:FormElement id="__element8" label="Berg-/Talfahrt">
@@ -47,6 +40,24 @@
 								<Text text="{Lotsenname}" id="__text24"/>
 							</sap.ui.layout.form:fields>
 						</sap.ui.layout.form:FormElement>
+					</sap.ui.layout.form:FormContainer>
+					<sap.ui.layout.form:FormContainer xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.m.semantic="sap.m.semantic" xmlns:sap.ui.layout.form="sap.ui.layout.form" title="Bestätigung" id="__container7" expandable="true">
+					    <sap.ui.layout.form:formElements>
+					        <sap.ui.layout.form:FormElement id="__element14">
+					            <sap.ui.layout.form:fields>
+					                <HBox xmlns="sap.m" width="100%" id="__hbox0">
+					                    <items>
+					                        <CheckBox id="__boxCheckConfirm0" selected="{rapportView>/confirmed}"/>
+					                        <Text class="myConfirmation" text="Hiermit bestätigen wir, dass die obigen Angaben zutreffen und dass das Schiff bei Antritt der Reise in einem einwandfreien technischen und nautischen Zustand ist.&#10;&#10;Nous certifions par le présent document que les indications fournies sont correctes et que le navire est dans un état technique et nautique irréprochable au début du voyage.&#10;&#10;Hiermee bevestigen wij de correctheid van de bovenstaande informatie en dat het schip bij het begin van de reis in een technisch en nautisch perfecte staat verkeerd.&#10;&#10;We hereby confirm that the information listed above is accurate and that the ship is in good technical and nautical condition at the start of the journey." id="__text13"/>
+					                        </items>
+					                    
+					                </HBox>
+					                
+					            </sap.ui.layout.form:fields>
+					            
+					        </sap.ui.layout.form:FormElement>
+					        </sap.ui.layout.form:formElements>
+					    
 					</sap.ui.layout.form:FormContainer>
 					<sap.ui.layout.form:FormContainer title="Zuschläge" id="__container3" expandable="true">
 						<sap.ui.layout.form:FormElement id="__element0" label="Samstags">
@@ -129,8 +140,7 @@
 										<ColumnListItem id="__item6" class="myBorderBlackFat">
 											<cells>
 												<StandardListItem type="Inactive" title="Allgemeine Dienstleistungen" description="Lotsen/Stundenlohn" id="__item13"/>
-												<Input ariaLabelledBy="__xmlview0--__label7" width="100%" id="__input0" change="_calc" value="{AllgemeineDienstleistung}"
-													editable="{rapportView>/changeMode}"/>
+												<Input ariaLabelledBy="__xmlview0--__label7" width="100%" id="__input0" change="_calc" value="{AllgemeineDienstleistung}" editable="{rapportView>/changeMode}"/>
 												<!--<CheckBox id="__box6"/>-->
 												<Text text="alle Schiffe" id="__text44"/>
 												<Text text="{ path: 'tarifeSet>/d/AllgemeineDienstleistung', formatter: '.formatter.currencyValue' } CHF" id="__text45"/>
@@ -185,8 +195,7 @@
 									<!--<ObjectHeader binding="{Debitor>}" number="{d/Kunnr}" introActive="true" titleActive="true" id="debitorHeader1" title="{/d/Name1}">-->
 									<ObjectHeader number="{Debitor>/d/Kunnr}" id="debitorHeader1" title="{Debitor>/d/Name1}" class="myDebitorMissingBox">
 										<customData>
-											<sap.ui.core:CustomData xmlns:sap.ui.core="sap.ui.core" id="__data11" key="missing"
-												value="{= ${ path: 'Debitor>/d/Kunnr', formatter: '.formatter.convertToBool' }.toString()}" writeToDom="true"/>
+											<sap.ui.core:CustomData xmlns:sap.ui.core="sap.ui.core" id="__data11" key="missing" value="{= ${ path: 'Debitor>/d/Kunnr', formatter: '.formatter.convertToBool' }.toString()}" writeToDom="true"/>
 										</customData>
 										<attributes>
 											<ObjectAttribute text="{Debitor>/d/Name2}" id="__attribute8" title="Zusatz"/>
@@ -203,18 +212,6 @@
 					</sap.ui.layout.form:FormContainer>
 					<sap.ui.layout.form:FormContainer title="Unterschrift" id="__container2" expandable="true">
 						<sap.ui.layout.form:formElements>
-							<sap.ui.layout.form:FormElement id="__element14">
-								<sap.ui.layout.form:fields>
-									<HBox width="100%" id="__hbox0">
-										<items>
-											<CheckBox id="__boxCheckConfirm0" selected="{rapportView>/confirmed}"/>
-											<Text class="myConfirmation"
-												text="Hiermit bestätigen wir, dass die obigen Angaben zutreffen und dass das Schiff bei Antritt der Reise in einem einwandfreien technischen und nautischen Zustand ist.&#10;&#10;Nous certifions par le présent document que les indications fournies sont correctes et que le navire est dans un état technique et nautique irréprochable au début du voyage.&#10;&#10;Hiermee bevestigen wij de correctheid van de bovenstaande informatie en dat het schip bij het begin van de reis in een technisch en nautisch perfecte staat verkeerd.&#10;&#10;We hereby confirm that the information listed above is accurate and that the ship is in good technical and nautical condition at the start of the journey."
-												id="__text13"/>
-										</items>
-									</HBox>
-								</sap.ui.layout.form:fields>
-							</sap.ui.layout.form:FormElement>
 							<sap.ui.layout.form:FormElement id="__element1">
 								<sap.ui.layout.form:fields>
 									<Panel id="signaturePanel">
@@ -236,8 +233,7 @@
 													<sap.ui.core:CustomData id="__data71" key="sap-ui-fastnavgroup" value="true" writeToDom="true"/>
 												</customData>
 												<content>
-													<Button id="SignatureReset" press="onSignatureReset" text="Unterschrift zurücksetzen" width="200px" enabled="{rapportView>/changeMode}"
-														type="Reject" visible="{rapportView>/changeMode}"/>
+													<Button id="SignatureReset" press="onSignatureReset" text="Unterschrift zurücksetzen" width="200px" enabled="{rapportView>/changeMode}" type="Reject" visible="{rapportView>/changeMode}"/>
 												</content>
 											</Toolbar>
 										</infoToolbar>
@@ -273,9 +269,7 @@
 							</sap.ui.layout.form:FormElement>
 							<sap.ui.layout.form:FormElement id="__element12" label=" ">
 								<sap.ui.layout.form:fields>
-									<Text
-										text="* Gemäss Gebührentarif gültig ab 01.01.2017. Für die Punkte LD1, LD3, LD4 und LD5 kann gegebenenfalls MWST verrechnet werden. LD=Lotsendienstleistungen"
-										id="__text12"/>
+									<Text text="* Gemäss Gebührentarif gültig ab 01.01.2017. Für die Punkte LD1, LD3, LD4 und LD5 kann gegebenenfalls MWST verrechnet werden. LD=Lotsendienstleistungen" id="__text12"/>
 								</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
 						</sap.ui.layout.form:formElements>
@@ -290,8 +284,7 @@
 			</sap.ui.layout.form:Form>
 		</semantic:content>
 		<semantic:negativeAction>
-			<semantic:NegativeAction text="Annullieren" id="__action2" enabled="{rapportView>/annullierenVisible}"
-				visible="{rapportView>/annullierenVisible}" press="onAnnullieren"/>
+			<semantic:NegativeAction text="Annullieren" id="__action2" enabled="{rapportView>/annullierenVisible}" visible="{rapportView>/annullierenVisible}" press="onAnnullieren"/>
 		</semantic:negativeAction>
 		<semantic:layoutData/>
 	</semantic:DetailPage>
