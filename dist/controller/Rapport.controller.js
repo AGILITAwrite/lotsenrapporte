@@ -164,6 +164,12 @@ sap.ui.define([
 			]
 			));*/
 			this._setFahrtrichtung();
+			// Bei annullierten Rapporten löschvermerk ausblenden
+			if (oContext.getProperty("Loevm") === true) {
+				this.getView().getModel("rapportView").setProperty("/annullierenVisible", false);
+
+			}
+			//if 
 		},
 		_onMetadataLoaded: function() {
 			// Store original busy indicator delay for the detail view
@@ -241,8 +247,8 @@ sap.ui.define([
 						//onClose: function(oAction) { error = true; } 
 				});
 			} else if (oContext.getProperty("Datum") < minDate && //Lotsenrapporte nur bis und mit Vortag erfassbar
-						!this.getModel("rapportView").getProperty("/poweruser") // Ausnahme für 
-						) { 
+				!this.getModel("rapportView").getProperty("/poweruser") // Ausnahme für 
+			) {
 				sap.m.MessageBox.show("Der Lotsenrapport nicht mehr als 1 Tag in die Vergangeheit erfasst werden! \ Bitte das Datum anpassen", {
 					icon: sap.m.MessageBox.Icon.ERROR,
 					title: "Fehler" //,
@@ -251,10 +257,9 @@ sap.ui.define([
 				});
 			} else {
 
-				if ( ( !oContext.getProperty("Signatur") // Muss unterschrieben sein 
-					 && !this.getModel("rapportView").getProperty("/poweruser")  // oder Poweruser 
-				)
-				|| !this.getModel("rapportView").getProperty("/confirmed")) { // 
+				if ((!oContext.getProperty("Signatur") // Muss unterschrieben sein 
+						&& !this.getModel("rapportView").getProperty("/poweruser") // oder Poweruser 
+					) || !this.getModel("rapportView").getProperty("/confirmed")) { // 
 					//!this.getView().byId("__boxCheckConfirm0").getSelected()) { // 
 
 					sap.m.MessageBox.show("Der Lotsenrapport muss vor dem Speichern bestätigt und unterschrieben werden!", {
@@ -275,31 +280,31 @@ sap.ui.define([
 								//onClose: function(oAction) { error = true; } 
 						});
 					} else {
-						if ( this.getModel("rapportView").getProperty("/total") === 0 ) { // 
-						//!this.getView().byId("__boxCheckConfirm0").getSelected()) { // 
+						if (this.getModel("rapportView").getProperty("/total") === 0) { // 
+							//!this.getView().byId("__boxCheckConfirm0").getSelected()) { // 
 
-						sap.m.MessageBox.show("Bitte eine Leistung auswählen!", {
-							icon: sap.m.MessageBox.Icon.ERROR,
-							title: "Fehler" //,
-								//actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
-								//onClose: function(oAction) { error = true; } 
-						});
-					} else {
+							sap.m.MessageBox.show("Bitte eine Leistung auswählen!", {
+								icon: sap.m.MessageBox.Icon.ERROR,
+								title: "Fehler" //,
+									//actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+									//onClose: function(oAction) { error = true; } 
+							});
+						} else {
 
-						// 					var dateTime = new Date();
-						// ( dateTime.getTime() - dateTime.getTimezoneOffset() * 60000 )
+							// 					var dateTime = new Date();
+							// ( dateTime.getTime() - dateTime.getTimezoneOffset() * 60000 )
 
-						// die Zeit wird beim Lesen des Models in MS umgewandelt und muss aber beim speichern manuell in EdmTime umgewandelt werden, da das nicht wieder automatisch gemacht wird
-						//oRapportModel.setProperty("Zeit", this.formatter.time(new Date( oContext.getProperty("Zeit/ms") - new Date().getTimezoneOffset() * 60000 )), oContext);
-						oRapportModel.setProperty("Zeit", this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))), oContext);
-						//			oRapportModel.attachEventOnce("batchRequestCompleted", jQuery.proxy(this._submitSuccess, this));
-						//			oRapportModel.attachEventOnce("batchRequestFailed", jQuery.proxy(this._submitError, this));
-						oRapportModel.submitChanges({
-							success: jQuery.proxy(this._submitSuccess, this),
-							error: jQuery.proxy(this._submitError, this)
-						});
-					}
-						
+							// die Zeit wird beim Lesen des Models in MS umgewandelt und muss aber beim speichern manuell in EdmTime umgewandelt werden, da das nicht wieder automatisch gemacht wird
+							//oRapportModel.setProperty("Zeit", this.formatter.time(new Date( oContext.getProperty("Zeit/ms") - new Date().getTimezoneOffset() * 60000 )), oContext);
+							oRapportModel.setProperty("Zeit", this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))), oContext);
+							//			oRapportModel.attachEventOnce("batchRequestCompleted", jQuery.proxy(this._submitSuccess, this));
+							//			oRapportModel.attachEventOnce("batchRequestFailed", jQuery.proxy(this._submitError, this));
+							oRapportModel.submitChanges({
+								success: jQuery.proxy(this._submitSuccess, this),
+								error: jQuery.proxy(this._submitError, this)
+							});
+						}
+
 					}
 				}
 			}
@@ -535,7 +540,7 @@ sap.ui.define([
 			oBenutzerModel.loadData(URL, true, false);
 			return oBenutzerModel.getProperty("/d/Firstname") + " " + oBenutzerModel.getProperty("/d/Lastname");
 		},*/
-		
+
 		_getBenutzer: function() {
 			// Ermitteln des Lotsennamens
 			var oBenutzerModel = new JSONModel({
@@ -544,8 +549,9 @@ sap.ui.define([
 			});
 			var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/BenutzerSet('1')";
 			oBenutzerModel.loadData(URL, true, false);
-			this.getView().getModel("rapportView").setProperty("/lotsenname", oBenutzerModel.getProperty("/d/Firstname") + " " + oBenutzerModel.getProperty("/d/Lastname") );
-			this.getView().getModel("rapportView").setProperty("/poweruser", oBenutzerModel.getProperty("/d/Ispoweruser") );
+			this.getView().getModel("rapportView").setProperty("/lotsenname", oBenutzerModel.getProperty("/d/Firstname") + " " + oBenutzerModel
+				.getProperty("/d/Lastname"));
+			this.getView().getModel("rapportView").setProperty("/poweruser", oBenutzerModel.getProperty("/d/Ispoweruser"));
 			return oBenutzerModel.getProperty("/d/Firstname") + " " + oBenutzerModel.getProperty("/d/Lastname");
 		},
 		_destory: function(bSave) {
@@ -573,12 +579,12 @@ sap.ui.define([
 			oViewModel.setProperty("/newRapport", false);
 			var schiffsnr = this.getView().getBindingContext().getProperty("EniNr");
 			this._destory(true);
-			
+
 			// alte navigation
 			// this.getRouter().navTo("object", {
 			// 	objectId: schiffsnr
 			// }, true);
-			
+
 			if (oViewModel.getProperty("/reporting") === true) {
 				this.getRouter().navTo("showReportingRoute", {}, true);
 			} else {
@@ -617,18 +623,39 @@ sap.ui.define([
 		 *@memberOf ch.portof.controller.Rapport
 		 */
 		onAnnullieren: function() {
-			//This code was generated by the layout editor.
-			var oRapportModel = this.getModel();
-			var oContext = this.getView().getBindingContext();
-			//oRapportModel.setProperty("Zeit", this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))), oContext);
-			oRapportModel.setProperty("Loevm", true, oContext);
-			oRapportModel.setProperty("Zeit", this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))), oContext);
-			//			oRapportModel.attachEventOnce("batchRequestCompleted", jQuery.proxy(this._submitSuccess, this));
-			//			oRapportModel.attachEventOnce("batchRequestFailed", jQuery.proxy(this._submitError, this));
-			oRapportModel.submitChanges({
-				success: jQuery.proxy(this._submitSuccess, this),
-				error: jQuery.proxy(this._submitError, this)
-			});
+			/*			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+						sap.m.MessageBox.confirm(
+							"Wollen Sie den Lotsenrapport wirklich annullieren?", {
+								styleClass: bCompact ? "sapUiSizeCompact" : ""
+							}
+						);*/
+
+			sap.m.MessageBox.confirm(
+				"Wollen Sie den Lotsenrapport wirklich annullieren?.", {
+					icon: sap.m.MessageBox.Icon.QUESTION,
+					title: "Annullation",
+					actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+					onClose: jQuery.proxy(function(oAction) {
+						if (oAction === sap.m.MessageBox.Action.YES) {
+
+							//This code was generated by the layout editor.
+							var oRapportModel = this.getModel();
+							var oContext = this.getView().getBindingContext();
+							//oRapportModel.setProperty("Zeit", this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))), oContext);
+							oRapportModel.setProperty("Loevm", true, oContext);
+							oRapportModel.setProperty("Zeit", this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))), oContext);
+							//			oRapportModel.attachEventOnce("batchRequestCompleted", jQuery.proxy(this._submitSuccess, this));
+							//			oRapportModel.attachEventOnce("batchRequestFailed", jQuery.proxy(this._submitError, this));
+							oRapportModel.submitChanges({
+								success: jQuery.proxy(this._submitSuccess, this),
+								error: jQuery.proxy(this._submitError, this)
+							});
+
+						}
+					}, this)
+				}
+			);
+
 		},
 		/**
 		 *@memberOf ch.portof.controller.Rapport

@@ -164,6 +164,12 @@ sap.ui.define([
 			]
 			));*/
 			this._setFahrtrichtung();
+			// Bei annullierten Rapporten löschvermerk ausblenden
+			if (oContext.getProperty("Loevm") === true) {
+				this.getView().getModel("rapportView").setProperty("/annullierenVisible", false);
+
+			}
+			//if 
 		},
 		_onMetadataLoaded: function() {
 			// Store original busy indicator delay for the detail view
@@ -222,6 +228,17 @@ sap.ui.define([
 						oRapportModel.setProperty("Signatur", oSignatureBase30[1], oContext);
 					} else {
 						oRapportModel.setProperty("Signatur", null, oContext);
+					}
+				}
+
+				var oSignaturImage = oSignature.jSignature("getData", "image");
+				// var oSignaturImage = oSignature.jSignature("getData", "image");
+				if (oSignaturImage) {
+					var isSignatureProvidedImage = oSignaturImage[1].length > 1 ? true : false;
+					if (isSignatureProvidedImage) {
+						oRapportModel.setProperty("Signaturimage", oSignaturImage[1], oContext);
+					} else {
+						oRapportModel.setProperty("Signaturimage", null, oContext);
 					}
 				}
 			}
@@ -321,7 +338,7 @@ sap.ui.define([
 					// content: "<div style='width: 340px; height: 128px; border: 1px solid black'></div>",
 					//content: "<div style='width: 340px; height: 100%; border: 1px solid black'></div>",
 					// content: "<div id="parentofsignature style='width: 340px; height: 85px; border: 1px solid black'></div>",
-					content: "<div id='signatureparent'><div id='signature'></div> </div>",
+					content: "<div id='signatureparent' class='signature' ><div id='signature' ></div> </div>",
 
 					//preferDOM : true,
 					afterRendering: function(e) {
@@ -332,6 +349,13 @@ sap.ui.define([
 						} else {
 							$("#signature").jSignature("clear");
 						}
+						
+						//var canvas = $('.jSignature')[0];
+						//var ctx = canvas.getContext('2d');
+
+						//ctx.fillStyle = '#FFFFFF'; /// set white fill style
+						//ctx.fillRect(0, 0, canvas.width, canvas.height);
+
 						if (this.getBindingContext()) {
 							var oSignature = this.getBindingContext().getProperty("Signatur");
 							if (oSignature) {
@@ -342,6 +366,7 @@ sap.ui.define([
 								$("#signature").jSignature("setData", "data:" + signatureArray.join(","));
 							}
 						}
+
 					}
 				});
 				oSignatureDiv.init = true;
