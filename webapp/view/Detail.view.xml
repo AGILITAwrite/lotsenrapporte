@@ -94,7 +94,7 @@
 			<semantic:PositiveAction text="neuer Lotsenrapport" id="__action3" press="newRapport"/>
 		</semantic:positiveAction>
 	<semantic:mainAction>
-	    <semantic:MainAction text="neue Schlepp- und Schubbootrapport" id="__action5" press="newRapportSSB" visible="false"/>
+	    <semantic:MainAction text="neue Schlepp- und Schubbootrapport" id="__action5" press="newRapportSSB" visible="true"/>
 	</semantic:mainAction>
 	</semantic:DetailPage>
 </mvc:View>
