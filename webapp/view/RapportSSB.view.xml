@@ -126,7 +126,7 @@
 					<sap.ui.layout.form:FormContainer title="Tabelle" id="__container0" expandable="true">
 						<sap.ui.layout.form:FormElement id="__element10" label="Schlepptarif">
 							<sap.ui.layout.form:fields>
-								<Text text="{sel_tarifeSet>/d/Preis}" id="__text22"/>
+								<Text text="{sel_tarifeSet>/d/Preis}" id="__text22" visible="false"/>
 								<Select id="__select0" items="{ path : 'tarifeSet>/d/results', sorter: { path: 'SsbTarif', descending: false } }" change="onChangeTarif" selectedKey="{SsbTarif}">
 									<items>
 										<core:ListItem key="{tarifeSet>SsbTarif}" text="{tarifeSet>Text}"/>
