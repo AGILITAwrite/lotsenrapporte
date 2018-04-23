@@ -27,7 +27,7 @@
 											}"/>-->
 									<DatePicker width="100%" id="startDatePicker" valueFormat="yyyyMMdd" placeholder="dd.MM.yyyy" displayFormat="dd.MM.yyyy" value="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}" editable="{rapportView>/changeMode}" change="_updateTarifeNewDate"/>
 									<TimePicker xmlns="sap.m" placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker_copy4" value="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time' , formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm', UTC : true }}" editable="{rapportView>/changeMode}" change="_updateTarifeNewDate"/>
-									<Input width="100%" id="startPegelstand" dateFormat=""/>
+									<Input width="100%" id="startPegelstand" value="{Pegel}"/>
 								</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
 							<sap.ui.layout.form:FormElement xmlns:sap.ui.layout.form="sap.ui.layout.form" id="__element2_copy" label="Zeit Bis">
@@ -38,9 +38,9 @@
 													source: { pattern : '\'PT\'HH\'H\'mm\'M\'ss\'S\''  } 
 												} 
 											}"/>-->
-									<DatePicker xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" xmlns:sap.m.semantic="sap.m.semantic" xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns="sap.m" width="100%" id="endDatePicker" valueFormat="yyyyMMdd" placeholder="dd.MM.yyyy" displayFormat="dd.MM.yyyy" value="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}" editable="{rapportView>/changeMode}" change="_updateTarifeNewDate"/>
-									<TimePicker xmlns="sap.m" placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="endTimePicker" value="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time' , formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm', UTC : true }}" editable="{rapportView>/changeMode}" change="_updateTarifeNewDate"/>
-									<Input width="100%" id="endPegelstand" dateFormat=""/>
+									<DatePicker xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" xmlns:sap.m.semantic="sap.m.semantic" xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns="sap.m" width="100%" id="endDatePicker" valueFormat="yyyyMMdd" placeholder="dd.MM.yyyy" displayFormat="dd.MM.yyyy" value="{ path: 'DatumTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}" editable="{rapportView>/changeMode}" change="_updateTarifeNewDate"/>
+									<TimePicker xmlns="sap.m" placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="endTimePicker" value="{path : 'ZeitTo/ms', type : 'sap.ui.model.type.Time' , formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm', UTC : true }}" editable="{rapportView>/changeMode}" change="_updateTarifeNewDate"/>
+									<Input width="100%" id="endPegelstand" value="{PegelTo}"/>
 								</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
 							<sap.ui.layout.form:FormElement id="__element9" label="Erfasser">
@@ -90,18 +90,16 @@
 										</items>
 									</Select>
 									-->
-									
-									<Select id="__select1" items="{ path : 'orteSet>/d/results', sorter: { path: 'Sort', descending: false } }" change="onChangeOrt">
+									<Select id="__select1" items="{ path : 'orteSet>/d/results', sorter: { path: 'Sort', descending: false } }" change="onChangeOrt" selectedKey="{OrtVon}">
 										<items>
-											<core:ListItem key="{Ort}" text="{orteSet>Text}"/>
+											<core:ListItem key="{orteSet>Ort}" text="{orteSet>Text}"/>
 										</items>
 									</Select>
-									<Select id="__select2" items="{ path : 'orteSet>/d/results', sorter: { path: 'Sort', descending: false } }">
+									<Select id="__select2" items="{ path : 'orteSet>/d/results', sorter: { path: 'Sort', descending: false } }" selectedKey="{OrtBis}">
 										<items>
-											<core:ListItem key="{Ort}" text="{orteSet>Text}"/>
+											<core:ListItem key="{orteSet>Ort}" text="{orteSet>Text}"/>
 										</items>
 									</Select>
-
 								</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
 						</sap.ui.layout.form:formElements>
@@ -128,11 +126,12 @@
 					<sap.ui.layout.form:FormContainer title="Tabelle" id="__container0" expandable="true">
 						<sap.ui.layout.form:FormElement id="__element10" label="Schlepptarif">
 							<sap.ui.layout.form:fields>
-								<Select id="__select0" items="{ path : 'tarifeSet>/d/results', sorter: { path: 'SsbTarif', descending: false } }" change="onChangeTarif">
-										<items>
-											<core:ListItem key="{SsbTarif}" text="{tarifeSet>Text}"/>
-										</items>
-									</Select>
+								<Text text="{sel_tarifeSet>/d/Preis}" id="__text22" visible="false"/>
+								<Select id="__select0" items="{ path : 'tarifeSet>/d/results', sorter: { path: 'SsbTarif', descending: false } }" change="onChangeTarif" selectedKey="{SsbTarif}">
+									<items>
+										<core:ListItem key="{tarifeSet>SsbTarif}" text="{tarifeSet>Text}"/>
+									</items>
+								</Select>
 								<!--<Select selectedKey="item1" id="__select0">
 									<items>
 																				<core:ListItem text="SSB1 - Einsatz inkl. 2 Mann Besatzung, pro Stunde (Havarie, Allgemeine Dienstleistung)" key="item1" id="__item19"/>
@@ -151,7 +150,7 @@
 						<sap.ui.layout.form:FormElement xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" xmlns:sap.m.semantic="sap.m.semantic" xmlns:sap.ui.layout.form="sap.ui.layout.form" id="__element17_copy" label="Stunden">
 							<sap.ui.layout.form:fields>
 								<!--<StandardListItem type="Inactive" title="SSB4 - Zusatzkosten Schieben " description="bei Einsatz länger als 3 Stunden pauschal pro Stunde" id="__item45"/>-->
-								<Input width="100%" id="__input2" change="_calc" value="{AllgemeineDienstleistung}" editable="{rapportView>/changeMode}"/>
+								<Input width="100%" id="__input2" change="_calc" value="{SsbMenge}" editable="{rapportView>/changeMode}"/>
 							</sap.ui.layout.form:fields>
 						</sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:FormElement id="__element18">

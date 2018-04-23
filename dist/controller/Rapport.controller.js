@@ -27,7 +27,8 @@ sap.ui.define([
 				reporting: false,
 				total: 0,
 				poweruser: false,
-				lotsenname: ""
+				lotsenname: "",
+				rapportart: "L" // Lotsenrapport
 			});
 			this.setModel(oViewModel, "rapportView");
 			this._getBenutzer();
@@ -67,6 +68,7 @@ sap.ui.define([
 				oRapporteModel.setProperty("EniNr", sObjectId, onewRapport);
 				//oRapporteModel.setProperty("Lotsenname", this._getBenutzername(), onewRapport);
 				oRapporteModel.setProperty("Lotsenname", this.getModel("rapportView").getProperty("/lotsenname"), onewRapport);
+				oRapporteModel.setProperty("RapportArt", this.getModel("rapportView").getProperty("/rapportart"), onewRapport);
 				//oRapporteModel.setProperty("Talfahrt", true, onewRapport);
 				// oRapporteModel.setProperty("MrbUe2000t", true, onewRapport);
 				//oRapporteModel.setProperty("Bemerkung", "", onewRapport);
