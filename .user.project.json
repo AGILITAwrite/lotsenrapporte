@@ -31,7 +31,62 @@
         "id": 87567846,
         "runnerId": "webapprunner",
         "displayName": "App",
-        "lastRunTimeStamp": 1523010564218
+        "lastRunTimeStamp": 1524495743768
+      }
+    },
+    {
+      "filePath": "/LotsenRapporte/webapp/test/integration/opaTests.qunit.html",
+      "previewMode": 1,
+      "dataMode": 1,
+      "workspace": "withoutWorkspace",
+      "ui5ActiveVersion": null,
+      "ui5VerSource": null,
+      "isDefaultVersion": 1,
+      "urlParameters": [
+        {
+          "paramName": "",
+          "paramValue": "",
+          "paramActive": false
+        },
+        {
+          "paramName": "",
+          "paramValue": "",
+          "paramActive": false
+        }
+      ],
+      "hashParameter": "",
+      "_metadata": {
+        "id": 3635224,
+        "runnerId": "webapprunner",
+        "displayName": "OPA Tests",
+        "lastRunTimeStamp": 1523877533520
+      }
+    },
+    {
+      "filePath": "/LotsenRapporte/webapp/test/unit/unitTests.qunit.html",
+      "previewMode": 1,
+      "dataMode": 1,
+      "workspace": "withoutWorkspace",
+      "ui5ActiveVersion": null,
+      "ui5VerSource": null,
+      "isDefaultVersion": 1,
+      "urlParameters": [
+        {
+          "paramName": "",
+          "paramValue": "",
+          "paramActive": false
+        },
+        {
+          "paramName": "",
+          "paramValue": "",
+          "paramActive": false
+        }
+      ],
+      "_metadata": {
+        "id": 8735167,
+        "runnerId": "webapprunner",
+        "displayName": "Unit Tests",
+        "lastRunTimeStamp": 1523434355915
       }
     },
     {
@@ -77,59 +132,6 @@
         "id": 37567899,
         "runnerId": "webapprunner",
         "displayName": "App (Mock Server)"
-      }
-    },
-    {
-      "filePath": "/LotsenRapporte/webapp/test/unit/unitTests.qunit.html",
-      "previewMode": 1,
-      "dataMode": 1,
-      "workspace": "withoutWorkspace",
-      "ui5ActiveVersion": null,
-      "ui5VerSource": null,
-      "isDefaultVersion": 1,
-      "urlParameters": [
-        {
-          "paramName": "",
-          "paramValue": "",
-          "paramActive": false
-        },
-        {
-          "paramName": "",
-          "paramValue": "",
-          "paramActive": false
-        }
-      ],
-      "_metadata": {
-        "id": 8735167,
-        "runnerId": "webapprunner",
-        "displayName": "Unit Tests"
-      }
-    },
-    {
-      "filePath": "/LotsenRapporte/webapp/test/integration/opaTests.qunit.html",
-      "previewMode": 1,
-      "dataMode": 1,
-      "workspace": "withoutWorkspace",
-      "ui5ActiveVersion": null,
-      "ui5VerSource": null,
-      "isDefaultVersion": 1,
-      "urlParameters": [
-        {
-          "paramName": "",
-          "paramValue": "",
-          "paramActive": false
-        },
-        {
-          "paramName": "",
-          "paramValue": "",
-          "paramActive": false
-        }
-      ],
-      "hashParameter": "",
-      "_metadata": {
-        "id": 3635224,
-        "runnerId": "webapprunner",
-        "displayName": "OPA Tests"
       }
     },
     {
