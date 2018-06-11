@@ -47,8 +47,8 @@
 					            <sap.ui.layout.form:fields>
 					                <HBox xmlns="sap.m" width="100%" id="__hbox0">
 					                    <items>
-					                        <CheckBox id="__boxCheckConfirm0" selected="{rapportView>/confirmed}"/>
-					                        <Text class="myConfirmation" text="Hiermit bestätigen wir, dass die obigen Angaben zutreffen und dass das Schiff bei Antritt der Reise in einem einwandfreien technischen und nautischen Zustand ist.&#10;&#10;Nous certifions par le présent document que les indications fournies sont correctes et que le navire est dans un état technique et nautique irréprochable au début du voyage.&#10;&#10;Hiermee bevestigen wij de correctheid van de bovenstaande informatie en dat het schip bij het begin van de reis in een technisch en nautisch perfecte staat verkeerd.&#10;&#10;We hereby confirm that the information listed above is accurate and that the ship is in good technical and nautical condition at the start of the journey." id="__text13"/>
+					                        <CheckBox id="__boxCheckConfirm0" selected="{rapportView>/confirmed}" editable="{rapportView>/changeMode}"/>
+					                        <Text class="myConfirmation" text="Hiermit bestätigen wir, dass die obigen Angaben zutreffen und dass das Schiff bei Antritt der Reise in einem einwandfreien technischen und nautischen Zustand ist. Tiefgang und Durchfahrtshöhe müssen dem jeweils aktuellen Wasserstand Pegel Base-Rheinhalle entsprechen.&#10;&#10;Nous certifions par le présent document que les indications fournies sont correctes et que le navire est dans un état technique et nautique irréprochable au début du voyage.&#10;&#10;Hiermee bevestigen wij de correctheid van de bovenstaande informatie en dat het schip bij het begin van de reis in een technisch en nautisch perfecte staat verkeerd.&#10;&#10;We hereby confirm that the information listed above is accurate and that the ship is in good technical and nautical condition at the start of the journey." id="__text13"/>
 					                        </items>
 					                    
 					                </HBox>
@@ -187,6 +187,25 @@
 								</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
 						</sap.ui.layout.form:formElements>
+					</sap.ui.layout.form:FormContainer>
+					<sap.ui.layout.form:FormContainer xmlns:sap.ui.core="sap.ui.core" xmlns:sap.ui.layout="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.m.semantic="sap.m.semantic" xmlns:sap.ui.layout.form="sap.ui.layout.form" title="Bestätigung" id="__container7_copy" expandable="true" visible="{rapportView>/display_ul}">
+					    <sap.ui.layout.form:formElements>
+					        <sap.ui.layout.form:FormElement id="__element14_copy">
+					            <sap.ui.layout.form:fields>
+					                <HBox xmlns="sap.m" width="100%" id="__hbox0_copy">
+					                    <items>
+					                        <CheckBox id="__boxCheckConfirm1" selected="{rapportView>/confirmed_ul}" editable="{rapportView>/changeMode}"/>
+					                        <Text class="myConfirmation" text="Der Schiffsführer bestätigt mit der Unterschrift, dass sich das betreffende Motorschiff in einem einwandfreien, technischen Zustand befindet sowie die Vorschriften der Verordnung des UVEK über die rheinschifffahrtspolizeilichen Vorschriften auf der Rheinstrecke zwischen Basel -  Rheinfelden insbesondere die Artikel 9a und 9b erfüllt.&#10;Die Fahrt mit Sicht durch die Dachluke ist nicht gestattet, weil dadurch die relevanten optischen Hilfsmitteln sowie die Überwachungsinstrumente am Steuerstand nicht mehr einsehbar sind. Nötigenfalls ist mehr Ballast in die Wallgänge zu pumpen." id="__text13_copy"/>
+					                        </items>
+					                    
+					                </HBox>
+					                
+					            </sap.ui.layout.form:fields>
+					            
+					        </sap.ui.layout.form:FormElement>
+					        
+					    </sap.ui.layout.form:formElements>
+					    
 					</sap.ui.layout.form:FormContainer>
 					<sap.ui.layout.form:FormContainer title="Debitorenadresse" id="__container5" expandable="true">
 						<sap.ui.layout.form:formElements>
