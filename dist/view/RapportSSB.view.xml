@@ -90,12 +90,12 @@
 										</items>
 									</Select>
 									-->
-									<Select id="__select1" items="{ path : 'orteSet>/d/results', sorter: { path: 'Sort', descending: false } }" change="onChangeOrt" selectedKey="{OrtVon}">
+									<Select id="__select1" items="{ path : 'orteSet>/d/results', sorter: { path: 'Sort', descending: false } }" change="onChangeOrt" selectedKey="{OrtVon}" forceSelection="false">
 										<items>
 											<core:ListItem key="{orteSet>Ort}" text="{orteSet>Text}"/>
 										</items>
 									</Select>
-									<Select id="__select2" items="{ path : 'orteSet>/d/results', sorter: { path: 'Sort', descending: false } }" selectedKey="{OrtBis}">
+									<Select id="__select2" items="{ path : 'orteSet>/d/results', sorter: { path: 'Sort', descending: false } }" selectedKey="{OrtBis}" forceSelection="false">
 										<items>
 											<core:ListItem key="{orteSet>Ort}" text="{orteSet>Text}"/>
 										</items>

@@ -73,7 +73,7 @@ sap.ui.define([
 				oRapporteModel.setProperty("Lotsenname", this.getModel("rapportView").getProperty("/lotsenname"), onewRapport);
 				oRapporteModel.setProperty("RapportArt", this.getModel("rapportView").getProperty("/rapportart"), onewRapport);
 				oRapporteModel.setProperty("Talfahrt", true, onewRapport);
-				oRapporteModel.setProperty("OrtVon", "TNKLP", onewRapport);
+				//oRapporteModel.setProperty("OrtVon", "TNKLP", onewRapport);
 				var sObjectPath = onewRapport.getPath();
 				this._bindView(sObjectPath);
 			}.bind(this));
@@ -402,6 +402,31 @@ sap.ui.define([
 			this.setModel(oTarifModel, "tarifeSet");
 			this._updateTarifeNewDate();
 			},
+		_getPegel: function(atype) {
+			// Model zum Lesen der Tarife erzeugen
+			var oPegelModel = new JSONModel({
+				busy: false,
+				delay: 0
+			});
+			
+			var oContext = this.getView().getBindingContext();
+			if(atype === "Pegel"){
+				var date = this.formatter.UTCTimeToLocale(oContext.getProperty("Datum")).toJSON().slice(0, -1);
+				var time = this.formatter.time(new Date(oContext.getProperty("Zeit/ms")));
+			}else if(atype === "PegelTo"){
+				date = this.formatter.UTCTimeToLocale(oContext.getProperty("DatumTo")).toJSON().slice(0, -1);
+				time = this.formatter.time(new Date(oContext.getProperty("ZeitTo/ms")));	
+			}
+
+			var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/PegelSet(Pegeldatum=datetime'" + date + "',Pegelzeit=time'" + time + "')";
+			oPegelModel.loadData(URL, true, false);
+			var pegelstand = oPegelModel.getProperty("/d/Pegelstand");
+			var oRapporteModel = this.getView().getModel();
+
+				oRapporteModel.setProperty( atype, pegelstand, oContext);
+			    // oRapporteModel.setProperty("Samstagszuschlag", false, oContext);
+
+			},
 		_updateTarife: function() {
 			// Ermitteln der Tarife 
 			var oRapporteModel = this.getView().getBindingContext();
@@ -462,6 +487,8 @@ sap.ui.define([
 					break;
 			}
 			this.setModel(oTarifModel, "tarifeSet");
+			this._getPegel("Pegel");
+			this._getPegel("PegelTo");
 		},
 		_createSelTarifModel: function() {
 			// Model zum Lesen der Tarife erzeugen

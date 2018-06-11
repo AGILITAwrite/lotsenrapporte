@@ -1,192 +1,339 @@
 {
     "resources": [
         {
-            "name": "Component.js"
-        },
-        {
-            "name": "test.html"
-        },
-        {
-            "name": "css/style.css"
-        },
-        {
-            "name": "view/DetailNoObjectsAvailable.view.xml"
-        },
-        {
-            "name": "view/Master.view.xml"
-        },
-        {
-            "name": "view/DetailObjectNotFound.view.xml"
-        },
-        {
-            "name": "view/Rapport.view.xml"
-        },
-        {
-            "name": "view/NotFound.view.xml"
-        },
-        {
-            "name": "view/Detail.view.xml"
-        },
-        {
-            "name": "view/App.view.xml"
-        },
-        {
-            "name": "view/Reporting.view.xml"
-        },
-        {
-            "name": "view/RapportSSB.view.xml"
-        },
-        {
-            "name": "view/ViewSettingsDialog.fragment.xml"
-        },
-        {
-            "name": "manifest.json"
-        },
-        {
-            "name": "libs/jSignature.min.js"
-        },
-        {
-            "name": "libs/jSignature.CompressorBase30.js"
-        },
-        {
-            "name": "i18n/i18n.properties",
-            "raw": "i18n/i18n.properties"
-        },
-        {
-            "name": "model/models.js"
-        },
-        {
-            "name": "model/formatter.js"
-        },
-        {
-            "name": "extended_runnable_file.html"
-        },
-        {
-            "name": "index.html"
-        },
-        {
-            "name": "test/integration/NavigationJourney.js"
-        },
-        {
-            "name": "test/integration/AllJourneys.js"
-        },
-        {
-            "name": "test/integration/opaTestsPhone.qunit.html"
-        },
-        {
-            "name": "test/integration/pages/Detail.js"
-        },
-        {
-            "name": "test/integration/pages/App.js"
-        },
-        {
-            "name": "test/integration/pages/Common.js"
-        },
-        {
-            "name": "test/integration/pages/Browser.js"
-        },
-        {
-            "name": "test/integration/pages/NotFound.js"
-        },
-        {
-            "name": "test/integration/pages/Master.js"
-        },
-        {
-            "name": "test/integration/BusyJourneyPhone.js"
-        },
-        {
-            "name": "test/integration/extended_runnable_file.html"
-        },
-        {
-            "name": "test/integration/NavigationJourneyPhone.js"
-        },
-        {
-            "name": "test/integration/BusyJourney.js"
-        },
-        {
-            "name": "test/integration/NotFoundJourney.js"
-        },
-        {
-            "name": "test/integration/PhoneJourneys.js"
-        },
-        {
-            "name": "test/integration/opaTests.qunit.html"
-        },
-        {
-            "name": "test/integration/MasterJourney.js"
-        },
-        {
-            "name": "test/integration/NotFoundJourneyPhone.js"
-        },
-        {
-            "name": "test/testsuite.qunit.html"
-        },
-        {
-            "name": "test/mockServer.html"
-        },
-        {
-            "name": "test/extended_runnable_file.html"
-        },
-        {
-            "name": "test/unit/controller/App.controller.js"
-        },
-        {
-            "name": "test/unit/controller/ListSelector.js"
-        },
-        {
-            "name": "test/unit/model/formatter.js"
-        },
-        {
-            "name": "test/unit/model/models.js"
-        },
-        {
-            "name": "test/unit/allTests.js"
-        },
-        {
-            "name": "test/unit/extended_runnable_file.html"
-        },
-        {
-            "name": "test/unit/unitTests.qunit.html"
-        },
-        {
-            "name": "localService/metadata.xml"
-        },
-        {
-            "name": "localService/mockserver.js"
-        },
-        {
-            "name": "controller/Reporting.controller.js"
-        },
-        {
-            "name": "controller/RapportSSB.controller.js"
-        },
-        {
-            "name": "controller/App.controller.js"
-        },
-        {
-            "name": "controller/Rapport.controller.js"
-        },
-        {
-            "name": "controller/Master.controller.js"
-        },
-        {
-            "name": "controller/ErrorHandler.js"
-        },
-        {
-            "name": "controller/ListSelector.js"
-        },
-        {
-            "name": "controller/Detail.controller.js"
-        },
-        {
-            "name": "controller/BaseController.js"
+            "name": "Component-dbg.js",
+            "isDebug": true
         },
         {
             "name": "Component-preload.js",
             "merged": true
         },
         {
+            "name": "Component.js"
+        },
+        {
+            "name": "controller/App-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/App.controller.js"
+        },
+        {
+            "name": "controller/BaseController-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/BaseController.js"
+        },
+        {
+            "name": "controller/Detail-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/Detail.controller.js"
+        },
+        {
+            "name": "controller/ErrorHandler-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/ErrorHandler.js"
+        },
+        {
+            "name": "controller/ListSelector-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/ListSelector.js"
+        },
+        {
+            "name": "controller/Master-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/Master.controller.js"
+        },
+        {
+            "name": "controller/Rapport-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/Rapport.controller.js"
+        },
+        {
+            "name": "controller/RapportSSB-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/RapportSSB.controller.js"
+        },
+        {
+            "name": "controller/Reporting-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/Reporting.controller.js"
+        },
+        {
+            "name": "css/style-dbg.css",
+            "isDebug": true
+        },
+        {
+            "name": "css/style.css"
+        },
+        {
+            "name": "di.code-validation.core_issues.json"
+        },
+        {
+            "name": "extended_runnable_file.html"
+        },
+        {
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "index.html"
+        },
+        {
+            "name": "libs/jSignature.CompressorBase30-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "libs/jSignature.CompressorBase30.js"
+        },
+        {
+            "name": "libs/jSignature.min-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "libs/jSignature.min.js"
+        },
+        {
+            "name": "localService/metadata.xml"
+        },
+        {
+            "name": "localService/mockserver-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "localService/mockserver.js"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "model/formatter-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "model/formatter.js"
+        },
+        {
+            "name": "model/models-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "model/models.js"
+        },
+        {
             "name": "neo-app.json"
+        },
+        {
+            "name": "test/extended_runnable_file.html"
+        },
+        {
+            "name": "test/integration/AllJourneys-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/AllJourneys.js"
+        },
+        {
+            "name": "test/integration/BusyJourney-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/BusyJourney.js"
+        },
+        {
+            "name": "test/integration/BusyJourneyPhone-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/BusyJourneyPhone.js"
+        },
+        {
+            "name": "test/integration/MasterJourney-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/MasterJourney.js"
+        },
+        {
+            "name": "test/integration/NavigationJourney-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/NavigationJourney.js"
+        },
+        {
+            "name": "test/integration/NavigationJourneyPhone-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/NavigationJourneyPhone.js"
+        },
+        {
+            "name": "test/integration/NotFoundJourney-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/NotFoundJourney.js"
+        },
+        {
+            "name": "test/integration/NotFoundJourneyPhone-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/NotFoundJourneyPhone.js"
+        },
+        {
+            "name": "test/integration/PhoneJourneys-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/PhoneJourneys.js"
+        },
+        {
+            "name": "test/integration/extended_runnable_file.html"
+        },
+        {
+            "name": "test/integration/opaTests.qunit.html"
+        },
+        {
+            "name": "test/integration/opaTestsPhone.qunit.html"
+        },
+        {
+            "name": "test/integration/pages/App-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/App.js"
+        },
+        {
+            "name": "test/integration/pages/Browser-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/Browser.js"
+        },
+        {
+            "name": "test/integration/pages/Common-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/Common.js"
+        },
+        {
+            "name": "test/integration/pages/Detail-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/Detail.js"
+        },
+        {
+            "name": "test/integration/pages/Master-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/Master.js"
+        },
+        {
+            "name": "test/integration/pages/NotFound-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/NotFound.js"
+        },
+        {
+            "name": "test/mockServer.html"
+        },
+        {
+            "name": "test/testsuite.qunit.html"
+        },
+        {
+            "name": "test/unit/allTests-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/unit/allTests.js"
+        },
+        {
+            "name": "test/unit/controller/App-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/unit/controller/App.controller.js"
+        },
+        {
+            "name": "test/unit/controller/ListSelector-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/unit/controller/ListSelector.js"
+        },
+        {
+            "name": "test/unit/extended_runnable_file.html"
+        },
+        {
+            "name": "test/unit/model/formatter-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/unit/model/formatter.js"
+        },
+        {
+            "name": "test/unit/model/models-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/unit/model/models.js"
+        },
+        {
+            "name": "test/unit/unitTests.qunit.html"
+        },
+        {
+            "name": "test.html"
+        },
+        {
+            "name": "view/App.view.xml"
+        },
+        {
+            "name": "view/Detail.view.xml"
+        },
+        {
+            "name": "view/DetailNoObjectsAvailable.view.xml"
+        },
+        {
+            "name": "view/DetailObjectNotFound.view.xml"
+        },
+        {
+            "name": "view/Master.view.xml"
+        },
+        {
+            "name": "view/NotFound.view.xml"
+        },
+        {
+            "name": "view/Rapport.view.xml"
+        },
+        {
+            "name": "view/RapportSSB.view.xml"
+        },
+        {
+            "name": "view/Reporting.view.xml"
+        },
+        {
+            "name": "view/ViewSettingsDialog.fragment.xml"
         }
     ]
 }
