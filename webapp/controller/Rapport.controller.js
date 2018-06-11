@@ -22,7 +22,9 @@ sap.ui.define([
 				newRapport: false,
 				changeMode: false,
 				annullierenVisible: false,
-				confirmed: false,
+				confirmed: false, // bestätigungsflag schiffsführer
+				confirmed_ul: false, //bestätigungsflag für überlängen
+				display_ul: false, 
 				fahrtrichtung: "",
 				reporting: false,
 				total: 0,
@@ -49,6 +51,7 @@ sap.ui.define([
 			this.getView().getModel("rapportView").setProperty("/changeMode", true);
 			this.getView().getModel("rapportView").setProperty("/annullierenVisible", false);
 			this.getView().getModel("rapportView").setProperty("/confirmed", false);
+			this.getView().getModel("rapportView").setProperty("/confirmed_ul", false);
 			this.getView().getModel("rapportView").setProperty("/reporting", false);
 			// Annullieren von neuen Rapporten nicht möglich
 			var sObjectId = oEvent.getParameter("arguments").objectId;
@@ -81,6 +84,8 @@ sap.ui.define([
 			this.getView().getModel("rapportView").setProperty("/newRapport", false);
 			this.getView().getModel("rapportView").setProperty("/changeMode", false);
 			this.getView().getModel("rapportView").setProperty("/confirmed", true); // Rapport kann nur gespeichert werden wenn Flag gesetzt
+			this.getView().getModel("rapportView").setProperty("/confirmed_ul", true); // Rapport kann nur gespeichert werden wenn Flag gesetzt
+			
 			this.getView().getModel("rapportView").setProperty("/reporting", false);
 			// zum Editeren von bestehenden rapporten hier aktivieren.
 			this.getView().getModel("rapportView").setProperty("/annullierenVisible", true);
@@ -304,6 +309,30 @@ sap.ui.define([
 							});
 						} else {
 
+							// // 					var dateTime = new Date();
+							// // ( dateTime.getTime() - dateTime.getTimezoneOffset() * 60000 )
+
+							// // die Zeit wird beim Lesen des Models in MS umgewandelt und muss aber beim speichern manuell in EdmTime umgewandelt werden, da das nicht wieder automatisch gemacht wird
+							// //oRapportModel.setProperty("Zeit", this.formatter.time(new Date( oContext.getProperty("Zeit/ms") - new Date().getTimezoneOffset() * 60000 )), oContext);
+							// oRapportModel.setProperty("Zeit", this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))), oContext);
+							// //			oRapportModel.attachEventOnce("batchRequestCompleted", jQuery.proxy(this._submitSuccess, this));
+							// //			oRapportModel.attachEventOnce("batchRequestFailed", jQuery.proxy(this._submitError, this));
+							// oRapportModel.submitChanges({
+							// 	success: jQuery.proxy(this._submitSuccess, this),
+							// 	error: jQuery.proxy(this._submitError, this)
+							// });
+						
+							if (	this.getModel("rapportView").getProperty("/display_ul") === true && 
+									!this.getModel("rapportView").getProperty("/confirmed_ul") ) { 
+
+							sap.m.MessageBox.show("Bitte technischen zustand für Überlänge bestätigen!", {
+								icon: sap.m.MessageBox.Icon.ERROR,
+								title: "Fehler" //,
+									//actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+									//onClose: function(oAction) { error = true; } 
+							});
+						} else {
+
 							// 					var dateTime = new Date();
 							// ( dateTime.getTime() - dateTime.getTimezoneOffset() * 60000 )
 
@@ -316,6 +345,9 @@ sap.ui.define([
 								success: jQuery.proxy(this._submitSuccess, this),
 								error: jQuery.proxy(this._submitError, this)
 							});
+						}
+							
+							
 						}
 
 					}
@@ -439,6 +471,7 @@ sap.ui.define([
 			// rechnen des Totalbetrags
 			var total = 0;
 			this.getView().getModel("rapportView").setProperty("/total", total);
+				this.getView().getModel("rapportView").setProperty("/display_ul", false); // standardmässig ausblenden
 			if (oRapporteContext.getProperty("MrbU2000t")) {
 				total = parseFloat(oTarifModel.getProperty("/d/MrbU2000t"));
 			}
@@ -447,9 +480,11 @@ sap.ui.define([
 			}
 			if (oRapporteContext.getProperty("BRU125m")) {
 				total = total + parseFloat(oTarifModel.getProperty("/d/BRU125m"));
+				this.getView().getModel("rapportView").setProperty("/display_ul", true); // bei Schiffen über 125 m anzeigen
 			}
 			if (oRapporteContext.getProperty("BRSchubverband")) {
 				total = parseFloat(total) + parseFloat(oTarifModel.getProperty("/d/BRSchubverband"));
+				this.getView().getModel("rapportView").setProperty("/display_ul", true); // bei koppelverbänden anzeigen
 			}
 			if (oRapporteContext.getProperty("BaAug")) {
 				total = parseFloat(total) + parseFloat(oTarifModel.getProperty("/d/BaAug"));
