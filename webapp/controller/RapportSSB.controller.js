@@ -52,6 +52,11 @@ sap.ui.define([
 			this.getView().getModel("rapportView").setProperty("/annullierenVisible", false);
 			this.getView().getModel("rapportView").setProperty("/confirmed", false);
 			this.getView().getModel("rapportView").setProperty("/reporting", false);
+			
+			var dateForTime = new Date();
+				dateForTime.setYear(1970);
+				dateForTime.setMonth(1);
+				dateForTime.setDate(1);
 			// Annullieren von neuen Rapporten nicht möglich
 			var sObjectId = oEvent.getParameter("arguments").objectId;
 			this.getModel().resetChanges();
@@ -62,11 +67,13 @@ sap.ui.define([
 				oRapporteModel.setProperty("Datum", new Date(), onewRapport);
 				oRapporteModel.setProperty("DatumTo", new Date(), onewRapport);
 				oRapporteModel.setProperty("Zeit", {
-					ms: formatter.UTCTimeToLocale(new Date()).getTime(),
+					//ms: formatter.UTCTimeToLocale(new Date()).getTime(),
+					ms: formatter.UTCTimeToLocale(dateForTime).getTime(),
 					__edmtype: "Edm.Time"
 				}, onewRapport);
 				oRapporteModel.setProperty("ZeitTo", {
-					ms: formatter.UTCTimeToLocale(new Date()).getTime(),
+					// ms: formatter.UTCTimeToLocale(new Date()).getTime(),
+					ms: formatter.UTCTimeToLocale(dateForTime).getTime(),
 					__edmtype: "Edm.Time"
 				}, onewRapport);
 				oRapporteModel.setProperty("EniNr", sObjectId, onewRapport);
@@ -247,18 +254,18 @@ sap.ui.define([
 						//onClose: function(oAction) { error = true; } 
 				});
 			} else {
-				if (!oContext.getProperty("Signatur") // Muss unterschrieben sein 
-					&& !this.getModel("rapportView").getProperty("/poweruser") // oder Poweruser 
-					|| !this.getModel("rapportView").getProperty("/confirmed")) {
-					// 
-					//!this.getView().byId("__boxCheckConfirm0").getSelected()) { // 
-					sap.m.MessageBox.show("Der Lotsenrapport muss vor dem Speichern best\xE4tigt und unterschrieben werden!", {
-						icon: sap.m.MessageBox.Icon.ERROR,
-						title: "Fehler" //,
-							//actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
-							//onClose: function(oAction) { error = true; } 
-					});
-				} else {
+				// if (!oContext.getProperty("Signatur") // Muss unterschrieben sein 
+				// 	&& !this.getModel("rapportView").getProperty("/poweruser") // oder Poweruser 
+				// 	|| !this.getModel("rapportView").getProperty("/confirmed")) {
+				// 	// 
+				// 	//!this.getView().byId("__boxCheckConfirm0").getSelected()) { // 
+				// 	sap.m.MessageBox.show("Der Lotsenrapport muss vor dem Speichern best\xE4tigt und unterschrieben werden!", {
+				// 		icon: sap.m.MessageBox.Icon.ERROR,
+				// 		title: "Fehler" //,
+				// 			//actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+				// 			//onClose: function(oAction) { error = true; } 
+				// 	});
+				// } else {
 					if (!oContext.getProperty("Bemerkung") && !this.getModel("Debitor").getProperty("/d/Kunnr")) {
 						// 
 						//!this.getView().byId("__boxCheckConfirm0").getSelected()) { // 
@@ -287,7 +294,7 @@ sap.ui.define([
 							});
 						//}
 					}
-				}
+				// }
 			}
 		},
 		onSignatureReset: function() {
@@ -342,34 +349,79 @@ sap.ui.define([
 		_calc: function() {
 			var oRapporteContext = this.getView().getBindingContext();
 			var oRapporteModel = this.getView().getModel();
-			var oTarifModel = this.getView().getModel("tarifeSet");
+			var oTarifModel = this.getView().getModel("sel_tarifeSet");
+			var lowest_value = oTarifModel.getProperty("/d/KleinsteEinheit");
+			
 			// rechnen des Totalbetrags
 			var total = 0;
 			this.getView().getModel("rapportView").setProperty("/total", total);
-/*			if (oRapporteContext.getProperty("MrbU2000t")) {
-				total = parseFloat(oTarifModel.getProperty("/d/MrbU2000t"));
+			
+			if ( parseFloat(oRapporteContext.getProperty("SsbMenge"), 10) < parseFloat( lowest_value, 10) ){
+				// Falls die erfasste zeit kleiner als die Mindestzeit ist 
+				oRapporteModel.setProperty("SsbMenge", lowest_value, oRapporteContext);
 			}
-			if (oRapporteContext.getProperty("MrbUe2000t")) {
-				total = parseFloat(total) + parseFloat(oTarifModel.getProperty("/d/MrbUe2000t"));
-			}
-			if (oRapporteContext.getProperty("BRU125m")) {
-				total = total + parseFloat(oTarifModel.getProperty("/d/BRU125m"));
-			}
-			if (oRapporteContext.getProperty("BRSchubverband")) {
-				total = parseFloat(total) + parseFloat(oTarifModel.getProperty("/d/BRSchubverband"));
-			}
-			if (oRapporteContext.getProperty("BaAug")) {
-				total = parseFloat(total) + parseFloat(oTarifModel.getProperty("/d/BaAug"));
-			}
-			if (oRapporteContext.getProperty("BirAug")) {
-				total = parseFloat(total) + parseFloat(oTarifModel.getProperty("/d/BirAug"));
-			}*/
+			
 			if (parseFloat(oRapporteContext.getProperty("SsbMenge"), 10) !== 0 && oRapporteContext.getProperty(
 					"SsbMenge") !== "" && oRapporteContext.getProperty("SsbMenge") != null) {
-				total = parseFloat(total) + parseFloat(oTarifModel.getProperty("/d/AllgemeineDienstleistung")) * parseFloat(oRapporteContext.getProperty(
-					"SsbMenge"));
+				total = parseFloat(total) + parseFloat(oTarifModel.getProperty("/d/Preis")) * 
+						parseFloat(oRapporteContext.getProperty("SsbMenge"));
 			}
 			this.getView().getModel("rapportView").setProperty("/total", total);
+		},
+		/**
+		 *@memberOf ch.portof.controller.Rapport
+		 */
+		_calcDateDiffrence: function() {
+			//var oRapporteModel = this.getView().getBindingContext();
+			var oRapporteContext = this.getView().getBindingContext();
+			var oRapporteModel = this.getView().getModel();
+			var oTarifModel = this.getView().getModel("sel_tarifeSet");
+			// var lowest_value = parseFloat( this.getView().getModel("sel_tarifeSet").getProperty("/d/KleinsteEinheit"), 10);
+			
+			//var date_from = this.formatter.UTCTimeToLocale(oRapporteContext.getProperty("Datum")).toJSON().slice(0, -1);
+			var date_from = this.formatter.UTCTimeToLocale(oRapporteContext.getProperty("Datum"));
+			// var time_from = this.formatter.UTCTimeToLocale(new Date(oRapporteContext.getProperty("Zeit/ms")));
+			var time_from = this.formatter.LocaleTimeToUTC(new Date(oRapporteContext.getProperty("Zeit/ms"))) ;
+			
+			
+			//var date_to = this.formatter.UTCTimeToLocale(oContext.getProperty("DatumTo")).toJSON().slice(0, -1);
+			var date_to = this.formatter.UTCTimeToLocale(oRapporteContext.getProperty("DatumTo"));
+			// var time_to = this.formatter.UTCTimeToLocale(new Date(oRapporteContext.getProperty("ZeitTo/ms")));
+			var time_to = this.formatter.LocaleTimeToUTC( new Date(oRapporteContext.getProperty("ZeitTo/ms")) );
+			
+			var dateTimeFrom = new Date( date_from.getFullYear(), date_from.getMonth(), date_from.getDate(), time_from.getHours(), time_from.getMinutes(), time_from.getSeconds(), time_from.getMilliseconds());
+			var dateTimeTo = new Date( date_to.getFullYear(), date_to.getMonth(), date_to.getDate(), time_to.getHours(), time_to.getMinutes(), time_to.getSeconds(), time_to.getMilliseconds());
+			
+			//var diff = dateTimeTo - dateTimeFrom;
+//			var diff = new Date( Math.abs(dateTimeTo - dateTimeFrom) / 36e5 );
+	
+						var oDateFormat = sap.ui.core.format.DateFormat.getTimeInstance({pattern: "HH:mm",
+																					     UTC : true
+						});
+						
+						var diff_ms = Math.floor( ((Math.floor( dateTimeTo / 60000 ) * 60000) - (Math.floor( dateTimeFrom / 60000 ) * 60000) ) / (36e5 / 100)) * (36e5 / 100) ;
+						//var diff = oDateFormat.format(new Date( diff_minutes ));
+						var diff = diff_ms / 36e5 ;
+			
+
+
+
+			var old_effective_time = this.getView().getModel("rapportView").getProperty("/effektiveEinsatzZeit");
+			if(old_effective_time != diff) {
+				
+			var lowest_value = oTarifModel.getProperty("/d/KleinsteEinheit");
+
+			
+			if ( parseFloat(diff, 10) < parseFloat( lowest_value, 10) ){
+				// Falls die erfasste zeit kleiner als die Mindestzeit ist 
+				oRapporteModel.setProperty("SsbMenge", lowest_value, oRapporteContext);
+			}else {
+				oRapporteModel.setProperty("SsbMenge", diff , oRapporteContext);
+			}
+				
+			}
+			this.getView().getModel("rapportView").setProperty("/effektiveEinsatzZeit", diff);
+			
 		},
 		_createSignatureModel: function(oSignature) {
 			// Model zum handling der Signatur erzeugen
@@ -486,6 +538,7 @@ sap.ui.define([
 					oRapporteModel.setProperty("Feiertagszuschlag", false, oContext);
 					break;
 			}
+			this._calcDateDiffrence( );
 			this.setModel(oTarifModel, "tarifeSet");
 			this._getPegel("Pegel");
 			this._getPegel("PegelTo");
