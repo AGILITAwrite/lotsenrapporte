@@ -163,6 +163,14 @@
 					]
 				},
 				{
+					"pattern": "RapportSSBReport/{objectId}",
+					"name": "rapportSSBRouteReport",
+					"target": [
+						"master",
+						"rapportTarget"
+					]
+				},
+				{
 					"pattern": "showReport",
 					"name": "showReportingRoute",
 					"target": [

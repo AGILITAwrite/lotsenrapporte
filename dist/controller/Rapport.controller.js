@@ -325,7 +325,7 @@ sap.ui.define([
 							if (	this.getModel("rapportView").getProperty("/display_ul") === true && 
 									!this.getModel("rapportView").getProperty("/confirmed_ul") ) { 
 
-							sap.m.MessageBox.show("Bitte technischen zustand für Überlänge bestätigen!", {
+							sap.m.MessageBox.show("Bitte technischen Zustand für Überlänge bestätigen!", {
 								icon: sap.m.MessageBox.Icon.ERROR,
 								title: "Fehler" //,
 									//actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],

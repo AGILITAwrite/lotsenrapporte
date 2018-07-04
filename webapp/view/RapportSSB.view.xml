@@ -127,7 +127,7 @@
 						<sap.ui.layout.form:FormElement id="__element10" label="Tarif">
 							<sap.ui.layout.form:fields>
 								<Text text="{sel_tarifeSet>/d/Preis}" id="__text22" visible="false"/>
-								<Select id="__select0" items="{ path : 'tarifeSet>/d/results', sorter: { path: 'SsbTarif', descending: false } }" change="onChangeTarif" selectedKey="{SsbTarif}">
+								<Select id="__select0" items="{ path : 'tarifeSet>/d/results' }" change="onChangeTarif" selectedKey="{SsbTarif}" forceSelection="false">
 									<items>
 										<core:ListItem key="{tarifeSet>SsbTarif}" text="{tarifeSet>Text}"/>
 									</items>
@@ -171,7 +171,7 @@
 							<sap.ui.layout.form:FormElement id="__element17">
 								<sap.ui.layout.form:fields>
 									<!--<StandardListItem type="Inactive" title="SSB4 - Zusatzkosten Schieben " description="bei Einsatz länger als 3 Stunden pauschal pro Stunde" id="__item45"/>-->
-									<Text text=" SSB2 - Schlepptarif inkl. 2 Mann Besatzung, pro Stunde (Hoheitlich nicht MWST-pflichtig) SSB3 - Schiebetarif Basel-Birsfelden inkl. 2 Mann Besatzung, bis zu 3 Stunden pauschal SSB4 - Zusatzkosten Schieben bei Einsatz länger als 3 Stunden pauschal pro Stunde" id="__text51"/>
+									<Text id="__text51" text="{sel_tarifeSet>/d/Beschreibung}"/>
 								</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
 						</sap.ui.layout.form:formElements>
