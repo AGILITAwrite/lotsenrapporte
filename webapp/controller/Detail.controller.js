@@ -17,10 +17,31 @@ sap.ui.define([
 			var oViewModel = new JSONModel({
 				busy: false,
 				delay: 0,
+				isPowerUser : false, 
+				lotsenRapport: false,
+				ssbRapport: false,
 				lineItemListTitle: this.getResourceBundle().getText("detailLineItemTableHeading")
 			});
+			
+				// Ermitteln des Lotsennamens
+			var oBenutzerModel = new JSONModel({
+				busy: false,
+				delay: 0
+			});
+
+			
+			var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/BenutzerSet('1')";
+			oBenutzerModel.loadData(URL, true, false);
+//			this.getView().getModel("rapportView").setProperty("/lotsenname", oBenutzerModel.getProperty("/d/Firstname") + " " + oBenutzerModel
+//				.getProperty("/d/Lastname"));
+	
+			oViewModel.setProperty("/ispoweruser", oBenutzerModel.getProperty("/d/Ispoweruser"));
+			oViewModel.setProperty("/lotsenRapport", oBenutzerModel.getProperty("/d/Lotsenrapport"));
+			oViewModel.setProperty("/ssbRapport", oBenutzerModel.getProperty("/d/Ssbrapport"));			
 			this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
-			this.setModel(oViewModel, "detailView");
+			
+			this.setModel(oViewModel, "detailView");			
+			
 			this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
 			/*			var oModelTest = this.getView().getModel();
 							var title = this.byId("debitorHeader1").getProperty("title");

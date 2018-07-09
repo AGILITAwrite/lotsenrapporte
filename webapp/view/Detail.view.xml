@@ -97,10 +97,10 @@
 			</IconTabBar>
 		</semantic:content>
 		<semantic:positiveAction>
-			<semantic:PositiveAction text="neuer Lotsenrapport" id="__action3" press="newRapport"/>
+			<semantic:PositiveAction text="neuer Lotsenrapport" id="__action3" press="newRapport" visible="{detailView>/lotsenRapport}"/>
 		</semantic:positiveAction>
 	<semantic:mainAction>
-	    <semantic:MainAction text="neue Schlepp- und Schubbootrapport" id="__action5" press="newRapportSSB" visible="true"/>
+	    <semantic:MainAction text="neue Schlepp- und Schubbootrapport" id="__action5" press="newRapportSSB" visible="{detailView>/ssbRapport}"/>
 	</semantic:mainAction>
 	</semantic:DetailPage>
 </mvc:View>
