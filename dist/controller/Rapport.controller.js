@@ -622,7 +622,7 @@ sap.ui.define([
 			this.getView().setModel(oRapportModel);
 			this.getView().getModel("tarifeSet").destroy();
 			this.getView().getModel("Schiff").destroy();
-			this.getView().getModel("rapportView").destroy();
+			//this.getView().getModel("rapportView").destroy();
 			this.getView().unbindElement();
 		},
 		_resetModel: function(oData) {
