@@ -22,7 +22,7 @@
 						<sap.ui.layout.form:FormElement id="__element2" label="Datum/Zeit">
 							<sap.ui.layout.form:fields>
 								<DatePicker width="100%" id="startDatePicker" valueFormat="yyyyMMdd" placeholder="dd.MM.yyyy" displayFormat="dd.MM.yyyy"
-									value="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', UTC: true } }"
+									value="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', UTC : true } }"
 									editable="{rapportView>/changeMode}" change="_updateTarifeNewDate"/>
 								<!--								<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker"   
 									value="{ path: 'Zeit', type: 'sap.ui.model.type.Time', 
@@ -196,7 +196,7 @@
 							</sap.ui.layout.form:FormElement>
 						</sap.ui.layout.form:formElements>
 					</sap.ui.layout.form:FormContainer>
-					<!--					<sap.ui.layout.form:FormContainer xmlns:sap.ui.core="sap.ui.core" xmlns:sap.ui.layout="sap.ui.layout" xmlns:core="sap.ui.core"
+					<sap.ui.layout.form:FormContainer xmlns:sap.ui.core="sap.ui.core" xmlns:sap.ui.layout="sap.ui.layout" xmlns:core="sap.ui.core"
 						xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.m.semantic="sap.m.semantic"
 						xmlns:sap.ui.layout.form="sap.ui.layout.form" title="Bestätigung" id="__container8" expandable="true" visible="{rapportView>/display_ul}">
 						<sap.ui.layout.form:formElements>
@@ -206,14 +206,18 @@
 										<items>
 											<CheckBox id="__boxCheckConfirm1" selected="{rapportView>/confirmed_ul}" editable="{rapportView>/changeMode}"/>
 											<Text class="myConfirmation"
-												text="Der Schiffsführer bestätigt mit der Unterschrift, dass sich das betreffende Motorschiff in einem einwandfreien, technischen Zustand befindet sowie die Vorschriften der Verordnung des UVEK über die rheinschifffahrtspolizeilichen Vorschriften auf der Rheinstrecke zwischen Basel - Rheinfelden insbesondere die Artikel 9a und 9b erfüllt.Die Fahrt mit Sicht durch die Dachluke ist nicht gestattet, weil dadurch die relevanten optischen Hilfsmitteln sowie die Überwachungsinstrumente am Steuerstand nicht mehr einsehbar sind. Nötigenfalls ist mehr Ballast in die Wallgänge zu pumpen."
-												id="__text14"/>
+												text="Der Schiffsführer bestätigt mit der Unterschrift, dass sich das betreffende Motorschiff in einem einwandfreien, technischen Zustand befindet sowie die Vorschriften der Verordnung des UVEK über die rheinschifffahrtspolizeilichen Vorschriften auf der Rheinstrecke zwischen Basel - Rheinfelden insbesondere die Artikel 9a und 9b erfüllt.Die Fahrt mit Sicht durch die Dachluke ist nicht gestattet, weil dadurch die relevanten optischen Hilfsmitteln sowie die Überwachungsinstrumente am Steuerstand nicht mehr einsehbar sind. Nötigenfalls ist mehr Ballast in die Wallgänge zu pumpen.&#10;&lt;a href=&quot;https://www.w3schools.com&quot; target=&quot;_blank&quot;&gt;Visit W3Schools.com!&lt;/a&gt;&#10;&lt;Link text=&quot;v1&quot; href=&quot;url&quot; /&gt;"
+												id="__text14" visible="false"/>
+											<Link text="Link auf Verordnung" id="link0" href="https://www.admin.ch/opc/de/official-compilation/2018/1019.pdf#page=4" target="_blank"
+												visible="false"/>
+											<sap.ui.core:HTML
+												content="&lt;div class=&quot;myConfirmation&quot; &gt;Der Schiffsführer bestätigt mit der Unterschrift, dass sich das betreffende Motorschiff in einem einwandfreien, technischen Zustand befindet sowie die Vorschriften der Verordnung des UVEK über die rheinschifffahrtspolizeilichen Vorschriften auf der Rheinstrecke zwischen Basel - Rheinfelden insbesondere die &lt;a target=&quot;_blank&quot; href=&quot;https://www.admin.ch/opc/de/official-compilation/2018/1019.pdf#page=4&quot;&gt;Artikel 9a und 9b&lt;/a&gt; erfüllt. &lt;p&gt;Die Fahrt mit Sicht durch die Dachluke ist nicht gestattet, weil dadurch die relevanten optischen Hilfsmitteln sowie die Überwachungsinstrumente am Steuerstand nicht mehr einsehbar sind. Nötigenfalls ist mehr Ballast in die Wallgänge zu pumpen.&lt;/div&gt; "></sap.ui.core:HTML>
 										</items>
 									</HBox>
 								</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
 						</sap.ui.layout.form:formElements>
-					</sap.ui.layout.form:FormContainer>-->
+					</sap.ui.layout.form:FormContainer>
 					<sap.ui.layout.form:FormContainer title="Debitorenadresse" id="__container5" expandable="true">
 						<sap.ui.layout.form:formElements>
 							<sap.ui.layout.form:FormElement id="__element6">
