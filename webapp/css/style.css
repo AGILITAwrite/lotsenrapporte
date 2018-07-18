@@ -56,8 +56,8 @@ tr.myBorderBlackFat td {
 
 canvas.jSignature {
     width: 340px !important;
-    height: 84px !important;
-    /*height: 110px !important;*/
+    /*height: 84px !important;*/
+    height: 110px !important;
     /*background-color:darkgrey !important; */
 }
 
@@ -66,8 +66,8 @@ canvas.jSignature {
     /* background-color:darkgrey !important; */
     padding: 2px;
     width: 344px;
-    height: 90px;
-    /*height: 120px;*/
+    /*    height: 90px;*/
+    height: 120px;
 }
 
 #signature {
