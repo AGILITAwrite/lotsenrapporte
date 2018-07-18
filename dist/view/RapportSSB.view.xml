@@ -145,28 +145,25 @@
 							</sap.ui.layout.form:fields>
 						</sap.ui.layout.form:FormElement>
 					</sap.ui.layout.form:FormContainer>
-					<sap.ui.layout.form:FormContainer title="Tabelle" id="__container0" expandable="true">
-						<sap.ui.layout.form:FormElement id="__element10" label="Tarif">
+					<sap.ui.layout.form:FormContainer title="Tarife" id="__container0" expandable="true">
+						<sap.ui.layout.form:FormElement id="__element10" label="Dienstleistung">
 							<sap.ui.layout.form:fields>
-								<Text text="{sel_tarifeSet>/d/Preis}" id="__text22" visible="false"/>
 								<Select id="__select0" items="{ path : 'tarifeSet>/d/results' }" change="onChangeTarif" selectedKey="{SsbTarif}" forceSelection="false">
 									<items>
 										<core:ListItem key="{tarifeSet>SsbTarif}" text="{tarifeSet>Text}"/>
 									</items>
 								</Select>
-								<!--<Select selectedKey="item1" id="__select0">
-									<items>
-																				<core:ListItem text="SSB1 - Einsatz inkl. 2 Mann Besatzung, pro Stunde (Havarie, Allgemeine Dienstleistung)" key="item1" id="__item19"/>
-										<core:ListItem text="SSB2 - Schlepptarif inkl. 2 Mann Besatzung, pro Stunde (Hoheitlich nicht MWST-pflichtig)" key="item2" id="__item20"/>
-										<core:ListItem text="SSB3 - Schiebetarif Basel-Birsfelden inkl. 2 Mann Besatzung, bis zu 3 Stunden pauschal" key="item3" id="__item21"/>
-										<core:ListItem text="Schlepptarif" key="item1" id="__item20"/>
-										<core:ListItem text="Schiebetarif" key="item2" id="__item21"/>
-										<core:ListItem text="Einsatz Havarie" key="item3" id="__item19"/>
-										<core:ListItem text="Kraneinsatz" key="item4" id="__item23"/>
-										<core:ListItem text="Sonstiges" key="item5" id="__item24"/>
-									</items>
-								</Select>-->
+								<Text xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core"
+									xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" xmlns:sap.m.semantic="sap.m.semantic"
+									xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns="sap.m" id="text51" text="{sel_tarifeSet>/d/Beschreibung}"/>
 								<!--<Text text="{ path: 'tarifeSet>/d/AllgemeineDienstleistung', formatter: '.formatter.currencyValue' } CHF" id="__text45"/>-->
+							</sap.ui.layout.form:fields>
+						</sap.ui.layout.form:FormElement>
+						<sap.ui.layout.form:FormElement xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic"
+							xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout"
+							xmlns:sap.m.semantic="sap.m.semantic" xmlns:sap.ui.layout.form="sap.ui.layout.form" id="element20" label="Preis pro Stunde">
+							<sap.ui.layout.form:fields>
+								<Text xmlns="sap.m" id="text52" text="{ path: 'sel_tarifeSet>/d/Preis', formatter: '.formatter.currencyValue' } CHF"/>
 							</sap.ui.layout.form:fields>
 						</sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:FormElement xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic"
@@ -177,13 +174,13 @@
 								<Input width="100%" id="__input2" change="_calc" value="{SsbMenge}" editable="{rapportSSBView>/changeMode}"/>
 							</sap.ui.layout.form:fields>
 						</sap.ui.layout.form:FormElement>
-						<sap.ui.layout.form:FormElement id="__element18">
+						<sap.ui.layout.form:FormElement id="__element18" label="Total">
 							<sap.ui.layout.form:fields>
 								<!--<StandardListItem title="Total" id="__item14"/>-->
-								<Text text="Total" id="__text50"/>
+								<Text text="Total" id="__text50" visible="false"/>
 								<Text text="" id="__text47" visible="false"/>
 								<Text text="" id="__text48" visible="false"/>
-								<Text text="{rapportSSBView>/total}" id="__Total"/>
+								<Text text="{ path: 'rapportSSBView>/total', formatter: '.formatter.currencyValue' } CHF" id="__Total"/>
 							</sap.ui.layout.form:fields>
 						</sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:formElements>
@@ -192,10 +189,13 @@
 									<Button text="Eingaben Löschen" width="150px" id="__button6" type="Reject" press="onResetSelection" visible="{rapportSSBView>/changeMode}"/>
 								</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
-							<sap.ui.layout.form:FormElement id="__element17">
+							<sap.ui.layout.form:FormElement xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic"
+								xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout"
+								xmlns:sap.m.semantic="sap.m.semantic" xmlns:sap.ui.layout.form="sap.ui.layout.form" id="element17" label="Beschreibung" visible="false">
 								<sap.ui.layout.form:fields>
-									<!--<StandardListItem type="Inactive" title="SSB4 - Zusatzkosten Schieben " description="bei Einsatz länger als 3 Stunden pauschal pro Stunde" id="__item45"/>-->
-									<Text id="__text51" text="{sel_tarifeSet>/d/Beschreibung}"/>
+									<Text xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core"
+										xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" xmlns:sap.m.semantic="sap.m.semantic"
+										xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns="sap.m" id="text51_copy" text="{sel_tarifeSet>/d/Beschreibung}"/>
 								</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
 						</sap.ui.layout.form:formElements>
