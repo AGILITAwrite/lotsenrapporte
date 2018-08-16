@@ -188,8 +188,10 @@
 								<sap.ui.layout.form:fields>
 									<!--<StandardListItem type="Inactive" title="SSB4 - Zusatzkosten Schieben " description="bei Einsatz länger als 3 Stunden pauschal pro Stunde" id="__item45"/>-->
 									<!--type: 'sap.ui.model.type.Float', -->
-									<Input xmlns="sap.m" width="100%" id="input3" change="_calc"
+									<!--									<Input xmlns="sap.m" width="100%" id="input3" change="_calc"
 										value="{ path: 'SsbPauschal', type: 'sap.ui.model.odata.type.Decimal', formatOptions: { maxFractionDigits: 2 } }"
+										editable="{rapportSSBView>/changeMode}" visible="{rapportSSBView>/pauschalPreis}"/>-->
+									<Input xmlns="sap.m" width="100%" id="input3" change="_calc" value="{ path: 'SsbPauschal' }" type="Number"
 										editable="{rapportSSBView>/changeMode}" visible="{rapportSSBView>/pauschalPreis}"/>
 								</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
