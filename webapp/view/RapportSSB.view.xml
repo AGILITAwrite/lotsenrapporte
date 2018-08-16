@@ -1,4 +1,5 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" controllerName="ch.portof.controller.RapportSSB">
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" controllerName="ch.portof.controller.RapportSSB">
 	<!-- bindingContexts="RapporteSet" -->
 	<semantic:DetailPage xmlns:sap.m.semantic="sap.m.semantic" title="Semantic Page" id="__page2">
 		<semantic:saveAction>
@@ -8,25 +9,33 @@
 			<semantic:CancelAction id="__action1" press="onCancel"/>
 		</semantic:cancelAction>
 		<semantic:content>
-			<ObjectHeader title="{Schiff>/d/Name}" introActive="true" id="__header0" number="{Schiff>/d/Schiffsnummer}" condensed="true" class="myDebitorMissing">
+			<ObjectHeader title="{Schiff>/d/Name}" introActive="true" id="__header0" number="{Schiff>/d/Schiffsnummer}" condensed="true"
+				class="myDebitorMissing">
 				<customData>
-					<sap.ui.core:CustomData xmlns:sap.ui.core="sap.ui.core" id="__data10" key="missing" value="${ path: 'Debitor>/d/Kunnr', formatter: '.formatter.convertToBool' }.toString()" writeToDom="true"/>
+					<sap.ui.core:CustomData xmlns:sap.ui.core="sap.ui.core" id="__data10" key="missing"
+						value="${ path: 'Debitor>/d/Kunnr', formatter: '.formatter.convertToBool' }.toString()" writeToDom="true"/>
 				</customData>
 			</ObjectHeader>
 			<sap.ui.layout.form:Form xmlns:sap.ui.layout.form="sap.ui.layout.form" editable="true" id="__form1">
 				<sap.ui.layout.form:formContainers>
 					<sap.ui.layout.form:FormContainer title="Kopfdaten {= parseFloat(${Rapportid}) }" id="__container1" expandable="true">
 						<sap.ui.layout.form:formElements>
-							<sap.ui.layout.form:FormElement xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" xmlns:sap.m.semantic="sap.m.semantic" xmlns:sap.ui.layout.form="sap.ui.layout.form" id="__element2_copy2" label="Zeit von">
+							<sap.ui.layout.form:FormElement xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic"
+								xmlns:sap.ui.core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout"
+								xmlns:sap.m.semantic="sap.m.semantic" xmlns:sap.ui.layout.form="sap.ui.layout.form" id="__element2_copy2" label="Zeit von">
 								<sap.ui.layout.form:fields>
-									<!--								<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker_copy2"   
+									<!-- <TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker_copy2"   
 									value="{ path: 'Zeit', type: 'sap.ui.model.type.Time', 
 												formatOptions: { pattern: 'HH:mm', 
 													source: { pattern : '\'PT\'HH\'H\'mm\'M\'ss\'S\''  } 
 												} 
 											}"/>-->
-									<DatePicker width="100%" id="startDatePicker" valueFormat="yyyyMMdd" placeholder="dd.MM.yyyy" displayFormat="dd.MM.yyyy" value="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', UTC: true }}" editable="{rapportSSBView>/changeMode}" change="_updateTarifeNewDate"/>
-									<TimePicker xmlns="sap.m" placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker_copy4" value="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time' , formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm', UTC : true }}" editable="{rapportSSBView>/changeMode}" change="_updateTarifeNewDate"/>
+									<DatePicker width="100%" id="startDatePicker" valueFormat="yyyyMMdd" placeholder="dd.MM.yyyy" displayFormat="dd.MM.yyyy"
+										value="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', UTC: true }}"
+										editable="{rapportSSBView>/changeMode}" change="_updateTarifeNewDate"/>
+									<TimePicker xmlns="sap.m" placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker_copy4"
+										value="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time', formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm', UTC : true }}"
+										editable="{rapportSSBView>/changeMode}" change="_updateTarifeNewDate"/>
 									<Input width="100%" id="startPegelstand" value="{Pegel}" editable="{rapportSSBView>/changeMode}"/>
 								</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
@@ -38,8 +47,14 @@
 													source: { pattern : '\'PT\'HH\'H\'mm\'M\'ss\'S\''  } 
 												} 
 											}"/>-->
-									<DatePicker xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" xmlns:sap.m.semantic="sap.m.semantic" xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns="sap.m" width="100%" id="endDatePicker" valueFormat="yyyyMMdd" placeholder="dd.MM.yyyy" displayFormat="dd.MM.yyyy" value="{ path: 'DatumTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', UTC: true }}" editable="{rapportSSBView>/changeMode}" change="_updateTarifeNewDate"/>
-									<TimePicker xmlns="sap.m" placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="endTimePicker" value="{path : 'ZeitTo/ms', type : 'sap.ui.model.type.Time' , formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm', UTC : true }}" editable="{rapportSSBView>/changeMode}" change="_updateTarifeNewDate"/>
+									<DatePicker xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core"
+										xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" xmlns:sap.m.semantic="sap.m.semantic"
+										xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns="sap.m" width="100%" id="endDatePicker" valueFormat="yyyyMMdd" placeholder="dd.MM.yyyy"
+										displayFormat="dd.MM.yyyy" value="{ path: 'DatumTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', UTC: true }}"
+										editable="{rapportSSBView>/changeMode}" change="_updateTarifeNewDate"/>
+									<TimePicker xmlns="sap.m" placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="endTimePicker"
+										value="{path : 'ZeitTo/ms', type : 'sap.ui.model.type.Time' , formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm', UTC : true }}"
+										editable="{rapportSSBView>/changeMode}" change="_updateTarifeNewDate"/>
 									<Input width="100%" id="endPegelstand" value="{PegelTo}" editable="{rapportSSBView>/changeMode}"/>
 								</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
@@ -49,7 +64,9 @@
 									<Text text="{Lotsenname}" id="__text24"/>
 								</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
-							<sap.ui.layout.form:FormElement xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" xmlns:sap.m.semantic="sap.m.semantic" xmlns:sap.ui.layout.form="sap.ui.layout.form" id="__element19" label="Effektive Einsatzzeit">
+							<sap.ui.layout.form:FormElement xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic"
+								xmlns:sap.ui.core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout"
+								xmlns:sap.m.semantic="sap.m.semantic" xmlns:sap.ui.layout.form="sap.ui.layout.form" id="__element19" label="Effektive Einsatzzeit">
 								<sap.ui.layout.form:fields>
 									<!--<Text text="{benutzerSet>/d/Firstname} {benutzerSet>/d/Lastname}" id="__text24_copy"/>-->
 									<Text xmlns="sap.m" text="{rapportSSBView>/effektiveEinsatzZeit}" id="effektiveEinsatzZeit"/>
@@ -57,11 +74,14 @@
 							</sap.ui.layout.form:FormElement>
 						</sap.ui.layout.form:formElements>
 					</sap.ui.layout.form:FormContainer>
-					<sap.ui.layout.form:FormContainer xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" xmlns:sap.m.semantic="sap.m.semantic" xmlns:sap.ui.layout.form="sap.ui.layout.form" title="Strecke" id="__container7">
+					<sap.ui.layout.form:FormContainer xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic"
+						xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout"
+						xmlns:sap.m.semantic="sap.m.semantic" xmlns:sap.ui.layout.form="sap.ui.layout.form" title="Strecke" id="__container7">
 						<sap.ui.layout.form:formElements>
 							<sap.ui.layout.form:FormElement id="__element8" label="Berg-/Talfahrt">
 								<sap.ui.layout.form:fields>
-									<Switch id="__switch0" customTextOn="T" customTextOff="B" state="{Talfahrt}" enabled="{rapportSSBView>/changeMode}" change="_setFahrtrichtung"/>
+									<Switch id="__switch0" customTextOn="T" customTextOff="B" state="{Talfahrt}" enabled="{rapportSSBView>/changeMode}"
+										change="_setFahrtrichtung"/>
 									<Text text="{rapportSSBView>/fahrtrichtung}" id="__text21"/>
 								</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
@@ -90,12 +110,14 @@
 										</items>
 									</Select>
 									-->
-									<Select id="__select1" items="{ path : 'orteSet>/d/results', sorter: { path: 'Sort', descending: false } }" change="onChangeOrt" selectedKey="{OrtVon}" forceSelection="false" enabled="{rapportSSBView>/changeMode}">
+									<Select id="__select1" items="{ path : 'orteSet>/d/results', sorter: { path: 'Sort', descending: false } }" change="onChangeOrt"
+										selectedKey="{OrtVon}" forceSelection="false" enabled="{rapportSSBView>/changeMode}">
 										<items>
 											<core:ListItem key="{orteSet>Ort}" text="{orteSet>Text}"/>
 										</items>
 									</Select>
-									<Select id="__select2" items="{ path : 'orteSet>/d/results', sorter: { path: 'Sort', descending: false } }" selectedKey="{OrtBis}" forceSelection="false" enabled="{rapportSSBView>/changeMode}">
+									<Select id="__select2" items="{ path : 'orteSet>/d/results', sorter: { path: 'Sort', descending: false } }" selectedKey="{OrtBis}"
+										forceSelection="false" enabled="{rapportSSBView>/changeMode}">
 										<items>
 											<core:ListItem key="{orteSet>Ort}" text="{orteSet>Text}"/>
 										</items>
@@ -124,46 +146,74 @@
 						</sap.ui.layout.form:FormElement>
 					</sap.ui.layout.form:FormContainer>
 					<sap.ui.layout.form:FormContainer title="Tarife" id="__container0" expandable="true">
-						<sap.ui.layout.form:FormElement id="__element10" label="Dienstleistung">
-							<sap.ui.layout.form:fields>
-								<Select id="__select0" items="{ path : 'tarifeSet>/d/results' }" change="onChangeTarif" selectedKey="{SsbTarif}" forceSelection="false" enabled="{rapportSSBView>/changeMode}">
-									<items>
-										<core:ListItem key="{tarifeSet>SsbTarif}" text="{tarifeSet>Text}"/>
-									</items>
-								</Select>
-								<Text xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" xmlns:sap.m.semantic="sap.m.semantic" xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns="sap.m" id="text51" text="{sel_tarifeSet>/d/Beschreibung}"/>
-								<!--<Text text="{ path: 'tarifeSet>/d/AllgemeineDienstleistung', formatter: '.formatter.currencyValue' } CHF" id="__text45"/>-->
-							</sap.ui.layout.form:fields>
-						</sap.ui.layout.form:FormElement>
-						<sap.ui.layout.form:FormElement xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" xmlns:sap.m.semantic="sap.m.semantic" xmlns:sap.ui.layout.form="sap.ui.layout.form" id="element20" label="Preis pro Stunde">
-							<sap.ui.layout.form:fields>
-								<Text xmlns="sap.m" id="text52" text="{ path: 'sel_tarifeSet>/d/Preis', formatter: '.formatter.currencyValue' } CHF"/>
-							</sap.ui.layout.form:fields>
-						</sap.ui.layout.form:FormElement>
-						<sap.ui.layout.form:FormElement xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" xmlns:sap.m.semantic="sap.m.semantic" xmlns:sap.ui.layout.form="sap.ui.layout.form" id="__element17_copy" label="Verrechenbare Stunden">
-							<sap.ui.layout.form:fields>
-								<!--<StandardListItem type="Inactive" title="SSB4 - Zusatzkosten Schieben " description="bei Einsatz länger als 3 Stunden pauschal pro Stunde" id="__item45"/>-->
-								<Input width="100%" id="__input2" change="_calc" value="{SsbMenge}" editable="{rapportSSBView>/changeMode}"/>
-							</sap.ui.layout.form:fields>
-						</sap.ui.layout.form:FormElement>
-						<sap.ui.layout.form:FormElement id="__element18" label="Total">
-							<sap.ui.layout.form:fields>
-								<!--<StandardListItem title="Total" id="__item14"/>-->
-								<Text text="Total" id="__text50" visible="false"/>
-								<Text text="" id="__text47" visible="false"/>
-								<Text text="" id="__text48" visible="false"/>
-								<Text text="{ path: 'rapportSSBView>/total', formatter: '.formatter.currencyValue' } CHF" id="__Total"/>
-							</sap.ui.layout.form:fields>
-						</sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:formElements>
+							<sap.ui.layout.form:FormElement id="__element10" label="Dienstleistung">
+								<sap.ui.layout.form:fields>
+									<Select id="__select0" items="{ path : 'tarifeSet>/d/results' }" change="onChangeTarif" selectedKey="{SsbTarif}" forceSelection="false"
+										enabled="{rapportSSBView>/changeMode}">
+										<items>
+											<core:ListItem key="{tarifeSet>SsbTarif}" text="{tarifeSet>Text}"/>
+										</items>
+									</Select>
+									<Text xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core"
+										xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" xmlns:sap.m.semantic="sap.m.semantic"
+										xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns="sap.m" id="text51" text="{sel_tarifeSet>/d/Beschreibung}"/>
+									<!--<Text text="{ path: 'tarifeSet>/d/AllgemeineDienstleistung', formatter: '.formatter.currencyValue' } CHF" id="__text45"/>-->
+								</sap.ui.layout.form:fields>
+							</sap.ui.layout.form:FormElement>
+							<sap.ui.layout.form:FormElement xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic"
+								xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout"
+								xmlns:sap.m.semantic="sap.m.semantic" xmlns:sap.ui.layout.form="sap.ui.layout.form" id="element20" label="Preis pro Stunde"
+								visible="{rapportSSBView>/mengenPreis}">
+								<sap.ui.layout.form:fields>
+									<Text xmlns="sap.m" id="text52" text="{ path: 'sel_tarifeSet>/d/Preis', formatter: '.formatter.currencyValue' } CHF"/>
+								</sap.ui.layout.form:fields>
+							</sap.ui.layout.form:FormElement>
+							<sap.ui.layout.form:FormElement xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic"
+								xmlns:sap.ui.core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout"
+								xmlns:sap.m.semantic="sap.m.semantic" xmlns:sap.ui.layout.form="sap.ui.layout.form" id="__element17_copy" label="Verrechenbare Stunden"
+								visible="{rapportSSBView>/mengenPreis}">
+								<sap.ui.layout.form:fields>
+									<!--<StandardListItem type="Inactive" title="SSB4 - Zusatzkosten Schieben " description="bei Einsatz länger als 3 Stunden pauschal pro Stunde" id="__item45"/>-->
+									<!--value="{path: 'SsbMenge', type: 'sap.ui.model.odata.type.Decimal', formatOptions: { maxFractionDigits: 2, minFractionDigits: 0}, constraints: { scale: 2 }}"-->
+									<!--type: 'sap.ui.model.type.Float', -->
+									<Input width="100%" id="__input2" value="{path: 'SsbMenge'}" type="Number" editable="{rapportSSBView>/changeMode}" valueLiveUpdate="true"
+										change="_calc"/>
+								</sap.ui.layout.form:fields>
+							</sap.ui.layout.form:FormElement>
+							<sap.ui.layout.form:FormElement xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic"
+								xmlns:sap.ui.core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout"
+								xmlns:sap.m.semantic="sap.m.semantic" xmlns:sap.ui.layout.form="sap.ui.layout.form" id="element18" label="Pauschalpreis"
+								visible="{rapportSSBView>/pauschalPreis}">
+								<sap.ui.layout.form:fields>
+									<!--<StandardListItem type="Inactive" title="SSB4 - Zusatzkosten Schieben " description="bei Einsatz länger als 3 Stunden pauschal pro Stunde" id="__item45"/>-->
+									<!--type: 'sap.ui.model.type.Float', -->
+									<Input xmlns="sap.m" width="100%" id="input3" change="_calc"
+										value="{ path: 'SsbPauschal', type: 'sap.ui.model.odata.type.Decimal', formatOptions: { maxFractionDigits: 2 } }"
+										editable="{rapportSSBView>/changeMode}" visible="{rapportSSBView>/pauschalPreis}"/>
+								</sap.ui.layout.form:fields>
+							</sap.ui.layout.form:FormElement>
+							<sap.ui.layout.form:FormElement id="__element18" label="Total">
+								<sap.ui.layout.form:fields>
+									<!--<StandardListItem title="Total" id="__item14"/>-->
+									<Text text="Total" id="__text50" visible="false"/>
+									<Text text="" id="__text47" visible="false"/>
+									<Text text="" id="__text48" visible="false"/>
+									<Text text="{ path: 'rapportSSBView>/total', formatter: '.formatter.currencyValue' } CHF" id="__Total"/>
+								</sap.ui.layout.form:fields>
+							</sap.ui.layout.form:FormElement>
 							<sap.ui.layout.form:FormElement id="__element15">
 								<sap.ui.layout.form:fields>
 									<Button text="Eingaben Löschen" width="150px" id="__button6" type="Reject" press="onResetSelection" visible="{rapportSSBView>/changeMode}"/>
 								</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
-							<sap.ui.layout.form:FormElement xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" xmlns:sap.m.semantic="sap.m.semantic" xmlns:sap.ui.layout.form="sap.ui.layout.form" id="element17" label="Beschreibung" visible="false">
+							<sap.ui.layout.form:FormElement xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic"
+								xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout"
+								xmlns:sap.m.semantic="sap.m.semantic" xmlns:sap.ui.layout.form="sap.ui.layout.form" id="element17" label="Beschreibung" visible="false">
 								<sap.ui.layout.form:fields>
-									<Text xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" xmlns:sap.m.semantic="sap.m.semantic" xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns="sap.m" id="text51_copy" text="{sel_tarifeSet>/d/Beschreibung}"/>
+									<Text xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:sap.ui.core="sap.ui.core"
+										xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout="sap.ui.layout" xmlns:sap.m.semantic="sap.m.semantic"
+										xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns="sap.m" id="text51_copy" text="{sel_tarifeSet>/d/Beschreibung}"/>
 								</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
 						</sap.ui.layout.form:formElements>
@@ -175,7 +225,8 @@
 									<!--<ObjectHeader binding="{Debitor>}" number="{d/Kunnr}" introActive="true" titleActive="true" id="debitorHeader1" title="{/d/Name1}">-->
 									<ObjectHeader number="{Debitor>/d/Kunnr}" id="debitorHeader1" title="{Debitor>/d/Name1}" class="myDebitorMissingBox">
 										<customData>
-											<sap.ui.core:CustomData xmlns:sap.ui.core="sap.ui.core" id="__data11" key="missing" value="{= ${ path: 'Debitor>/d/Kunnr', formatter: '.formatter.convertToBool' }.toString()}" writeToDom="true"/>
+											<sap.ui.core:CustomData xmlns:sap.ui.core="sap.ui.core" id="__data11" key="missing"
+												value="{= ${ path: 'Debitor>/d/Kunnr', formatter: '.formatter.convertToBool' }.toString()}" writeToDom="true"/>
 										</customData>
 										<attributes>
 											<ObjectAttribute text="{Debitor>/d/Name2}" id="__attribute8" title="Zusatz"/>
@@ -197,7 +248,9 @@
 									<HBox width="100%" id="__hbox0">
 										<items>
 											<CheckBox id="__boxCheckConfirm0" selected="{rapportSSBView>/confirmed}"/>
-											<Text class="myConfirmation" text="Hiermit bestätigen wir, dass die obigen Angaben zutreffen und dass das Schiff bei Antritt der Reise in einem einwandfreien technischen und nautischen Zustand ist.&#10;&#10;Nous certifions par le présent document que les indications fournies sont correctes et que le navire est dans un état technique et nautique irréprochable au début du voyage.&#10;&#10;Hiermee bevestigen wij de correctheid van de bovenstaande informatie en dat het schip bij het begin van de reis in een technisch en nautisch perfecte staat verkeerd.&#10;&#10;We hereby confirm that the information listed above is accurate and that the ship is in good technical and nautical condition at the start of the journey." id="__text13"/>
+											<Text class="myConfirmation"
+												text="Hiermit bestätigen wir, dass die obigen Angaben zutreffen und dass das Schiff bei Antritt der Reise in einem einwandfreien technischen und nautischen Zustand ist.&#10;&#10;Nous certifions par le présent document que les indications fournies sont correctes et que le navire est dans un état technique et nautique irréprochable au début du voyage.&#10;&#10;Hiermee bevestigen wij de correctheid van de bovenstaande informatie en dat het schip bij het begin van de reis in een technisch en nautisch perfecte staat verkeerd.&#10;&#10;We hereby confirm that the information listed above is accurate and that the ship is in good technical and nautical condition at the start of the journey."
+												id="__text13"/>
 										</items>
 									</HBox>
 								</sap.ui.layout.form:fields>
@@ -223,7 +276,8 @@
 													<sap.ui.core:CustomData id="__data71" key="sap-ui-fastnavgroup" value="true" writeToDom="true"/>
 												</customData>
 												<content>
-													<Button id="SignatureReset" press="onSignatureReset" text="Unterschrift zurücksetzen" width="200px" enabled="{rapportSSBView>/changeMode}" type="Reject" visible="{rapportSSBView>/changeMode}"/>
+													<Button id="SignatureReset" press="onSignatureReset" text="Unterschrift zurücksetzen" width="200px" enabled="{rapportSSBView>/changeMode}"
+														type="Reject" visible="{rapportSSBView>/changeMode}"/>
 												</content>
 											</Toolbar>
 										</infoToolbar>
@@ -259,7 +313,9 @@
 							</sap.ui.layout.form:FormElement>
 							<sap.ui.layout.form:FormElement id="__element12" label=" ">
 								<sap.ui.layout.form:fields>
-									<Text text="* Gemäss Gebührentarif gültig ab 01.01.2017. Für die Punkte SSB1, SSB2, SSB3 und SSB4 kann gegebenenfalls MWST verrechnet werden. SSB=Schlepp- Schubboot" id="__text12"/>
+									<Text
+										text="* Gemäss Gebührentarif gültig ab 01.01.2017. Für die Punkte SSB1, SSB2, SSB3 und SSB4 kann gegebenenfalls MWST verrechnet werden. SSB=Schlepp- Schubboot"
+										id="__text12"/>
 								</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
 						</sap.ui.layout.form:formElements>
@@ -274,7 +330,8 @@
 			</sap.ui.layout.form:Form>
 		</semantic:content>
 		<semantic:negativeAction>
-			<semantic:NegativeAction text="Annullieren" id="__action2" enabled="{rapportSSBView>/annullierenVisible}" visible="{rapportSSBView>/annullierenVisible}" press="onAnnullieren"/>
+			<semantic:NegativeAction text="Annullieren" id="__action2" enabled="{rapportSSBView>/annullierenVisible}"
+				visible="{rapportSSBView>/annullierenVisible}" press="onAnnullieren"/>
 		</semantic:negativeAction>
 		<semantic:layoutData/>
 	</semantic:DetailPage>
