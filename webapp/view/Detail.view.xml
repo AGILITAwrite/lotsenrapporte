@@ -1,24 +1,29 @@
 <mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" controllerName="ch.portof.controller.Detail">
-	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}" busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
+	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}"
+		busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
 		<semantic:content>
 			<ObjectHeader id="objectHeader" title="{Name}" class="myDebitorMissing">
 				<customData>
-					<sap.ui.core:CustomData xmlns:sap.ui.core="sap.ui.core" id="__data10" key="missing" binding="{Debitoren/}" value="{= ${ path: 'Kunnr', formatter: '.formatter.convertToBool' }.toString()}" writeToDom="true"/>
+					<sap.ui.core:CustomData xmlns:sap.ui.core="sap.ui.core" id="__data10" key="missing" binding="{Debitoren/}"
+						value="{= ${ path: 'Kunnr', formatter: '.formatter.convertToBool' }.toString()}" writeToDom="true"/>
 				</customData>
 				<attributes>
 					<ObjectAttribute text="{Schiffsnummer}" id="__attribute3" title="{/#Schiffe/Schiffsnummer/@sap:label}"/>
 					<ObjectAttribute text="{Nationalitaet}" id="__attribute6" title="{/#Schiffe/Nationalitaet/@sap:label}"/>
 					<ObjectAttribute text="{Schiffstyp}" id="__attribute12" title="{/#Schiffe/Schiffstyp/@sap:label}"/>
 					<ObjectAttribute text="{EcocardNr}" id="__attribute4" title="{/#Schiffe/EcocardNr/@sap:label}"/>
+					<ObjectAttribute text="{Tragfaehigkeit}" id="__attribute129" title="{/#Schiffe/Tragfaehigkeit/@sap:label}"/>
 				</attributes>
 			</ObjectHeader>
 			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
 				<items>
 					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://hint" tooltip="{i18n>detailIconTabBarInfo}" text="{i18n>detailStammdaten}">
 						<content>
-							<ObjectHeader binding="{Debitoren/}" number="{Kunnr}" introActive="true" titleActive="true" id="debitorHeader1" title="{Name1}" class="myDebitorMissingBox">
+							<ObjectHeader binding="{Debitoren/}" number="{Kunnr}" introActive="true" titleActive="true" id="debitorHeader1" title="{Name1}"
+								class="myDebitorMissingBox">
 								<customData>
-									<sap.ui.core:CustomData xmlns:sap.ui.core="sap.ui.core" id="__data11" key="missing" value="{= ${ path: 'Kunnr', formatter: '.formatter.convertToBool' }.toString()}" writeToDom="true"/>
+									<sap.ui.core:CustomData xmlns:sap.ui.core="sap.ui.core" id="__data11" key="missing"
+										value="{= ${ path: 'Kunnr', formatter: '.formatter.convertToBool' }.toString()}" writeToDom="true"/>
 								</customData>
 								<attributes>
 									<ObjectAttribute text="{Name2}" id="__attribute8" title="Zusatz"/>
@@ -39,7 +44,9 @@
 					</IconTabFilter>
 					<IconTabFilter text="{i18n>detailRapportListe}" icon="sap-icon://task" iconColor="Critical" id="__filter0">
 						<content>
-							<Table id="lineItemsList" width="auto" items="{RapporteSet}" updateFinished="onListUpdateFinished" noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin" growingScrollToLoad="true" growing="true">
+							<Table id="lineItemsList" width="auto" items="{RapporteSet}" updateFinished="onListUpdateFinished"
+								noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin"
+								growingScrollToLoad="true" growing="true">
 								<headerToolbar>
 									<Toolbar id="lineItemsToolbar">
 										<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}"/>
@@ -68,9 +75,9 @@
 										</header>
 									</Column>
 									<Column id="__column5">
-									    <header>
-									        <Text text="{i18n>detailLineItemTableUnitAttirbut6Column}" id="__text25"/>
-									    </header>
+										<header>
+											<Text text="{i18n>detailLineItemTableUnitAttirbut6Column}" id="__text25"/>
+										</header>
 									</Column>
 								</columns>
 								<items>
@@ -82,7 +89,8 @@
 											<ObjectIdentifier title="{= parseFloat(${Rapportid}) }"/>
 											<ObjectAttribute text="{ path: 'Datum', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}" id="__attribute0"/>
 											<!--<ObjectAttribute id="__attribute1" text="{ path: 'Zeit.ms', type: 'sap.ui.model.type.Time', formatOptions: { pattern: 'HH:mm', source: { pattern : '\'PT\'HH\'H\'mm\'M\'ss\'S\''}}}"/>-->
-											<ObjectAttribute id="__attribute1" text="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time' ,formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm', UTC : true }}"/>
+											<ObjectAttribute id="__attribute1"
+												text="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time' ,formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm', UTC : true }}"/>
 											<ObjectAttribute text="{Lotsenname}" id="__attribute2"/>
 											<CheckBox id="__box0" selected="{Loevm}" editable="false"/>
 											<ObjectAttribute text="{RapportArt}" id="__attribute13"/>
@@ -99,8 +107,8 @@
 		<semantic:positiveAction>
 			<semantic:PositiveAction text="neuer Lotsenrapport" id="__action3" press="newRapport" visible="{detailView>/lotsenRapport}"/>
 		</semantic:positiveAction>
-	<semantic:mainAction>
-	    <semantic:MainAction text="neue Schlepp- und Schubbootrapport" id="__action5" press="newRapportSSB" visible="{detailView>/ssbRapport}"/>
-	</semantic:mainAction>
+		<semantic:mainAction>
+			<semantic:MainAction text="neue Schlepp- und Schubbootrapport" id="__action5" press="newRapportSSB" visible="{detailView>/ssbRapport}"/>
+		</semantic:mainAction>
 	</semantic:DetailPage>
 </mvc:View>
