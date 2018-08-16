@@ -5,7 +5,7 @@ sap.ui.define([
 	"ch/portof/model/formatter",
 	"ch/portof/controller/ErrorHandler",
 	"sap/ui/core/routing/History"
-], function (BaseController, JSONModel, formatter, ErrorHandler, History) {
+], function(BaseController, JSONModel, formatter, ErrorHandler, History) {
 	"use strict";
 	return BaseController.extend("ch.portof.controller.RapportSSB", {
 		/**
@@ -14,7 +14,7 @@ sap.ui.define([
 		 * @memberOf ch.portof.view.Rapport
 		 */
 		formatter: formatter,
-		onInit: function () {
+		onInit: function() {
 			var oViewModel = new JSONModel({
 				busy: false,
 				delay: 0,
@@ -29,7 +29,9 @@ sap.ui.define([
 				total: 0,
 				lotsenname: "",
 				effektiveEinsatzZeit: 0,
-				rapportart: "S" //Schlepp und Schubboot Rapport
+				rapportart: "S", //Schlepp und Schubboot Rapport
+				pauschalPreis: false, //pauschalpreis bei Material Pauschal
+				mengenPreis: false
 			});
 			this.setModel(oViewModel, "rapportSSBView");
 			this.getView().getModel("rapportSSBView").setProperty("/changeMode", true);
@@ -45,7 +47,7 @@ sap.ui.define([
 		 * listLoading is done and the first item in the list is known
 		 * @private
 		 */
-		_onRouteMatchedNew: function (oEvent) {
+		_onRouteMatchedNew: function(oEvent) {
 			//this._resetModel();
 			this.getView().getModel("rapportSSBView").setProperty("/newRapport", true);
 			this.getView().getModel("rapportSSBView").setProperty("/changeMode", true);
@@ -67,25 +69,42 @@ sap.ui.define([
 			var sObjectId = oEvent.getParameter("arguments").objectId;
 			this.getModel().resetChanges();
 			//var dateTime = new Date();
-			this.getModel().metadataLoaded().then(function () {
+			this.getModel().metadataLoaded().then(function() {
 				var oRapporteModel = this.getView().getModel();
 				var onewRapport = oRapporteModel.createEntry("/RapporteSet");
 				oRapporteModel.setProperty("Datum", new Date(), onewRapport);
 				oRapporteModel.setProperty("DatumTo", new Date(), onewRapport);
-
+				//keine Zeiten vorschlagen
+				/*				oRapporteModel.setProperty("ZeitTo", {
+									// ms: formatter.UTCTimeToLocale(new Date()).getTime(),
+									ms: formatter.UTCTimeToLocale(dateForTime).getTime(),
+									__edmtype: "Edm.Time"
+								}, onewRapport);*/
+				// statdessen leer 
+				//RapporteModel.setProperty("ZeitTo", null, onewRapport);
 				oRapporteModel.setProperty("ZeitTo", {
-					// ms: formatter.UTCTimeToLocale(new Date()).getTime(),
-					ms: formatter.UTCTimeToLocale(dateForTime).getTime(),
-					__edmtype: "Edm.Time"
-				}, onewRapport);
+						ms: (new Date(0)).getTime(),
+						__edmtype: "Edm.Time"
+					},
+					onewRapport);
 
 				//dateForTime.setHours( dateForTime.getHours() + 1 );
+
+				//keine Zeiten vorschlagen
 				dateForTime.setMinutes(dateForTime.getMinutes() - 30);
+				/*				oRapporteModel.setProperty("Zeit", {
+									//ms: formatter.UTCTimeToLocale(new Date()).getTime(),
+									ms: formatter.UTCTimeToLocale(dateForTime).getTime(),
+									__edmtype: "Edm.Time"
+								}, onewRapport);*/
+				// statdessen leer 
+				// oRapporteModel.setProperty("Zeit", null, onewRapport);
 				oRapporteModel.setProperty("Zeit", {
-					//ms: formatter.UTCTimeToLocale(new Date()).getTime(),
-					ms: formatter.UTCTimeToLocale(dateForTime).getTime(),
-					__edmtype: "Edm.Time"
-				}, onewRapport);
+						ms: (new Date(0)).getTime(),
+						__edmtype: "Edm.Time"
+					},
+					onewRapport);
+
 				oRapporteModel.setProperty("EniNr", sObjectId, onewRapport);
 				oRapporteModel.setProperty("Lotsenname", this.getModel("rapportSSBView").getProperty("/lotsenname"), onewRapport);
 				oRapporteModel.setProperty("RapportArt", this.getModel("rapportSSBView").getProperty("/rapportart"), onewRapport);
@@ -96,7 +115,7 @@ sap.ui.define([
 				this._bindView(sObjectPath);
 			}.bind(this));
 		},
-		_onRouteMatchedOld: function (oEvent) {
+		_onRouteMatchedOld: function(oEvent) {
 			this.getView().getModel("rapportSSBView").setProperty("/newRapport", false);
 			this.getView().getModel("rapportSSBView").setProperty("/changeMode", false);
 			this.getView().getModel("rapportSSBView").setProperty("/confirmed", true);
@@ -106,14 +125,14 @@ sap.ui.define([
 			this.getView().getModel("rapportSSBView").setProperty("/annullierenVisible", true);
 			// Annullieren von gespeicherten Rapporten möglich
 			var sObjectId = oEvent.getParameter("arguments").objectId;
-			this.getModel().metadataLoaded().then(function () {
+			this.getModel().metadataLoaded().then(function() {
 				var sObjectPath = this.getModel().createKey("RapporteSet", {
 					Rapportid: sObjectId
 				});
 				this._bindView("/" + sObjectPath);
 			}.bind(this));
 		},
-		_onRouteMatchedReport: function (oEvent) {
+		_onRouteMatchedReport: function(oEvent) {
 			//property reporting setzen und dann normale route für bestehenden Rapport aufrufen
 			this._onRouteMatchedOld(oEvent);
 			this.getView().getModel("rapportSSBView").setProperty("/reporting", true);
@@ -132,7 +151,7 @@ sap.ui.define([
 		 * @param {string} sObjectPath path to the object to be bound to the view.
 		 * @private
 		 */
-		_bindView: function (sObjectPath) {
+		_bindView: function(sObjectPath) {
 			// Set busy indicator during view binding
 			var oViewModel = this.getModel("rapportSSBView");
 			// If the view was not bound yet its not busy, only if the binding requests data it is set to busy again
@@ -141,16 +160,16 @@ sap.ui.define([
 				path: sObjectPath,
 				events: {
 					change: this._onBindingChange.bind(this),
-					dataRequested: function () {
+					dataRequested: function() {
 						oViewModel.setProperty("/busy", true);
 					},
-					dataReceived: function () {
+					dataReceived: function() {
 						oViewModel.setProperty("/busy", false);
 					}
 				}
 			});
 		},
-		_onBindingChange: function () {
+		_onBindingChange: function() {
 			var oView = this.getView(),
 				oElementBinding = oView.getElementBinding();
 			// No data for the binding
@@ -185,7 +204,7 @@ sap.ui.define([
 				this.getView().getModel("rapportSSBView").setProperty("/annullierenVisible", false);
 			}
 		},
-		_onMetadataLoaded: function () {
+		_onMetadataLoaded: function() {
 			// Store original busy indicator delay for the detail view
 			var iOriginalViewBusyDelay = this.getView().getBusyIndicatorDelay(),
 				oViewModel = this.getModel("rapportSSBView");
@@ -200,7 +219,7 @@ sap.ui.define([
 		/**
 		 *@memberOf ch.portof.controller.Rapport
 		 */
-		onCancel: function () {
+		onCancel: function() {
 			var oViewModel = this.getModel("rapportSSBView");
 			var oContext = this.getView().getBindingContext();
 			var schiffsnr = oContext.getProperty("EniNr");
@@ -217,7 +236,7 @@ sap.ui.define([
 		/**
 		 *@memberOf ch.portof.controller.Rapport
 		 */
-		onSave: function () {
+		onSave: function() {
 			var error = false;
 			var oRapportModel = this.getModel();
 			var oContext = this.getView().getBindingContext();
@@ -268,8 +287,21 @@ sap.ui.define([
 				});
 				return;
 			}
-			if (!oContext.getProperty("SsbMenge")) {
-				sap.m.MessageBox.show("Bitte Menge von erfassen!", {
+
+			//if (!oContext.getProperty("SsbMenge") && this.getView().getModel("rapportSSBView").getProperty("/mengenPreis") === true) {
+			if ((parseFloat(oContext.getProperty("SsbMenge"), 10) <= 0 || !oContext.getProperty("SsbMenge")) && this.getView().getModel(
+					"rapportSSBView").getProperty("/mengenPreis") === true) {
+				sap.m.MessageBox.show("Bitte Menge erfassen!", {
+					icon: sap.m.MessageBox.Icon.ERROR,
+					title: "Fehler"
+				});
+				return;
+			}
+			//if (!oContext.getProperty("SsbPauschal") && this.getView().getModel("rapportSSBView").getProperty("/pauschalPreis") === true) {
+			if ((parseFloat(oContext.getProperty("SsbPauschal"), 10) <= 0 || !oContext.getProperty("SsbPauschal")) && this.getView().getModel(
+					"rapportSSBView").getProperty(
+					"/pauschalPreis") === true) {
+				sap.m.MessageBox.show("Bitte Pauschalpreis erfassen!", {
 					icon: sap.m.MessageBox.Icon.ERROR,
 					title: "Fehler"
 				});
@@ -340,7 +372,7 @@ sap.ui.define([
 				// }
 			}
 		},
-		onSignatureReset: function () {
+		onSignatureReset: function() {
 			var oViewModel = this.getModel("rapportSSBView");
 			// Model Korrigieren
 			var initSignature = oViewModel.getProperty("/initSignature");
@@ -348,7 +380,7 @@ sap.ui.define([
 				$("#signature").jSignature("clear");
 			}
 		},
-		_initSignature: function () {
+		_initSignature: function() {
 			var oViewModel = this.getModel("rapportSSBView");
 			var initSignature = oViewModel.getProperty("/initSignature");
 			if (initSignature === false) {
@@ -356,7 +388,7 @@ sap.ui.define([
 				var oSignatureDiv = new sap.ui.core.HTML("signature", {
 					// the static content as a long string literal
 					content: "<div id='signatureparent' class='signature' ><div id='signature' ></div> </div>",
-					afterRendering: function (e) {
+					afterRendering: function(e) {
 						// Init darf nur einmal aufgerufen
 						if (this.init === true) {
 							$("#signature").jSignature("init");
@@ -389,7 +421,7 @@ sap.ui.define([
 		/**
 		 *@memberOf ch.portof.controller.Rapport
 		 */
-		_calc: function () {
+		_calc: function() {
 			var oRapporteContext = this.getView().getBindingContext();
 			var oRapporteModel = this.getView().getModel();
 			var oTarifModel = this.getView().getModel("sel_tarifeSet");
@@ -399,22 +431,37 @@ sap.ui.define([
 			var total = 0;
 			this.getView().getModel("rapportSSBView").setProperty("/total", total);
 
-			if (parseFloat(oRapporteContext.getProperty("SsbMenge"), 10) < parseFloat(lowest_value, 10)) {
+			if (parseFloat(oRapporteContext.getProperty("SsbMenge"), 10) < parseFloat(lowest_value, 10) && this.getView().getModel(
+					"rapportSSBView").getProperty("/mengenPreis") === true) {
 				// Falls die erfasste zeit kleiner als die Mindestzeit ist 
 				oRapporteModel.setProperty("SsbMenge", lowest_value, oRapporteContext);
 			}
 
-			if (parseFloat(oRapporteContext.getProperty("SsbMenge"), 10) !== 0 && oRapporteContext.getProperty(
-					"SsbMenge") !== "" && oRapporteContext.getProperty("SsbMenge") != null) {
-				total = parseFloat(total) + parseFloat(oTarifModel.getProperty("/d/Preis")) *
-					parseFloat(oRapporteContext.getProperty("SsbMenge"));
+			//var SsbTarif = oRapporteContext.getProperty("SsbTarif");
+			//if (SsbTarif === "PAUSCHAL") {
+			if (this.getView().getModel("rapportSSBView").getProperty("/pauschalPreis") === true) {
+
+				// if (parseFloat(oRapporteContext.getProperty("SsbPauschal"), 10) !== 0 && oRapporteContext.getProperty(
+				//  		"SsbMenge") !== "" && oRapporteContext.getProperty("SsbMenge") != null) {
+				total = parseFloat(oRapporteContext.getProperty("SsbPauschal"));
+				//} else {
+				// 	total = 0;
+				// }
+			} else {
+				if (parseFloat(oRapporteContext.getProperty("SsbMenge"), 10) !== 0 && oRapporteContext.getProperty(
+						"SsbMenge") !== "" && oRapporteContext.getProperty("SsbMenge") != null) {
+					total = parseFloat(total) + parseFloat(oTarifModel.getProperty("/d/Preis")) *
+						parseFloat(oRapporteContext.getProperty("SsbMenge"));
+				} else {
+					total = 0;
+				}
 			}
 			this.getView().getModel("rapportSSBView").setProperty("/total", total);
 		},
 		/**
 		 *@memberOf ch.portof.controller.Rapport
 		 */
-		_calcDateDiffrence: function () {
+		_calcDateDiffrence: function() {
 			//var oRapporteModel = this.getView().getBindingContext();
 			var oRapporteContext = this.getView().getBindingContext();
 			var oRapporteModel = this.getView().getModel();
@@ -456,18 +503,22 @@ sap.ui.define([
 					lowest_value = oTarifModel.getProperty("/d/KleinsteEinheit");
 				}
 
-				if (parseFloat(diff, 10) < parseFloat(lowest_value, 10)) {
-					// Falls die erfasste zeit kleiner als die Mindestzeit ist 
-					oRapporteModel.setProperty("SsbMenge", lowest_value, oRapporteContext);
-				} else {
-					oRapporteModel.setProperty("SsbMenge", diff, oRapporteContext);
+				if (this.getView().getModel("rapportSSBView").getProperty("/mengenPreis") === true) {
+					if (parseFloat(diff, 10) < parseFloat(lowest_value, 10)) {
+						// Falls die erfasste zeit kleiner als die Mindestzeit ist 
+						oRapporteModel.setProperty("SsbMenge", lowest_value, oRapporteContext);
+					} else {
+						oRapporteModel.setProperty("SsbMenge", (diff).toString(), oRapporteContext);
+					}
 				}
 
 			}
 			this.getView().getModel("rapportSSBView").setProperty("/effektiveEinsatzZeit", diff);
-
+			if (oTarifModel != null) {
+				this._calc();
+			}
 		},
-		_createSignatureModel: function (oSignature) {
+		_createSignatureModel: function(oSignature) {
 			// Model zum handling der Signatur erzeugen
 			var oSignatureModel = new JSONModel({
 				isFilterBarVisible: false,
@@ -480,7 +531,7 @@ sap.ui.define([
 			this._initSignature();
 		},
 
-		_createOrteModel: function () {
+		_createOrteModel: function() {
 			// Model zum Lesen der Orte erzeugen
 			var oOrteModel = new JSONModel({
 				busy: false,
@@ -489,7 +540,7 @@ sap.ui.define([
 			this.setModel(oOrteModel, "orteSet");
 			this._updateOrte();
 		},
-		_createTarifModel: function () {
+		_createTarifModel: function() {
 			// Model zum Lesen der Tarife erzeugen
 			var oTarifModel = new JSONModel({
 				busy: false,
@@ -498,7 +549,7 @@ sap.ui.define([
 			this.setModel(oTarifModel, "tarifeSet");
 			this._updateTarifeNewDate();
 		},
-		_getPegel: function (atype) {
+		_getPegel: function(atype) {
 			// Model zum Lesen der Tarife erzeugen
 			var oPegelModel = new JSONModel({
 				busy: false,
@@ -523,7 +574,7 @@ sap.ui.define([
 			// oRapporteModel.setProperty("Samstagszuschlag", false, oContext);
 
 		},
-		_updateTarife: function () {
+		_updateTarife: function() {
 			// Ermitteln der Tarife 
 			var oRapporteModel = this.getView().getBindingContext();
 
@@ -554,7 +605,7 @@ sap.ui.define([
 			this._updateSelTarife();
 			this._calc();
 		},
-		_updateTarifeNewDate: function () {
+		_updateTarifeNewDate: function() {
 			var oTarifModel = this.getView().getModel("tarifeSet");
 			var oContext = this.getView().getBindingContext();
 
@@ -570,25 +621,25 @@ sap.ui.define([
 			var tarifart = oTarifModel.getProperty("/d/results/0/Tarifart");
 			var oRapporteModel = this.getView().getModel();
 			switch (tarifart) {
-			case 'FR':
-				oRapporteModel.setProperty("Feiertagszuschlag", true, oContext);
-				oRapporteModel.setProperty("Samstagszuschlag", false, oContext);
-				break;
-			case 'SA':
-				oRapporteModel.setProperty("Samstagszuschlag", true, oContext);
-				oRapporteModel.setProperty("Feiertagszuschlag", false, oContext);
-				break;
-			default:
-				oRapporteModel.setProperty("Samstagszuschlag", false, oContext);
-				oRapporteModel.setProperty("Feiertagszuschlag", false, oContext);
-				break;
+				case 'FR':
+					oRapporteModel.setProperty("Feiertagszuschlag", true, oContext);
+					oRapporteModel.setProperty("Samstagszuschlag", false, oContext);
+					break;
+				case 'SA':
+					oRapporteModel.setProperty("Samstagszuschlag", true, oContext);
+					oRapporteModel.setProperty("Feiertagszuschlag", false, oContext);
+					break;
+				default:
+					oRapporteModel.setProperty("Samstagszuschlag", false, oContext);
+					oRapporteModel.setProperty("Feiertagszuschlag", false, oContext);
+					break;
 			}
 			this._calcDateDiffrence();
 			this.setModel(oTarifModel, "tarifeSet");
 			this._getPegel("Pegel");
 			this._getPegel("PegelTo");
 		},
-		_createSelTarifModel: function () {
+		_createSelTarifModel: function() {
 			// Model zum Lesen der Tarife erzeugen
 			var oSelTarifModel = new JSONModel({
 				busy: false,
@@ -597,26 +648,29 @@ sap.ui.define([
 			this.setModel(oSelTarifModel, "sel_tarifeSet");
 			this._updateSelTarife();
 		},
-		_updateSelTarife: function () {
+		_updateSelTarife: function() {
 			// Ermitteln der Tarife 
-			var oRapporteModel = this.getView().getBindingContext();
+			var oRapporteContext = this.getView().getBindingContext();
+			var oRapporteModel = this.getView().getModel();
 
-			var date_from = this.formatter.UTCTimeToLocale(oRapporteModel.getProperty("Datum")).toJSON().slice(0, -1);
-			var time_from = this.formatter.time(new Date(oRapporteModel.getProperty("Zeit/ms")));
-			var date_to = this.formatter.UTCTimeToLocale(oRapporteModel.getProperty("DatumTo")).toJSON().slice(0, -1);
-			var time_to = this.formatter.time(new Date(oRapporteModel.getProperty("ZeitTo/ms")));
+			var date_from = this.formatter.UTCTimeToLocale(oRapporteContext.getProperty("Datum")).toJSON().slice(0, -1);
+			var time_from = this.formatter.time(new Date(oRapporteContext.getProperty("Zeit/ms")));
+			var date_to = this.formatter.UTCTimeToLocale(oRapporteContext.getProperty("DatumTo")).toJSON().slice(0, -1);
+			var time_to = this.formatter.time(new Date(oRapporteContext.getProperty("ZeitTo/ms")));
 			//var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/TarifeSet(Datum=datetime'" + date + "',Tarifart='',Zeit=time'" + time + "')";
 			var oSelTarifModel = this.getView().getModel("sel_tarifeSet");
 			var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/TarifeSSBSet";
 			var tarifArt;
-			if (oRapporteModel.getProperty("Feiertagszuschlag")) {
+			if (oRapporteContext.getProperty("Feiertagszuschlag")) {
 				tarifArt = "FR";
-			} else if (oRapporteModel.getProperty("Samstagszuschlag")) {
+			} else if (oRapporteContext.getProperty("Samstagszuschlag")) {
 				tarifArt = "SA";
 			} else {
 				tarifArt = "NO";
 			}
-			var SsbTarif = oRapporteModel.getProperty("SsbTarif");
+
+			var SsbTarif = oRapporteContext.getProperty("SsbTarif");
+
 			var URL = URL + "(Tarifart='" + tarifArt + "',SsbTarif='" + SsbTarif + "')";
 			// var URL = URL + "?$filter=Tarifart eq '" + tarifArt + "' and DatumVon eq datetime'" + date_from + "' and ZeitVon eq time'" + time_from +
 			// 	"' and DatumBis eq datetime'" + date_to + "' and ZeitBis eq time'" + time_to + "'";
@@ -625,9 +679,20 @@ sap.ui.define([
 
 			oSelTarifModel.loadData(URL, true, false);
 			this.setModel(oSelTarifModel, "sel_tarifeSet");
+			if (SsbTarif === "PAUSCHAL") {
+				this.getView().getModel("rapportSSBView").setProperty("/pauschalPreis", true);
+				this.getView().getModel("rapportSSBView").setProperty("/mengenPreis", false);
+				//oRapporteModel.setProperty("SsbMenge", null, oRapporteContext);
+				oRapporteModel.setProperty("SsbMenge", "0", oRapporteContext);
+
+			} else {
+				this.getView().getModel("rapportSSBView").setProperty("/pauschalPreis", false);
+				this.getView().getModel("rapportSSBView").setProperty("/mengenPreis", true);
+				oRapporteModel.setProperty("SsbPauschal", "0", oRapporteContext);
+			}
 			this._calc();
 		},
-		_updateOrte: function () {
+		_updateOrte: function() {
 			var oOrteModel = this.getView().getModel("orteSet");
 			var oContext = this.getView().getBindingContext();
 			var oRapporteContext = this.getView().getBindingContext();
@@ -636,7 +701,7 @@ sap.ui.define([
 			oOrteModel.loadData(URL, true, false);
 			this.setModel(oOrteModel, "orteSet");
 		},
-		_createSchiffsModel: function () {
+		_createSchiffsModel: function() {
 			// Lesen der Schiffsdaten
 			var oSchiff = new JSONModel({
 				busy: false,
@@ -647,7 +712,7 @@ sap.ui.define([
 			oSchiff.loadData(URL, true, false);
 			this.setModel(oSchiff, "Schiff");
 		},
-		_createDebitorModel: function () {
+		_createDebitorModel: function() {
 			// Lesen der Debiorendaten zum Schiff
 			var oDebitor = new JSONModel({
 				busy: false,
@@ -658,7 +723,7 @@ sap.ui.define([
 			oDebitor.loadData(sUrlDebi, true, false);
 			this.setModel(oDebitor, "Debitor");
 		},
-		_getBenutzer: function () {
+		_getBenutzer: function() {
 			// Ermitteln des Lotsennamens
 			var oBenutzerModel = new JSONModel({
 				busy: false,
@@ -666,12 +731,13 @@ sap.ui.define([
 			});
 			var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/BenutzerSet('1')";
 			oBenutzerModel.loadData(URL, true, false);
-			this.getView().getModel("rapportSSBView").setProperty("/lotsenname", oBenutzerModel.getProperty("/d/Firstname") + " " + oBenutzerModel
+			this.getView().getModel("rapportSSBView").setProperty("/lotsenname", oBenutzerModel.getProperty("/d/Firstname") + " " +
+				oBenutzerModel
 				.getProperty("/d/Lastname"));
 			this.getView().getModel("rapportSSBView").setProperty("/poweruser", oBenutzerModel.getProperty("/d/Ispoweruser"));
 			return oBenutzerModel.getProperty("/d/Firstname") + " " + oBenutzerModel.getProperty("/d/Lastname");
 		},
-		_destory: function (bSave) {
+		_destory: function(bSave) {
 			// Aufräumen
 			var oContext = this.getView().getBindingContext();
 			var oRapportModel = this.getView().getModel();
@@ -689,12 +755,12 @@ sap.ui.define([
 
 			this.getView().unbindElement();
 		},
-		_resetModel: function (oData) {
+		_resetModel: function(oData) {
 			if (this.getView().getModel().hasPendingChanges()) {
 				this.getView().getModel().resetChanges();
 			}
 		},
-		_submitSuccess: function (oData) {
+		_submitSuccess: function(oData) {
 			var oViewModel = this.getModel("rapportSSBView");
 
 			oViewModel.setProperty("/newRapport", false);
@@ -716,23 +782,24 @@ sap.ui.define([
 				autoClose: false
 			});
 		},
-		_submitError: function () {
+		_submitError: function() {
 			sap.m.MessageToast.show("Fehler beim speichern des Rapports", {
 				duration: 30000,
 				autoClose: false
 			});
 			this._destory(true);
 		},
-		_logChange: function (sMethod) {
+		_logChange: function(sMethod) {
 			if (this.getView().getModel().hasPendingChanges() || this.getView().getModel().hasPendingRequests()) {
-				jQuery.sap.log.error(sMethod + " " + "Rapport: " + this.getView().getBindingContext().getProperty("Rapportid") + "SchiffNr" + this
+				jQuery.sap.log.error(sMethod + " " + "Rapport: " + this.getView().getBindingContext().getProperty("Rapportid") + "SchiffNr" +
+					this
 					.getView().getBindingContext().getProperty("EniNr"));
 			};
 		},
 		/**
 		 *@memberOf ch.portof.controller.Rapport
 		 */
-		onAnnullieren: function () {
+		onAnnullieren: function() {
 			sap.m.MessageBox.confirm("Wollen Sie den Lotsenrapport wirklich annullieren?.", {
 				icon: sap.m.MessageBox.Icon.QUESTION,
 				title: "Annullation",
@@ -740,7 +807,7 @@ sap.ui.define([
 					sap.m.MessageBox.Action.YES,
 					sap.m.MessageBox.Action.NO
 				],
-				onClose: jQuery.proxy(function (oAction) {
+				onClose: jQuery.proxy(function(oAction) {
 					if (oAction === sap.m.MessageBox.Action.YES) {
 						//This code was generated by the layout editor.
 						var oRapportModel = this.getModel();
@@ -758,20 +825,25 @@ sap.ui.define([
 		/**
 		 *@memberOf ch.portof.controller.Rapport
 		 */
-		onResetSelection: function () {
+		onResetSelection: function() {
 			//This code was generated by the layout editor.
 			var oRapporteContext = this.getView().getBindingContext();
 			var oRapporteModel = this.getView().getModel();
 			var oTarifModel = this.getView().getModel("tarifeSet");
 			//this._resetRadioButtons(oRapporteModel, oRapporteContext);
-			oRapporteModel.setProperty("SsbTarif", null, oRapporteContext);
-			oRapporteModel.setProperty("SsbMenge", null, oRapporteContext);
+			oRapporteModel.setProperty("SsbTarif", "0", oRapporteContext);
+
+			oRapporteModel.setProperty("SsbMenge", "0", oRapporteContext);
+			//var oSelTarifModel = this.getView().getModel("sel_tarifeSet");
+			//oSelTarifModel.destroy();
+			//this.setModel(null, "sel_tarifeSet");
+			this._updateSelTarife();
 			this._calc();
 		},
 		/**
 		 *@memberOf ch.portof.controller.Rapport
 		 */
-		_setFahrtrichtung: function () {
+		_setFahrtrichtung: function() {
 			var oRapporteContext = this.getView().getBindingContext();
 			if (oRapporteContext.getProperty("Talfahrt") === true) {
 				this.getView().getModel("rapportSSBView").setProperty("/fahrtrichtung", "Talfahrt");
@@ -782,7 +854,7 @@ sap.ui.define([
 		/**
 		 *@memberOf ch.portof.controller.RapportSSB
 		 */
-		onChangeTarif: function () {
+		onChangeTarif: function() {
 			this._updateSelTarife();
 			// var oTarifModel = this.getView().getModel("tarifeSet");
 			// // var url = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/TarifeSSBSet(Tarifart='NO',SsbTarif='HAVARIE')";
@@ -816,7 +888,7 @@ sap.ui.define([
 		/**
 		 *@memberOf ch.portof.controller.RapportSSB
 		 */
-		onChangeOrt: function () {
+		onChangeOrt: function() {
 			//This code was generated by the layout editor.
 		}
 	});
