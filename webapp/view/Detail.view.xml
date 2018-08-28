@@ -13,6 +13,7 @@
 					<ObjectAttribute text="{Schiffstyp}" id="__attribute12" title="{/#Schiffe/Schiffstyp/@sap:label}"/>
 					<ObjectAttribute text="{EcocardNr}" id="__attribute4" title="{/#Schiffe/EcocardNr/@sap:label}"/>
 					<ObjectAttribute text="{Tragfaehigkeit}" id="__attribute129" title="{/#Schiffe/Tragfaehigkeit/@sap:label}"/>
+					<ObjectAttribute text="{Laenge}" id="__attribute130" title="{/#Schiffe/Laenge/@sap:label}"/>
 				</attributes>
 			</ObjectHeader>
 			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
@@ -108,7 +109,7 @@
 			<semantic:PositiveAction text="neuer Lotsenrapport" id="__action3" press="newRapport" visible="{detailView>/lotsenRapport}"/>
 		</semantic:positiveAction>
 		<semantic:mainAction>
-			<semantic:MainAction text="neuer Schlepp- und Schubbootrapport" id="__action5" press="newRapportSSB" visible="{detailView>/ssbRapport}"/>
+			<semantic:MainAction text="neuer SSB Rapport" id="__action5" press="newRapportSSB" visible="{detailView>/ssbRapport}"/>
 		</semantic:mainAction>
 	</semantic:DetailPage>
 </mvc:View>
