@@ -120,6 +120,7 @@
 				</Key>
 				<Property Name="EcocardNr" Type="Edm.String" MaxLength="10" sap:label="Eco Card Nummer" sap:creatable="false" sap:updatable="false"
 					sap:sortable="false" sap:filterable="false"/>
+				<Property Name="Laenge" Type="Edm.Decimal" Precision="5" Scale="2" sap:unicode="false" sap:label="Länge" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
 				<Property Name="Tragfaehigkeit" Type="Edm.Decimal" Precision="9" Scale="3" sap:unicode="false" sap:label="Tragfähigkeit"
 					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
 				<Property Name="Schiffstyp" Type="Edm.String" MaxLength="70" sap:unicode="false" sap:creatable="false" sap:updatable="false"
@@ -129,8 +130,6 @@
 				<Property Name="Schiffsnummer" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="ENI" sap:creatable="false" sap:updatable="false"
 					sap:sortable="false" sap:filterable="false"/>
 				<Property Name="Matnr" Type="Edm.String" MaxLength="40" sap:label="Material" sap:creatable="false" sap:updatable="false"
-					sap:sortable="false" sap:filterable="false"/>
-				<Property Name="Schiffstyp" Type="Edm.String" MaxLength="70" sap:label="Char. Value" sap:creatable="false" sap:updatable="false"
 					sap:sortable="false" sap:filterable="false"/>
 				<Property Name="Nationalitaet" Type="Edm.String" MaxLength="3" sap:label="Flagge" sap:creatable="false" sap:updatable="false"
 					sap:sortable="false" sap:filterable="false"/>

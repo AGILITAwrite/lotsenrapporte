@@ -297,6 +297,14 @@ sap.ui.define([
 				});
 				return;
 			}
+			if ((parseFloat(oContext.getProperty("SsbMenge"), 10) >= 100 && oContext.getProperty("SsbMenge")) && this.getView().getModel(
+					"rapportSSBView").getProperty("/mengenPreis") === true) {
+				sap.m.MessageBox.show("Nur Mengen < 100 zulässig!", {
+					icon: sap.m.MessageBox.Icon.ERROR,
+					title: "Fehler"
+				});
+				return;
+			}
 			//if (!oContext.getProperty("SsbPauschal") && this.getView().getModel("rapportSSBView").getProperty("/pauschalPreis") === true) {
 			if ((parseFloat(oContext.getProperty("SsbPauschal"), 10) <= 0 || !oContext.getProperty("SsbPauschal")) && this.getView().getModel(
 					"rapportSSBView").getProperty(
@@ -361,6 +369,8 @@ sap.ui.define([
 					// 			//onClose: function(oAction) { error = true; } 
 					// 	});
 					// } else {
+
+					// OData service akzeptiert die daten nicht in im Format edm.time, wie er sie liefert, er akzeptiert und xsd duration 
 					oRapportModel.setProperty("Zeit", this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))), oContext);
 					oRapportModel.setProperty("ZeitTo", this.formatter.time(new Date(oContext.getProperty("ZeitTo/ms"))), oContext);
 					oRapportModel.submitChanges({
@@ -760,33 +770,87 @@ sap.ui.define([
 				this.getView().getModel().resetChanges();
 			}
 		},
-		_submitSuccess: function(oData) {
+		_submitSuccess: function(oData, oReponse) {
 			var oViewModel = this.getModel("rapportSSBView");
-
-			oViewModel.setProperty("/newRapport", false);
-			var schiffsnr = this.getView().getBindingContext().getProperty("EniNr");
-			this._destory(true);
-			// alte navigation
-			// this.getRouter().navTo("object", {
-			// 	objectId: schiffsnr
-			// }, true);
-			if (oViewModel.getProperty("/reporting") === true) {
-				this.getRouter().navTo("showReportingRoute", {}, true);
-			} else {
-				this.getRouter().navTo("object", {
-					objectId: schiffsnr
-				}, true);
+			var oContext = this.getView().getBindingContext();
+			var oRapportModel = this.getModel();
+			var error = true;
+			//	if (oData.__batchResponses[0].response.statusText === "Ok") {
+			if (oData.__batchResponses[0].response) {
+				if (oData.__batchResponses[0].response.statusText === "Ok") {
+					error = false;
+				}
+			} else if (oData.__batchResponses[0].__changeResponses[0]) {
+				if (oData.__batchResponses[0].__changeResponses[0].statusText === "Created") {
+					error = false;
+				}
 			}
-			sap.m.MessageToast.show("Rapport wurde erfolgreich gespeichert", {
-				duration: 30000,
-				autoClose: false
-			});
+			if (error) {
+				// sap.m.MessageBox.show("Fehler beim speichern des Rapports!", {
+				// 	icon: sap.m.MessageBox.Icon.ERROR,
+				// 	title: "Fehler"
+				// });
+				//oRapportModel.setProperty("Zeit", oContext.getProperty("Zeit"), oContext);
+				// var oDateFormat = sap.ui.core.format.DateFormat.getTimeInstance({
+				// 	pattern: "'PT'HH'H'mm'M'ss'S'"
+				// });
+
+				// oRapportModel.setProperty("Zeit", {
+				// 		ms: oDateFormat.parse(oContext.getProperty("Zeit"), true).getTime(),
+				// 		__edmtype: "Edm.Time"
+				// 	},
+				// 	oContext);
+
+				// oRapportModel.setProperty("ZeitTo", {
+				// 		ms: oDateFormat.parse(oContext.getProperty("ZeitTo"), true).getTime(),
+				// 		__edmtype: "Edm.Time"
+				// 	},
+				// 	oContext);
+
+				// Zeit von XSD Duration auf EDM Time zurückwandeln 
+				oRapportModel.setProperty("Zeit", {
+						ms: this.formatter.durationToTimestamp(oContext.getProperty("Zeit")),
+						__edmtype: "Edm.Time"
+					},
+					oContext);
+
+				oRapportModel.setProperty("ZeitTo", {
+						ms: this.formatter.durationToTimestamp(oContext.getProperty("ZeitTo")),
+						__edmtype: "Edm.Time"
+					},
+					oContext);
+
+				//oRapportModel.setProperty("ZeitTo", oContext.getProperty("ZeitTo"), oContext);
+			} else {
+				oViewModel.setProperty("/newRapport", false);
+				var schiffsnr = this.getView().getBindingContext().getProperty("EniNr");
+				this._destory(true);
+				// alte navigation
+				// this.getRouter().navTo("object", {
+				// 	objectId: schiffsnr
+				// }, true);
+				if (oViewModel.getProperty("/reporting") === true) {
+					this.getRouter().navTo("showReportingRoute", {}, true);
+				} else {
+					this.getRouter().navTo("object", {
+						objectId: schiffsnr
+					}, true);
+				}
+				sap.m.MessageToast.show("Rapport wurde erfolgreich gespeichert", {
+					duration: 30000,
+					autoClose: false
+				});
+			}
 		},
 		_submitError: function() {
 			sap.m.MessageToast.show("Fehler beim speichern des Rapports", {
 				duration: 30000,
 				autoClose: false
 			});
+			/*			sap.m.MessageBox.show("Fehler beim speichern des Rapports!", {
+							icon: sap.m.MessageBox.Icon.ERROR,
+							title: "Fehler"
+						});*/
 			this._destory(true);
 		},
 		_logChange: function(sMethod) {

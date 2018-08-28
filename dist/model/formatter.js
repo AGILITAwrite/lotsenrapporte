@@ -33,13 +33,13 @@ sap.ui.define([], function() {
 
 				var oTimeFormat = sap.ui.core.format.DateFormat.getTimeInstance({
 					pattern: "PTHH'H'mm'M'ss'S'",
-					UTC : true 
-					//pattern: "\'PT\'HH\'H\'mm\'M\'ss\'S\'"
+					UTC: true
+						//pattern: "\'PT\'HH\'H\'mm\'M\'ss\'S\'"
 				});
 				//falls Zeitzonen Konvertierung nötig
 				var TZOffsetMs = 0; // new Date().getTimezoneOffset() * 60 * 1000;
 				//                             console.log(TZOffsetMs);
-				var timeStr = oTimeFormat.format(new Date( timeinmiliseconds + TZOffsetMs));
+				var timeStr = oTimeFormat.format(new Date(timeinmiliseconds + TZOffsetMs));
 				//                             console.log(timeStr);
 				//var timeStr = oTimeFormat.format(new Date(timeinmiliseconds));
 				return timeStr;
@@ -48,24 +48,31 @@ sap.ui.define([], function() {
 			}
 		},
 		UTCTimeToLocale: function(value) {
-			return new Date       (  value.getTime() - value.getTimezoneOffset() * 60000 );
+			return new Date(value.getTime() - value.getTimezoneOffset() * 60000);
 		},
 		LocaleTimeToUTC: function(value) {
-			return new Date       (  value.getTime() + value.getTimezoneOffset() * 60000 );
+			return new Date(value.getTime() + value.getTimezoneOffset() * 60000);
 		},
 		fnBooleanFormatter: function(value) {
-			if (value === false){
+			if (value === false) {
 				value = null;
 			}
 			return value;
 		},
 		convertToBool: function(value) {
 			// return true;
-			if ( value == null || value == "" ) {
-				return true;                                                
+			if (value == null || value == "") {
+				return true;
 			} else {
 				return false;
 			}
+		},
+		durationToTimestamp: function(value) {
+			var oDateFormat = sap.ui.core.format.DateFormat.getTimeInstance({
+				pattern: "'PT'HH'H'mm'M'ss'S'"
+			});
+
+			return oDateFormat.parse(value, true).getTime();
 		}
 	};
 
