@@ -24,11 +24,11 @@ sap.ui.define([
 				annullierenVisible: false,
 				confirmed: false, // bestätigungsflag schiffsführer
 				confirmed_ul: false, //bestätigungsflag für überlängen
-				display_ul: false, 
+				display_ul: false,
 				fahrtrichtung: "",
-				reporting: false,
+				reporting: false, // Navigation kommt aus Rapportübersicht und muss wieder dahin zurück
 				total: 0,
-				poweruser: false,
+				poweruser: false, //Kann rapporte ohne Unterschrift und in die Vergangenheit erfassen
 				lotsenname: "",
 				rapportart: "L" // Lotsenrapport
 			});
@@ -85,7 +85,7 @@ sap.ui.define([
 			this.getView().getModel("rapportView").setProperty("/changeMode", false);
 			this.getView().getModel("rapportView").setProperty("/confirmed", true); // Rapport kann nur gespeichert werden wenn Flag gesetzt
 			this.getView().getModel("rapportView").setProperty("/confirmed_ul", true); // Rapport kann nur gespeichert werden wenn Flag gesetzt
-			
+
 			this.getView().getModel("rapportView").setProperty("/reporting", false);
 			// zum Editeren von bestehenden rapporten hier aktivieren.
 			this.getView().getModel("rapportView").setProperty("/annullierenVisible", true);
@@ -207,17 +207,6 @@ sap.ui.define([
 					objectId: schiffsnr
 				}, true);
 			}
-
-			// versuch zur navigation
-			// var oHistory = History.getInstance();
-			// var sPreviousHash = oHistory.getPreviousHash();
-
-			// if (sPreviousHash !== undefined) {
-			// 	window.history.go(-1);
-			// } else {
-			// 	var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			// 	oRouter.navTo("overview", true);
-			// }
 		},
 		/**
 		 *@memberOf ch.portof.controller.Rapport
@@ -321,33 +310,32 @@ sap.ui.define([
 							// 	success: jQuery.proxy(this._submitSuccess, this),
 							// 	error: jQuery.proxy(this._submitError, this)
 							// });
-						
-							if (	this.getModel("rapportView").getProperty("/display_ul") === true && 
-									!this.getModel("rapportView").getProperty("/confirmed_ul") ) { 
 
-							sap.m.MessageBox.show("Bitte technischen Zustand für Überlänge bestätigen!", {
-								icon: sap.m.MessageBox.Icon.ERROR,
-								title: "Fehler" //,
-									//actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
-									//onClose: function(oAction) { error = true; } 
-							});
-						} else {
+							if (this.getModel("rapportView").getProperty("/display_ul") === true &&
+								!this.getModel("rapportView").getProperty("/confirmed_ul")) {
 
-							// 					var dateTime = new Date();
-							// ( dateTime.getTime() - dateTime.getTimezoneOffset() * 60000 )
+								sap.m.MessageBox.show("Bitte technischen Zustand für Überlänge bestätigen!", {
+									icon: sap.m.MessageBox.Icon.ERROR,
+									title: "Fehler" //,
+										//actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+										//onClose: function(oAction) { error = true; } 
+								});
+							} else {
 
-							// die Zeit wird beim Lesen des Models in MS umgewandelt und muss aber beim speichern manuell in EdmTime umgewandelt werden, da das nicht wieder automatisch gemacht wird
-							//oRapportModel.setProperty("Zeit", this.formatter.time(new Date( oContext.getProperty("Zeit/ms") - new Date().getTimezoneOffset() * 60000 )), oContext);
-							oRapportModel.setProperty("Zeit", this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))), oContext);
-							//			oRapportModel.attachEventOnce("batchRequestCompleted", jQuery.proxy(this._submitSuccess, this));
-							//			oRapportModel.attachEventOnce("batchRequestFailed", jQuery.proxy(this._submitError, this));
-							oRapportModel.submitChanges({
-								success: jQuery.proxy(this._submitSuccess, this),
-								error: jQuery.proxy(this._submitError, this)
-							});
-						}
-							
-							
+								// 					var dateTime = new Date();
+								// ( dateTime.getTime() - dateTime.getTimezoneOffset() * 60000 )
+
+								// die Zeit wird beim Lesen des Models in MS umgewandelt und muss aber beim speichern manuell in EdmTime umgewandelt werden, da das nicht wieder automatisch gemacht wird
+								//oRapportModel.setProperty("Zeit", this.formatter.time(new Date( oContext.getProperty("Zeit/ms") - new Date().getTimezoneOffset() * 60000 )), oContext);
+								oRapportModel.setProperty("Zeit", this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))), oContext);
+								//			oRapportModel.attachEventOnce("batchRequestCompleted", jQuery.proxy(this._submitSuccess, this));
+								//			oRapportModel.attachEventOnce("batchRequestFailed", jQuery.proxy(this._submitError, this));
+								oRapportModel.submitChanges({
+									success: jQuery.proxy(this._submitSuccess, this),
+									error: jQuery.proxy(this._submitError, this)
+								});
+							}
+
 						}
 
 					}
@@ -383,7 +371,7 @@ sap.ui.define([
 						} else {
 							$("#signature").jSignature("clear");
 						}
-						
+
 						//var canvas = $('.jSignature')[0];
 						//var ctx = canvas.getContext('2d');
 
@@ -412,7 +400,7 @@ sap.ui.define([
 		},
 		_updateTarife: function() {
 			// Ermitteln der Tarife 
-			//TODO dem oData Service muss noch Datum und Uhrzeit mitgegeben werden, um den Nacht/Sonntagszuschlag automatisch zu ermitteln
+
 			var oRapporteModel = this.getView().getBindingContext();
 			var date = oRapporteModel.getProperty("Datum").toISOString().slice(0, -1);
 			var time = this.formatter.time(new Date(oRapporteModel.getProperty("Zeit/ms")));
@@ -454,24 +442,11 @@ sap.ui.define([
 			var oTarifModel = this.getView().getModel("tarifeSet");
 			// Löschen der Radiobuttons wenn Stunden bei Allgemeine Dienstleistung mitgegeben werden
 			// Gemäss meeting von 27.04. darf jetzt doch eine Strecke + Allgemeine Dienstleistung zusammen in einem Rapport verrechnet werden.
-			/*			if (parseInt(oRapporteContext.getProperty("AllgemeineDienstleistung"), 10) !== 0 &&
-				oRapporteContext.getProperty("AllgemeineDienstleistung") !== "" &&
-				oRapporteContext.getProperty("AllgemeineDienstleistung") != null) {
-				this._resetRadioButtons( oRapporteModel, oRapporteContext );
-			}
-			// Stunden auf 0 setzen wenn Radiobutton gesetzt ist
-			if (oRapporteContext.getProperty("MrbU2000t") === true ||
-				oRapporteContext.getProperty("MrbUe2000t") === true ||
-				oRapporteContext.getProperty("BRU125m") === true ||
-				oRapporteContext.getProperty("BRSchubverband") === true ||
-				oRapporteContext.getProperty("BaAug") === true ||
-				oRapporteContext.getProperty("BirAug") === true) {
-				oRapporteModel.setProperty("AllgemeineDienstleistung", null, oRapporteContext);
-			}*/
+
 			// rechnen des Totalbetrags
 			var total = 0;
 			this.getView().getModel("rapportView").setProperty("/total", total);
-				this.getView().getModel("rapportView").setProperty("/display_ul", false); // standardmässig ausblenden
+			this.getView().getModel("rapportView").setProperty("/display_ul", false); // standardmässig ausblenden
 			if (oRapporteContext.getProperty("MrbU2000t")) {
 				total = parseFloat(oTarifModel.getProperty("/d/MrbU2000t"));
 			}
@@ -586,17 +561,6 @@ sap.ui.define([
 			oDebitor.loadData(sUrlDebi, true, false);
 			this.setModel(oDebitor, "Debitor");
 		},
-		/*_getBenutzername: function() {
-			// Ermitteln des Lotsennamens
-			var oBenutzerModel = new JSONModel({
-				busy: false,
-				delay: 0
-			});
-			var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/BenutzerSet('1')";
-			oBenutzerModel.loadData(URL, true, false);
-			return oBenutzerModel.getProperty("/d/Firstname") + " " + oBenutzerModel.getProperty("/d/Lastname");
-		},*/
-
 		_getBenutzer: function() {
 			// Ermitteln des Lotsennamens
 			var oBenutzerModel = new JSONModel({
