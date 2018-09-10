@@ -297,14 +297,14 @@ sap.ui.define([
 				});
 				return;
 			}
-			if ((parseFloat(oContext.getProperty("SsbMenge"), 10) >= 100 && oContext.getProperty("SsbMenge")) && this.getView().getModel(
-					"rapportSSBView").getProperty("/mengenPreis") === true) {
-				sap.m.MessageBox.show("Nur Mengen < 100 zulässig!", {
-					icon: sap.m.MessageBox.Icon.ERROR,
-					title: "Fehler"
-				});
-				return;
-			}
+			// if ((parseFloat(oContext.getProperty("SsbMenge"), 10) >= 100 && oContext.getProperty("SsbMenge")) && this.getView().getModel(
+			// 		"rapportSSBView").getProperty("/mengenPreis") === true) {
+			// 	sap.m.MessageBox.show("Nur Mengen < 100 zulässig!", {
+			// 		icon: sap.m.MessageBox.Icon.ERROR,
+			// 		title: "Fehler"
+			// 	});
+			// 	return;
+			// }
 			//if (!oContext.getProperty("SsbPauschal") && this.getView().getModel("rapportSSBView").getProperty("/pauschalPreis") === true) {
 			if ((parseFloat(oContext.getProperty("SsbPauschal"), 10) <= 0 || !oContext.getProperty("SsbPauschal")) && this.getView().getModel(
 					"rapportSSBView").getProperty(
@@ -781,7 +781,8 @@ sap.ui.define([
 					error = false;
 				}
 			} else if (oData.__batchResponses[0].__changeResponses[0]) {
-				if (oData.__batchResponses[0].__changeResponses[0].statusText === "Created") {
+				if (oData.__batchResponses[0].__changeResponses[0].statusText === "Created" || oData.__batchResponses[0].__changeResponses[0].statusText ===
+					"No Content") {
 					error = false;
 				}
 			}
@@ -877,7 +878,9 @@ sap.ui.define([
 						var oRapportModel = this.getModel();
 						var oContext = this.getView().getBindingContext();
 						oRapportModel.setProperty("Loevm", true, oContext);
+						//oRapportModel.setProperty("Zeit", this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))), oContext);
 						oRapportModel.setProperty("Zeit", this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))), oContext);
+						oRapportModel.setProperty("ZeitTo", this.formatter.time(new Date(oContext.getProperty("ZeitTo/ms"))), oContext);
 						oRapportModel.submitChanges({
 							success: jQuery.proxy(this._submitSuccess, this),
 							error: jQuery.proxy(this._submitError, this)
