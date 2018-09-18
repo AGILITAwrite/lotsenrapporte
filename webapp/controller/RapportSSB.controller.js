@@ -504,7 +504,7 @@ sap.ui.define([
 			var diff_ms = Math.floor(((Math.floor(dateTimeTo / 60000) * 60000) - (Math.floor(dateTimeFrom / 60000) * 60000)) / (36e5 / 100)) *
 				(36e5 / 100);
 			//var diff = oDateFormat.format(new Date( diff_minutes ));
-			var diff = diff_ms / 36e5;
+			var diff = Math.ceil(diff_ms / 36e5);
 
 			var old_effective_time = this.getView().getModel("rapportSSBView").getProperty("/effektiveEinsatzZeit");
 			if (old_effective_time != diff) {
