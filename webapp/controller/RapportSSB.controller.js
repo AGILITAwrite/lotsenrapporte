@@ -504,7 +504,8 @@ sap.ui.define([
 			var diff_ms = Math.floor(((Math.floor(dateTimeTo / 60000) * 60000) - (Math.floor(dateTimeFrom / 60000) * 60000)) / (36e5 / 100)) *
 				(36e5 / 100);
 			//var diff = oDateFormat.format(new Date( diff_minutes ));
-			var diff = Math.ceil(diff_ms / 36e5);
+			var diff = diff_ms / 36e5;
+			var diff_round = Math.ceil(diff_ms / 36e5);
 
 			var old_effective_time = this.getView().getModel("rapportSSBView").getProperty("/effektiveEinsatzZeit");
 			if (old_effective_time != diff) {
@@ -514,11 +515,11 @@ sap.ui.define([
 				}
 
 				if (this.getView().getModel("rapportSSBView").getProperty("/mengenPreis") === true) {
-					if (parseFloat(diff, 10) < parseFloat(lowest_value, 10)) {
+					if (parseFloat(diff_round, 10) < parseFloat(lowest_value, 10)) {
 						// Falls die erfasste zeit kleiner als die Mindestzeit ist 
 						oRapporteModel.setProperty("SsbMenge", lowest_value, oRapporteContext);
 					} else {
-						oRapporteModel.setProperty("SsbMenge", (diff).toString(), oRapporteContext);
+						oRapporteModel.setProperty("SsbMenge", (diff_round).toString(), oRapporteContext);
 					}
 				}
 
