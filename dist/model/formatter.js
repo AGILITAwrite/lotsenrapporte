@@ -26,6 +26,7 @@ sap.ui.define([], function() {
 			return oNumberFormat.format(sValue);
 		},
 		time: function(value) {
+			// edm.time to xsd:duration Odata Model liefert edm.time erwartet aber xsd:duration zum speichern :(
 			//                             console.log(value);                        
 			if (value) {
 
@@ -34,14 +35,11 @@ sap.ui.define([], function() {
 				var oTimeFormat = sap.ui.core.format.DateFormat.getTimeInstance({
 					pattern: "PTHH'H'mm'M'ss'S'",
 					UTC: true
-						//pattern: "\'PT\'HH\'H\'mm\'M\'ss\'S\'"
 				});
 				//falls Zeitzonen Konvertierung nötig
 				var TZOffsetMs = 0; // new Date().getTimezoneOffset() * 60 * 1000;
 				//                             console.log(TZOffsetMs);
 				var timeStr = oTimeFormat.format(new Date(timeinmiliseconds + TZOffsetMs));
-				//                             console.log(timeStr);
-				//var timeStr = oTimeFormat.format(new Date(timeinmiliseconds));
 				return timeStr;
 			} else {
 				return value;
@@ -60,6 +58,7 @@ sap.ui.define([], function() {
 			return value;
 		},
 		convertToBool: function(value) {
+			//String zu bool umwandeln (invertiert)
 			// return true;
 			if (value == null || value == "") {
 				return true;

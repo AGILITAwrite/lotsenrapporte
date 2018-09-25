@@ -56,9 +56,9 @@ sap.ui.define([
 			this.getView().getModel("rapportSSBView").setProperty("/reporting", false);
 
 			this.getView().getModel("rapportSSBView").setProperty("/fahrtrichtung", "");
-			this.getView().getModel("rapportSSBView").setProperty("/poweruser", false);
+			//this.getView().getModel("rapportSSBView").setProperty("/poweruser", false);
 			this.getView().getModel("rapportSSBView").setProperty("/total", 0);
-			this.getView().getModel("rapportSSBView").setProperty("/lotsenname", "");
+			//this.getView().getModel("rapportSSBView").setProperty("/lotsenname", "");
 			this.getView().getModel("rapportSSBView").setProperty("/effektiveEinsatzZeit", 0);
 
 			var dateForTime = new Date();
@@ -505,6 +505,7 @@ sap.ui.define([
 				(36e5 / 100);
 			//var diff = oDateFormat.format(new Date( diff_minutes ));
 			var diff = diff_ms / 36e5;
+			var diff_round = Math.ceil(diff_ms / 36e5);
 
 			var old_effective_time = this.getView().getModel("rapportSSBView").getProperty("/effektiveEinsatzZeit");
 			if (old_effective_time != diff) {
@@ -514,11 +515,11 @@ sap.ui.define([
 				}
 
 				if (this.getView().getModel("rapportSSBView").getProperty("/mengenPreis") === true) {
-					if (parseFloat(diff, 10) < parseFloat(lowest_value, 10)) {
+					if (parseFloat(diff_round, 10) < parseFloat(lowest_value, 10)) {
 						// Falls die erfasste zeit kleiner als die Mindestzeit ist 
 						oRapporteModel.setProperty("SsbMenge", lowest_value, oRapporteContext);
 					} else {
-						oRapporteModel.setProperty("SsbMenge", (diff).toString(), oRapporteContext);
+						oRapporteModel.setProperty("SsbMenge", (diff_round).toString(), oRapporteContext);
 					}
 				}
 
@@ -923,34 +924,6 @@ sap.ui.define([
 		 */
 		onChangeTarif: function() {
 			this._updateSelTarife();
-			// var oTarifModel = this.getView().getModel("tarifeSet");
-			// // var url = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/TarifeSSBSet(Tarifart='NO',SsbTarif='HAVARIE')";
-
-			// var url = "/d/results/0/";
-			// //var context = oTarifModel.bindContext(url);
-			//  var context3 = new sap.ui.model.Context(oTarifModel, "/d/results/0/");
-			//  context3.getProperty("Preis");
-
-			// var context2 = oTarifModel.createBindingContext("/TarifeSSBSet(Tarifart='NO',SsbTarif='HAVARIE')");
-			// context2.getProperty("/d/results/0/Preis");
-
-			/*var oContext = this.getView().getBindingContext();
-
-			var date_from = this.formatter.UTCTimeToLocale(oContext.getProperty("Datum")).toJSON().slice(0, -1);
-			var time_from = this.formatter.time(new Date(oContext.getProperty("Zeit/ms")));
-			var date_to = this.formatter.UTCTimeToLocale(oContext.getProperty("DatumTo")).toJSON().slice(0, -1);
-			var time_to = this.formatter.time(new Date(oContext.getProperty("ZeitTo/ms")));
-
-			var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/TarifeSSBSet(Datum=datetime'" + date + "',Tarifart='',Zeit=time'" + time + "')";
-
-			var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/TarifeSSBSet?$filter=DatumVon eq datetime'" + date_from + "' and ZeitVon eq time'" +
-				time_to + "' and DatumBis eq datetime'" + date_to + "' and ZeitBis eq time'" + time_to + "'";
-
-			oTarifModel.loadData(URL, true, false);
-			var tarifart = oTarifModel.getProperty("/d/results/0/Tarifart");*/
-
-			// this.setModel(oTarifModel, "tarifeSet");
-			// this.setModel(context3, "tarifContext");
 		},
 		/**
 		 *@memberOf ch.portof.controller.RapportSSB
