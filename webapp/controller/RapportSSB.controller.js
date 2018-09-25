@@ -56,7 +56,7 @@ sap.ui.define([
 			this.getView().getModel("rapportSSBView").setProperty("/reporting", false);
 
 			this.getView().getModel("rapportSSBView").setProperty("/fahrtrichtung", "");
-			this.getView().getModel("rapportSSBView").setProperty("/poweruser", false);
+			//this.getView().getModel("rapportSSBView").setProperty("/poweruser", false);
 			this.getView().getModel("rapportSSBView").setProperty("/total", 0);
 			//this.getView().getModel("rapportSSBView").setProperty("/lotsenname", "");
 			this.getView().getModel("rapportSSBView").setProperty("/effektiveEinsatzZeit", 0);
