@@ -90,7 +90,7 @@
 							<sap.ui.layout.form:fields>
 								<Table noDataText="Drop column list items here and columns in the area above" id="__table0">
 									<items>
-										<ColumnListItem id="__item0">
+										<ColumnListItem id="__item0" visible="{rapportView>/kl_2000t}">
 											<cells>
 												<StandardListItem title="Mittlere Rheinbrücke" description="Basel - UW Birsfelden (v.v.)" id="__item7"/>
 												<!--<CheckBox id="__box0" selected="{MrbU2000t}" select="_calc"/>-->
@@ -99,7 +99,7 @@
 												<Text text="{ path: 'tarifeSet>/d/MrbU2000t', formatter: '.formatter.currencyValue' } CHF" id="__text27"/>
 											</cells>
 										</ColumnListItem>
-										<ColumnListItem id="__item1" class="myBackground myBorderBlackFat">
+										<ColumnListItem id="__item1" class="myBackground myBorderBlackFat" visible="{rapportView>/gr_2000t_100m}">
 											<cells>
 												<StandardListItem type="Inactive" title="Mittlere Rheinbrücke" description="Basel - UW Birsfelden (v.v.)" id="__item8" class="myBackground2"/>
 												<!--<CheckBox id="__box1" selected="{MrbUe2000t}" select="_calc"/>-->
@@ -108,7 +108,7 @@
 												<Text text="{ path: 'tarifeSet>/d/MrbUe2000t', formatter: '.formatter.currencyValue' } CHF" id="__text30"/>
 											</cells>
 										</ColumnListItem>
-										<ColumnListItem id="__item2" class="myBorderRedFat">
+										<ColumnListItem id="__item2" class="myBorderRedFat" visible="{rapportView>/gr_2000t_110m}">
 											<cells>
 												<StandardListItem type="Inactive" title="Gem.RPVO Basel - Birsfelden (v.v)" description="(hoheitlich / nicht Mwst.pflichtig)" id="__item9"/>
 												<!--<CheckBox id="__box2" selected="{BRU125m}" select="_calc"/>-->

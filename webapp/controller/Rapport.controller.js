@@ -30,6 +30,9 @@ sap.ui.define([
 				total: 0,
 				poweruser: false, //Kann rapporte ohne Unterschrift und in die Vergangenheit erfassen
 				lotsenname: "",
+				kl_2000t: false,
+				gr_2000t_100m: false,
+				gr_2000t_110m: false,
 				rapportart: "L" // Lotsenrapport
 			});
 			this.setModel(oViewModel, "rapportView");
@@ -548,6 +551,41 @@ sap.ui.define([
 			var sSchiffsNummer = this.getView().getBindingContext().getProperty("EniNr");
 			var URL = "/sap/opu/odata/sap/ZLOTSENAPP2_SRV/SchiffeSet('" + sSchiffsNummer + "')";
 			oSchiff.loadData(URL, true, false);
+
+			var laenge = oSchiff.getProperty("/d/Laenge");
+			var tragfaehigkeit = oSchiff.getProperty("/d/Tragfaehigkeit");
+			if (laenge == 0 || tragfaehigkeit == 0) {
+				this.getView().getModel("rapportView").setProperty("/gr_2000t_110m", true);
+				this.getView().getModel("rapportView").setProperty("/gr_2000t_100m", true);
+				this.getView().getModel("rapportView").setProperty("/kl_2000t", true);
+			} else {
+				if (laenge >= 110 || tragfaehigkeit >= 2000) {
+					this.getView().getModel("rapportView").setProperty("/gr_2000t_110m", true);
+					this.getView().getModel("rapportView").setProperty("/gr_2000t_100m", false);
+					this.getView().getModel("rapportView").setProperty("/kl_2000t", false);
+				} else {
+					this.getView().getModel("rapportView").setProperty("/gr_2000t_110m", false);
+				}
+				if (laenge >= 100 || tragfaehigkeit >= 2000) {
+					this.getView().getModel("rapportView").setProperty("/gr_2000t_100m", true);
+
+					this.getView().getModel("rapportView").setProperty("/kl_2000t", false);
+				} else if (tragfaehigkeit < 2000) {
+					this.getView().getModel("rapportView").setProperty("/kl_2000t", true);
+					this.getView().getModel("rapportView").setProperty("/gr_2000t_110m", false);
+					this.getView().getModel("rapportView").setProperty("/gr_2000t_100m", false);
+					// 				kl_2000t: false,
+					// gr_2000t_100m: false,
+					// gr_2000t_110m: false,
+
+				} else {
+					this.getView().getModel("rapportView").setProperty("/gr_2000t_110m", true);
+					this.getView().getModel("rapportView").setProperty("/gr_2000t_100m", true);
+					this.getView().getModel("rapportView").setProperty("/kl_2000t", true);
+				}
+
+			}
+
 			this.setModel(oSchiff, "Schiff");
 		},
 		_createDebitorModel: function() {
