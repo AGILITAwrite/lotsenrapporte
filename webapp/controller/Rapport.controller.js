@@ -475,6 +475,9 @@ sap.ui.define([
 				total = parseFloat(total) + parseFloat(oTarifModel.getProperty("/d/AllgemeineDienstleistung")) * parseFloat(oRapporteContext.getProperty(
 					"AllgemeineDienstleistung"));
 			}
+			if (oRapporteContext.getProperty("NoBill")) {
+				total = "keine Verrechnung";
+			}
 			//this.getView().byId("__Total").setProperty("text", total + " CHF");
 			this.getView().getModel("rapportView").setProperty("/total", total);
 		},

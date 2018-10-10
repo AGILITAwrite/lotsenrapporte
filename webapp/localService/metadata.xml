@@ -8,6 +8,7 @@
 				</Key>
 				<Property Name="Bemerkung" Type="Edm.String" MaxLength="255" sap:unicode="false" sap:label="Bemerkung Rapport" sap:sortable="false"
 					sap:filterable="false"/>
+				<Property Name="NoBill" Type="Edm.Boolean" sap:unicode="false" sap:label="Nicht Verrechenbar" sap:sortable="false" sap:filterable="false"/>
 				<Property Name="SsbPauschal" Type="Edm.Decimal" Precision="28" Scale="9" sap:unicode="false" sap:label="Pauschalpreis SSB"
 					sap:sortable="false" sap:filterable="false"/>
 				<Property Name="RapportArt" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="Rapportart" sap:sortable="false"
@@ -120,7 +121,8 @@
 				</Key>
 				<Property Name="EcocardNr" Type="Edm.String" MaxLength="10" sap:label="Eco Card Nummer" sap:creatable="false" sap:updatable="false"
 					sap:sortable="false" sap:filterable="false"/>
-				<Property Name="Laenge" Type="Edm.Decimal" Precision="5" Scale="2" sap:unicode="false" sap:label="Länge" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+				<Property Name="Laenge" Type="Edm.Decimal" Precision="5" Scale="2" sap:unicode="false" sap:label="Länge" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
 				<Property Name="Tragfaehigkeit" Type="Edm.Decimal" Precision="9" Scale="3" sap:unicode="false" sap:label="Tragfähigkeit"
 					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
 				<Property Name="Schiffstyp" Type="Edm.String" MaxLength="70" sap:unicode="false" sap:creatable="false" sap:updatable="false"
