@@ -476,7 +476,7 @@ sap.ui.define([
 					"AllgemeineDienstleistung"));
 			}
 			if (oRapporteContext.getProperty("NoBill")) {
-				total = "keine Verrechnung";
+				total = "keine Fakturierung";
 			}
 			//this.getView().byId("__Total").setProperty("text", total + " CHF");
 			this.getView().getModel("rapportView").setProperty("/total", total);
