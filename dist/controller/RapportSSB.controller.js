@@ -345,6 +345,15 @@ sap.ui.define([
 						//actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
 						//onClose: function(oAction) { error = true; } 
 				});
+			} else if (oContext.getProperty("Datum").toDateString() === oContext.getProperty("DatumTo").toDateString() && oContext.getProperty(
+					"Zeit/ms") >= oContext.getProperty(
+					"ZeitTo/ms")) {
+				sap.m.MessageBox.show("Die Endzeit darf nicht vor der Startzeit liegen!", {
+					icon: sap.m.MessageBox.Icon.ERROR,
+					title: "Fehler" //,
+						//actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+						//onClose: function(oAction) { error = true; } 
+				});
 			} else {
 				// if (!oContext.getProperty("Signatur") // Muss unterschrieben sein 
 				// 	&& !this.getModel("rapportSSBView").getProperty("/poweruser") // oder Poweruser 
