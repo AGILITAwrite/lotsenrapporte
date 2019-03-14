@@ -33,6 +33,7 @@ sap.ui.define([
 				kl_2000t: false,
 				gr_2000t_100m: false,
 				gr_2000t_110m: false,
+				kl_2000t_110m: false,
 				rapportart: "L" // Lotsenrapport
 			});
 			this.setModel(oViewModel, "rapportView");
@@ -562,29 +563,31 @@ sap.ui.define([
 				this.getView().getModel("rapportView").setProperty("/gr_2000t_100m", true);
 				this.getView().getModel("rapportView").setProperty("/kl_2000t", true);
 			} else {
-				if (laenge >= 110 || tragfaehigkeit >= 2000) {
+				if (laenge > 110 || (laenge > 110 && tragfaehigkeit >= 2000)) {
 					this.getView().getModel("rapportView").setProperty("/gr_2000t_110m", true);
 					this.getView().getModel("rapportView").setProperty("/gr_2000t_100m", false);
 					this.getView().getModel("rapportView").setProperty("/kl_2000t", false);
+					this.getView().getModel("rapportView").setProperty("/kl_2000t_110m", false);
 				} else {
+					this.getView().getModel("rapportView").setProperty("/kl_2000t_110m", true);
 					this.getView().getModel("rapportView").setProperty("/gr_2000t_110m", false);
-				}
-				if (laenge >= 100 || tragfaehigkeit >= 2000) {
-					this.getView().getModel("rapportView").setProperty("/gr_2000t_100m", true);
+					// in else verschoben 
+					if (laenge > 100 || tragfaehigkeit > 2000) {
+						this.getView().getModel("rapportView").setProperty("/gr_2000t_100m", true);
+						this.getView().getModel("rapportView").setProperty("/kl_2000t", false);
+					} else if (tragfaehigkeit <= 2000) {
+						this.getView().getModel("rapportView").setProperty("/kl_2000t", true);
+						this.getView().getModel("rapportView").setProperty("/gr_2000t_110m", false);
+						this.getView().getModel("rapportView").setProperty("/gr_2000t_100m", false);
+						// 				kl_2000t: false,
+						// gr_2000t_100m: false,
+						// gr_2000t_110m: false,
 
-					this.getView().getModel("rapportView").setProperty("/kl_2000t", false);
-				} else if (tragfaehigkeit < 2000) {
-					this.getView().getModel("rapportView").setProperty("/kl_2000t", true);
-					this.getView().getModel("rapportView").setProperty("/gr_2000t_110m", false);
-					this.getView().getModel("rapportView").setProperty("/gr_2000t_100m", false);
-					// 				kl_2000t: false,
-					// gr_2000t_100m: false,
-					// gr_2000t_110m: false,
-
-				} else {
-					this.getView().getModel("rapportView").setProperty("/gr_2000t_110m", true);
-					this.getView().getModel("rapportView").setProperty("/gr_2000t_100m", true);
-					this.getView().getModel("rapportView").setProperty("/kl_2000t", true);
+					} else {
+						this.getView().getModel("rapportView").setProperty("/gr_2000t_110m", true);
+						this.getView().getModel("rapportView").setProperty("/gr_2000t_100m", true);
+						this.getView().getModel("rapportView").setProperty("/kl_2000t", true);
+					}
 				}
 
 			}
