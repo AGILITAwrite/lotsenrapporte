@@ -316,7 +316,7 @@ sap.ui.define([
 				return;
 			}
 			var minDate = new Date();
-			minDate.setDate(minDate.getDate() - 2);
+			minDate.setDate(minDate.getDate() - 4);
 			//Lotsenrapporte nur bis und mit Vortag erfassbar
 			if (oContext.getProperty("Datum") >= new Date() || oContext.getProperty("Datum").toDateString() === new Date().toDateString() &&
 				this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))) >= this.formatter.time(this.formatter.UTCTimeToLocale(new Date())) // Datum in der Zukunft 
@@ -330,7 +330,7 @@ sap.ui.define([
 			} else if (oContext.getProperty("Datum") < minDate && //Lotsenrapporte nur bis und mit Vortag erfassbar
 				!this.getModel("rapportSSBView").getProperty("/poweruser") // Ausnahme für 
 			) {
-				sap.m.MessageBox.show("Der Lotsenrapport nicht mehr als 1 Tag in die Vergangeheit erfasst werden!  Bitte das Datum anpassen", {
+				sap.m.MessageBox.show("Der Lotsenrapport nicht mehr als 3 Tag in die Vergangeheit erfasst werden!  Bitte das Datum anpassen", {
 					icon: sap.m.MessageBox.Icon.ERROR,
 					title: "Fehler" //,
 						//actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
