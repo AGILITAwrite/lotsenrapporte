@@ -330,7 +330,7 @@ sap.ui.define([
 			} else if (oContext.getProperty("Datum") < minDate && //Lotsenrapporte nur bis und mit Vortag erfassbar
 				!this.getModel("rapportSSBView").getProperty("/poweruser") // Ausnahme für 
 			) {
-				sap.m.MessageBox.show("Der Lotsenrapport nicht mehr als 3 Tag in die Vergangeheit erfasst werden!  Bitte das Datum anpassen", {
+				sap.m.MessageBox.show("Der Lotsenrapport darf nicht mehr als 3 Tag in die Vergangeheit erfasst werden!  Bitte das Datum anpassen", {
 					icon: sap.m.MessageBox.Icon.ERROR,
 					title: "Fehler" //,
 						//actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
@@ -458,9 +458,9 @@ sap.ui.define([
 			// rechnen des Totalbetrags
 			var total = 0;
 			this.getView().getModel("rapportSSBView").setProperty("/total", total);
-
-			if (parseFloat(oRapporteContext.getProperty("SsbMenge"), 10) < parseFloat(lowest_value, 10) && this.getView().getModel(
-					"rapportSSBView").getProperty("/mengenPreis") === true) {
+			// in updateseltarif verschoben da nur bei änderung der art umgestellt werden soll 
+			if (parseFloat(oRapporteContext.getProperty("SsbMenge"), 10) < parseFloat(lowest_value, 10) &&
+				this.getView().getModel("rapportSSBView").getProperty("/mengenPreis") === true) {
 				// Falls die erfasste zeit kleiner als die Mindestzeit ist 
 				oRapporteModel.setProperty("SsbMenge", lowest_value, oRapporteContext);
 			}
@@ -531,7 +531,6 @@ sap.ui.define([
 				if (oTarifModel === null) {
 					lowest_value = oTarifModel.getProperty("/d/KleinsteEinheit");
 				}
-
 				if (this.getView().getModel("rapportSSBView").getProperty("/mengenPreis") === true) {
 					if (parseFloat(diff_round, 10) < parseFloat(lowest_value, 10)) {
 						// Falls die erfasste zeit kleiner als die Mindestzeit ist 
@@ -719,6 +718,37 @@ sap.ui.define([
 				this.getView().getModel("rapportSSBView").setProperty("/mengenPreis", true);
 				oRapporteModel.setProperty("SsbPauschal", "0", oRapporteContext);
 			}
+
+			//var oRapporteContext = this.getView().getBindingContext();
+			//var oRapporteModel = this.getView().getModel();
+			//var oTarifModel = this.getView().getModel("sel_tarifeSet");
+			//	var lowest_value = oSelTarifModel.getProperty("/d/KleinsteEinheit");
+
+			// rechnen des Totalbetrags
+			//	var total = 0;
+			//	this.getView().getModel("rapportSSBView").setProperty("/total", total);
+
+			//if (parseFloat(oRapporteContext.getProperty("SsbMenge"), 10) < parseFloat(lowest_value, 10) &&
+			//	this.getView().getModel("rapportSSBView").getProperty("/mengenPreis") === true) {
+			// Falls die erfasste zeit kleiner als die Mindestzeit ist 
+			//	oRapporteModel.setProperty("SsbMenge", lowest_value, oRapporteContext);
+			//}
+
+			var lowest_value = oSelTarifModel.getProperty("/d/KleinsteEinheit");
+			var diff_ms = this.getView().getModel("rapportSSBView").getProperty("/effektiveEinsatzZeit") * 36e5;
+			//var diff = diff_ms / 36e5;
+			var diff_round = Math.ceil(diff_ms / 36e5);
+			//			var old_effective_time = this.getView().getModel("rapportSSBView").getProperty("/effektiveEinsatzZeit");
+
+			if (this.getView().getModel("rapportSSBView").getProperty("/mengenPreis") === true) {
+				if (parseFloat(diff_round, 10) < parseFloat(lowest_value, 10)) {
+					// Falls die erfasste zeit kleiner als die Mindestzeit ist 
+					oRapporteModel.setProperty("SsbMenge", lowest_value, oRapporteContext);
+				} else {
+					oRapporteModel.setProperty("SsbMenge", (diff_round).toString(), oRapporteContext);
+				}
+			}
+
 			this._calc();
 		},
 		_updateOrte: function() {
