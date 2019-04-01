@@ -316,7 +316,7 @@ sap.ui.define([
 				return;
 			}
 			var minDate = new Date();
-			minDate.setDate(minDate.getDate() - 2);
+			minDate.setDate(minDate.getDate() - 4);
 			//Lotsenrapporte nur bis und mit Vortag erfassbar
 			if (oContext.getProperty("Datum") >= new Date() || oContext.getProperty("Datum").toDateString() === new Date().toDateString() &&
 				this.formatter.time(new Date(oContext.getProperty("Zeit/ms"))) >= this.formatter.time(this.formatter.UTCTimeToLocale(new Date())) // Datum in der Zukunft 
@@ -330,7 +330,7 @@ sap.ui.define([
 			} else if (oContext.getProperty("Datum") < minDate && //Lotsenrapporte nur bis und mit Vortag erfassbar
 				!this.getModel("rapportSSBView").getProperty("/poweruser") // Ausnahme für 
 			) {
-				sap.m.MessageBox.show("Der Lotsenrapport nicht mehr als 1 Tag in die Vergangeheit erfasst werden!  Bitte das Datum anpassen", {
+				sap.m.MessageBox.show("Der Lotsenrapport darf nicht mehr als 3 Tag in die Vergangeheit erfasst werden!  Bitte das Datum anpassen", {
 					icon: sap.m.MessageBox.Icon.ERROR,
 					title: "Fehler" //,
 						//actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
@@ -458,9 +458,9 @@ sap.ui.define([
 			// rechnen des Totalbetrags
 			var total = 0;
 			this.getView().getModel("rapportSSBView").setProperty("/total", total);
-
-			if (parseFloat(oRapporteContext.getProperty("SsbMenge"), 10) < parseFloat(lowest_value, 10) && this.getView().getModel(
-					"rapportSSBView").getProperty("/mengenPreis") === true) {
+			// in updateseltarif verschoben da nur bei änderung der art umgestellt werden soll 
+			if (parseFloat(oRapporteContext.getProperty("SsbMenge"), 10) < parseFloat(lowest_value, 10) &&
+				this.getView().getModel("rapportSSBView").getProperty("/mengenPreis") === true) {
 				// Falls die erfasste zeit kleiner als die Mindestzeit ist 
 				oRapporteModel.setProperty("SsbMenge", lowest_value, oRapporteContext);
 			}
@@ -531,7 +531,6 @@ sap.ui.define([
 				if (oTarifModel === null) {
 					lowest_value = oTarifModel.getProperty("/d/KleinsteEinheit");
 				}
-
 				if (this.getView().getModel("rapportSSBView").getProperty("/mengenPreis") === true) {
 					if (parseFloat(diff_round, 10) < parseFloat(lowest_value, 10)) {
 						// Falls die erfasste zeit kleiner als die Mindestzeit ist 
@@ -631,7 +630,7 @@ sap.ui.define([
 
 			oTarifModel.loadData(URL, true, false);
 			this.setModel(oTarifModel, "tarifeSet");
-			this._updateSelTarife();
+			this._updateSelTarife(); //???
 			this._calc();
 		},
 		_updateTarifeNewDate: function() {
@@ -719,7 +718,26 @@ sap.ui.define([
 				this.getView().getModel("rapportSSBView").setProperty("/mengenPreis", true);
 				oRapporteModel.setProperty("SsbPauschal", "0", oRapporteContext);
 			}
+
 			this._calc();
+		},
+		_updateSsbMenge: function() {
+			var oSelTarifModel = this.getView().getModel("sel_tarifeSet");
+			var oRapporteModel = this.getView().getModel();
+			var oRapporteContext = this.getView().getBindingContext();
+
+			var lowest_value = oSelTarifModel.getProperty("/d/KleinsteEinheit");
+			var diff_ms = this.getView().getModel("rapportSSBView").getProperty("/effektiveEinsatzZeit") * 36e5;
+			var diff_round = Math.ceil(diff_ms / 36e5);
+
+			if (this.getView().getModel("rapportSSBView").getProperty("/mengenPreis") === true) {
+				if (parseFloat(diff_round, 10) < parseFloat(lowest_value, 10)) {
+					// Falls die erfasste zeit kleiner als die Mindestzeit ist 
+					oRapporteModel.setProperty("SsbMenge", lowest_value, oRapporteContext);
+				} else {
+					oRapporteModel.setProperty("SsbMenge", (diff_round).toString(), oRapporteContext);
+				}
+			}
 		},
 		_updateOrte: function() {
 			var oOrteModel = this.getView().getModel("orteSet");
@@ -924,6 +942,7 @@ sap.ui.define([
 			//oSelTarifModel.destroy();
 			//this.setModel(null, "sel_tarifeSet");
 			this._updateSelTarife();
+			this._updateSsbMenge();
 			this._calc();
 		},
 		/**
@@ -942,6 +961,7 @@ sap.ui.define([
 		 */
 		onChangeTarif: function() {
 			this._updateSelTarife();
+			this._updateSsbMenge();
 		},
 		/**
 		 *@memberOf ch.portof.controller.RapportSSB
