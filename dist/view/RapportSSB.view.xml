@@ -200,9 +200,9 @@
 							<sap.ui.layout.form:FormElement id="__element18" label="Total">
 								<sap.ui.layout.form:fields>
 									<!--<StandardListItem title="Total" id="__item14"/>-->
-									<Text text="Total" id="__text50" visible="false"/>
+									<!--			<Text text="Total" id="__text50" visible="false"/>
 									<Text text="" id="__text47" visible="false"/>
-									<Text text="" id="__text48" visible="false"/>
+									<Text text="" id="__text48" visible="false"/>-->
 									<Text text="{ path: 'rapportSSBView>/total', formatter: '.formatter.currencyValue' } CHF" id="__Total"/>
 								</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
