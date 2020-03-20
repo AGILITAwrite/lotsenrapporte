@@ -192,8 +192,13 @@
 									<!--									<Input xmlns="sap.m" width="100%" id="input3" change="_calc"
 										value="{ path: 'SsbPauschal', type: 'sap.ui.model.odata.type.Decimal', formatOptions: { maxFractionDigits: 2 } }"
 										editable="{rapportSSBView>/changeMode}" visible="{rapportSSBView>/pauschalPreis}"/>-->
-									<Input xmlns="sap.m" width="100%" id="input3" change="_calc" value="{ path: 'SsbPauschal' }" type="Number"
-										editable="{rapportSSBView>/changeMode}" visible="{rapportSSBView>/pauschalPreis}"/>
+									<!--	<Input xmlns="sap.m" width="100%" id="input3" change="_calc"
+										value="{ path: 'SsbPauschal', type: 'sap.ui.model.type.Decimal', formatOptions: { maxFractionDigits: 2, decimals: 2 } }" type="Number"
+										editable="{rapportSSBView>/changeMode}" visible="{rapportSSBView>/pauschalPreis}"/>-->
+									<Input xmlns="sap.m" width="100%" id="input3" change="_calc"
+										value="{ path: 'SsbPauschal', type: 'sap.ui.model.odata.type.Decimal', constraints: { scale: 2 } }" editable="{rapportSSBView>/changeMode}"
+										visible="{rapportSSBView>/pauschalPreis}"/>
+									<!--, type: 'sap.ui.model.odata.type.Decimal', constraints: { precision: 12, scale: 2 }-->
 									<!--<Text xmlns="sap.m" id="text5233" text="{ path: 'SsbPauschal', formatter: '.formatter.currencyValue' } CHF"/>-->
 								</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
