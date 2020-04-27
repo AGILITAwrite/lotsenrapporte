@@ -33,6 +33,7 @@
 								<TimePicker placeholder="HH:mm" placeholderSymbol="-" displayFormat="HH:mm" localeId="de-CH" id="startTimePicker"
 									value="{path : 'Zeit/ms', type : 'sap.ui.model.type.Time' , formatOptions:{ source: {pattern: 'timestamp'}, pattern : 'HH:mm', UTC : true }}"
 									editable="{rapportView>/changeMode}" change="_updateTarifeNewDate"/>
+								<Input width="100%" id="startPegelstand" value="{Pegel}" editable="{rapportView>/changeMode}"/>
 							</sap.ui.layout.form:fields>
 						</sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:FormElement id="__element8" label="Berg-/Talfahrt">
@@ -81,6 +82,11 @@
 							<sap.ui.layout.form:FormElement label="Keine Fakturierung" id="element17" tooltip="Unentgeltliche Dienstleistung auf Grund Lotsenpflicht">
 								<sap.ui.layout.form:fields>
 									<CheckBox xmlns="sap.m" selected="{NoBill}" id="box0" editable="{rapportView>/changeMode}" select="_calc"/>
+								</sap.ui.layout.form:fields>
+							</sap.ui.layout.form:FormElement>
+							<sap.ui.layout.form:FormElement label="Wendemanöver TLP" id="element18" tooltip="Wendemanöver Tankliegeplatz">
+								<sap.ui.layout.form:fields>
+									<CheckBox xmlns="sap.m" selected="{WendemanoeverTlp}" id="box1" editable="{rapportView>/changeMode}"/>
 								</sap.ui.layout.form:fields>
 							</sap.ui.layout.form:FormElement>
 						</sap.ui.layout.form:formElements>
