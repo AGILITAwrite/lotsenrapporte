@@ -311,7 +311,7 @@
 		</semantic:negativeAction>
 		<semantic:layoutData/>
 	<semantic:mainAction>
-	    <semantic:MainAction text="Wendemanöver TLP" id="action3" enabled="{rapportView>/annullierenVisible}" visible="{rapportView>/annullierenVisible}" press="onsetWendemanoeverTlp"/>
+	    <semantic:MainAction text="TLP" id="action3" enabled="{rapportView>/annullierenVisible}" visible="{rapportView>/annullierenVisible}" press="onsetWendemanoeverTlp"/>
 	</semantic:mainAction>
 	</semantic:DetailPage>
 </mvc:View>
