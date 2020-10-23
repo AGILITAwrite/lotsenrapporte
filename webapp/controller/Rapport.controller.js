@@ -588,6 +588,7 @@ sap.ui.define([
 				this.getView().getModel("rapportView").setProperty("/gr_2000t_110m", true);
 				this.getView().getModel("rapportView").setProperty("/gr_2000t_100m", true);
 				this.getView().getModel("rapportView").setProperty("/kl_2000t", true);
+				this.getView().getModel("rapportView").setProperty("/kl_2000t_110m", true);
 			} else {
 				if (laenge > 110 || (laenge > 110 && tragfaehigkeit >= 2000)) {
 					this.getView().getModel("rapportView").setProperty("/gr_2000t_110m", true);
